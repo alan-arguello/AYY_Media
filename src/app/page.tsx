@@ -6,7 +6,8 @@ import { siteUrl, isPublicSite } from "@/lib/site-url";
 import { Button, LogoMark, Pill, SectionHeading } from "@/components/ui";
 import { SummitInterestForm } from "./interest-form";
 import { speakers, type SummitSpeaker } from "./speakers";
-import { pastEvents, pastEventSupporters } from "./past-events";
+import { pastEventSupporters } from "./past-events";
+import { EventCarousel } from "./event-carousel";
 import { EventOrganizer, EventSponsors } from "./event-branding";
 import { Countdown } from "./countdown";
 
@@ -306,19 +307,7 @@ export default function AcceleratingLatamSummitPage() {
                 conversación sigue en Bogotá.
               </p>
             </SectionHeading>
-            <ul className="lp-gallery" aria-label="Fotos de nuestros eventos anteriores">
-              {pastEvents.map((event) => (
-                <li key={event.image}>
-                  <Image
-                    src={event.image}
-                    alt={event.alt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 380px"
-                    quality={86}
-                  />
-                </li>
-              ))}
-            </ul>
+            <EventCarousel />
           </div>
           <div className="ds-frame lp-wall lp-wall-flush">
             <div className="lp-wall-head">

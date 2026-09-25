@@ -413,26 +413,76 @@
   transform: translate(-50%, 0);
 }
 
-/* ── Community gallery ───────────────────────────────────────────────────── */
+/* ── Community carousel ──────────────────────────────────────────────────── */
 
-.lp-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-.lp-gallery li {
+.lp-carousel {
   position: relative;
+}
+.lp-carousel-window {
+  overflow: hidden;
+  border-radius: var(--ds-r-lg);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+.lp-carousel-track {
+  display: flex;
+  width: max-content;
+  animation: lp-marquee 60s linear infinite;
+}
+.lp-carousel-track[data-paused="true"],
+.lp-carousel-window:hover .lp-carousel-track,
+.lp-carousel-window:focus-visible .lp-carousel-track {
+  animation-play-state: paused;
+}
+.lp-carousel-group {
+  display: flex;
+  gap: 12px;
+  padding-right: 12px;
+}
+.lp-carousel-group li {
+  position: relative;
+  flex: 0 0 auto;
+  width: 420px;
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: var(--ds-r-lg);
   background: var(--ds-surface-2);
 }
-.lp-gallery img {
+.lp-carousel-group img {
   object-fit: cover;
-  transition: transform 900ms var(--ds-ease-out);
 }
-.lp-gallery li:hover img {
-  transform: scale(1.03);
+.lp-carousel-toggle {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ds-white);
+  color: var(--ds-ink);
+  box-shadow: var(--ds-raise);
+  cursor: pointer;
+}
+.lp-carousel-toggle svg {
+  width: 15px;
+  height: 15px;
+}
+@keyframes lp-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-carousel-window {
+    overflow-x: auto;
+  }
+  .lp-carousel-group[aria-hidden="true"],
+  .lp-carousel-toggle {
+    display: none;
+  }
 }
 
 /* ── Registration ────────────────────────────────────────────────────────── */
@@ -788,9 +838,6 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  .lp-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 @media (max-width: 640px) {
   .lp-nav .ds-logo-word {
@@ -904,12 +951,13 @@
   .lp-credential img {
     height: 16px;
   }
-  .lp-gallery {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .lp-gallery li {
+  .lp-carousel-group li {
+    width: 280px;
     border-radius: var(--ds-r-md);
+  }
+  .lp-carousel-group {
+    gap: 8px;
+    padding-right: 8px;
   }
   /* The photo becomes a banner that melts into the clouds' own dark violet. */
   .lp-register {
