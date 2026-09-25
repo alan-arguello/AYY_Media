@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { existsSync } from "node:fs";
-import { mainSpeakers, guestSpeakers } from "../src/app/speakers.ts";
+import { speakers } from "../src/app/speakers.ts";
 import { pastEvents, pastEventSupporters } from "../src/app/past-events.ts";
 import {
   parseSummitInterest,
@@ -101,9 +101,7 @@ test("event source and date stay distinct from other campaigns", () => {
 });
 
 test("five speakers have real portraits, credential assets and source links", () => {
-  assert.equal(mainSpeakers.length, 2);
-  assert.equal(guestSpeakers.length, 3);
-  const speakers = [...mainSpeakers, ...guestSpeakers];
+  assert.equal(speakers.length, 5);
   assert.equal(new Set(speakers.map((speaker) => speaker.linkedin)).size, 5);
   for (const speaker of speakers) {
     assert.ok(

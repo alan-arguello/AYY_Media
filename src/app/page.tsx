@@ -5,7 +5,7 @@ import { colombiaSummit } from "@/lib/colombia-summit";
 import { siteUrl, isPublicSite } from "@/lib/site-url";
 import { SummitInterestForm } from "./interest-form";
 import { BogotaAscii } from "./bogota-ascii";
-import { mainSpeakers, guestSpeakers, type SummitSpeaker } from "./speakers";
+import { speakers, type SummitSpeaker } from "./speakers";
 import { SpeakerPortrait } from "./speaker-portrait";
 import { pastEventSupporters } from "./past-events";
 import { EventCarousel } from "./event-carousel";
@@ -41,15 +41,9 @@ export const metadata: Metadata = {
   },
 };
 
-function Speaker({
-  speaker,
-  featured = false,
-}: {
-  speaker: SummitSpeaker;
-  featured?: boolean;
-}) {
+function Speaker({ speaker }: { speaker: SummitSpeaker }) {
   return (
-    <article className={`cs-speaker${featured ? " cs-speaker-featured" : ""}`}>
+    <article className="cs-speaker">
       <a
         href={speaker.linkedin}
         target="_blank"
@@ -57,11 +51,7 @@ function Speaker({
         className="cs-speaker-link"
         aria-label={`Perfil de ${speaker.name} en LinkedIn (nueva pestaña)`}
       >
-        <SpeakerPortrait
-          src={speaker.image}
-          name={speaker.name}
-          featured={featured}
-        />
+        <SpeakerPortrait src={speaker.image} name={speaker.name} />
         <div className="cs-speaker-caption">
           <h3>{speaker.name}</h3>
           <p>{speaker.role}</p>
@@ -129,9 +119,9 @@ export default function ColombiaSummitPage() {
             </div>
             <div className="cs-hero-title">
               <h1 id="summit-title">
-                <span className="cs-title-intro">Back to the</span>
+                <span className="cs-title-intro">Back to the Future</span>
                 <span className="cs-title-main">
-                  Future Summit
+                  Summit
                   <span className="cs-title-cursor" aria-hidden="true">
                     _
                   </span>
@@ -167,13 +157,7 @@ export default function ColombiaSummitPage() {
             <p>Fundadores, operadores y nuevas perspectivas.</p>
           </div>
           <div className="cs-speaker-grid">
-            {mainSpeakers.map((speaker) => (
-              <Speaker key={speaker.name} speaker={speaker} featured />
-            ))}
-          </div>
-          <h3 className="cs-guests-heading">También en la conversación</h3>
-          <div className="cs-guest-grid">
-            {guestSpeakers.map((speaker) => (
+            {speakers.map((speaker) => (
               <Speaker key={speaker.name} speaker={speaker} />
             ))}
           </div>

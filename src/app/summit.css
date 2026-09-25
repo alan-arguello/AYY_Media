@@ -349,31 +349,28 @@
 }
 .cs-speaker-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 42px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 20px;
 }
 .cs-speaker {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 .cs-speaker-link {
   display: grid;
-  grid-template-columns: 88px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
   gap: 18px;
-  align-items: center;
-}
-.cs-speaker-featured .cs-speaker-link {
-  grid-template-columns: 156px minmax(0, 1fr);
-  gap: 24px;
+  flex: 1;
+  align-items: start;
 }
 .cs-portrait {
   position: relative;
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 5;
   background: #202020;
   overflow: hidden;
-}
-.cs-speaker-featured .cs-portrait {
-  aspect-ratio: 4 / 5;
 }
 .cs-portrait img {
   object-fit: cover;
@@ -399,24 +396,23 @@
 }
 .cs-speaker-caption {
   min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .cs-speaker-caption h3 {
   font-size: 18px;
   line-height: 1.25;
   font-weight: 500;
-}
-.cs-speaker-featured h3 {
-  font-size: 25px;
-  max-width: 220px;
+  min-height: 2.5em;
 }
 .cs-speaker-caption p {
+  flex: 1;
   font-size: 12px;
   line-height: 1.6;
   color: var(--cs-muted);
   margin-top: 8px;
-}
-.cs-speaker-featured .cs-speaker-caption p {
-  font-size: 13px;
+  min-height: 4.8em;
 }
 .cs-profile-arrow {
   display: inline-flex;
@@ -433,11 +429,12 @@
   transform: translate(2px, -2px) rotate(-45deg);
 }
 .cs-credentials {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
-  gap: 22px;
-  height: 74px;
-  margin-top: 22px;
+  gap: 10px;
+  height: 64px;
+  margin-top: 18px;
   border-top: 1px solid var(--cs-line);
 }
 .cs-credential {
@@ -446,11 +443,13 @@
   align-items: center;
   justify-content: flex-start;
   min-width: 0;
+  width: 100%;
+  max-width: 64px;
   height: 44px;
 }
 .cs-credential img {
-  width: 96px;
-  height: 30px;
+  width: 100%;
+  height: 28px;
   object-fit: contain;
   object-position: left center;
   filter: grayscale(1) invert(1) brightness(3);
@@ -483,38 +482,6 @@
   visibility: visible;
 }
 .cs-credential:last-child .cs-credential-tooltip {
-  left: auto;
-  right: 0;
-}
-.cs-guests-heading {
-  font-size: 13px;
-  font-weight: 400;
-  color: #aaa;
-  border-top: 1px solid var(--cs-line);
-  padding-block: 28px;
-}
-.cs-guest-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
-}
-.cs-guest-grid .cs-speaker {
-  display: flex;
-  flex-direction: column;
-}
-.cs-guest-grid .cs-speaker-link {
-  flex: 1;
-  align-items: start;
-}
-.cs-guest-grid .cs-credentials {
-  height: 64px;
-  margin-top: 24px;
-}
-.cs-guest-grid .cs-credential img {
-  width: 108px;
-  height: 29px;
-}
-.cs-guest-grid .cs-credential:last-child .cs-credential-tooltip {
   left: auto;
   right: 0;
 }
@@ -899,26 +866,6 @@
   .cs-title-main {
     font-size: 80px;
   }
-  .cs-speaker-featured .cs-speaker-link {
-    grid-template-columns: 132px minmax(0, 1fr);
-    gap: 20px;
-  }
-  .cs-speaker-featured h3 {
-    font-size: 22px;
-  }
-  .cs-guest-grid {
-    gap: 24px;
-  }
-  .cs-guest-grid .cs-speaker-link {
-    grid-template-columns: 72px minmax(0, 1fr);
-    gap: 14px;
-  }
-  .cs-guest-grid h3 {
-    font-size: 17px;
-  }
-  .cs-guest-grid .cs-credential img {
-    width: 88px;
-  }
   .cs-company-list {
     gap: 22px;
   }
@@ -927,6 +874,20 @@
   }
   .cs-registration-grid {
     gap: 64px;
+  }
+}
+@media (min-width: 601px) and (max-width: 1050px) {
+  .cs-speaker-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 32px 12px;
+    max-width: 730px;
+    margin-inline: auto;
+  }
+  .cs-speaker {
+    grid-column: span 2;
+  }
+  .cs-speaker:nth-child(4) {
+    grid-column: 2 / span 2;
   }
 }
 @media (max-width: 900px) {
@@ -958,48 +919,6 @@
   }
   .cs-speakers {
     padding: 48px 24px 0;
-  }
-  .cs-speaker-grid {
-    gap: 28px;
-  }
-  .cs-speaker-featured .cs-speaker-link {
-    grid-template-columns: 104px minmax(0, 1fr);
-    gap: 18px;
-  }
-  .cs-speaker-featured h3 {
-    font-size: 20px;
-  }
-  .cs-credentials {
-    gap: 20px;
-  }
-  .cs-credential img {
-    width: 76px;
-  }
-  .cs-guest-grid {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  .cs-guest-grid .cs-speaker {
-    display: grid;
-    grid-template-columns: 1.25fr 1fr;
-    gap: 30px;
-    align-items: center;
-    padding-block: 20px;
-    border-bottom: 1px solid var(--cs-line);
-  }
-  .cs-guest-grid .cs-speaker-link {
-    grid-template-columns: 72px minmax(0, 1fr);
-  }
-  .cs-guest-grid .cs-credentials {
-    border: 0;
-    margin: 0;
-    justify-content: flex-end;
-  }
-  .cs-guest-grid .cs-credential img {
-    width: 100px;
-  }
-  .cs-guests-heading {
-    padding-bottom: 10px;
   }
   .cs-coming {
     grid-template-columns: 1fr;
@@ -1190,53 +1109,34 @@
   }
   .cs-speaker-grid {
     grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
     gap: 26px;
   }
-  .cs-speaker-featured .cs-speaker-link {
+  .cs-speaker-link {
     grid-template-columns: 104px minmax(0, 1fr);
+    grid-template-rows: 1fr;
     gap: 18px;
+    align-items: center;
   }
-  .cs-speaker-featured h3 {
-    font-size: 21px;
+  .cs-speaker-caption h3 {
+    min-height: 0;
   }
-  .cs-speaker-featured .cs-speaker-caption p {
-    font-size: 12px;
+  .cs-speaker-caption {
+    height: auto;
   }
-  .cs-speaker-featured .cs-credentials {
+  .cs-speaker-caption p {
+    min-height: 0;
+  }
+  .cs-credentials {
     height: 52px;
     margin-top: 18px;
-    gap: 25px;
-  }
-  .cs-speaker-featured .cs-credential img {
-    width: 78px;
-    height: 26px;
-  }
-  .cs-guests-heading {
-    margin-top: 24px;
-    font-size: 12px;
-  }
-  .cs-guest-grid .cs-speaker {
-    display: block;
-    padding-block: 22px;
-  }
-  .cs-guest-grid .cs-speaker-link {
-    grid-template-columns: 72px minmax(0, 1fr);
-    gap: 18px;
-  }
-  .cs-guest-grid .cs-credentials {
-    justify-content: flex-start;
-    height: 48px;
-    margin-top: 14px;
     gap: 24px;
   }
-  .cs-guest-grid .cs-credential img {
-    width: 100px;
-    height: 27px;
+  .cs-credential {
+    max-width: 78px;
   }
-  .cs-guest-grid .cs-credential:last-child .cs-credential-tooltip {
-    left: auto;
-    right: 0;
-    max-width: 170px;
+  .cs-credential img {
+    height: 26px;
   }
   .cs-track-record-note {
     margin-block: 20px 26px !important;
@@ -1329,18 +1229,15 @@
   .cs-registration-grid {
     padding-inline: 14px;
   }
-  .cs-speaker-featured .cs-speaker-link {
+  .cs-speaker-link {
     grid-template-columns: 88px minmax(0, 1fr);
     gap: 14px;
   }
-  .cs-speaker-featured h3 {
-    font-size: 19px;
-  }
-  .cs-speaker-featured .cs-credentials {
+  .cs-credentials {
     gap: 18px;
   }
-  .cs-speaker-featured .cs-credential img {
-    width: 72px;
+  .cs-credential {
+    max-width: 72px;
   }
   .cs-company-list {
     gap: 12px;

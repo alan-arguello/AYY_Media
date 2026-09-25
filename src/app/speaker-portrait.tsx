@@ -8,11 +8,9 @@ const GLYPHS = " .:;+=xX#%@";
 export function SpeakerPortrait({
   src,
   name,
-  featured,
 }: {
   src: string;
   name: string;
-  featured: boolean;
 }) {
   const photo = useRef<HTMLImageElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -38,7 +36,7 @@ export function SpeakerPortrait({
       output.width = Math.round(width * ratio);
       output.height = Math.round(height * ratio);
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      const columns = Math.round(width / (featured ? 4 : 3.5));
+      const columns = Math.round(width / 4);
       const cell = width / columns;
       const line = cell * 1.4;
       const rows = Math.ceil(height / line);
@@ -114,7 +112,7 @@ export function SpeakerPortrait({
       resize.disconnect();
       cancelAnimationFrame(frame);
     };
-  }, [src, featured]);
+  }, [src]);
 
   return (
     <div className="cs-portrait">
@@ -123,11 +121,7 @@ export function SpeakerPortrait({
         src={src}
         alt={name}
         fill
-        sizes={
-          featured
-            ? "(max-width: 900px) 104px, (max-width: 1150px) 132px, 156px"
-            : "(max-width: 1150px) 72px, 88px"
-        }
+        sizes="(max-width: 360px) 88px, (max-width: 600px) 104px, (max-width: 828px) calc((100vw - 122px) / 3), (max-width: 1050px) 236px, (max-width: 1296px) calc((100vw - 250px) / 5), 209px"
         quality={90}
       />
       <canvas ref={canvas} className="cs-portrait-ascii" aria-hidden="true" />

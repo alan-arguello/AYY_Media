@@ -20,7 +20,7 @@ const torre = (detail: string, source: string): SpeakerCredential => ({
   source,
 });
 
-export const mainSpeakers: SummitSpeaker[] = [
+export const speakers: SummitSpeaker[] = [
   {
     name: "Alexander Torrenegra",
     role: "Cofundador de Torre.ai, Voice123 y Bunny Studio",
@@ -69,9 +69,6 @@ export const mainSpeakers: SummitSpeaker[] = [
       },
     ],
   },
-];
-
-export const guestSpeakers: SummitSpeaker[] = [
   {
     name: "Alan Argüello",
     role: "Ingeniero de software y emprendedor · Torrenegra & Co",
