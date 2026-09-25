@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const colombiaSummit = {
-  name: "Back to the Future Summit",
+  name: "Accelerating LATAM Summit",
   path: "/",
   date: "2026-11-19",
   source: "colombia-summit-2026",

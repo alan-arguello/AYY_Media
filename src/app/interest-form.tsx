@@ -18,8 +18,8 @@ export function SummitInterestForm() {
 
   if (state.status === "success") {
     return (
-      <div className="cs-success" ref={message} tabIndex={-1} role="status">
-        <span className="cs-success-mark" aria-hidden="true">
+      <div className="lp-success" ref={message} tabIndex={-1} role="status">
+        <span className="lp-success-mark" aria-hidden="true">
           ✓
         </span>
         <h3>{state.message}</h3>
@@ -27,10 +27,10 @@ export function SummitInterestForm() {
           Te avisaremos por correo cuando anunciemos los próximos speakers y
           abramos las inscripciones.
         </p>
-        <p className="cs-small">
+        <p className="lp-small">
           Este registro es de interés, no una reserva de entrada.
         </p>
-        <a className="cs-text-link" href="#speakers">
+        <a className="lp-text-link" href="#speakers">
           Conoce a los primeros speakers <ArrowRightIcon />
         </a>
       </div>
@@ -40,13 +40,13 @@ export function SummitInterestForm() {
   return (
     <form
       action={action}
-      className="cs-form"
-      aria-label="Lista de interés de Back to the Future Summit"
+      className="lp-form"
+      aria-label="Lista de interés de Accelerating LATAM Summit"
       aria-busy={pending}
     >
       <fieldset disabled={pending}>
-        <legend className="cs-sr-only">Tus datos de contacto</legend>
-        <div className="cs-field">
+        <legend className="lp-sr-only">Tus datos de contacto</legend>
+        <div className="lp-field">
           <label htmlFor="summit-name">Nombre completo</label>
           <input
             id="summit-name"
@@ -63,12 +63,12 @@ export function SummitInterestForm() {
             }
           />
           {state.errors?.fullName && (
-            <span id="summit-name-error" className="cs-field-error">
+            <span id="summit-name-error" className="lp-field-error">
               {state.errors.fullName}
             </span>
           )}
         </div>
-        <div className="cs-field">
+        <div className="lp-field">
           <label htmlFor="summit-email">Correo electrónico</label>
           <input
             id="summit-email"
@@ -85,12 +85,12 @@ export function SummitInterestForm() {
             }
           />
           {state.errors?.email && (
-            <span id="summit-email-error" className="cs-field-error">
+            <span id="summit-email-error" className="lp-field-error">
               {state.errors.email}
             </span>
           )}
         </div>
-        <div className="cs-field">
+        <div className="lp-field">
           <label htmlFor="summit-company">
             Empresa <span>Opcional</span>
           </label>
@@ -107,12 +107,12 @@ export function SummitInterestForm() {
             }
           />
           {state.errors?.company && (
-            <span id="summit-company-error" className="cs-field-error">
+            <span id="summit-company-error" className="lp-field-error">
               {state.errors.company}
             </span>
           )}
         </div>
-        <div className="cs-field">
+        <div className="lp-field">
           <label htmlFor="summit-linkedin">
             LinkedIn <span>Opcional</span>
           </label>
@@ -133,12 +133,12 @@ export function SummitInterestForm() {
             }
           />
           {state.errors?.linkedin && (
-            <span id="summit-linkedin-error" className="cs-field-error">
+            <span id="summit-linkedin-error" className="lp-field-error">
               {state.errors.linkedin}
             </span>
           )}
         </div>
-        <div className="cs-honeypot" aria-hidden="true">
+        <div className="lp-honeypot" aria-hidden="true">
           <label htmlFor="summit-website">Website</label>
           <input
             id="summit-website"
@@ -147,7 +147,7 @@ export function SummitInterestForm() {
             autoComplete="off"
           />
         </div>
-        <label className="cs-consent">
+        <label className="lp-consent">
           <input
             name="consent"
             type="checkbox"
@@ -168,21 +168,26 @@ export function SummitInterestForm() {
           </span>
         </label>
         {state.errors?.consent && (
-          <span id="summit-consent-error" className="cs-field-error">
+          <span id="summit-consent-error" className="lp-field-error">
             {state.errors.consent}
           </span>
         )}
-        <button type="submit" className="cs-button cs-button-dark">
+        <button
+          type="submit"
+          className="ds-button lp-submit"
+          data-variant="primary"
+          data-size="lg"
+        >
           {pending ? "Guardando tu registro…" : "Quiero enterarme primero"}
           <ArrowRightIcon />
         </button>
       </fieldset>
       {state.status === "error" && (
-        <div className="cs-form-error" ref={message} tabIndex={-1} role="alert">
+        <div className="lp-form-error" ref={message} tabIndex={-1} role="alert">
           {state.message}
         </div>
       )}
-      <p className="cs-form-note">
+      <p className="lp-form-note">
         Lista de interés. Las entradas aún no están a la venta.
       </p>
     </form>

@@ -1,14 +1,11 @@
 # Photography
 
-`bogota.jpg`: "Monserrate y centro de Bogota", Jos Cuevasc (Jose Nelson Cuevas), 2019.
+- `/images/photos/bogota-golden-hour.webp`: "Bogotá y Cerros Orientales", Felipeortegag. CC BY-SA 4.0. https://commons.wikimedia.org/wiki/File:Bogot%C3%A1_y_Cerros_Orientales.jpg
+  Cropped to remove the foreground rooftop, resized to 2800 px, slightly brightened and compressed to WebP. The adaptation remains CC BY-SA 4.0.
+- `/images/photos/bogota-sky.webp`: "El cielo del atardecer sobre Bogotá, Colombia, 2015", Cristian Baron (Unsplash, via Wikimedia Commons). CC0. https://commons.wikimedia.org/wiki/File:El_cielo_del_atardecer_sobre_Bogot%C3%A1,_Colombia,_2015,_por_Cristian_Baron_(Unsplash).jpg
+  Resized to 2600 px and compressed to WebP. Also used, cropped, in `opengraph.png`.
 
-Source: https://commons.wikimedia.org/wiki/File:Monserrate_y_centro_de_Bogota.jpg
-Original: https://upload.wikimedia.org/wikipedia/commons/1/10/Monserrate_y_centro_de_Bogota.jpg
-License: https://creativecommons.org/licenses/by-sa/4.0/
-
-Original photograph, displayed with a responsive crop and a monochrome ASCII canvas treatment. A grayscale photo is retained as the no-JavaScript fallback.
-`bogota-hero.webp` is a resized, compressed copy for the web (2200 pixels wide); no generative edits.
-The photograph and adaptations remain CC BY-SA 4.0. Attribution is displayed in the page footer.
+Attribution is displayed in the page footer.
 
 # Company marks
 
@@ -33,4 +30,5 @@ Marks identify organizations whose speakers are pending confirmation. They do no
 
 # Typography
 
-Geist Sans, Mono and Pixel Square: official Vercel `geist` package, SIL Open Font License 1.1. https://github.com/vercel/geist-font
+- Host Grotesk (display) and Inter (text): Google Fonts, SIL Open Font License 1.1. Static TTF copies in `scripts/fonts/` are used only to render `opengraph.png`.
+- Geist Mono: official Vercel `geist` package, SIL Open Font License 1.1.

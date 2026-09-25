@@ -1,11 +1,12 @@
-# Back to the Future Summit
+# Accelerating LATAM Summit
 
-Proyecto independiente de Next.js para el evento del 19 de noviembre de 2026 en Bogota, Colombia.
+Proyecto independiente de Next.js para el evento del 19 de noviembre de 2026 en Bogotá, Colombia (antes "Back to the Future Summit").
 
 - Organiza: **AIYaiYai**, con enlace a https://www.youtube.com/@aiyaiyaimedia.
 - Sponsors: **Torrenegra & Co, Torre.ai y Worder**.
 - La landing vive en `/`. `/colombia-summit` redirige a `/`.
-- Incluye retratos con hover ASCII, carrusel de fotos reales, formulario y Open Graph.
+- Incluye speakers con trayectoria, sponsors, galería de eventos anteriores, formulario de lista de interés, cuenta regresiva y Open Graph.
+- Design system inspirado en elevenlabs.io (el mismo del LATAM AI Summit): papel cálido, tinta negra, rieles de 1px, superficies redondeadas y fotografía real. Tipografía: Host Grotesk (display), Inter (texto) y Geist Mono (cifras). Tokens y primitivos en `src/app/design-system.css` y `src/components/ui.tsx`.
 - No depende del repositorio `consulting_website`. No incluye credenciales, leads ni historial Git del sitio anterior. Ese sitio no se modifico.
 
 ## Desarrollo
@@ -60,8 +61,9 @@ Tambien se verificaron inserciones de las 3 versiones de consentimiento y dedupl
 - Contenido y fecha: `src/lib/colombia-summit.ts` y `src/app/page.tsx`.
 - Organizador y sponsors: `src/app/event-branding.tsx`.
 - Speakers y trayectoria: `src/app/speakers.ts`.
-- Estilo: `src/app/summit.css` y `src/app/globals.css`.
-- Thumbnail: `public/images/colombia-summit/opengraph.png`; regenerar con `npm run og`.
+- Estilo: tokens y primitivos en `src/app/design-system.css`; composición de la página en `src/app/summit.css`.
+- Thumbnail y favicon: `public/images/colombia-summit/opengraph.png` y `src/app/icon.png`; regenerar ambos con `npm run og`.
+- Fotos principales: `public/images/photos/`.
 - Creditos y licencias: `public/images/colombia-summit/CREDITS.md`.
 
 Las participaciones de OpenAI, Google y Microsoft permanecen marcadas como pendientes de confirmacion. Los logos de trayectoria profesional y de colaboraciones anteriores no indican patrocinio de este evento.
