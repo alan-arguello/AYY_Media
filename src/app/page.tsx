@@ -227,14 +227,6 @@ export default function AcceleratingLatamSummitPage() {
                   <dd>Bogotá, Colombia</dd>
                 </div>
                 <div>
-                  <dt>Organiza</dt>
-                  <dd>AIYaiYai</dd>
-                </div>
-                <div>
-                  <dt>Sponsors</dt>
-                  <dd>Torrenegra &amp; Co · Torre.ai · Worder</dd>
-                </div>
-                <div>
                   <dt>Registro</dt>
                   <dd>Lista de interés abierta</dd>
                 </div>

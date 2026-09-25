@@ -142,7 +142,8 @@
   inset: auto 20px 20px;
   z-index: 2;
   display: grid;
-  grid-template-columns: 0.9fr 0.8fr 1.5fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 220px));
+  right: auto;
   border-radius: var(--ds-r-lg);
   background: rgb(28 18 12 / 0.3);
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.18);
@@ -792,15 +793,6 @@
   .lp-speakers {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .lp-stage-facts {
-    grid-template-columns: 1fr 1fr;
-  }
-  .lp-stage-facts > div:nth-child(3) {
-    border-left: 0;
-  }
-  .lp-stage-facts > div:nth-child(n + 3) {
-    border-top: 1px solid rgb(255 255 255 / 0.14);
-  }
   .lp-supporters {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -874,6 +866,7 @@
   }
   .lp-stage-facts {
     inset: auto 10px 10px;
+    grid-template-columns: 1fr 1fr;
     border-radius: var(--ds-r-md);
   }
   .lp-stage-facts > div {
