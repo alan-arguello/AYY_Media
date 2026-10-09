@@ -36,7 +36,7 @@ async function solidLogo(path) {
 const icon = (Icon, size = 24) =>
   renderToStaticMarkup(h(Icon, { size, strokeWidth: 2, "aria-hidden": true }));
 
-const OUT = "marketing/accelerating-latam-summit-horizontal.png";
+const OUT = "marketing/bogota-forward-summit-horizontal.png";
 const URL_LABEL = "aiyaiyai.io";
 const CHROME =
   process.env.CHROME_PATH ||
@@ -45,10 +45,10 @@ const CHROME =
 // Same palette and bitmaps as src/components/ui.tsx and pixel-icons.ts.
 const PALETTE = {
   k: "#0d0b01", d: "#3a362b", m: "#8f8a7b", g: "#d9d3c2", w: "#ffffff",
-  b: "#794e00", a: "#b17300", l: "#e2a93b", y: "#f3d48c",
+  b: "#003893", a: "#f2c40c", l: "#fcd116", y: "#fff1a8", r: "#ce1126",
 };
 const MARK = [
-  ".......a",
+  ".......r",
   "......k.",
   "......k.",
   ".....k..",
@@ -108,7 +108,9 @@ const html = /* html */ `<!doctype html>
 @font-face { font-family: GeistMono; src: url(${mono}) format("woff2"); font-weight: 100 900; }
 :root {
   --bg: #fcfbf6; --ink: #0d0b01; --ink2: #3a362b; --muted: #6d685a; --subtle: #9b9584;
-  --line: #d8d2c1; --line2: #b5ae99; --amber: #b17300; --brown: #794e00;
+  --line: #d8d2c1; --line2: #b5ae99; --blue: #003893; --yellow: #fcd116; --red: #ce1126;
+  --flag: linear-gradient(var(--yellow) 0 50%, var(--blue) 50% 75%, var(--red) 75%);
+  --flag-h: linear-gradient(90deg, var(--yellow) 0 50%, var(--blue) 50% 75%, var(--red) 75%);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 1920px; height: 1080px; }
@@ -118,7 +120,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 .pixel { font-family: GeistPixel, GeistMono, monospace; font-weight: 500; }
-.accent { color: var(--amber); }
+.accent { color: var(--blue); }
+.code-dot { color: var(--subtle); } .code-fn { color: var(--blue); } .code-call { color: var(--red); }
+.cursor { display: inline-block; width: 0.5em; height: 0.8em; margin-left: 0.08em; vertical-align: -0.04em;
+  background: var(--yellow); box-shadow: inset 0 0 0 1px rgb(13 11 1 / 0.12); }
+.kind { color: var(--muted); }
+.stripe { position: absolute; inset: 0 0 auto; height: 8px; background: var(--flag-h); }
 
 /* Frame: two pairs of dashed rails and a faint pixel mosaic */
 .rails { position: absolute; inset: 0; pointer-events: none;
@@ -136,12 +143,12 @@ body {
 .card::before, .card::after { content: ""; position: absolute; z-index: 3; width: 5px; height: 5px; background: var(--ink); }
 .card::before { top: -3px; left: -3px; }
 .card::after { right: -3px; bottom: -3px; }
-.card.amber { border-color: var(--amber); }
-.card.amber::before, .card.amber::after { background: var(--amber); }
+.card.amber { border-color: var(--blue); }
+.card.amber::before, .card.amber::after { background: var(--blue); }
 .tag { display: inline-flex; align-items: center; gap: 10px; padding: 6px 11px;
   border: 1px dashed var(--line2); background: var(--bg); color: var(--muted);
   font-size: 18px; line-height: 1.35; white-space: nowrap; }
-.dot { width: 10px; height: 10px; background: var(--amber); flex-shrink: 0; }
+.dot { width: 15px; height: 10px; background: var(--flag); box-shadow: 0 0 0 1px rgb(13 11 1 / 0.1); flex-shrink: 0; }
 .tile { position: absolute; display: grid; place-items: center; width: 60px; height: 60px;
   border: 1px dashed var(--line2); background: var(--bg); }
 .mono-logo { filter: brightness(0); display: block; }
@@ -157,7 +164,7 @@ body {
 /* Hero, left */
 .hero { position: absolute; left: 120px; top: 162px; width: 900px; }
 h1 { margin-top: 26px; font-size: 118px; line-height: 1.0; letter-spacing: -0.035em; }
-h1 span { display: block; }
+h1 > span { display: block; white-space: nowrap; }
 .lead { margin-top: 24px; font-size: 25px; line-height: 1.38; color: var(--muted); white-space: nowrap; }
 .facts { position: absolute; left: 120px; top: 548px; width: 900px; height: 96px; }
 .facts .card { top: 0; height: 96px; width: 288px; padding: 16px 18px; display: grid;
@@ -179,7 +186,7 @@ h1 span { display: block; }
 .speaker { top: 732px; width: 266px; height: 242px; }
 .speaker .photo { height: 152px; border-bottom: 1px dashed var(--line); overflow: hidden; background: #ece7d9; }
 .speaker .photo img { width: 100%; height: 100%; object-fit: cover; display: block;
-  filter: grayscale(1) sepia(0.4) contrast(1.05); }
+  filter: grayscale(1) contrast(1.05); }
 .speaker .meta { padding: 11px 14px 0; }
 .speaker .name { font-size: 19px; font-weight: 500; line-height: 1.2; }
 .speaker .role { margin-top: 4px; font-size: 14.5px; line-height: 1.32; color: var(--muted); }
@@ -196,16 +203,17 @@ h1 span { display: block; }
 .foot .label { color: var(--muted); font-size: 18px; }
 .foot .torrenegra { display: flex; align-items: center; gap: 11px; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
 .cta { margin-left: auto; display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 22px;
-  background: var(--brown); color: #fff; font-size: 21px; }
-.cta b { font-weight: 400; color: #f3d48c; font-family: GeistMono, monospace; font-size: 19px; }
+  background: var(--blue); color: #fff; font-size: 21px; }
+.cta b { font-weight: 400; color: #fcd116; font-family: GeistMono, monospace; font-size: 19px; }
 </style></head>
 <body>
 <div class="rails"></div>
+<div class="stripe"></div>
 <div class="field"></div>
 <div class="field right"></div>
 
 <header class="card nav">
-  <div class="brand pixel">${pixelSvg(MARK, 30)}Accelerating LATAM Summit</div>
+  <div class="brand pixel">${pixelSvg(MARK, 30)}<span>bogota<span class="code-dot">.</span><span class="code-fn">forward</span><span class="code-call">()</span> <span class="kind">summit</span></span></div>
   <div class="theme">IA · Empresas · Lo que viene</div>
   <div class="sep"></div>
   <div class="org">Organiza <img class="mono-logo" src="${aiyaiyai}" height="30" alt=""></div>
@@ -213,7 +221,7 @@ h1 span { display: block; }
 
 <section class="hero">
   <span class="tag"><span class="dot"></span>Próximamente · Bogotá, Colombia</span>
-  <h1 class="pixel"><span>Accelerating</span><span class="accent">LATAM Summit.</span></h1>
+  <h1 class="pixel"><span>bogota<span class="code-dot">.</span><span class="code-fn">forward</span><span class="code-call">()</span></span><span>summit<span class="cursor"></span></span></h1>
   <p class="lead">IA, empresas y lo que viene. La próxima conversación empieza en Bogotá.</p>
 </section>
 
@@ -273,7 +281,7 @@ window.renderPhoto = (src) => new Promise((resolve, reject) => {
     const scale = Math.max(w / photo.naturalWidth, h / photo.naturalHeight);
     const sw = w / scale, sh = h / scale;
     const sx = (photo.naturalWidth - sw) * 0.5, sy = (photo.naturalHeight - sh) * 0.42;
-    const tone = "sepia(0.3) saturate(1.2) brightness(1.08)";
+    const tone = "saturate(1.05) brightness(1.06)";
     ctx.imageSmoothingQuality = "high";
     ctx.filter = tone;
     ctx.drawImage(photo, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
@@ -327,6 +335,17 @@ try {
   const png = await page.screenshot({ type: "png" });
   await writeFile(new URL(OUT, root), png);
   console.log(`${OUT}: 3840×2160`);
+
+  // The site's Open Graph card (1200×630): same design, no speakers row.
+  await page.setViewport({ width: 1920, height: 1008, deviceScaleFactor: 1 });
+  await page.addStyleTag({ content: `
+    .speakers-head, .speaker { display: none !important; }
+    .hero { top: 196px; } h1 { font-size: 126px; }
+    .facts { top: 668px; } .stage { top: 196px; height: 568px; } .foot { top: 896px; }` });
+  await page.evaluate((src) => window.renderPhoto(src), hero);
+  const og = await sharp(await page.screenshot({ type: "png" })).resize(1200, 630).png().toBuffer();
+  await writeFile(new URL("public/images/colombia-summit/opengraph.png", root), og);
+  console.log("public/images/colombia-summit/opengraph.png: 1200×630");
 } finally {
   await browser.close();
 }

@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
 import { siteUrl, isPublicSite } from "@/lib/site-url";
-import { Button, LogoMark, PixelArt, SectionHeading, Tag } from "@/components/ui";
+import { Button, CodeName, LogoMark, PixelArt, SectionHeading, Tag } from "@/components/ui";
 import { PixelPhoto } from "@/components/pixel-photo";
 import { SummitInterestForm } from "./interest-form";
 import { speakers, type SummitSpeaker } from "./speakers";
@@ -30,7 +30,7 @@ const OG_IMAGE = "/images/colombia-summit/opengraph.png";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   robots: { index: isPublicSite, follow: isPublicSite },
-  title: "Accelerating LATAM Summit | 19 de noviembre de 2026, Bogotá",
+  title: "bogota.forward() summit | IA en Bogotá, 19 de noviembre de 2026",
   description:
     "IA, empresas y lo que viene. Nos encontramos en Bogotá con Alexander Torrenegra, Tania Zapata y más speakers. 19 de noviembre de 2026.",
   alternates: { canonical: colombiaSummit.path },
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     locale: "es_CO",
     url: colombiaSummit.path,
     siteName: colombiaSummit.name,
-    title: "Accelerating LATAM Summit · Bogotá, 19 de noviembre",
+    title: "bogota.forward() summit · Bogotá, 19 de noviembre",
     description:
       "Una conversación sobre IA, empresas y lo que viene. Súmate a la lista de interés.",
     images: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Accelerating LATAM Summit. Bogotá, 19 de noviembre de 2026. Organiza AIYaiYai. Sponsors: Torrenegra & Co, Torre.ai y Worder.",
+        alt: "bogota.forward() summit. Bogotá, 19 de noviembre de 2026. Organiza AIYaiYai. Sponsors: Torrenegra & Co, Torre.ai y Worder.",
       },
     ],
   },
@@ -211,7 +211,7 @@ const eventSchema = {
 
 const step = (i: number) => ({ "--i": i }) as React.CSSProperties;
 
-export default function AcceleratingLatamSummitPage() {
+export default function BogotaForwardSummitPage() {
   return (
     <div className="lp" id="top">
       <script
@@ -225,7 +225,7 @@ export default function AcceleratingLatamSummitPage() {
 
       <header className="lp-nav">
         <div className="lp-nav-inner">
-          <a href="#top" aria-label="Accelerating LATAM Summit, inicio">
+          <a href="#top" aria-label="bogota.forward() summit, inicio">
             <LogoMark />
           </a>
           <nav className="lp-nav-links" aria-label="Secciones">
@@ -245,12 +245,13 @@ export default function AcceleratingLatamSummitPage() {
             <span className="ds-reveal">
               <Tag live>Próximamente · Bogotá, Colombia</Tag>
             </span>
-            <h1 id="summit-title" className="ds-display-xl">
+            <h1 id="summit-title" className="ds-display-xl lp-hero-title">
               <span className="ds-reveal" style={step(1)}>
-                Accelerating
+                <CodeName />
               </span>{" "}
-              <span className="ds-accent ds-reveal" style={step(2)}>
-                LATAM Summit.
+              <span className="ds-reveal" style={step(2)}>
+                summit
+                <span className="ds-cursor" aria-hidden="true" />
               </span>
             </h1>
             <p className="ds-lead lp-hero-lead ds-reveal" style={step(3)}>
@@ -552,7 +553,7 @@ export default function AcceleratingLatamSummitPage() {
             </nav>
           </div>
           <div className="lp-footer-base">
-            <p>© 2026 Accelerating LATAM Summit · Bogotá, Colombia</p>
+            <p>© 2026 bogota.forward() summit · Bogotá, Colombia</p>
             <p>
               Fotos:{" "}
               <a

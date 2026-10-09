@@ -137,6 +137,10 @@
 .lp-hero h1 > span {
   display: block;
 }
+.lp-hero-title {
+  font-size: clamp(2.4rem, 1.3rem + 4.4vw, 5rem);
+  line-height: 1.04;
+}
 .lp-hero-lead {
   max-width: 470px;
 }

@@ -41,7 +41,7 @@ export function SummitInterestForm() {
     <form
       action={action}
       className="lp-form"
-      aria-label="Lista de interés de Accelerating LATAM Summit"
+      aria-label="Lista de interés de bogota.forward() summit"
       aria-busy={pending}
     >
       <fieldset disabled={pending}>

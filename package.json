@@ -13,6 +13,8 @@
     "lint": "eslint",
     "test": "node --test scripts/*.test.mjs",
     "og": "node scripts/generate-colombia-summit-og.mjs",
+    "social": "node scripts/generate-social-square.mjs",
+    "bogota": "node scripts/generate-bogota-promo.mjs",
     "promo": "node scripts/generate-horizontal-promo.mjs"
   },
   "dependencies": {

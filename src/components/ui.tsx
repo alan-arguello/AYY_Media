@@ -156,11 +156,28 @@ const MARK = [
   "kk......",
 ];
 
+// The event's name as a line of code, with the flag as syntax colours:
+// the object in ink, the method in blue, the call in red.
+export function CodeName() {
+  return (
+    <span className="ds-code">
+      <span className="ds-code-obj">bogota</span>
+      <span className="ds-code-dot">.</span>
+      <span className="ds-code-fn">forward</span>
+      <span className="ds-code-call">()</span>
+    </span>
+  );
+}
+
 export function LogoMark({ word = true }: { word?: boolean }) {
   return (
     <span className="ds-logo">
       <PixelArt rows={MARK} size={24} />
-      {word && <span className="ds-logo-word">Accelerating LATAM Summit</span>}
+      {word && (
+        <span className="ds-logo-word">
+          <CodeName /> <span className="ds-logo-kind">summit</span>
+        </span>
+      )}
     </span>
   );
 }

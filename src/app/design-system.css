@@ -1,5 +1,5 @@
 /* ──────────────────────────────────────────────────────────────────────────
-   Accelerating LATAM Summit — design system
+   bogota.forward() summit — design system
    A light take on a dot-matrix system: warm paper, near-black ink and the
    Colombian flag used by role (blue leads, yellow lights, red signals), 1px dashed rules, square corners, 4px corner markers and pixel
    type (Geist Pixel Square) over Geist text.
@@ -342,6 +342,40 @@ a.ds-card:hover::after,
   font: 500 1rem/1 var(--ds-font-display);
   letter-spacing: -0.02em;
   white-space: nowrap;
+}
+.ds-logo-kind {
+  color: var(--ds-muted);
+}
+
+/* ── Code name: bogota.forward() ─────────────────────────────────────────── */
+
+.ds-code {
+  white-space: nowrap;
+}
+.ds-code-dot {
+  color: var(--ds-subtle);
+}
+.ds-code-fn {
+  color: var(--ds-blue);
+}
+.ds-code-call {
+  color: var(--ds-red);
+}
+/* A terminal block cursor in flag yellow. */
+.ds-cursor {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.82em;
+  margin-left: 0.08em;
+  vertical-align: -0.06em;
+  background: var(--ds-yellow);
+  box-shadow: inset 0 0 0 1px rgb(13 11 1 / 0.12);
+  animation: ds-cursor 1.1s steps(1) infinite;
+}
+@keyframes ds-cursor {
+  50% {
+    opacity: 0;
+  }
 }
 
 /* ── Motion ──────────────────────────────────────────────────────────────── */
