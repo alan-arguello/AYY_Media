@@ -1,6 +1,7 @@
 import type { Viewport } from "next";
 import { Host_Grotesk, Inter } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
+import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import "./design-system.css";
@@ -37,7 +38,10 @@ export default function SummitLayout({
       lang="es"
       className={`${display.variable} ${text.variable} ${GeistMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
