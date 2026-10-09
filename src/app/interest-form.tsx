@@ -176,7 +176,7 @@ export function SummitInterestForm() {
           type="submit"
           className="ds-button lp-submit"
           data-variant="primary"
-          data-size="lg"
+          data-size="md"
         >
           {pending ? "Guardando tu registro…" : "Quiero enterarme primero"}
           <ArrowRightIcon />

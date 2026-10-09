@@ -12,7 +12,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test scripts/*.test.mjs",
-    "og": "node scripts/generate-colombia-summit-og.mjs"
+    "og": "node scripts/generate-colombia-summit-og.mjs",
+    "promo": "node scripts/generate-horizontal-promo.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.110.2",
@@ -32,6 +33,7 @@
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.5",
     "eslint-config-next": "16.3.6",
+    "puppeteer-core": "24.43.1",
     "sharp": "0.35.4",
     "typescript": "5.9.3"
   },

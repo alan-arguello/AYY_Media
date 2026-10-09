@@ -1,29 +1,18 @@
 import type { Viewport } from "next";
-import { Host_Grotesk, Inter } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { GeistPixelSquare } from "geist/font/pixel";
 import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import "./design-system.css";
 import "./summit.css";
 
-// Display: Host Grotesk. Text: Inter. Figures: Geist Mono.
-const display = Host_Grotesk({
-  subsets: ["latin", "latin-ext"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const text = Inter({
-  subsets: ["latin", "latin-ext"],
-  variable: "--font-text",
-  display: "swap",
-});
-
+// Display: Geist Pixel Square. Text: Geist. Figures: Geist Mono.
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#fdfcfc",
+  themeColor: "#fcfbf6",
   colorScheme: "light",
 };
 
@@ -36,7 +25,7 @@ export default function SummitLayout({
   return (
     <html
       lang="es"
-      className={`${display.variable} ${text.variable} ${GeistMono.variable}`}
+      className={`${GeistSans.variable} ${GeistPixelSquare.variable} ${GeistMono.variable}`}
     >
       <body>
         {children}

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { TorrenegraMark } from "@/components/torrenegra-mark";
+import { Tag } from "@/components/ui";
 import { colombiaSummit } from "@/lib/colombia-summit";
 
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
@@ -26,17 +27,17 @@ export function EventOrganizer() {
 
 export function EventSponsors() {
   return (
-    <section className="ds-band" id="sponsors" aria-labelledby="sponsors-title">
-      <div className="ds-frame lp-wall">
-        <div className="lp-wall-head">
-          <h2 id="sponsors-title">
-            Organiza AIYaiYai, con el apoyo de Torrenegra &amp; Co, Torre.ai y
-            Worder
-          </h2>
-          <p>Bogotá, Colombia · 19.11.2026</p>
-        </div>
-        <ul className="lp-wall-grid lp-sponsors">
-          <li>
+    <section className="lp-sponsors-band" id="sponsors" aria-labelledby="sponsors-title">
+      <div className="ds-container">
+        <h2 id="sponsors-title" className="lp-sponsors-title">
+          Organiza AIYaiYai, con el apoyo de Torrenegra &amp; Co, Torre.ai y
+          Worder
+        </h2>
+        <ul className="lp-sponsors">
+          <li className="ds-card">
+            <Tag dot className="lp-sponsor-role">
+              Organiza
+            </Tag>
             <a
               href={colombiaSummit.channel}
               {...external}
@@ -50,9 +51,9 @@ export function EventSponsors() {
                 className="lp-mono-logo"
               />
             </a>
-            <span className="lp-wall-caption">Organiza</span>
           </li>
-          <li>
+          <li className="ds-card">
+            <Tag className="lp-sponsor-role">Sponsor</Tag>
             <a
               href="https://www.torrenegra.com"
               {...external}
@@ -62,9 +63,9 @@ export function EventSponsors() {
               <TorrenegraMark />
               <span>Torrenegra &amp; Co</span>
             </a>
-            <span className="lp-wall-caption">Sponsor</span>
           </li>
-          <li>
+          <li className="ds-card">
+            <Tag className="lp-sponsor-role">Sponsor</Tag>
             <a href="https://torre.ai" {...external} aria-label="Torre.ai (nueva pestaña)">
               <Image
                 src="/images/colombia-summit/credential-torre-ai.png"
@@ -74,9 +75,9 @@ export function EventSponsors() {
                 className="lp-mono-logo"
               />
             </a>
-            <span className="lp-wall-caption">Sponsor</span>
           </li>
-          <li>
+          <li className="ds-card">
+            <Tag className="lp-sponsor-role">Sponsor</Tag>
             <Image
               src="/images/colombia-summit/worder.png"
               alt="Worder"
@@ -84,7 +85,6 @@ export function EventSponsors() {
               height={32}
               className="lp-mono-logo"
             />
-            <span className="lp-wall-caption">Sponsor</span>
           </li>
         </ul>
       </div>
