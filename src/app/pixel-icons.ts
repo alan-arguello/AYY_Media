@@ -1,5 +1,6 @@
 // 18×18 bitmaps for <PixelArt>. One character per pixel: k ink, d dark,
-// m mid grey, g light grey, b brown, a amber, l light amber, y highlight.
+// m mid grey, g light grey, b blue, a yellow, l flag yellow, y highlight,
+// r red.
 
 export const chip = [
   "................a.",
@@ -11,8 +12,8 @@ export const chip = [
   "....kddddddddk....",
   "..kkkddllaaddkkk..",
   "....kddlyaaddk....",
-  "....kddaaabddk....",
-  "..kkkddaabbddkkk..",
+  "....kddaaaaddk....",
+  "..kkkddaaaaddkkk..",
   "....kddddddddk....",
   "..kkkddddddddkkk..",
   "....kkkkkkkkkk....",
@@ -23,7 +24,7 @@ export const chip = [
 ] as const;
 
 export const skyline = [
-  "........a.........",
+  "........r.........",
   "........k.........",
   "......kkkkkk......",
   "......kddddk......",
@@ -45,19 +46,19 @@ export const skyline = [
 
 export const rocket = [
   "........kk........",
-  ".......kaak.......",
-  "......kaaaak......",
+  ".......krrk.......",
+  "......krrrrk......",
   "......kggggk......",
   ".....kggggggk.....",
   ".....kggkkggk.....",
   ".....kgkyakgk.....",
-  ".....kgkabkgk.....",
+  ".....kgkbbkgk.....",
   ".....kggkkggk.....",
   ".....kggggggk.....",
   "....kkggggggkk....",
-  "...kakggggggkak...",
-  "..kaakggmmggkaak..",
-  "..kaakkkkkkkkaak..",
+  "...kbkggggggkbk...",
+  "..kbbkggmmggkbbk..",
+  "..kbbkkkkkkkkbbk..",
   "..kkk..kllk..kkk..",
   ".......lyyl.......",
   ".......alla.......",

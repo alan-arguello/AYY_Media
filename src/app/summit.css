@@ -8,6 +8,15 @@
   letter-spacing: -0.008em;
   overflow-x: clip;
 }
+/* The flag as a thin signature at the top of the page. */
+.lp::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  height: 4px;
+  background: var(--ds-flag-h);
+}
 .lp > main,
 .lp > footer {
   position: relative;
@@ -242,7 +251,7 @@
   font-size: 0.75rem;
 }
 .lp-sponsor-role .ds-tag-dot {
-  width: 6px;
+  width: 9px;
   height: 6px;
 }
 .lp-sponsors img {
@@ -337,7 +346,7 @@
   object-fit: cover;
   object-position: 50% 18%;
   /* Sources mix colour and black-and-white; a warm duotone unifies them. */
-  filter: grayscale(1) sepia(0.4) contrast(1.04);
+  filter: grayscale(1) contrast(1.05);
   transition:
     transform 700ms var(--ds-ease-out),
     filter 500ms var(--ds-ease);
@@ -368,7 +377,7 @@
     color var(--ds-fast);
 }
 .lp-speaker-link:hover h3 svg {
-  color: var(--ds-amber);
+  color: var(--ds-blue);
   transform: translate(2px, -2px);
 }
 .lp-speaker-head p {
@@ -532,7 +541,7 @@
 }
 .lp-carousel-group img {
   object-fit: cover;
-  filter: sepia(0.18) saturate(0.92);
+  filter: saturate(0.9);
 }
 .lp-carousel-toggle {
   position: absolute;
@@ -618,7 +627,7 @@
   transition: border-color var(--ds-fast);
 }
 .lp-faq-item[open] {
-  border-color: var(--ds-amber);
+  border-color: var(--ds-blue);
 }
 .lp-faq-item summary {
   display: flex;
@@ -642,7 +651,7 @@
 }
 .lp-faq-item[open] summary svg {
   transform: rotate(180deg);
-  color: var(--ds-amber);
+  color: var(--ds-blue);
 }
 .lp-faq-item p {
   padding: 0 14px 16px;
@@ -741,7 +750,7 @@
   outline: none;
   border-style: solid;
   border-color: var(--ds-ink);
-  box-shadow: 0 0 0 3px var(--ds-amber-tint);
+  box-shadow: 0 0 0 3px var(--ds-blue-tint);
 }
 .lp-field input[aria-invalid="true"] {
   border-style: solid;
@@ -766,7 +775,7 @@
   width: 16px;
   height: 16px;
   margin: 1px 0 0;
-  accent-color: var(--ds-brown);
+  accent-color: var(--ds-blue);
 }
 .lp-consent a {
   color: var(--ds-ink);
@@ -811,7 +820,7 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  background: var(--ds-brown);
+  background: var(--ds-blue);
   color: var(--ds-white);
   font-size: 1.125rem;
 }
@@ -913,6 +922,7 @@
   height: 16px;
 }
 .lp-footer-base {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -921,6 +931,15 @@
   border-top: 1px dashed var(--ds-line);
   font-size: 0.8125rem;
   color: var(--ds-muted);
+}
+.lp-footer-base::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 96px;
+  height: 3px;
+  background: var(--ds-flag-h);
 }
 .lp-footer-base a {
   color: var(--ds-ink);

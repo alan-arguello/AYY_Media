@@ -1,7 +1,7 @@
 /* ──────────────────────────────────────────────────────────────────────────
    Accelerating LATAM Summit — design system
-   A light take on a dot-matrix system: warm paper, near-black ink, one amber
-   signal, 1px dashed rules, square corners, 4px corner markers and pixel
+   A light take on a dot-matrix system: warm paper, near-black ink and the
+   Colombian flag used by role (blue leads, yellow lights, red signals), 1px dashed rules, square corners, 4px corner markers and pixel
    type (Geist Pixel Square) over Geist text.
    ────────────────────────────────────────────────────────────────────────── */
 
@@ -22,12 +22,17 @@
   --ds-line: #d8d2c1;
   --ds-line-strong: #b5ae99;
 
-  /* Signal: amber for display accents, brown for fills and small text */
-  --ds-amber: #b17300;
-  --ds-amber-ink: #8a5a00;
-  --ds-brown: #794e00;
-  --ds-brown-hover: #613e00;
-  --ds-amber-tint: #f4ead2;
+  /* Colombia, by role: blue for accents and fills, yellow only as light
+     (pixels, tints; never text), red as a rare signal. */
+  --ds-blue: #003893;
+  --ds-blue-hover: #002a70;
+  --ds-blue-tint: #e2e8f5;
+  --ds-yellow: #fcd116;
+  --ds-yellow-tint: #fff3bf;
+  --ds-red: #ce1126;
+  /* The flag in its 2:1:1 proportion. */
+  --ds-flag: linear-gradient(var(--ds-yellow) 0 50%, var(--ds-blue) 50% 75%, var(--ds-red) 75%);
+  --ds-flag-h: linear-gradient(90deg, var(--ds-yellow) 0 50%, var(--ds-blue) 50% 75%, var(--ds-red) 75%);
 
   /* Type */
   --ds-font-display: var(--font-geist-pixel-square), var(--font-geist-mono), ui-monospace, monospace;
@@ -87,7 +92,7 @@
   letter-spacing: -0.015em;
 }
 .ds-accent {
-  color: var(--ds-amber);
+  color: var(--ds-blue);
 }
 .ds-lead {
   font-size: 1rem;
@@ -197,10 +202,11 @@
   white-space: nowrap;
 }
 .ds-tag-dot {
-  width: 8px;
+  width: 12px;
   height: 8px;
   flex-shrink: 0;
-  background: var(--ds-amber);
+  background: var(--ds-flag);
+  box-shadow: 0 0 0 1px rgb(13 11 1 / 0.08);
 }
 .ds-tag-dot[data-live] {
   animation: ds-blink 1.6s steps(1) infinite;
@@ -242,11 +248,11 @@
   transform: translateX(2px);
 }
 .ds-button[data-variant="primary"] {
-  background: var(--ds-brown);
+  background: var(--ds-blue);
   color: var(--ds-white);
 }
 .ds-button[data-variant="primary"]:hover {
-  background: var(--ds-brown-hover);
+  background: var(--ds-blue-hover);
 }
 .ds-button[data-variant="secondary"] {
   border: 1px dashed var(--ds-line-strong);
@@ -290,10 +296,10 @@ a.ds-card:hover::before,
 a.ds-card:hover::after,
 .ds-card:has(a:hover)::before,
 .ds-card:has(a:hover)::after {
-  background: var(--ds-amber);
+  background: var(--ds-blue);
 }
 .ds-card[data-accent] {
-  border-color: var(--ds-amber);
+  border-color: var(--ds-blue);
 }
 
 .ds-icon-tile {
@@ -375,6 +381,6 @@ a.ds-card:hover::after,
 }
 
 :focus-visible {
-  outline: 2px solid var(--ds-amber);
+  outline: 2px solid var(--ds-blue);
   outline-offset: 3px;
 }

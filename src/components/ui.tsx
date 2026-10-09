@@ -91,10 +91,11 @@ const PIXEL_PALETTE: Record<string, string> = {
   m: "#8f8a7b", // mid grey
   g: "#d9d3c2", // light grey
   w: "#ffffff",
-  b: "#794e00", // brown
-  a: "#b17300", // amber
-  l: "#e2a93b", // light amber
-  y: "#f3d48c", // highlight
+  b: "#003893", // blue
+  a: "#f2c40c", // yellow
+  l: "#fcd116", // flag yellow
+  y: "#fff1a8", // highlight
+  r: "#ce1126", // red
 };
 
 // Renders a bitmap (one string per row, one character per pixel, "." for
@@ -143,10 +144,10 @@ export function PixelArt({
   );
 }
 
-// An exponential curve drawn in pixels, its leading point in amber:
+// An exponential curve drawn in pixels, its leading point in red:
 // acceleration in one stroke.
 const MARK = [
-  ".......a",
+  ".......r",
   "......k.",
   "......k.",
   ".....k..",

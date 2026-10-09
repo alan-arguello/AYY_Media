@@ -5,7 +5,7 @@ import { writeFileSync } from "node:fs";
 const CELL = 24;
 const COLS = 60;
 const ROWS = 36;
-const palette = ["#b17300", "#b17300", "#b17300", "#794e00", "#0d0b01"];
+const palette = ["#fcd116", "#fcd116", "#fcd116", "#003893", "#003893", "#ce1126", "#0d0b01"];
 
 let seed = 19112026;
 const random = () => {
@@ -20,7 +20,10 @@ for (let row = 0; row < ROWS; row++) {
     const density = 0.62 - (row / ROWS) * 0.3;
     if (random() > density) continue;
     const color = palette[Math.floor(random() * palette.length)];
-    const alpha = color === "#0d0b01" ? 0.012 + random() * 0.02 : 0.02 + random() * 0.06;
+    const alpha =
+      color === "#fcd116" ? 0.05 + random() * 0.09 // yellow is light; it needs more
+      : color === "#ce1126" ? 0.015 + random() * 0.025
+      : 0.012 + random() * 0.03;
     rects.push(
       `<rect x="${col * CELL}" y="${row * CELL}" width="${CELL}" height="${CELL}" fill="${color}" fill-opacity="${alpha.toFixed(3)}"/>`,
     );

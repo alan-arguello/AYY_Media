@@ -498,7 +498,7 @@ export default function AcceleratingLatamSummitPage() {
                   quality={86}
                   cell={12}
                   solidFrom={0.27}
-                  filter="sepia(0.9) saturate(1.3) hue-rotate(-18deg) brightness(1.08)"
+                  filter="saturate(0.85) brightness(1.04)"
                   className="lp-register-photo"
                 />
                 <dl className="lp-register-facts">
