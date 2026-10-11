@@ -22,6 +22,7 @@ import { Countdown } from "./countdown";
 import { TicketPricing } from "./ticket-pricing";
 import { TicketSelectionProvider } from "./ticket-selection";
 import { NapaExperience } from "./napa-experience";
+import { SummitAgenda } from "./summit-agenda";
 import { chip, rocket, skyline } from "./pixel-icons";
 
 export const runtime = "nodejs";
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   robots: { index: isPublicSite, follow: isPublicSite },
   title: "bogota.forward() summit | IA en Bogotá, 19 de noviembre de 2026",
   description:
-    "IA, empresas y lo que viene. Nos encontramos en Bogotá con Alexander Torrenegra, Tania Zapata y más speakers. 19 de noviembre de 2026.",
+    "IA, empresas y lo que viene. Bogotá, 19 de noviembre de 2026, de 10 a. m. a 4 p. m. Charlas, fireside chat y workshop con Alexander Torrenegra, Tania Zapata y más speakers.",
   alternates: { canonical: colombiaSummit.path },
   openGraph: {
     type: "website",
@@ -98,7 +99,7 @@ const speakerNames = new Intl.ListFormat("es", {
 const faqs: { q: string; a: React.ReactNode }[] = [
   {
     q: "¿Cuándo y dónde es?",
-    a: "El jueves 19 de noviembre de 2026, en Bogotá, Colombia. La agenda y los detalles los compartiremos primero con la lista de interés.",
+    a: "El jueves 19 de noviembre de 2026, de 10 a. m. a 4 p. m., hora de Bogotá, Colombia. Ya puedes consultar las primeras sesiones en la agenda. Los horarios de cada charla y los detalles del lugar se anunciarán próximamente.",
   },
   {
     q: "¿Ya puedo comprar mi entrada?",
@@ -126,7 +127,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "¿Quiénes son los speakers?",
-    a: `Hasta ahora, ${speakerNames}. Agenda y nombres nuevos, muy pronto.`,
+    a: `Hasta ahora, ${speakerNames}. Consulta sus primeras sesiones en la agenda. Más sesiones y speakers por anunciar.`,
   },
   {
     q: "¿Cómo los contacto?",
@@ -202,7 +203,8 @@ const eventSchema = {
   "@type": "Event",
   name: colombiaSummit.name,
   description: "IA, empresas y lo que viene.",
-  startDate: colombiaSummit.date,
+  startDate: colombiaSummit.startDate,
+  endDate: colombiaSummit.endDate,
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
   inLanguage: "es",
@@ -245,6 +247,7 @@ export default function BogotaForwardSummitPage() {
           </a>
           <nav className="lp-nav-links" aria-label="Secciones">
             <a href="#speakers">Speakers</a>
+            <a href="#agenda">Agenda</a>
             <a href="#entradas">Entradas</a>
             <a href="#comunidad">Comunidad</a>
           </nav>
@@ -278,8 +281,8 @@ export default function BogotaForwardSummitPage() {
               <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>
                 Ver entradas y precios
               </Button>
-              <Button variant="secondary" href="#speakers">
-                Ver speakers
+              <Button variant="secondary" href="#agenda">
+                Ver agenda
               </Button>
             </div>
             <p className="lp-hero-note ds-reveal" style={step(5)}>
@@ -321,7 +324,7 @@ export default function BogotaForwardSummitPage() {
                 <strong>
                   <time dateTime={colombiaSummit.date}>19.11.2026</time>
                 </strong>
-                <span>Jueves 19 de noviembre</span>
+                <span>Jueves · 10 a. m. a 4 p. m.</span>
               </li>
               <li className="ds-card">
                 <MapPin aria-hidden="true" />
@@ -412,7 +415,7 @@ export default function BogotaForwardSummitPage() {
                     </li>
                   ))}
                 </ul>
-                <p className="lp-coming-foot">Agenda y nombres, muy pronto.</p>
+                <p className="lp-coming-foot">Más sesiones y nombres, muy pronto.</p>
               </li>
             </ul>
             <p className="lp-note">
@@ -421,6 +424,10 @@ export default function BogotaForwardSummitPage() {
             </p>
           </div>
         </section>
+
+        <hr className="ds-divider" />
+
+        <SummitAgenda />
 
         <hr className="ds-divider" />
 
@@ -530,6 +537,10 @@ export default function BogotaForwardSummitPage() {
                     <dd>Jueves 19 de noviembre, 2026</dd>
                   </div>
                   <div>
+                    <dt>Horario</dt>
+                    <dd>10 a. m. a 4 p. m. · Hora de Bogotá</dd>
+                  </div>
+                  <div>
                     <dt>Dónde</dt>
                     <dd>Bogotá, Colombia</dd>
                   </div>
@@ -558,6 +569,7 @@ export default function BogotaForwardSummitPage() {
               <div>
                 <h2>Evento</h2>
                 <a href="#speakers">Speakers</a>
+                <a href="#agenda">Agenda</a>
                 <a href="#entradas">Entradas y precios</a>
                 <a href="#sponsors">Sponsors</a>
                 <a href="#comunidad">Comunidad</a>

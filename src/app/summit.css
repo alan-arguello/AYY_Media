@@ -96,7 +96,7 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  width: min(780px, 100% - 32px);
+  width: min(860px, 100% - 32px);
   height: var(--ds-nav);
   margin-inline: auto;
   padding: 0 12px 0 16px;
@@ -692,7 +692,11 @@
 .lp-register-facts > div {
   padding: 14px;
 }
-.lp-register-facts > div + div {
+.lp-register-facts > div:first-child {
+  grid-column: 1 / -1;
+  border-bottom: 1px dashed var(--ds-line);
+}
+.lp-register-facts > div:nth-child(3) {
   border-left: 1px dashed var(--ds-line);
 }
 .lp-register-facts dt {

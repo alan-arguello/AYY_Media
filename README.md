@@ -60,6 +60,7 @@ Tambien se verificaron inserciones de las 3 versiones de consentimiento y dedupl
 
 ## Edicion
 
+- Agenda: `src/app/summit-agenda.tsx` y su CSS. El horario general es de 10 a. m. a 4 p. m. en Bogotá; las cuatro sesiones están numeradas, sin asignar horarios individuales todavía. Inicio y cierre con zona horaria están en `src/lib/colombia-summit.ts` y alimentan los datos estructurados del evento.
 - Entradas y fases: `src/lib/summit-pricing.ts`; selector y tarjetas en `src/app/ticket-pricing.tsx` y su CSS. Los cortes incluyen todo el 24 de octubre, 7 y 19 de noviembre de 2026 en Bogotá (UTC-5). La fase vigente se actualiza en el navegador sin otro despliegue; el calendario completo permanece visible. Después del último corte, las tarjetas muestran las fases finalizadas.
 - General, VIP y VIP Plus usan el mismo formulario; cada tarjeta preselecciona su ticket sin borrar otros campos. La eleccion se conserva ante errores de validacion. No hay cobro ni aceptacion automatica. Los cupos publicados son limites de cada experiencia, no un inventario de disponibilidad en tiempo real.
 - Formulario y validacion: `src/app/interest-form.tsx`, `src/app/ticket-selection.tsx`, `src/app/actions.ts` y `src/lib/colombia-summit.ts`. Persistencia: `src/lib/colombia-summit-persistence.ts` y `src/lib/supabase/summit-interest.ts`.

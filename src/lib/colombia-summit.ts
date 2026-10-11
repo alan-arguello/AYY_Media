@@ -4,6 +4,8 @@ export const colombiaSummit = {
   name: "bogota.forward() summit",
   path: "/",
   date: "2026-11-19",
+  startDate: "2026-11-19T10:00:00-05:00",
+  endDate: "2026-11-19T16:00:00-05:00",
   source: "colombia-summit-2026",
   consentVersion: "aiyaiyai-summit-2026-v1",
   organizer: "AIYaiYai",
