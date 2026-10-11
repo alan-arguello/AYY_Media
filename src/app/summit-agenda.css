@@ -67,14 +67,83 @@
 
 .agenda-session {
   display: grid;
-  grid-template-columns: 40px 180px minmax(0, 1fr);
-  gap: 24px;
-  align-items: start;
-  padding-block: 32px;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;
+  padding-block: 36px;
 }
 
 .agenda-session + .agenda-session {
   border-top: 1px dashed var(--ds-line-strong);
+}
+
+.agenda-portraits {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding-left: 10px;
+}
+
+.agenda-portrait {
+  position: relative;
+  flex: 0 0 112px;
+  height: 124px;
+  overflow: hidden;
+  border: 4px solid var(--ds-bg);
+  outline: 1px solid var(--ds-line-strong);
+  background: var(--ds-surface-2);
+  transform: rotate(-3deg);
+}
+
+.agenda-portrait img {
+  object-fit: cover;
+  object-position: 50% 0;
+  transform-origin: 50% 0;
+}
+
+.agenda-portrait[data-speaker="Alexander Torrenegra"] img {
+  transform: scale(1.65);
+}
+
+.agenda-portrait[data-speaker="Tania Zapata"] img {
+  transform: scale(1.55);
+  transform-origin: 70% 0;
+}
+
+.agenda-portrait[data-speaker="Alan Argüello"] img {
+  transform: scale(1.5);
+}
+
+.agenda-portrait[data-speaker="Juan Pablo Rodríguez"] img {
+  transform: scale(1.15);
+}
+
+.agenda-portrait[data-speaker="Catalina Morales"] img {
+  object-position: 50% 40%;
+}
+
+.agenda-portraits[data-pair] .agenda-portrait {
+  flex-basis: 88px;
+  height: 108px;
+}
+
+.agenda-portraits[data-pair] .agenda-portrait + .agenda-portrait {
+  margin-top: 16px;
+  margin-left: -12px;
+  transform: rotate(4deg);
+}
+
+.agenda-portraits .agenda-number {
+  position: absolute;
+  z-index: 1;
+  top: -10px;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  background: var(--ds-blue);
+  border-color: var(--ds-bg);
+  color: var(--ds-bg);
+  font-size: 0.6875rem;
 }
 
 .agenda-number {
@@ -94,11 +163,17 @@
   font-size: 0.75rem;
 }
 
-.agenda-speaker > p {
+.agenda-speaker {
+  margin-top: 14px;
   font-size: 0.9375rem;
   font-weight: 500;
   line-height: 1.45;
   text-wrap: pretty;
+}
+
+.agenda-speaker-join {
+  color: var(--ds-muted);
+  font-weight: 400;
 }
 
 .agenda-topic h3 {
@@ -160,13 +235,8 @@
   }
 
   .agenda-session {
-    grid-template-columns: 36px minmax(0, 1fr);
-    gap: 14px 20px;
-    padding-block: 26px;
-  }
-
-  .agenda-topic {
-    grid-column: 2;
+    gap: 24px;
+    padding-block: 32px;
   }
 
   .agenda-format {
@@ -176,6 +246,32 @@
   .agenda-coming {
     padding: 24px;
     gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .agenda-session {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .agenda-portrait,
+  .agenda-portraits[data-pair] .agenda-portrait {
+    flex-basis: 80px;
+    height: 88px;
+  }
+
+  .agenda-portraits[data-pair] .agenda-portrait + .agenda-portrait {
+    margin-left: 8px;
+    margin-top: 4px;
+  }
+
+  .agenda-topic h3 {
+    font-size: 1.375rem;
+  }
+
+  .agenda-speaker {
+    margin-top: 10px;
   }
 }
 
@@ -202,10 +298,6 @@
 
   .agenda-sessions {
     padding-inline: 16px;
-  }
-
-  .agenda-session {
-    column-gap: 12px;
   }
 
   .agenda-coming {

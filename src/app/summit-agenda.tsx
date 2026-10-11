@@ -1,27 +1,35 @@
+import Image from "next/image";
 import { ArrowRight, Plus } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
+import { speakers } from "./speakers";
 import "./summit-agenda.css";
+
+function agendaSpeaker(name: string) {
+  const speaker = speakers.find((person) => person.name === name);
+  if (!speaker) throw new Error(`Missing agenda speaker: ${name}`);
+  return speaker;
+}
 
 const sessions = [
   {
     format: "Charla",
-    speaker: "Alexander Torrenegra",
+    speakers: [agendaSpeaker("Alexander Torrenegra")],
     title: "Cómo predecir el futuro",
   },
   {
     format: "Fireside chat",
-    speaker: "Tania Zapata",
+    speakers: [agendaSpeaker("Tania Zapata")],
     title: "Reinventar tu compañía cuando es disrumpida",
   },
   {
     format: "Workshop",
-    speaker: "Alan Argüello",
+    speakers: [agendaSpeaker("Alan Argüello")],
     title: "Cómo volverte un 10X Operator",
     description: "Así uso Claude y Codex para operar yo solo.",
   },
   {
     format: "Charla",
-    speaker: "Juan Pablo Rodríguez y Catalina Morales",
+    speakers: [agendaSpeaker("Juan Pablo Rodríguez"), agendaSpeaker("Catalina Morales")],
     title: "Lecciones de Growth en Torre.ai para la era de IA",
   },
 ];
@@ -50,16 +58,34 @@ export function SummitAgenda() {
           <ol className="agenda-sessions" role="list" aria-label="Sesiones del summit">
             {sessions.map((session, index) => (
               <li className="agenda-session" key={session.title}>
-                <span className="agenda-number" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div className="agenda-speaker">
-                  <span className="agenda-format">{session.format}</span>
-                  <p>{session.speaker}</p>
+                <div className="agenda-portraits" data-pair={session.speakers.length > 1 || undefined}>
+                  {session.speakers.map((speaker) => (
+                    <div className="agenda-portrait" data-speaker={speaker.name} key={speaker.name}>
+                      <Image
+                        src={speaker.image}
+                        alt={speaker.name}
+                        fill
+                        sizes="(max-width: 600px) 80px, 112px"
+                        quality={90}
+                      />
+                    </div>
+                  ))}
+                  <span className="agenda-number" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
                 <div className="agenda-topic">
+                  <span className="agenda-format">{session.format}</span>
                   <h3>{session.title}</h3>
                   {session.description && <p>{session.description}</p>}
+                  <div className="agenda-speaker">
+                    {session.speakers.map((speaker, speakerIndex) => (
+                      <span key={speaker.name}>
+                        {speakerIndex > 0 && <span className="agenda-speaker-join"> y </span>}
+                        {speaker.name}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </li>
             ))}
