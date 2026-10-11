@@ -42,11 +42,11 @@ test("accepts both the existing deployment variables and legacy aliases", () => 
 test("uses the existing registrations table and keeps keys on the server", () => {
   const source = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
   assert.match(
-    source("../src/lib/colombia-summit-persistence.ts"),
+    source("../src/lib/supabase/summit-interest.ts"),
     /from\("colombia_summit_interests"\)/,
   );
   assert.doesNotMatch(
-    source("../src/lib/colombia-summit-persistence.ts"),
+    source("../src/lib/supabase/summit-interest.ts"),
     /bttf_summit_interests/,
   );
   assert.match(

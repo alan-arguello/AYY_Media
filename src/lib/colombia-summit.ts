@@ -54,17 +54,25 @@ export const summitInterestSchema = z.object({
     .transform((email) => email.toLowerCase()),
   company: z.string().trim().max(160).default(""),
   linkedin: linkedinProfile,
+  ticketType: z.enum(["general", "vip", "vip-plus"], {
+    error: "Elige el tipo de ticket que te interesa.",
+  }),
   consent: z.literal(true, {
     error: "Autoriza el contacto para recibir novedades.",
   }),
 });
 
 export type SummitInterest = z.infer<typeof summitInterestSchema>;
+export type SummitTicketType = SummitInterest["ticketType"];
 export type SummitFormState = {
   status: "idle" | "error" | "success";
   message: string;
+  detail?: string;
   errors?: Partial<Record<keyof SummitInterest, string>>;
-  values?: Omit<SummitInterest, "consent"> & { consent: boolean };
+  values?: Omit<SummitInterest, "consent" | "ticketType"> & {
+    consent: boolean;
+    ticketType: string;
+  };
 };
 
 export const initialSummitFormState: SummitFormState = {
@@ -81,6 +89,7 @@ export function parseSummitInterest(formData: FormData) {
         : null,
     company: formData.get("company") ?? "",
     linkedin: formData.get("linkedin") ?? "",
+    ticketType: formData.get("ticketType"),
     consent: formData.get("consent") === "on",
   });
 }

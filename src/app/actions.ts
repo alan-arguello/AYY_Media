@@ -2,6 +2,7 @@
 
 import {
   parseSummitInterest,
+  colombiaSummit,
   type SummitFormState,
   type SummitInterest,
 } from "@/lib/colombia-summit";
@@ -13,7 +14,7 @@ export async function submitSummitInterest(
 ): Promise<SummitFormState> {
   const success: SummitFormState = {
     status: "success",
-    message: "Ya estás en la lista.",
+    message: "Recibimos tu interés.",
   };
   if (formData.get("website")) return success;
 
@@ -23,6 +24,7 @@ export async function submitSummitInterest(
     email: String(formData.get("email") ?? "").slice(0, 254),
     company: String(formData.get("company") ?? "").slice(0, 160),
     linkedin: String(formData.get("linkedin") ?? "").slice(0, 500),
+    ticketType: String(formData.get("ticketType") ?? "").slice(0, 40),
     consent: formData.get("consent") === "on",
   };
   if (!result.success) {
@@ -41,7 +43,13 @@ export async function submitSummitInterest(
 
   try {
     await persistSummitInterest(result.data);
-    return success;
+    // Keep the public response the same for new and duplicate emails. Do not
+    // disclose whether a person already registered or which ticket they chose.
+    return {
+      status: "success",
+      message: "Gracias por tu interés.",
+      detail: `Te contactaremos con los próximos pasos para asistir. Si ya habías elegido un ticket en un registro anterior, conservamos esa preferencia; para cambiarla, escríbenos a ${colombiaSummit.contactEmail}.${result.data.ticketType === "general" ? "" : " Las solicitudes VIP y VIP Plus están sujetas a aceptación y disponibilidad."}`,
+    };
   } catch (error) {
     console.error(
       "Colombia Summit registration failed",

@@ -24,7 +24,7 @@ Abrir http://localhost:3105. Sin credenciales, solo en desarrollo, el formulario
 
 1. Sube el contenido de esta carpeta al nuevo repositorio, incluyendo `package-lock.json`, sin `node_modules`, `.next`, `.local`, `.env.local` ni `supabase/.temp`.
 2. Importa el repositorio en Vercel como **Next.js**, directorio raiz `.`, Node.js 22.x. Build: `npm run build`. No uses exportacion estatica: el formulario necesita un servidor.
-3. Usa el **mismo Supabase de Consulting**, proyecto `rcvmfvacalolcijkrvsb`, y la tabla existente `public.colombia_summit_interests`. No crees otro proyecto ni otra tabla. La actualizacion de consentimiento **ya fue aplicada y verificada el 24 de septiembre de 2026** en ese proyecto; no necesitas ejecutar SQL para desplegar. El archivo `supabase/migrations/20260924184338_colombia_summit_aiyaiyai_consent.sql` documenta ese cambio, sin modificar registros ni permisos. No ejecutes `supabase db push` desde este proyecto aislado: el historial completo sigue gestionado por el proyecto original.
+3. Usa el **mismo Supabase de Consulting**, proyecto `rcvmfvacalolcijkrvsb`, y la tabla existente `public.colombia_summit_interests`. No crees otro proyecto ni otra tabla. La actualizacion de consentimiento fue aplicada el 24 de septiembre de 2026 y la columna `ticket_type` **fue aplicada y verificada el 10 de octubre de 2026**. Ambas migraciones estan documentadas en `supabase/migrations/`; no vuelvas a ejecutarlas en ese proyecto. No ejecutes `supabase db push` desde este proyecto aislado: el historial completo sigue gestionado por el proyecto original.
 4. Configura las variables de `.env.example` en Vercel:
    - `SITE_URL`: origen HTTPS del nuevo sitio, sin ruta. Se utiliza en canonical, Open Graph y sitemap. Si se omite en Vercel, se usa `VERCEL_PROJECT_PRODUCTION_URL`.
    - `NEXT_PUBLIC_SUPABASE_URL`: `https://rcvmfvacalolcijkrvsb.supabase.co`, igual al sitio original. Tambien se acepta `SUPABASE_URL`.
@@ -37,7 +37,9 @@ Las variables del hosting anterior no se transfieren automaticamente al crear ot
 
 ## Datos y consentimiento
 
-El sitio original y este proyecto escriben en la **misma lista**, `colombia_summit_interests`, con el mismo `source` (`colombia-summit-2026`). No se copian ni trasladan registros. Los nuevos registros de esta web usan `aiyaiyai-summit-2026-v1`, para que **AIYaiYai** contacte sobre este evento. Los consentimientos anteriores se conservan; una persona que ya esta registrada no se sobrescribe al reenviar el formulario. Ser sponsor no concede acceso a los registros ni autoriza comunicaciones de marketing de terceros.
+El sitio original y este proyecto escriben en la **misma lista**, `colombia_summit_interests`, con el mismo `source` (`colombia-summit-2026`). No se copian ni trasladan registros. Los nuevos registros de esta web usan `aiyaiyai-summit-2026-v1`, para que **AIYaiYai** contacte sobre este evento. Los consentimientos anteriores se conservan. Ser sponsor no concede acceso a los registros ni autoriza comunicaciones de marketing de terceros.
+
+El nuevo formulario exige elegir `general`, `vip` o `vip-plus` y el servidor valida ese valor antes de guardar `ticket_type`. La columna permite `NULL`, sin default: los registros historicos y los formularios anteriores siguen siendo validos, sin asignarles una preferencia inventada. Ante un email repetido se conservan identidad, fecha, empresa, LinkedIn y consentimiento. Solo se completa `ticket_type` si estaba vacio; una preferencia ya guardada no se sobrescribe desde el formulario publico. Las respuestas no revelan si el email ya existia ni su preferencia anterior. El respaldo local de desarrollo conserva la primera escritura completa y no modifica duplicados.
 
 RLS activado. Sin lectura ni escritura publica. La app valida en servidor, normaliza email/LinkedIn y evita duplicados sin sobrescribir registros existentes. Incluye honeypot; configura tambien rate limiting del hosting antes de campanas de alto trafico. No envia correos automaticamente ni reserva entradas.
 
@@ -58,6 +60,10 @@ Tambien se verificaron inserciones de las 3 versiones de consentimiento y dedupl
 
 ## Edicion
 
+- Entradas y fases: `src/lib/summit-pricing.ts`; selector y tarjetas en `src/app/ticket-pricing.tsx` y su CSS. Los cortes incluyen todo el 24 de octubre, 7 y 19 de noviembre de 2026 en Bogotá (UTC-5). La fase vigente se actualiza en el navegador sin otro despliegue; el calendario completo permanece visible. Después del último corte, las tarjetas muestran las fases finalizadas.
+- General, VIP y VIP Plus usan el mismo formulario; cada tarjeta preselecciona su ticket sin borrar otros campos. La eleccion se conserva ante errores de validacion. No hay cobro ni aceptacion automatica. Los cupos publicados son limites de cada experiencia, no un inventario de disponibilidad en tiempo real.
+- Formulario y validacion: `src/app/interest-form.tsx`, `src/app/ticket-selection.tsx`, `src/app/actions.ts` y `src/lib/colombia-summit.ts`. Persistencia: `src/lib/colombia-summit-persistence.ts` y `src/lib/supabase/summit-interest.ts`.
+- Referencia de Napa: `src/app/napa-experience.tsx` y su CSS. Las cuatro fotos suministradas están optimizadas en WebP, sin metadatos, en `public/images/napa/`.
 - Contenido y fecha: `src/lib/colombia-summit.ts` y `src/app/page.tsx`.
 - Organizador y sponsors: `src/app/event-branding.tsx`.
 - Speakers y trayectoria: `src/app/speakers.ts`.

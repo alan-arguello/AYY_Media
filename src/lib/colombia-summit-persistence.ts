@@ -1,6 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { saveSupabaseSummitInterest, type SummitPersistenceResult } from "@/lib/supabase/summit-interest";
 
 import { colombiaSummit, type SummitInterest } from "@/lib/colombia-summit";
 import {
@@ -8,7 +9,7 @@ import {
   getSupabaseConfigState,
 } from "@/lib/supabase/service-role";
 
-export async function persistSummitInterest(interest: SummitInterest) {
+export async function persistSummitInterest(interest: SummitInterest): Promise<SummitPersistenceResult> {
   const record = {
     id: randomUUID(),
     submitted_at: new Date().toISOString(),
@@ -18,17 +19,12 @@ export async function persistSummitInterest(interest: SummitInterest) {
     company: interest.company,
     linkedin_url: interest.linkedin,
     consent_version: colombiaSummit.consentVersion,
+    ticket_type: interest.ticketType,
   };
 
   const config = getSupabaseConfigState();
   if (config.status === "configured") {
-    // Repeated submissions must not overwrite an existing person's details.
-    const { error } = await createSupabaseAdminClient()
-      .from("colombia_summit_interests")
-      .upsert(record, { onConflict: "email", ignoreDuplicates: true });
-    if (error)
-      throw new Error(`Summit interest persistence failed: ${error.code}`);
-    return;
+    return saveSupabaseSummitInterest(createSupabaseAdminClient(), record);
   }
 
   if (
@@ -52,8 +48,10 @@ export async function persistSummitInterest(interest: SummitInterest) {
       JSON.stringify(record),
       { flag: "wx", mode: 0o600 },
     );
+    return "created";
   } catch (error) {
     if (!(error instanceof Error && "code" in error && error.code === "EEXIST"))
       throw error;
+    return "already-registered";
   }
 }

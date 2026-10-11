@@ -1,0 +1,101 @@
+.lp-form .lp-ticket-selection {
+  display: block;
+  padding-bottom: 6px;
+}
+
+.lp-ticket-selection > legend {
+  margin-bottom: 6px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.lp-ticket-selection-help {
+  margin-bottom: 14px;
+  color: var(--ds-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.lp-ticket-radio-options {
+  display: grid;
+  gap: 9px;
+}
+
+.lp-ticket-radio {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 13px;
+  border: 1px dashed var(--ds-line-strong);
+  background: var(--ds-white);
+  cursor: pointer;
+  transition:
+    border-color var(--ds-fast),
+    background var(--ds-fast),
+    box-shadow var(--ds-fast);
+}
+
+.lp-ticket-radio:hover {
+  border-color: var(--ds-blue);
+}
+
+.lp-ticket-radio[data-selected] {
+  border-style: solid;
+  border-color: var(--ds-blue);
+  background: #f0f4fb;
+  box-shadow: inset 3px 0 0 var(--ds-blue);
+}
+
+.lp-ticket-radio[data-invalid] {
+  border-color: #c2330f;
+}
+
+.lp-ticket-radio:focus-within {
+  outline: 2px solid var(--ds-blue);
+  outline-offset: 3px;
+}
+
+.lp-ticket-radio > input {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  margin: 2px 0 0;
+  accent-color: var(--ds-blue);
+  cursor: pointer;
+}
+
+.lp-ticket-radio-copy {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.lp-ticket-radio-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.lp-ticket-radio-description {
+  color: var(--ds-ink-2);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.lp-ticket-radio-admission {
+  margin-top: 3px;
+  color: var(--ds-blue);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+}
+
+.lp-form > fieldset:disabled .lp-ticket-radio,
+.lp-form > fieldset:disabled .lp-ticket-radio > input {
+  cursor: wait;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-ticket-radio {
+    transition: none;
+  }
+}

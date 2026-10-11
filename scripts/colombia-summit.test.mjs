@@ -14,6 +14,7 @@ function form(overrides = {}) {
     fullName: "Ana Prueba",
     email: "ana@example.com",
     company: "",
+    ticketType: "general",
     consent: "on",
     ...overrides,
   })) {
@@ -36,6 +37,7 @@ test("validates consent and normalizes email and whitespace", () => {
     email: "ana@example.com",
     company: "Mi empresa",
     linkedin: "",
+    ticketType: "general",
     consent: true,
   });
 });
@@ -45,6 +47,35 @@ test("company and LinkedIn are optional", () => {
   data.delete("company");
   data.delete("linkedin");
   assert.equal(parseSummitInterest(data).success, true);
+});
+
+test("accepts each explicitly selected ticket type", () => {
+  for (const ticketType of ["general", "vip", "vip-plus"]) {
+    const result = parseSummitInterest(form({ ticketType }));
+    assert.equal(result.success, true);
+    assert.equal(result.data.ticketType, ticketType);
+  }
+});
+
+test("rejects missing, unknown and malicious ticket types", () => {
+  const missing = form();
+  missing.delete("ticketType");
+  assert.equal(parseSummitInterest(missing).success, false);
+  for (const ticketType of [
+    "",
+    "VIP",
+    "vip plus",
+    " vip ",
+    "admin",
+    "general,vip",
+    "<script>alert(1)</script>",
+    "vip'); drop table public.colombia_summit_interests; --",
+  ]) {
+    assert.equal(parseSummitInterest(form({ ticketType })).success, false);
+  }
+  const fileValue = form();
+  fileValue.set("ticketType", new Blob(["vip"], { type: "text/plain" }));
+  assert.equal(parseSummitInterest(fileValue).success, false);
 });
 
 test("normalizes LinkedIn profile URLs and removes tracking parameters", () => {

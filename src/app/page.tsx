@@ -6,7 +6,7 @@ import {
   CalendarDays,
   ChevronDown,
   CirclePlay,
-  ListChecks,
+  Ticket,
   MapPin,
 } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
@@ -19,6 +19,9 @@ import { pastEventSupporters } from "./past-events";
 import { EventCarousel } from "./event-carousel";
 import { EventOrganizer, EventSponsors } from "./event-branding";
 import { Countdown } from "./countdown";
+import { TicketPricing } from "./ticket-pricing";
+import { TicketSelectionProvider } from "./ticket-selection";
+import { NapaExperience } from "./napa-experience";
 import { chip, rocket, skyline } from "./pixel-icons";
 
 export const runtime = "nodejs";
@@ -41,7 +44,7 @@ export const metadata: Metadata = {
     siteName: colombiaSummit.name,
     title: "bogota.forward() summit · Bogotá, 19 de noviembre",
     description:
-      "Una conversación sobre IA, empresas y lo que viene. Súmate a la lista de interés.",
+      "Una conversación sobre IA, empresas y lo que viene. Conoce las experiencias General, VIP y VIP Plus y sus precios por fases.",
     images: [
       {
         url: OG_IMAGE,
@@ -99,11 +102,23 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "¿Ya puedo comprar mi entrada?",
-    a: "Todavía no. Las entradas aún no están a la venta; por ahora puedes unirte a la lista de interés.",
+    a: "Ya puedes consultar los precios de General, VIP y VIP Plus por fases. Elige la entrada que te interesa y completa el formulario de esta página. El pago en línea aún no está habilitado; tu registro o solicitud no confirma una entrada.",
   },
   {
     q: "¿Qué pasa cuando me uno a la lista?",
-    a: "Te avisaremos por correo cuando anunciemos nuevos speakers y abramos las inscripciones. Es un registro de interés, no una reserva de entrada.",
+    a: "Guardamos tus datos y la entrada que te interesa. Te compartiremos por correo los próximos pasos para asistir. Si eliges VIP o VIP Plus, tu solicitud estará sujeta a aceptación. El registro no es una reserva ni garantiza el precio de una fase.",
+  },
+  {
+    q: "¿Cómo funcionan las fases de precios?",
+    a: "La primera fase termina el 24 de octubre; la segunda, el 07 de noviembre; y la tercera, el 19 de noviembre de 2026. Cada fecha incluye el día completo, hasta las 11:59 p. m., hora de Bogotá. Todos los precios están expresados en USD por persona.",
+  },
+  {
+    q: "¿VIP y VIP Plus requieren aceptación?",
+    a: "Sí. VIP está limitado a 20 personas y VIP Plus a 10 personas, ambos sujetos a aceptación. Selecciona tu experiencia en el formulario y envía tus datos; el equipo te compartirá los próximos pasos por correo.",
+  },
+  {
+    q: "¿Cuándo es la sesión 1 a 1 de VIP Plus?",
+    a: "Es una sesión individual de 45 minutos con Alexander Torrenegra, posterior al summit. La fecha y el horario se coordinarán por separado.",
   },
   {
     q: "¿Quién organiza el summit?",
@@ -230,7 +245,7 @@ export default function BogotaForwardSummitPage() {
           </a>
           <nav className="lp-nav-links" aria-label="Secciones">
             <a href="#speakers">Speakers</a>
-            <a href="#sponsors">Sponsors</a>
+            <a href="#entradas">Entradas</a>
             <a href="#comunidad">Comunidad</a>
           </nav>
           <Button href="#lista" size="sm" className="lp-nav-cta">
@@ -239,6 +254,7 @@ export default function BogotaForwardSummitPage() {
         </div>
       </header>
 
+      <TicketSelectionProvider>
       <main id="contenido">
         <section className="ds-section lp-hero" data-field aria-labelledby="summit-title">
           <div className="ds-container lp-hero-copy">
@@ -259,15 +275,15 @@ export default function BogotaForwardSummitPage() {
               IA, empresas y lo que viene empieza en Bogotá.
             </p>
             <div className="lp-actions ds-reveal" style={step(4)}>
-              <Button href="#lista" icon={<ArrowRight aria-hidden="true" />}>
-                Quiero enterarme primero
+              <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>
+                Ver entradas y precios
               </Button>
               <Button variant="secondary" href="#speakers">
                 Ver speakers
               </Button>
             </div>
             <p className="lp-hero-note ds-reveal" style={step(5)}>
-              *Lista de interés. Las entradas aún no están a la venta.
+              General, VIP y VIP Plus · Precios por fases
             </p>
           </div>
 
@@ -313,9 +329,9 @@ export default function BogotaForwardSummitPage() {
                 <span>Colombia</span>
               </li>
               <li className="ds-card">
-                <ListChecks aria-hidden="true" />
-                <strong>Lista abierta</strong>
-                <span>Registro de interés</span>
+                <Ticket aria-hidden="true" />
+                <strong>3 experiencias</strong>
+                <span>General · VIP · VIP Plus</span>
               </li>
             </ul>
           </div>
@@ -408,6 +424,12 @@ export default function BogotaForwardSummitPage() {
 
         <hr className="ds-divider" />
 
+        <NapaExperience />
+
+        <TicketPricing />
+
+        <hr className="ds-divider" />
+
         <section className="ds-section" id="comunidad" data-field aria-labelledby="community-title">
           <div className="ds-container">
             <SectionHeading
@@ -487,8 +509,8 @@ export default function BogotaForwardSummitPage() {
                 </>
               }
             >
-              Recibe los nuevos speakers, la agenda y la apertura de
-              inscripciones antes que nadie.
+              Elige la entrada que te interesa y déjanos tus datos. Te
+              compartiremos los próximos pasos para asistir.
             </SectionHeading>
             <div className="lp-register">
               <div className="ds-card lp-register-media">
@@ -520,6 +542,7 @@ export default function BogotaForwardSummitPage() {
           </div>
         </section>
       </main>
+      </TicketSelectionProvider>
 
       <footer className="lp-footer">
         <div className="ds-container">
@@ -535,6 +558,7 @@ export default function BogotaForwardSummitPage() {
               <div>
                 <h2>Evento</h2>
                 <a href="#speakers">Speakers</a>
+                <a href="#entradas">Entradas y precios</a>
                 <a href="#sponsors">Sponsors</a>
                 <a href="#comunidad">Comunidad</a>
                 <a href="#faq">Preguntas</a>
@@ -576,11 +600,11 @@ export default function BogotaForwardSummitPage() {
       </footer>
 
       <Button
-        href="#lista"
+        href="#entradas"
         className="lp-mobile-cta"
         icon={<ArrowRight aria-hidden="true" />}
       >
-        Únete a la lista · 19 de noviembre
+        Ver entradas · 19 de noviembre
       </Button>
     </div>
   );
