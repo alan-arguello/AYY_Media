@@ -2,19 +2,19 @@ export const pricingPhases = [
   {
     id: "primera",
     name: "Fase 01",
-    deadline: "24 de octubre",
-    shortDeadline: "24 oct",
-    date: "2026-10-24",
+    deadline: "31 de octubre",
+    shortDeadline: "31 oct",
+    date: "2026-10-31",
     // The advertised deadline includes the full day in Bogotá (UTC-5).
-    endsAt: "2026-10-25T00:00:00-05:00",
+    endsAt: "2026-11-01T00:00:00-05:00",
   },
   {
     id: "segunda",
     name: "Fase 02",
-    deadline: "07 de noviembre",
-    shortDeadline: "07 nov",
-    date: "2026-11-07",
-    endsAt: "2026-11-08T00:00:00-05:00",
+    deadline: "14 de noviembre",
+    shortDeadline: "14 nov",
+    date: "2026-11-14",
+    endsAt: "2026-11-15T00:00:00-05:00",
   },
   {
     id: "final",

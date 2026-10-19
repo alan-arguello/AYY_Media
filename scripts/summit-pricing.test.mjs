@@ -11,14 +11,14 @@ test("the first phase is available before its advertised deadline", () => {
 
 for (const { lastMoment, nextMoment, before, after } of [
   {
-    lastMoment: "2026-10-24T23:59:59.999-05:00",
-    nextMoment: "2026-10-25T00:00:00.000-05:00",
+    lastMoment: "2026-10-31T23:59:59.999-05:00",
+    nextMoment: "2026-11-01T00:00:00.000-05:00",
     before: 0,
     after: 1,
   },
   {
-    lastMoment: "2026-11-07T23:59:59.999-05:00",
-    nextMoment: "2026-11-08T00:00:00.000-05:00",
+    lastMoment: "2026-11-14T23:59:59.999-05:00",
+    nextMoment: "2026-11-15T00:00:00.000-05:00",
     before: 1,
     after: 2,
   },
@@ -36,16 +36,16 @@ for (const { lastMoment, nextMoment, before, after } of [
 }
 
 test("UTC midnight does not end a pricing phase five hours early", () => {
-  assert.equal(getCurrentPricingPhase(new Date("2026-10-25T00:00:00Z")), 0);
-  assert.equal(getCurrentPricingPhase(new Date("2026-11-08T00:00:00Z")), 1);
+  assert.equal(getCurrentPricingPhase(new Date("2026-11-01T00:00:00Z")), 0);
+  assert.equal(getCurrentPricingPhase(new Date("2026-11-15T00:00:00Z")), 1);
   assert.equal(getCurrentPricingPhase(new Date("2026-11-20T00:00:00Z")), 2);
 });
 
 test("equivalent instants use the Bogotá cutoff regardless of visitor timezone", () => {
   for (const instant of [
-    "2026-11-08T05:00:00Z",
-    "2026-11-07T21:00:00-08:00",
-    "2026-11-08T14:00:00+09:00",
+    "2026-11-15T05:00:00Z",
+    "2026-11-14T21:00:00-08:00",
+    "2026-11-15T14:00:00+09:00",
   ]) {
     assert.equal(getCurrentPricingPhase(new Date(instant)), 2);
   }

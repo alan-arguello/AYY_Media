@@ -111,7 +111,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "¿Cómo funcionan las fases de precios?",
-    a: "La primera fase termina el 24 de octubre; la segunda, el 07 de noviembre; y la tercera, el 19 de noviembre de 2026. Cada fecha incluye el día completo, hasta las 11:59 p. m., hora de Bogotá. Todos los precios están expresados en USD por persona.",
+    a: "La primera fase termina el 31 de octubre; la segunda, el 14 de noviembre; y la tercera, el 19 de noviembre de 2026. Cada fecha incluye el día completo, hasta las 11:59 p. m., hora de Bogotá. Todos los precios están expresados en USD por persona.",
   },
   {
     q: "¿VIP y VIP Plus requieren aceptación?",
