@@ -31,7 +31,7 @@ export function SummitInterestForm() {
         </span>
         <h3>{state.message}</h3>
         <p>
-          {state.detail ?? "Te compartiremos por correo las novedades del summit y los próximos pasos para asistir."}
+          {state.detail ?? "Te compartiremos por correo o WhatsApp las novedades del summit y los próximos pasos para asistir."}
         </p>
         <p className="lp-small">
           Este registro es de interés, no una reserva de entrada.
@@ -147,6 +147,34 @@ export function SummitInterestForm() {
           {state.errors?.email && (
             <span id="summit-email-error" className="lp-field-error">
               {state.errors.email}
+            </span>
+          )}
+        </div>
+        <div className="lp-field">
+          <label htmlFor="summit-whatsapp">WhatsApp</label>
+          <input
+            id="summit-whatsapp"
+            name="whatsapp"
+            type="tel"
+            inputMode="tel"
+            defaultValue={state.values?.whatsapp}
+            autoComplete="tel"
+            placeholder="+57 300 123 4567"
+            maxLength={32}
+            required
+            aria-invalid={!!state.errors?.whatsapp}
+            aria-describedby={
+              state.errors?.whatsapp
+                ? "summit-whatsapp-help summit-whatsapp-error"
+                : "summit-whatsapp-help"
+            }
+          />
+          <span id="summit-whatsapp-help" className="lp-field-help">
+            Si tu número no es de Colombia, incluye el indicativo (+52, +1…).
+          </span>
+          {state.errors?.whatsapp && (
+            <span id="summit-whatsapp-error" className="lp-field-error">
+              {state.errors.whatsapp}
             </span>
           )}
         </div>

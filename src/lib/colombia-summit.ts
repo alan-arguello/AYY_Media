@@ -48,12 +48,42 @@ const linkedinProfile = z
     }
   });
 
+// Stored in E.164 (+573001234567) so numbers open directly in wa.me links.
+// A bare Colombian mobile (3xx xxx xxxx, with or without 57) gets +57; any
+// other number must carry its country code, with "+" or "00".
+const whatsappNumber = z
+  .string({ error: "Escribe tu número de WhatsApp." })
+  .trim()
+  .max(32, "Revisa tu número de WhatsApp.")
+  .transform((value, ctx) => {
+    const compact = value.replace(/[\s().-]/g, "");
+    const digits = compact.replace(/^(\+|00)/, "");
+    const international = digits !== compact;
+    let e164 = "";
+    if (/^\d+$/.test(digits)) {
+      if (international) e164 = `+${digits}`;
+      else if (/^3\d{9}$/.test(digits)) e164 = `+57${digits}`;
+      else if (/^573\d{9}$/.test(digits)) e164 = `+${digits}`;
+    }
+    if (!/^\+[1-9]\d{6,14}$/.test(e164)) {
+      ctx.addIssue({
+        code: "custom",
+        message: value
+          ? "Revisa tu número e incluye el indicativo de tu país, por ejemplo +57 300 123 4567."
+          : "Escribe tu número de WhatsApp.",
+      });
+      return z.NEVER;
+    }
+    return e164;
+  });
+
 export const summitInterestSchema = z.object({
   fullName: z.string().trim().min(2, "Escribe tu nombre completo.").max(120),
   email: z
     .email("Revisa tu correo electrónico.")
     .max(254)
     .transform((email) => email.toLowerCase()),
+  whatsapp: whatsappNumber,
   company: z.string().trim().max(160).default(""),
   linkedin: linkedinProfile,
   ticketType: z.enum(["general", "vip", "vip-plus"], {
@@ -89,6 +119,7 @@ export function parseSummitInterest(formData: FormData) {
       typeof formData.get("email") === "string"
         ? String(formData.get("email")).trim()
         : null,
+    whatsapp: formData.get("whatsapp") ?? "",
     company: formData.get("company") ?? "",
     linkedin: formData.get("linkedin") ?? "",
     ticketType: formData.get("ticketType"),

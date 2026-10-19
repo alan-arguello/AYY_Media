@@ -22,6 +22,7 @@ export async function submitSummitInterest(
   const values = {
     fullName: String(formData.get("fullName") ?? "").slice(0, 120),
     email: String(formData.get("email") ?? "").slice(0, 254),
+    whatsapp: String(formData.get("whatsapp") ?? "").slice(0, 32),
     company: String(formData.get("company") ?? "").slice(0, 160),
     linkedin: String(formData.get("linkedin") ?? "").slice(0, 500),
     ticketType: String(formData.get("ticketType") ?? "").slice(0, 40),

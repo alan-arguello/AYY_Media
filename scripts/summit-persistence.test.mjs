@@ -7,6 +7,7 @@ const record = {
   source: "colombia-summit-2026",
   full_name: "Ana Prueba",
   email: "ana+summit@example.com",
+  whatsapp: "+573001234567",
   company: "Empresa de prueba",
   linkedin_url: "https://www.linkedin.com/in/ana-prueba/",
   consent_version: "aiyaiyai-summit-2026-v1",
@@ -60,32 +61,53 @@ test("new registrations persist the selected ticket and never replace a duplicat
   }
 });
 
-test("legacy duplicate registrations only fill an empty ticket choice, preserving identity and consent", async () => {
+test("legacy duplicate registrations only fill empty answers, preserving identity and consent", async () => {
   const { client, requests } = transport([
     { body: [] },
     { body: [{ id: "legacy-registration" }] },
+    { body: [{ id: "legacy-registration" }] },
   ]);
 
-  assert.equal(await saveSupabaseSummitInterest(client, record), "ticket-added");
-  assert.equal(requests.length, 2);
-  const [, update] = requests;
-  assert.equal(update.method, "PATCH");
-  assert.equal(update.url.pathname, "/rest/v1/colombia_summit_interests");
-  assert.equal(update.url.searchParams.get("email"), `eq.${record.email}`);
-  assert.equal(update.url.searchParams.get("ticket_type"), "is.null");
-  assert.equal(update.url.searchParams.get("select"), "id");
-  assert.deepEqual(update.body, { ticket_type: "vip" });
+  assert.equal(await saveSupabaseSummitInterest(client, record), "updated");
+  assert.equal(requests.length, 3);
+  const [, ticket, whatsapp] = requests;
+  for (const [update, column, body] of [
+    [ticket, "ticket_type", { ticket_type: "vip" }],
+    [whatsapp, "whatsapp", { whatsapp: "+573001234567" }],
+  ]) {
+    assert.equal(update.method, "PATCH");
+    assert.equal(update.url.pathname, "/rest/v1/colombia_summit_interests");
+    assert.equal(update.url.searchParams.get("email"), `eq.${record.email}`);
+    assert.equal(update.url.searchParams.get(column), "is.null");
+    assert.equal(update.url.searchParams.get("select"), "id");
+    // Each update writes only its own column: no name, company, consent or source.
+    assert.deepEqual(update.body, body);
+  }
 });
 
-test("an existing ticket choice is reported without an unconditional update or retry", async () => {
-  const { client, requests } = transport([{ body: [] }, { body: [] }]);
+test("a registration with a ticket but no WhatsApp gains only the number", async () => {
+  const { client, requests } = transport([
+    { body: [] },
+    { body: [] },
+    { body: [{ id: "ticket-registration" }] },
+  ]);
+
+  assert.equal(await saveSupabaseSummitInterest(client, record), "updated");
+  assert.equal(requests.length, 3);
+  assert.equal(requests[2].url.searchParams.get("whatsapp"), "is.null");
+  assert.deepEqual(requests[2].body, { whatsapp: "+573001234567" });
+});
+
+test("existing answers are reported without an unconditional update or retry", async () => {
+  const { client, requests } = transport([{ body: [] }, { body: [] }, { body: [] }]);
 
   assert.equal(
-    await saveSupabaseSummitInterest(client, { ...record, ticket_type: "vip-plus" }),
+    await saveSupabaseSummitInterest(client, { ...record, ticket_type: "vip-plus", whatsapp: "+14155550100" }),
     "already-registered",
   );
-  assert.equal(requests.length, 2);
+  assert.equal(requests.length, 3);
   assert.equal(requests[1].url.searchParams.get("ticket_type"), "is.null");
+  assert.equal(requests[2].url.searchParams.get("whatsapp"), "is.null");
 });
 
 test("a rejected insertion does not attempt to alter an existing registration", async () => {
@@ -99,6 +121,17 @@ test("a rejected insertion does not attempt to alter an existing registration", 
   await assert.rejects(saveSupabaseSummitInterest(client, record), /23514/);
   assert.equal(requests.length, 1);
   assert.equal(requests[0].method, "POST");
+});
+
+test("failure to add a WhatsApp number is surfaced instead of reporting registration success", async () => {
+  const { client, requests } = transport([
+    { body: [] },
+    { body: [] },
+    { status: 400, body: { code: "23514", message: "whatsapp violates check constraint" } },
+  ]);
+
+  await assert.rejects(saveSupabaseSummitInterest(client, record), /whatsapp persistence failed: 23514/);
+  assert.equal(requests.length, 3);
 });
 
 test("failure to add a legacy ticket is surfaced instead of reporting registration success", async () => {

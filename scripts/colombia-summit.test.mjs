@@ -13,6 +13,7 @@ function form(overrides = {}) {
   for (const [key, value] of Object.entries({
     fullName: "Ana Prueba",
     email: "ana@example.com",
+    whatsapp: "+57 300 123 4567",
     company: "",
     ticketType: "general",
     consent: "on",
@@ -35,6 +36,7 @@ test("validates consent and normalizes email and whitespace", () => {
   assert.deepEqual(result.data, {
     fullName: "Ana Prueba",
     email: "ana@example.com",
+    whatsapp: "+573001234567",
     company: "Mi empresa",
     linkedin: "",
     ticketType: "general",
@@ -47,6 +49,53 @@ test("company and LinkedIn are optional", () => {
   data.delete("company");
   data.delete("linkedin");
   assert.equal(parseSummitInterest(data).success, true);
+});
+
+test("normalizes WhatsApp numbers to E.164", () => {
+  for (const [input, expected] of [
+    ["+57 300 123 4567", "+573001234567"],
+    ["(+57) 300-123-4567", "+573001234567"],
+    ["3001234567", "+573001234567"],
+    ["300 123 4567", "+573001234567"],
+    ["57 300 123 4567", "+573001234567"],
+    ["0057 300 123 4567", "+573001234567"],
+    ["+1 (415) 555-0100", "+14155550100"],
+    ["+52 55 1234 5678", "+525512345678"],
+    ["0052.55.1234.5678", "+525512345678"],
+    ["  +34 612 34 56 78  ", "+34612345678"],
+  ]) {
+    const result = parseSummitInterest(form({ whatsapp: input }));
+    assert.equal(result.success, true, input);
+    assert.equal(result.data.whatsapp, expected, input);
+  }
+});
+
+test("requires a WhatsApp number with a country code outside Colombia", () => {
+  const missing = form();
+  missing.delete("whatsapp");
+  assert.equal(parseSummitInterest(missing).success, false);
+  for (const whatsapp of [
+    "",
+    "   ",
+    "55 1234 5678",
+    "6011234567",
+    "12345",
+    "+57",
+    "+0573001234567",
+    "+57 300 ABC 4567",
+    "+57 300 123 4567 ext 2",
+    "+5730012345678901",
+    "+57300123456789012345678901234567",
+    "<script>alert(1)</script>",
+    "+573001234567'); drop table public.colombia_summit_interests; --",
+  ]) {
+    const result = parseSummitInterest(form({ whatsapp }));
+    assert.equal(result.success, false, whatsapp);
+    assert.equal(result.error.issues[0].path[0], "whatsapp", whatsapp);
+  }
+  const fileValue = form();
+  fileValue.set("whatsapp", new Blob(["+573001234567"], { type: "text/plain" }));
+  assert.equal(parseSummitInterest(fileValue).success, false);
 });
 
 test("accepts each explicitly selected ticket type", () => {

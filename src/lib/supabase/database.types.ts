@@ -8,6 +8,7 @@ type Interest = {
   linkedin_url: string;
   consent_version: string;
   ticket_type: "general" | "vip" | "vip-plus" | null;
+  whatsapp: string | null;
 };
 
 export type Database = {
@@ -15,8 +16,8 @@ export type Database = {
     Tables: {
       colombia_summit_interests: {
         Row: Interest;
-        Insert: Omit<Interest, "id" | "submitted_at" | "ticket_type"> &
-          Partial<Pick<Interest, "id" | "submitted_at" | "ticket_type">>;
+        Insert: Omit<Interest, "id" | "submitted_at" | "ticket_type" | "whatsapp"> &
+          Partial<Pick<Interest, "id" | "submitted_at" | "ticket_type" | "whatsapp">>;
         Update: Partial<Interest>;
         Relationships: [];
       };

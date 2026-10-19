@@ -107,7 +107,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "¿Qué pasa cuando me uno a la lista?",
-    a: "Guardamos tus datos y la entrada que te interesa. Te compartiremos por correo los próximos pasos para asistir. Si eliges VIP o VIP Plus, tu solicitud estará sujeta a aceptación. El registro no es una reserva ni garantiza el precio de una fase.",
+    a: "Guardamos tus datos y la entrada que te interesa. Te compartiremos por correo o WhatsApp los próximos pasos para asistir. Si eliges VIP o VIP Plus, tu solicitud estará sujeta a aceptación. El registro no es una reserva ni garantiza el precio de una fase.",
   },
   {
     q: "¿Cómo funcionan las fases de precios?",
@@ -115,7 +115,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "¿VIP y VIP Plus requieren aceptación?",
-    a: "Sí. VIP está limitado a 20 personas y VIP Plus a 10 personas, ambos sujetos a aceptación. Selecciona tu experiencia en el formulario y envía tus datos; el equipo te compartirá los próximos pasos por correo.",
+    a: "Sí. VIP está limitado a 20 personas y VIP Plus a 10 personas, ambos sujetos a aceptación. Selecciona tu experiencia en el formulario y envía tus datos; el equipo te compartirá los próximos pasos por correo o WhatsApp.",
   },
   {
     q: "¿Cuándo es la sesión 1 a 1 de VIP Plus?",

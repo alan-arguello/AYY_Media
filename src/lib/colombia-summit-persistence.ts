@@ -16,6 +16,7 @@ export async function persistSummitInterest(interest: SummitInterest): Promise<S
     source: colombiaSummit.source,
     full_name: interest.fullName,
     email: interest.email,
+    whatsapp: interest.whatsapp,
     company: interest.company,
     linkedin_url: interest.linkedin,
     consent_version: colombiaSummit.consentVersion,

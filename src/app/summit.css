@@ -764,6 +764,12 @@
   border-style: solid;
   border-color: #c2330f;
 }
+.lp-field-help {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--ds-muted);
+}
 .lp-field-error {
   display: block;
   margin-top: 6px;
