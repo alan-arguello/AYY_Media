@@ -2,6 +2,14 @@
 // These are past collaborations, not sponsors of the upcoming summit.
 export const pastEvents = [
   {
+    image: "/images/events/sf-panel.webp",
+    alt: "Panel de conversación con speakers latinoamericanos en San Francisco",
+  },
+  {
+    image: "/images/events/sf-speakers-group.webp",
+    alt: "Speakers y organizadores reunidos después de un panel en San Francisco",
+  },
+  {
     image: "/images/events/builders-night.webp",
     alt: "Builders' Night en el Consulado General de Colombia en San Francisco",
   },

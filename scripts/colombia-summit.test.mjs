@@ -150,7 +150,7 @@ test("five speakers have real portraits, credential assets and source links", ()
 });
 
 test("past events have real photos and distinct supporter logos", () => {
-  assert.equal(pastEvents.length, 6);
+  assert.equal(pastEvents.length, 8);
   assert.equal(pastEventSupporters.length, 6);
   assert.equal(
     new Set(pastEventSupporters.map((partner) => partner.name)).size,

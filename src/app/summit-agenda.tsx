@@ -10,27 +10,36 @@ function agendaSpeaker(name: string) {
   return speaker;
 }
 
+// One short paragraph per session: the idea, why it matters to a founder or
+// executive, and what they leave with.
 const sessions = [
   {
     format: "Charla",
     speakers: [agendaSpeaker("Alexander Torrenegra")],
     title: "Cómo predecir el futuro",
+    description:
+      "Predecir el futuro no es adivinar: es hacerse la pregunta correcta. Para Alexander, esa pregunta es: si hoy empezaras tu empresa desde cero, con todo lo que ya sabes, ¿la construirías igual? Una charla para detectar qué partes de tu negocio responden a otra época y cómo replantearlas.",
   },
   {
     format: "Fireside chat",
     speakers: [agendaSpeaker("Tania Zapata")],
     title: "Reinventar tu compañía cuando es disrumpida",
+    description:
+      "Tania pasó más de veinte años construyendo un negocio de voces humanas. Después llegó la voz sintética. En esta conversación cuenta cómo se ve la disrupción desde adentro: cuándo defender el negocio, cuándo canibalizarlo y cómo mover a un equipo sin perderlo en el camino. Para quienes saben que su turno puede llegar.",
   },
   {
     format: "Workshop",
     speakers: [agendaSpeaker("Alan Argüello")],
     title: "Cómo volverte un 10X Operator",
-    description: "Así uso Claude y Codex para operar yo solo.",
+    description:
+      "Los agentes de IA ya no son solo para equipos de ingeniería. En este workshop Alan muestra, con su propio día a día, cómo una sola persona opera con Claude y Codex lo que antes hacía un equipo, y qué debería estar haciendo ya cada área de tu empresa. Sales con un plan para empezar el lunes.",
   },
   {
     format: "Charla",
     speakers: [agendaSpeaker("Juan Pablo Rodríguez"), agendaSpeaker("Catalina Morales")],
     title: "Lecciones de Growth en Torre.ai para la era de IA",
+    description:
+      "Torre lleva casi siete años creciendo a punta de experimentos: líneas de ingreso que escalaron, otras que apagaron a tiempo, y una “inteligencia artificial” que al principio eran personas detrás de la cortina. Juan Pablo, desde growth, y Catalina, desde operaciones, cuentan qué cambia ahora que los agentes hacen el trabajo, y qué lecciones siguen vigentes.",
   },
 ];
 
@@ -77,15 +86,15 @@ export function SummitAgenda() {
                 <div className="agenda-topic">
                   <span className="agenda-format">{session.format}</span>
                   <h3>{session.title}</h3>
-                  {session.description && <p>{session.description}</p>}
-                  <div className="agenda-speaker">
-                    {session.speakers.map((speaker, speakerIndex) => (
-                      <span key={speaker.name}>
-                        {speakerIndex > 0 && <span className="agenda-speaker-join"> y </span>}
-                        {speaker.name}
-                      </span>
+                  <p>{session.description}</p>
+                  <ul className="agenda-speakers" aria-label="Speakers de la sesión">
+                    {session.speakers.map((speaker) => (
+                      <li key={speaker.name}>
+                        <span className="agenda-speaker">{speaker.name}</span>
+                        <span className="agenda-role">{speaker.role}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               </li>
             ))}
