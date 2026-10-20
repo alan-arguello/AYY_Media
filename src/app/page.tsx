@@ -21,7 +21,6 @@ import { EventOrganizer, EventSponsors } from "./event-branding";
 import { Countdown } from "./countdown";
 import { TicketPricing } from "./ticket-pricing";
 import { TicketSelectionProvider } from "./ticket-selection";
-import { NapaExperience } from "./napa-experience";
 import { PrivateDinner } from "./private-dinner";
 import { SummitAgenda } from "./summit-agenda";
 import { dinnerSeats, summitTickets } from "@/lib/summit-pricing";
@@ -449,8 +448,6 @@ export default function BogotaForwardSummitPage() {
         <SummitAgenda />
 
         <hr className="ds-divider" />
-
-        <NapaExperience />
 
         <PrivateDinner />
 
