@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  dinnerSeats,
   formatTicketPrice,
   getCurrentPricingPhase,
+  summitTickets,
 } from "../src/lib/summit-pricing.ts";
 
 test("the first phase is available before its advertised deadline", () => {
@@ -58,4 +60,14 @@ test("expired schedules never keep the final price marked as current", () => {
 
 test("ticket prices use unambiguous USD-style thousands grouping", () => {
   assert.equal(formatTicketPrice(1349), "$1,349");
+});
+
+test("the private dinner seats exactly the VIP and VIP Plus capacities", () => {
+  const capacity = Object.fromEntries(summitTickets.map((ticket) => [ticket.id, ticket.capacity]));
+  assert.deepEqual(capacity, { general: null, vip: 15, "vip-plus": 5 });
+  assert.equal(dinnerSeats, 20);
+  for (const ticket of summitTickets) {
+    const atDinner = ticket.benefits.some((benefit) => benefit.startsWith("Cena privada"));
+    assert.equal(atDinner, ticket.capacity !== null, ticket.id);
+  }
 });

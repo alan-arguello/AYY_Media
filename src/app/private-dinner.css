@@ -1,0 +1,528 @@
+/* ── Cena privada: the one full-bleed dark band on the page ───────────────
+   The VIP Plus navy from the ticket cards, paper for ink, dashed rules in a
+   lighter navy and the flag as light: yellow for VIP Plus seats and the
+   prompt, blue lit up for the accent. Markers and tags re-theme through the
+   design-system variables. */
+
+.dinner {
+  --ds-bg: #10274b;
+  --ds-ink: #fcfbf6;
+  --ds-ink-2: #e4e8f1;
+  --ds-muted: #b7c2d8;
+  --ds-subtle: #7f8db0;
+  --ds-line: #2d4068;
+  --ds-line-strong: #4a5d85;
+  --dinner-accent: #9ab6ff;
+  --dinner-tint: #16305a;
+  padding-block: calc(var(--ds-section) - 16px);
+  background: var(--ds-bg);
+  color: var(--ds-ink);
+}
+/* A glow behind the heading and the screen's faint scanlines. */
+.dinner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 48% at 22% 18%, #1c3a6b, transparent 70%),
+    repeating-linear-gradient(to bottom, rgb(255 255 255 / 0.022) 0 1px, transparent 1px 3px);
+  pointer-events: none;
+}
+
+/* ── Prompt ──────────────────────────────────────────────────────────────── */
+
+.dinner-prompt {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--ds-line-strong);
+  font: 400 0.875rem/1.4 var(--ds-font-mono);
+  color: var(--ds-muted);
+}
+.dinner-prompt-line {
+  display: inline-flex;
+  gap: 0;
+}
+.dinner-prompt-line > span:not(.dinner-prompt-mark) {
+  color: var(--ds-ink);
+}
+.dinner-prompt-mark {
+  margin-right: 10px;
+  color: var(--ds-yellow);
+}
+.dinner-prompt-line .dinner-prompt-dot {
+  color: var(--ds-subtle);
+}
+.dinner-prompt-line .dinner-prompt-fn {
+  color: var(--dinner-accent);
+}
+.dinner-prompt-line .dinner-prompt-call {
+  color: #ff6b7a;
+}
+.dinner-prompt-status::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 8px;
+  margin-right: 10px;
+  vertical-align: 0;
+  background: var(--ds-flag);
+  animation: ds-blink 1.6s steps(1) infinite;
+}
+
+/* ── Heading ─────────────────────────────────────────────────────────────── */
+
+.dinner-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 32px 56px;
+  align-items: start;
+  padding-block: 44px 48px;
+}
+.dinner-title {
+  font: 500 clamp(2.25rem, 1.5rem + 2vw, 3rem)/1.04 var(--ds-font-display);
+  letter-spacing: -0.03em;
+}
+/* One thought per line: the hours, then the turn. */
+.dinner-title > span {
+  display: block;
+}
+.dinner-accent {
+  color: var(--dinner-accent);
+}
+.dinner-intro {
+  display: grid;
+  gap: 24px;
+  padding-top: 8px;
+}
+.dinner-lead {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--ds-ink-2);
+  text-wrap: pretty;
+}
+.dinner-how {
+  display: grid;
+  gap: 12px;
+  counter-reset: how;
+}
+.dinner-how li {
+  position: relative;
+  padding-left: 34px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ds-muted);
+  text-wrap: pretty;
+}
+.dinner-how li::before {
+  counter-increment: how;
+  content: "0" counter(how);
+  position: absolute;
+  top: 0.2em;
+  left: 0;
+  font: 400 0.75rem/1.4 var(--ds-font-mono);
+  color: var(--ds-yellow);
+}
+.dinner-how strong {
+  font-weight: 600;
+  color: var(--ds-ink);
+}
+
+/* ── Gallery: a wide shot, a portrait and two tiles ─────────────────────── */
+
+.dinner-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 12px;
+}
+.dinner-photo {
+  position: relative;
+  overflow: hidden;
+  border: 1px dashed var(--ds-line-strong);
+  background: var(--dinner-tint);
+}
+.dinner-photo > img {
+  object-fit: cover;
+  /* Mixed venues and lighting; a touch less saturation keeps them one set. */
+  filter: saturate(0.82) contrast(1.02);
+}
+.dinner-photo[data-shot="session"] {
+  grid-column: 1 / 3;
+  aspect-ratio: 16 / 9;
+}
+.dinner-photo[data-shot="session"] > img {
+  object-position: 50% 40%;
+}
+.dinner-photo[data-shot="alexander"] {
+  grid-column: 3;
+  grid-row: 1 / 3;
+}
+.dinner-photo[data-shot="alexander"] > img {
+  object-position: 42% 20%;
+}
+.dinner-photo[data-shot="fireside"],
+.dinner-photo[data-shot="group"] {
+  aspect-ratio: 3 / 2;
+}
+.dinner-photo[data-shot="group"] > img {
+  object-position: 60% 30%;
+}
+.dinner-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: 26px 12px 10px;
+  background: linear-gradient(to top, rgb(9 20 42 / 0.9), rgb(9 20 42 / 0));
+  font: 400 0.75rem/1.4 var(--ds-font-mono);
+  color: var(--ds-ink-2);
+}
+.dinner-caption::before {
+  content: "> ";
+  color: var(--ds-yellow);
+}
+
+/* ── Hosts ───────────────────────────────────────────────────────────────── */
+
+.dinner-hosts-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 56px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--ds-line-strong);
+}
+.dinner-hosts-head h3 {
+  font: 500 1.5rem/1.1 var(--ds-font-display);
+  letter-spacing: -0.02em;
+}
+.dinner-hosts-head p {
+  font-size: 0.9375rem;
+  color: var(--ds-muted);
+}
+.dinner-hosts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+.dinner-host {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 20px;
+  padding: 22px;
+  background: var(--dinner-tint);
+}
+.dinner-host::before,
+.dinner-host::after {
+  background: var(--ds-yellow);
+}
+.dinner-host-portrait {
+  position: relative;
+  height: 112px;
+  overflow: hidden;
+  border: 1px solid var(--ds-line-strong);
+  background: var(--ds-line);
+}
+.dinner-host-portrait img {
+  object-fit: cover;
+  object-position: 50% 0;
+  transform-origin: 50% 0;
+  filter: saturate(0.9);
+}
+.dinner-host-portrait[data-speaker="Alexander Torrenegra"] img {
+  transform: scale(1.55);
+}
+.dinner-host-portrait[data-speaker="Tania Zapata"] img {
+  transform: scale(1.45);
+  transform-origin: 68% 0;
+}
+.dinner-host-copy h4 {
+  margin: 0;
+  font: 600 1.125rem/1.25 var(--ds-font-text);
+  letter-spacing: -0.015em;
+}
+.dinner-host-role {
+  margin-top: 4px;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--dinner-accent);
+}
+.dinner-host-bio {
+  margin-top: 14px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--ds-muted);
+  text-wrap: pretty;
+}
+.dinner-host-ask {
+  margin-top: 18px;
+  font: 400 0.6875rem/1.4 var(--ds-font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ds-subtle);
+}
+.dinner-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.dinner-topics li {
+  padding: 4px 8px;
+  border: 1px dashed var(--ds-line-strong);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ds-ink-2);
+}
+
+/* ── Portfolio: the marks as one row of white silhouettes ───────────────── */
+
+.dinner-portfolio {
+  display: grid;
+  gap: 18px;
+  margin-top: 14px;
+  padding: 20px 22px 18px;
+  border: 1px dashed var(--ds-line-strong);
+}
+.dinner-portfolio-head {
+  font: 400 0.6875rem/1.4 var(--ds-font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ds-subtle);
+}
+.dinner-portfolio-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 18px 26px;
+}
+.dinner-portfolio-logos li {
+  display: grid;
+  gap: 9px;
+  justify-items: start;
+}
+.dinner-portfolio-logos img {
+  height: 22px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+.dinner-portfolio-logos img[data-mark="liftit"] {
+  height: 30px;
+}
+.dinner-portfolio-logos img[data-mark="platzi"],
+.dinner-portfolio-logos img[data-mark="vaki"] {
+  height: 24px;
+}
+.dinner-portfolio-logos img[data-mark="robot-com"] {
+  height: 20px;
+}
+.dinner-portfolio-logos img[data-mark="endeavor-catalyst"] {
+  height: 16px;
+}
+.dinner-portfolio-logos span {
+  font: 400 0.6875rem/1.4 var(--ds-font-mono);
+  color: var(--ds-muted);
+}
+.dinner-portfolio-note {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--ds-subtle);
+}
+
+/* ── Seats and call to action ───────────────────────────────────────────── */
+
+.dinner-seats {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px 48px;
+  align-items: end;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px dashed var(--ds-line-strong);
+}
+.dinner-seats-copy h3 {
+  font: 500 clamp(1.75rem, 1.4rem + 1vw, 2.25rem)/1.05 var(--ds-font-display);
+  letter-spacing: -0.03em;
+}
+.dinner-seat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-width: 400px;
+  margin-top: 18px;
+}
+.dinner-seat-row i {
+  width: 15px;
+  height: 15px;
+  background: var(--dinner-accent);
+  box-shadow: inset 0 0 0 1px rgb(13 11 1 / 0.18);
+}
+.dinner-seat-row i[data-tier="vip-plus"] {
+  background: var(--ds-yellow);
+}
+.dinner-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin-top: 16px;
+}
+.dinner-legend > div {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: var(--ds-muted);
+}
+.dinner-legend dt {
+  position: relative;
+  padding-left: 18px;
+  font: 500 1.125rem/1 var(--ds-font-display);
+  color: var(--ds-ink);
+}
+.dinner-legend dt::before {
+  content: "";
+  position: absolute;
+  top: 0.15em;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: var(--dinner-accent);
+}
+.dinner-legend [data-tier="vip-plus"] dt::before {
+  background: var(--ds-yellow);
+}
+.dinner-seats-cta {
+  display: grid;
+  justify-items: end;
+  gap: 12px;
+}
+.dinner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.dinner-button[data-variant="primary"] {
+  background: var(--ds-ink);
+  color: #10274b;
+}
+.dinner-button[data-variant="primary"]:hover {
+  background: var(--ds-yellow);
+}
+.dinner-button[data-variant="secondary"] {
+  border-color: var(--ds-line-strong);
+  background: transparent;
+  color: var(--ds-ink);
+}
+.dinner-button[data-variant="secondary"]:hover {
+  border-color: var(--ds-ink);
+}
+.dinner-seats-note {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--ds-muted);
+  text-align: right;
+}
+.dinner-seats-note a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ds-ink);
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+}
+.dinner-seats-note svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .dinner-head {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-block: 36px 40px;
+  }
+  .dinner-intro {
+    padding-top: 0;
+  }
+  .dinner-hosts {
+    grid-template-columns: 1fr;
+  }
+  .dinner-seats {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .dinner-seats-cta {
+    justify-items: start;
+  }
+  .dinner-seats-note {
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .dinner {
+    padding-block: 56px;
+  }
+  .dinner-prompt {
+    font-size: 0.8125rem;
+  }
+  .dinner-title {
+    font-size: clamp(2rem, 7.4vw, 2.75rem);
+  }
+  .dinner-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .dinner-photo[data-shot="session"] {
+    grid-column: 1 / -1;
+  }
+  .dinner-photo[data-shot="alexander"] {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    aspect-ratio: 3 / 2;
+  }
+  .dinner-photo[data-shot="alexander"] > img {
+    object-position: 45% 18%;
+  }
+  .dinner-caption {
+    padding: 22px 10px 8px;
+    font-size: 0.6875rem;
+  }
+  .dinner-hosts-head {
+    margin-top: 44px;
+  }
+  .dinner-host {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px;
+  }
+  .dinner-host-portrait {
+    width: 96px;
+  }
+  .dinner-portfolio {
+    padding: 18px 16px;
+  }
+  .dinner-portfolio-logos {
+    gap: 16px 24px;
+  }
+  .dinner-seats {
+    margin-top: 40px;
+  }
+  .dinner-actions {
+    width: 100%;
+  }
+  .dinner-actions .ds-button {
+    flex: 1 1 100%;
+    justify-content: space-between;
+  }
+}

@@ -113,6 +113,7 @@
   color: var(--ds-muted);
 }
 .lp-nav-links a {
+  white-space: nowrap;
   transition: color var(--ds-fast);
 }
 .lp-nav-links a:hover {

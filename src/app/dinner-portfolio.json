@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Robot.com",
+    "image": "/images/dinner/portfolio/robot.png",
+    "width": 763,
+    "height": 120
+  },
+  {
+    "name": "Latitud",
+    "image": "/images/dinner/portfolio/latitud.png",
+    "width": 550,
+    "height": 120
+  },
+  {
+    "name": "Platzi",
+    "image": "/images/dinner/portfolio/platzi.png",
+    "width": 456,
+    "height": 120
+  },
+  {
+    "name": "Truora",
+    "image": "/images/dinner/portfolio/truora.png",
+    "width": 441,
+    "height": 120
+  },
+  {
+    "name": "Vozy",
+    "image": "/images/dinner/portfolio/vozy.png",
+    "width": 442,
+    "height": 120
+  },
+  {
+    "name": "Vaki",
+    "image": "/images/dinner/portfolio/vaki.png",
+    "width": 195,
+    "height": 120
+  },
+  {
+    "name": "Liftit",
+    "image": "/images/dinner/portfolio/liftit.png",
+    "width": 120,
+    "height": 120
+  },
+  {
+    "name": "Endeavor Catalyst",
+    "image": "/images/colombia-summit/credential-endeavor.png",
+    "width": 640,
+    "height": 84
+  }
+]

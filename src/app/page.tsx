@@ -22,7 +22,9 @@ import { Countdown } from "./countdown";
 import { TicketPricing } from "./ticket-pricing";
 import { TicketSelectionProvider } from "./ticket-selection";
 import { NapaExperience } from "./napa-experience";
+import { PrivateDinner } from "./private-dinner";
 import { SummitAgenda } from "./summit-agenda";
+import { dinnerSeats, summitTickets } from "@/lib/summit-pricing";
 import { chip, rocket, skyline } from "./pixel-icons";
 
 export const runtime = "nodejs";
@@ -96,6 +98,9 @@ const speakerNames = new Intl.ListFormat("es", {
   type: "conjunction",
 }).format(speakers.map((speaker) => speaker.name));
 
+const seatsFor = (id: "vip" | "vip-plus") =>
+  summitTickets.find((ticket) => ticket.id === id)?.capacity ?? 0;
+
 const faqs: { q: string; a: React.ReactNode }[] = [
   {
     q: "¿Cuándo y dónde es?",
@@ -115,7 +120,20 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "¿VIP y VIP Plus requieren aceptación?",
-    a: "Sí. VIP está limitado a 20 personas y VIP Plus a 10 personas, ambos sujetos a aceptación. Selecciona tu experiencia en el formulario y envía tus datos; el equipo te compartirá los próximos pasos por correo o WhatsApp.",
+    a: `Sí. VIP está limitado a ${seatsFor("vip")} personas y VIP Plus a ${seatsFor("vip-plus")} personas, ambos sujetos a aceptación. Selecciona tu experiencia en el formulario y envía tus datos; el equipo te compartirá los próximos pasos por correo o WhatsApp.`,
+  },
+  {
+    q: "¿Cómo es la cena privada?",
+    a: (
+      <>
+        Es una cena con Alexander Torrenegra y Tania Zapata para las{" "}
+        {dinnerSeats} personas con entrada VIP o VIP Plus ({seatsFor("vip")} y{" "}
+        {seatsFor("vip-plus")} lugares). Un espacio pequeño para hacer preguntas
+        directas y recibir feedback de primera mano sobre tu empresa. Lugar,
+        hora y detalles se compartirán con las personas aceptadas.{" "}
+        <a href="#cena">Conoce la cena privada</a>.
+      </>
+    ),
   },
   {
     q: "¿Cuándo es la sesión 1 a 1 de VIP Plus?",
@@ -248,6 +266,7 @@ export default function BogotaForwardSummitPage() {
           <nav className="lp-nav-links" aria-label="Secciones">
             <a href="#speakers">Speakers</a>
             <a href="#agenda">Agenda</a>
+            <a href="#cena">Cena VIP</a>
             <a href="#entradas">Entradas</a>
             <a href="#comunidad">Comunidad</a>
           </nav>
@@ -433,6 +452,8 @@ export default function BogotaForwardSummitPage() {
 
         <NapaExperience />
 
+        <PrivateDinner />
+
         <TicketPricing />
 
         <hr className="ds-divider" />
@@ -570,6 +591,7 @@ export default function BogotaForwardSummitPage() {
                 <h2>Evento</h2>
                 <a href="#speakers">Speakers</a>
                 <a href="#agenda">Agenda</a>
+                <a href="#cena">Cena privada</a>
                 <a href="#entradas">Entradas y precios</a>
                 <a href="#sponsors">Sponsors</a>
                 <a href="#comunidad">Comunidad</a>

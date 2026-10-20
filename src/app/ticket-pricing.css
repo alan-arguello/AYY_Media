@@ -126,6 +126,20 @@
 .lp-ticket-benefits li { display: flex; align-items: flex-start; gap: 9px; font-size: 0.875rem; line-height: 1.5; }
 .lp-ticket-benefits svg { flex-shrink: 0; width: 15px; height: 15px; margin-top: 3px; color: var(--ds-blue); }
 .lp-ticket-benefits [data-extra] { font-weight: 500; }
+.lp-ticket-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 16px;
+  font-size: 0.8125rem;
+  color: var(--ds-muted);
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+  transition: color var(--ds-fast);
+}
+.lp-ticket-link:hover { color: inherit; }
+.lp-ticket-link svg { width: 13px; height: 13px; }
 .lp-ticket-bottom { margin-top: auto; padding-top: 32px; }
 .lp-ticket-schedule { margin-bottom: 22px; padding-top: 12px; border-top: 1px dashed var(--ds-line); }
 .lp-ticket-schedule > div {

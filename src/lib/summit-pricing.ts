@@ -30,7 +30,13 @@ const generalBenefits = [
   "Entrada al evento del summit",
   "Bebidas y snacks durante el evento",
 ] as const;
-const dinnerBenefit = "Cena privada con Alex Torrenegra y Tania Zapata";
+// Every VIP and VIP Plus seat is a seat at the private dinner.
+const vipSeats = 15;
+const vipPlusSeats = 5;
+export const dinnerSeats = vipSeats + vipPlusSeats;
+const dinnerBenefit = `Cena privada con Alexander Torrenegra y Tania Zapata · ${dinnerSeats} lugares en total`;
+export const oneOnOneBenefit =
+  "Sesión 1 a 1 de 45 minutos con Alexander Torrenegra, posterior al evento";
 
 export const summitTickets = [
   {
@@ -45,7 +51,7 @@ export const summitTickets = [
     id: "vip",
     name: "VIP",
     description: "La conversación sigue en la mesa.",
-    capacity: 20,
+    capacity: vipSeats,
     prices: [549, 749, 849],
     benefits: [...generalBenefits, dinnerBenefit],
   },
@@ -53,13 +59,9 @@ export const summitTickets = [
     id: "vip-plus",
     name: "VIP Plus",
     description: "Una conversación enfocada en ti.",
-    capacity: 10,
+    capacity: vipPlusSeats,
     prices: [1349, 1549, 1749],
-    benefits: [
-      ...generalBenefits,
-      dinnerBenefit,
-      "Sesión 1 a 1 de 45 minutos con Alexander Torrenegra, posterior al evento",
-    ],
+    benefits: [...generalBenefits, dinnerBenefit, oneOnOneBenefit],
   },
 ] as const;
 

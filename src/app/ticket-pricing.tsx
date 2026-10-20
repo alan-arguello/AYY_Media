@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUp, Check } from "lucide-react";
 import {
   formatTicketPrice,
   getCurrentPricingPhase,
@@ -105,6 +105,11 @@ export function TicketPricing() {
                     </li>
                   ))}
                 </ul>
+                {ticket.capacity && (
+                  <a href="#cena" className="lp-ticket-link">
+                    Cómo es la cena privada <ArrowUp aria-hidden="true" />
+                  </a>
+                )}
 
                 <div className="lp-ticket-bottom">
                   <dl className="lp-ticket-schedule" aria-label={`Todas las fases de ${ticket.name}, precios en USD`}>

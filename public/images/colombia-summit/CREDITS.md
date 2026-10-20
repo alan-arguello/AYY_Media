@@ -32,3 +32,9 @@ Marks identify organizations whose speakers are pending confirmation. They do no
 
 - Host Grotesk (display) and Inter (text): Google Fonts, SIL Open Font License 1.1. Static TTF copies in `scripts/fonts/` are used only to render `opengraph.png`.
 - Geist Mono: official Vercel `geist` package, SIL Open Font License 1.1.
+
+# Private dinner section
+
+- `/images/dinner/*.webp`: event photographs supplied directly by the organizer (private sessions, a fireside chat and a Torre event). Resized to at most 1400 px, `alexander-torre.webp` cropped to Alexander Torrenegra, compressed to WebP. Desaturation is CSS only. Captions name only people identified by the organizer.
+- `/images/dinner/portfolio/*.png`: marks of companies and funds the dinner hosts have invested in, taken from each company's official website and rasterised (trimmed, 120 px tall, alpha kept): Robot.com (inline header logo, robot.com), Latitud (inline header logo, latitud.com), Platzi (inline header logo, platzi.com), Truora (truora.com/hubfs/2026/logos/Logo Dark Truora.svg), Vozy (vozy.co header logo PNG), Vaki (vaki.co/assets/images/logos/vaki-logo-white&green.svg), Liftit (liftit.co/_next/static/media/Logo_V2.png). Endeavor Catalyst reuses `credential-endeavor.png`. All are rendered as white silhouettes by CSS; `src/app/dinner-portfolio.json` lists them. They identify investments, not sponsors, and the page says so.
+
