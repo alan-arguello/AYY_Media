@@ -15,7 +15,18 @@
     "og": "node scripts/generate-colombia-summit-og.mjs",
     "social": "node scripts/generate-social-square.mjs",
     "bogota": "node scripts/generate-bogota-promo.mjs",
-    "promo": "node scripts/generate-horizontal-promo.mjs"
+    "promo": "node scripts/generate-horizontal-promo.mjs",
+    "promo:speakers": "node scripts/generate-speaker-promos.mjs",
+    "promo:video": "node scripts/generate-promo-video.mjs",
+    "promo:ascii": "node scripts/generate-ascii-promo.mjs",
+    "promo:cover": "node scripts/generate-cover-promo.mjs",
+    "promo:ascii-cover": "node scripts/generate-ascii-cover.mjs",
+    "promo:ascii-horizontal": "FORMAT=horizontal node scripts/generate-ascii-cover.mjs",
+    "promo:ascii-lineup": "FORMAT=lineup node scripts/generate-ascii-cover.mjs",
+    "promo:ascii-dinner": "FORMAT=dinner node scripts/generate-ascii-cover.mjs",
+    "promo:dinner": "node scripts/generate-dinner-promo.mjs",
+    "promo:lineup": "node scripts/generate-lineup-promo.mjs",
+    "promo:openai": "node scripts/generate-openai-teaser.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.110.2",

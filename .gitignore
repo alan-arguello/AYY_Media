@@ -9,3 +9,12 @@ out/
 *.tsbuildinfo
 .DS_Store
 supabase/.temp/
+
+# Licensed tracks (Pixabay etc.): use in videos, never redistribute the files
+marketing/music/
+# Third-party source photos for the promos
+marketing/photos/
+# Rendered promo exports: regenerate with npm run promo:*
+marketing/*.mp4
+marketing/*.png
+marketing/*.jpg
