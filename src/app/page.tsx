@@ -64,16 +64,6 @@ export const metadata: Metadata = {
 
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-const comingSoon = [
-  { name: "OpenAI", image: "/images/logos/collaborations/openai.png", ratio: 3.68 },
-  { name: "Google", image: "/images/colombia-summit/google.png", ratio: 2.96 },
-  {
-    name: "Microsoft",
-    image: "/images/colombia-summit/microsoft-wordmark.svg",
-    ratio: 4.69,
-  },
-];
-
 const pillars = [
   {
     art: chip,
@@ -413,28 +403,6 @@ export default function BogotaForwardSummitPage() {
               {speakers.map((speaker) => (
                 <Speaker key={speaker.name} speaker={speaker} />
               ))}
-              <li className="ds-card lp-coming ds-in-view" aria-labelledby="coming-title">
-                <Tag dot>Por confirmar</Tag>
-                <h3 id="coming-title">
-                  Y esto apenas <span className="ds-accent">empieza.</span>
-                </h3>
-                <p>Próximamente, speakers de</p>
-                <ul className="lp-coming-logos">
-                  {comingSoon.map((company) => (
-                    <li key={company.name}>
-                      <Image
-                        src={company.image}
-                        alt={company.name}
-                        width={Math.round(24 * company.ratio)}
-                        height={24}
-                        className="lp-mono-logo"
-                      />
-                      <span>Por confirmar</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="lp-coming-foot">Más sesiones y nombres, muy pronto.</p>
-              </li>
             </ul>
             <p className="lp-note">
               Logos de trayectoria profesional y formación de los speakers. No
