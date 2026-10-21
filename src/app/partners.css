@@ -1,0 +1,367 @@
+/* ── Aliados: the offer, reach by channel, proof and the partner form ──── */
+
+/* As a page, the section opens under the floating nav. */
+.partners-page {
+  padding-top: calc(var(--ds-nav) + 104px);
+}
+
+.partners-offer {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.partners-offer > li {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  padding: 24px 22px 26px;
+}
+.partners-offer-index {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font: 500 0.8125rem/1 var(--ds-font-display);
+  color: var(--ds-subtle);
+}
+.partners-offer .ds-pixel-art {
+  width: 54px;
+  height: 54px;
+}
+.partners-offer h3 {
+  margin-top: 4px;
+  font: 500 1.125rem/1.3 var(--ds-font-text);
+  letter-spacing: -0.015em;
+}
+.partners-offer p {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ds-muted);
+  text-wrap: pretty;
+}
+
+/* ── Reach ───────────────────────────────────────────────────────────────── */
+
+.partners-reach {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+  gap: 28px 40px;
+  margin-top: 16px;
+  padding: 28px;
+  background: var(--ds-surface);
+}
+.partners-reach-total {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 18px;
+}
+.partners-reach-number {
+  display: grid;
+  gap: 6px;
+}
+.partners-reach-number strong {
+  font: 500 clamp(3rem, 2.3rem + 2.6vw, 4.5rem)/0.95 var(--ds-font-display);
+  letter-spacing: -0.04em;
+  color: var(--ds-blue);
+}
+.partners-reach-number span {
+  font: 500 1.0625rem/1.3 var(--ds-font-text);
+  letter-spacing: -0.01em;
+}
+.partners-reach-note {
+  max-width: 300px;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--ds-muted);
+  text-wrap: pretty;
+}
+.partners-channels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.partners-channel {
+  border: 1px dashed var(--ds-line-strong);
+  background: var(--ds-bg);
+  transition: border-color var(--ds-fast);
+}
+.partners-channel:hover {
+  border-color: var(--ds-blue);
+}
+.partners-channel-inner {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+}
+.partners-channel-code {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  background: var(--ds-ink);
+  font: 500 0.8125rem/1 var(--ds-font-mono);
+  color: var(--ds-bg);
+}
+.partners-channel-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.partners-channel-copy strong {
+  font: 500 1.5rem/1 var(--ds-font-display);
+  letter-spacing: -0.03em;
+}
+.partners-channel-copy span {
+  overflow: hidden;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ds-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Proof: past collaborations and this edition's sponsors ─────────────── */
+
+.partners-proof {
+  display: grid;
+  gap: 40px;
+  margin-top: 48px;
+}
+
+/* ── Apply: the pitch beside the form ───────────────────────────────────── */
+
+.partners-apply {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 16px;
+  margin-top: 48px;
+  scroll-margin-top: calc(var(--ds-nav) + 32px);
+}
+.partners-pitch {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 20px;
+  padding: 24px;
+  background: var(--ds-surface);
+}
+.partners-pitch h3 {
+  font: 500 clamp(1.5rem, 1.25rem + 0.9vw, 2rem)/1.12 var(--ds-font-display);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.partners-steps {
+  display: grid;
+  gap: 14px;
+  counter-reset: step;
+}
+.partners-steps li {
+  position: relative;
+  padding-left: 34px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ds-muted);
+  text-wrap: pretty;
+}
+.partners-steps li::before {
+  counter-increment: step;
+  content: "0" counter(step);
+  position: absolute;
+  top: 0.25em;
+  left: 0;
+  font: 500 0.75rem/1 var(--ds-font-display);
+  color: var(--ds-blue);
+}
+.partners-steps strong {
+  font-weight: 600;
+  color: var(--ds-ink);
+}
+.partners-pitch-contact {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ds-muted);
+}
+.partners-pitch-contact a {
+  color: var(--ds-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Form pieces the attendee form does not have: choice cards, two-up rows,
+   a select and a textarea in the same dashed language as the inputs. */
+.lp-form .pt-choice-group {
+  display: block;
+}
+.pt-choice-group > legend {
+  margin-bottom: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.pt-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.pt-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border: 1px dashed var(--ds-line-strong);
+  background: var(--ds-white);
+  cursor: pointer;
+  transition:
+    border-color var(--ds-fast),
+    background var(--ds-fast),
+    box-shadow var(--ds-fast);
+}
+.pt-choice:hover {
+  border-color: var(--ds-blue);
+}
+.pt-choice:has(input:checked) {
+  border-style: solid;
+  border-color: var(--ds-blue);
+  background: #f0f4fb;
+  box-shadow: inset 3px 0 0 var(--ds-blue);
+}
+.pt-choice[data-invalid] {
+  border-color: #c2330f;
+}
+.pt-choice:focus-within {
+  outline: 2px solid var(--ds-blue);
+  outline-offset: 3px;
+}
+.pt-choice > input {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  margin: 1px 0 0;
+  accent-color: var(--ds-blue);
+  cursor: pointer;
+}
+.pt-choice-copy {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+.pt-choice-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.pt-choice-description {
+  color: var(--ds-ink-2);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+.pt-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.lp-field select,
+.lp-field textarea {
+  width: 100%;
+  padding: 0 12px;
+  border: 1px dashed var(--ds-line-strong);
+  border-radius: 0;
+  background: var(--ds-white);
+  font: 400 0.9375rem/1.45 var(--ds-font-text);
+  color: var(--ds-ink);
+  transition:
+    border-color var(--ds-fast),
+    box-shadow var(--ds-fast);
+}
+.lp-field select {
+  height: 44px;
+  padding-right: 40px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%230d0b01' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+}
+.lp-field select:invalid {
+  color: var(--ds-subtle);
+}
+.lp-field textarea {
+  min-height: 92px;
+  padding-block: 10px;
+  resize: vertical;
+}
+.lp-field textarea::placeholder {
+  color: var(--ds-subtle);
+}
+.lp-field select:hover,
+.lp-field textarea:hover {
+  border-color: var(--ds-muted);
+}
+.lp-field select:focus,
+.lp-field textarea:focus {
+  outline: none;
+  border-style: solid;
+  border-color: var(--ds-ink);
+  box-shadow: 0 0 0 3px var(--ds-blue-tint);
+}
+.lp-field select[aria-invalid="true"],
+.lp-field textarea[aria-invalid="true"] {
+  border-style: solid;
+  border-color: #c2330f;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .partners-offer {
+    grid-template-columns: 1fr;
+  }
+  .partners-offer > li {
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 8px 18px;
+  }
+  .partners-offer .ds-pixel-art {
+    grid-row: 1 / 3;
+  }
+  .partners-offer h3 {
+    margin-top: 10px;
+  }
+  .partners-reach {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 22px;
+  }
+  .partners-apply {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .partners-page {
+    padding-top: calc(var(--ds-nav) + 64px);
+  }
+  .partners-offer > li {
+    padding: 18px 16px 20px;
+  }
+  .partners-reach {
+    padding: 18px 16px;
+  }
+  .partners-channels {
+    grid-template-columns: 1fr;
+  }
+  .partners-proof {
+    gap: 32px;
+    margin-top: 40px;
+  }
+  .partners-apply {
+    margin-top: 40px;
+  }
+  .partners-pitch {
+    padding: 20px 16px;
+  }
+  .pt-choices,
+  .pt-row {
+    grid-template-columns: 1fr;
+  }
+}

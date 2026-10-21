@@ -28,11 +28,11 @@ export function EventOrganizer() {
 export function EventSponsors() {
   return (
     <section className="lp-sponsors-band" id="sponsors" aria-labelledby="sponsors-title">
-      <div className="ds-container">
-        <h2 id="sponsors-title" className="lp-sponsors-title">
-          Organiza AIYaiYai, con el apoyo de Torrenegra &amp; Co, Torre.ai y
-          Worder
-        </h2>
+      <div className="lp-supporters-head">
+        <h3 id="sponsors-title">Sponsors de esta edición</h3>
+        <Tag dot>Edición 2026</Tag>
+      </div>
+      <div>
         <ul className="lp-sponsors">
           <li className="ds-card">
             <Tag dot className="lp-sponsor-role">

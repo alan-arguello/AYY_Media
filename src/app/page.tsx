@@ -5,19 +5,17 @@ import {
   ArrowUpRight,
   CalendarDays,
   ChevronDown,
-  CirclePlay,
   Ticket,
   MapPin,
 } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
 import { siteUrl, isPublicSite } from "@/lib/site-url";
-import { Button, CodeName, LogoMark, PixelArt, SectionHeading, Tag } from "@/components/ui";
+import { Button, CodeName, PixelArt, SectionHeading, Tag } from "@/components/ui";
 import { PixelPhoto } from "@/components/pixel-photo";
 import { SummitInterestForm } from "./interest-form";
 import { speakers, type SummitSpeaker } from "./speakers";
-import { pastEventSupporters } from "./past-events";
 import { EventCarousel } from "./event-carousel";
-import { EventOrganizer, EventSponsors } from "./event-branding";
+import { SiteFooter, SiteNav } from "./site-chrome";
 import { Countdown } from "./countdown";
 import { TicketPricing } from "./ticket-pricing";
 import { TicketSelectionProvider } from "./ticket-selection";
@@ -131,6 +129,17 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   {
     q: "¿Quién organiza el summit?",
     a: "AIYaiYai, con el apoyo de Torrenegra & Co, Torre.ai y Worder.",
+  },
+  {
+    q: "¿Mi empresa puede ser aliada o sponsor?",
+    a: (
+      <>
+        Sí. Proponemos un speaker en la agenda, tu marca en el summit y en
+        todo nuestro contenido, y el alcance de nuestros canales.{" "}
+        <a href="/partners">Conoce la propuesta para aliados</a> y envíanos tus
+        datos; te respondemos en pocos días.
+      </>
+    ),
   },
   {
     q: "¿Quiénes son los speakers?",
@@ -247,23 +256,7 @@ export default function BogotaForwardSummitPage() {
         Ir al contenido
       </a>
 
-      <header className="lp-nav">
-        <div className="lp-nav-inner">
-          <a href="#top" aria-label="bogota.forward() summit, inicio">
-            <LogoMark />
-          </a>
-          <nav className="lp-nav-links" aria-label="Secciones">
-            <a href="#speakers">Speakers</a>
-            <a href="#agenda">Agenda</a>
-            <a href="#cena">Cena VIP</a>
-            <a href="#entradas">Entradas</a>
-            <a href="#comunidad">Comunidad</a>
-          </nav>
-          <Button href="#lista" size="sm" className="lp-nav-cta">
-            Únete a la lista
-          </Button>
-        </div>
-      </header>
+      <SiteNav />
 
       <TicketSelectionProvider>
       <main id="contenido">
@@ -347,8 +340,6 @@ export default function BogotaForwardSummitPage() {
             </ul>
           </div>
         </section>
-
-        <EventSponsors />
 
         <hr className="ds-divider" />
 
@@ -441,24 +432,12 @@ export default function BogotaForwardSummitPage() {
           </div>
           <EventCarousel />
           <div className="ds-container">
-            <div className="lp-supporters-head">
-              <h3>Empresas que han apoyado nuestros eventos anteriores</h3>
-              <Tag>No son sponsors de este evento</Tag>
+            <div className="lp-partners-cta">
+              <p>¿Tu empresa quiere ser aliada o sponsor del summit?</p>
+              <Button variant="secondary" href="/partners" icon={<ArrowRight aria-hidden="true" />}>
+                Conoce la propuesta para aliados
+              </Button>
             </div>
-            <ul className="lp-supporters">
-              {pastEventSupporters.map((partner) => (
-                <li key={partner.name} className="ds-card">
-                  <Image
-                    src={partner.image}
-                    alt={partner.name}
-                    width={160}
-                    height={40}
-                    className="lp-mono-logo"
-                    data-compact={partner.name === "v0" || undefined}
-                  />
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
 
@@ -541,62 +520,7 @@ export default function BogotaForwardSummitPage() {
       </main>
       </TicketSelectionProvider>
 
-      <footer className="lp-footer">
-        <div className="ds-container">
-          <div className="lp-footer-inner">
-            <div className="lp-footer-brand">
-              <LogoMark />
-              <p>
-                IA, empresas y lo que viene. Bogotá, 19 de noviembre de 2026.
-              </p>
-              <EventOrganizer />
-            </div>
-            <nav className="lp-footer-nav" aria-label="Pie de página">
-              <div>
-                <h2>Evento</h2>
-                <a href="#speakers">Speakers</a>
-                <a href="#agenda">Agenda</a>
-                <a href="#cena">Cena privada</a>
-                <a href="#entradas">Entradas y precios</a>
-                <a href="#sponsors">Sponsors</a>
-                <a href="#comunidad">Comunidad</a>
-                <a href="#faq">Preguntas</a>
-                <a href="#lista">Lista de interés</a>
-              </div>
-              <div>
-                <h2>Organiza</h2>
-                <a href={colombiaSummit.channel} {...external} className="lp-footer-icon">
-                  <CirclePlay aria-hidden="true" /> AIYaiYai en YouTube
-                </a>
-              </div>
-              <div>
-                <h2>Contacto</h2>
-                <a href={`mailto:${colombiaSummit.contactEmail}`}>Hablemos</a>
-              </div>
-            </nav>
-          </div>
-          <div className="lp-footer-base">
-            <p>© 2026 bogota.forward() summit · Bogotá, Colombia</p>
-            <p>
-              Fotos:{" "}
-              <a
-                href="https://commons.wikimedia.org/wiki/File:Bogot%C3%A1_y_Cerros_Orientales.jpg"
-                {...external}
-              >
-                Felipeortegag
-              </a>{" "}
-              (CC BY-SA 4.0) y{" "}
-              <a
-                href="https://commons.wikimedia.org/wiki/File:El_cielo_del_atardecer_sobre_Bogot%C3%A1,_Colombia,_2015,_por_Cristian_Baron_(Unsplash).jpg"
-                {...external}
-              >
-                Cristian Baron
-              </a>{" "}
-              (CC0).
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <Button
         href="#entradas"

@@ -64,3 +64,68 @@ export const rocket = [
   ".......alla.......",
   "........aa........",
 ] as const;
+
+// Partners: a microphone (a speaker on the agenda), a flag (your brand
+// everywhere, in the flag's own stripes) and a mast with waves (reach).
+export const mic = [
+  "......kkkkkk......",
+  ".....kggggggk.....",
+  ".....kgyygggk.....",
+  ".....kgyggggk.....",
+  ".....kggggggk.....",
+  ".....kggggggk.....",
+  ".....kggggggk.....",
+  "...k.kggggggk.k...",
+  "...k..kkkkkk..k...",
+  "...k..........k...",
+  "....kk......kk....",
+  "......kkkkkk......",
+  "........kk........",
+  "........kk........",
+  "........kk........",
+  ".....kkkkkkkk.....",
+  ".....kkkkrrkk.....",
+  "..................",
+] as const;
+
+export const flag = [
+  "....kk............",
+  "....kkkkkkkkkk....",
+  "....kkllllllllk...",
+  "....kkllllllllllk.",
+  "....kkllllllllllk.",
+  "....kkllllllllllk.",
+  "....kkbbbbbbbbbbk.",
+  "....kkbbbbbbbbbk..",
+  "....kkrrrrrrrrk...",
+  "....kkrrrrrrrrk...",
+  "....kkkkkkkkkk....",
+  "....kk............",
+  "....kk............",
+  "....kk............",
+  "....kk............",
+  "...kkkk...........",
+  "..................",
+  "..................",
+] as const;
+
+export const signal = [
+  "..................",
+  "......bbbbbb......",
+  "....bb......bb....",
+  "...b..........b...",
+  ".......bbbb.......",
+  ".....bb....bb.....",
+  "........ll........",
+  "........ll........",
+  "........kk........",
+  ".......kkkk.......",
+  ".......kkkk.......",
+  "......kkkkkk......",
+  "......kkkkkk......",
+  ".....kkkkkkkk.....",
+  ".....kkkkkkkk.....",
+  "....kkkkkkkkkk....",
+  "..................",
+  "..................",
+] as const;

@@ -50,27 +50,33 @@ const linkedinProfile = z
 
 // Stored in E.164 (+573001234567) so numbers open directly in wa.me links.
 // A bare Colombian mobile (3xx xxx xxxx, with or without 57) gets +57; any
-// other number must carry its country code, with "+" or "00".
+// other number must carry its country code, with "+" or "00". Returns null
+// when the input is not a usable number.
+export function toE164(value: string): string | null {
+  const compact = value.replace(/[\s().-]/g, "");
+  const digits = compact.replace(/^(\+|00)/, "");
+  const international = digits !== compact;
+  let e164 = "";
+  if (/^\d+$/.test(digits)) {
+    if (international) e164 = `+${digits}`;
+    else if (/^3\d{9}$/.test(digits)) e164 = `+57${digits}`;
+    else if (/^573\d{9}$/.test(digits)) e164 = `+${digits}`;
+  }
+  return /^\+[1-9]\d{6,14}$/.test(e164) ? e164 : null;
+}
+export const whatsappHint =
+  "Revisa tu número e incluye el indicativo de tu país, por ejemplo +57 300 123 4567.";
+
 const whatsappNumber = z
   .string({ error: "Escribe tu número de WhatsApp." })
   .trim()
   .max(32, "Revisa tu número de WhatsApp.")
   .transform((value, ctx) => {
-    const compact = value.replace(/[\s().-]/g, "");
-    const digits = compact.replace(/^(\+|00)/, "");
-    const international = digits !== compact;
-    let e164 = "";
-    if (/^\d+$/.test(digits)) {
-      if (international) e164 = `+${digits}`;
-      else if (/^3\d{9}$/.test(digits)) e164 = `+57${digits}`;
-      else if (/^573\d{9}$/.test(digits)) e164 = `+${digits}`;
-    }
-    if (!/^\+[1-9]\d{6,14}$/.test(e164)) {
+    const e164 = toE164(value);
+    if (!e164) {
       ctx.addIssue({
         code: "custom",
-        message: value
-          ? "Revisa tu número e incluye el indicativo de tu país, por ejemplo +57 300 123 4567."
-          : "Escribe tu número de WhatsApp.",
+        message: value ? whatsappHint : "Escribe tu número de WhatsApp.",
       });
       return z.NEVER;
     }

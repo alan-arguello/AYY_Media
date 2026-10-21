@@ -68,18 +68,22 @@ export function SectionHeading({
   tag,
   title,
   children,
+  level = "h2",
 }: {
   id: string;
   tag: string;
   title: React.ReactNode;
   children?: React.ReactNode;
+  /** h1 when the heading opens a page of its own. */
+  level?: "h1" | "h2";
 }) {
+  const Heading = level;
   return (
     <header className="ds-heading">
       <Tag>{tag}</Tag>
-      <h2 id={id} className="ds-display-l">
+      <Heading id={id} className={level === "h1" ? "ds-display-xl" : "ds-display-l"}>
         {title}
-      </h2>
+      </Heading>
       {children && <p className="ds-lead">{children}</p>}
     </header>
   );

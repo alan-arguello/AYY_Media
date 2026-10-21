@@ -45,8 +45,17 @@ test("organizer and sponsor assets are included locally", () => {
     new URL("../src/app/page.tsx", import.meta.url),
     "utf8",
   );
-  assert.match(page, /EventOrganizer/);
-  assert.match(page, /EventSponsors/);
-  assert.match(page, /AIYaiYai en YouTube/);
-  assert.doesNotMatch(page, /EventHosts|@\/lib\/seo|@\/components\/marketing/);
+  // Nav and footer are shared chrome; the sponsor strip lives on /partners.
+  const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
+  const chrome = read("../src/app/site-chrome.tsx");
+  const partners = read("../src/app/partners.tsx");
+  const partnersPage = read("../src/app/partners/page.tsx");
+  assert.match(page, /<SiteNav \/>/);
+  assert.match(page, /<SiteFooter \/>/);
+  assert.match(chrome, /EventOrganizer/);
+  assert.match(chrome, /AIYaiYai en YouTube/);
+  assert.match(chrome, /href="\/partners"/);
+  assert.match(partnersPage, /<Partners standalone \/>/);
+  assert.match(partners, /EventSponsors/);
+  assert.doesNotMatch(page, /EventHosts|@\/lib\/seo|@\/components\/marketing|<Partners/);
 });
