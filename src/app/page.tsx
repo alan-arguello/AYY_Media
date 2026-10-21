@@ -22,7 +22,7 @@ import { TicketSelectionProvider } from "./ticket-selection";
 import { PrivateDinner } from "./private-dinner";
 import { SummitAgenda } from "./summit-agenda";
 import { dinnerSeats, summitTickets } from "@/lib/summit-pricing";
-import { chip, rocket, skyline } from "./pixel-icons";
+import { chip, flag, rocket, skyline } from "./pixel-icons";
 
 export const runtime = "nodejs";
 
@@ -431,13 +431,24 @@ export default function BogotaForwardSummitPage() {
             </SectionHeading>
           </div>
           <EventCarousel />
+        </section>
+
+        <section className="lp-partners-band" aria-labelledby="partners-band-title">
           <div className="ds-container">
-            <div className="lp-partners-cta">
-              <p>¿Tu empresa quiere ser aliada o sponsor del summit?</p>
-              <Button variant="secondary" href="/partners" icon={<ArrowRight aria-hidden="true" />}>
-                Conoce la propuesta para aliados
-              </Button>
-            </div>
+            <a href="/partners" className="ds-card lp-partners-cta" data-accent>
+              <PixelArt rows={flag} size={64} className="lp-partners-art" />
+              <div className="lp-partners-copy">
+                <Tag dot>Aliados y sponsors</Tag>
+                <h2 id="partners-band-title">
+                  ¿Te interesa ser sponsor <span className="ds-accent">o aliado?</span>
+                </h2>
+                <p>Un speaker en la agenda, tu marca en todo lo que hacemos y +642K de alcance.</p>
+              </div>
+              <span className="ds-button lp-partners-button" data-variant="primary" data-size="md">
+                Revisa la propuesta
+                <ArrowRight aria-hidden="true" />
+              </span>
+            </a>
           </div>
         </section>
 

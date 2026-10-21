@@ -560,20 +560,62 @@
   max-width: 40px;
 }
 
-/* A pointer to /partners under the community carousel. */
-.lp-partners-cta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px 24px;
-  margin-top: 40px;
-  padding-top: 24px;
-  border-top: 1px dashed var(--ds-line);
+/* A pointer to /partners between Comunidad and the FAQ: one card, all link. */
+.lp-partners-band {
+  padding-bottom: var(--ds-section);
 }
-.lp-partners-cta p {
-  font-size: 1rem;
+.lp-partners-cta {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 20px 32px;
+  padding: 28px 32px;
+  background: var(--ds-surface);
+}
+.lp-partners-art {
+  width: 64px;
+  height: 64px;
+  transition: transform var(--ds-base) var(--ds-ease-out);
+}
+.lp-partners-cta:hover .lp-partners-art {
+  transform: translateY(-3px) rotate(-4deg);
+}
+.lp-partners-copy {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+}
+.lp-partners-copy h2 {
+  font: 500 clamp(1.5rem, 1.2rem + 1vw, 2rem)/1.1 var(--ds-font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.lp-partners-copy p {
+  font-size: 0.9375rem;
+  line-height: 1.5;
   color: var(--ds-muted);
+  text-wrap: pretty;
+}
+.lp-partners-cta:hover .lp-partners-button {
+  background: var(--ds-blue-hover);
+}
+.lp-partners-cta:hover .lp-partners-button svg {
+  transform: translateX(2px);
+}
+@media (max-width: 760px) {
+  .lp-partners-cta {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    padding: 22px 18px;
+  }
+  .lp-partners-art {
+    width: 48px;
+    height: 48px;
+  }
+  .lp-partners-button {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 /* ── FAQ ─────────────────────────────────────────────────────────────────── */
