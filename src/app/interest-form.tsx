@@ -30,10 +30,7 @@ export function SummitInterestForm() {
         </span>
         <h3>{state.message}</h3>
         <p>
-          {state.detail ?? "Revisamos cada solicitud a mano. Si hay un lugar para ti, te escribimos por correo o WhatsApp con los siguientes pasos."}
-        </p>
-        <p className="lp-small">
-          Tu solicitud no reserva un lugar: primero revisamos tu perfil.
+          {state.detail ?? "Si hay un lugar para ti, te escribimos por correo o WhatsApp."}
         </p>
         <a className="lp-text-link" href="#agenda">
           Mira la agenda de la tarde <ArrowRightIcon />
@@ -49,7 +46,7 @@ export function SummitInterestForm() {
       // native reset. Keep the draft intact; success replaces the form above.
       onReset={(event) => event.preventDefault()}
       className="lp-form"
-      aria-label="Solicitud de lugar para el almuerzo privado de bogota.forward()"
+      aria-label="Solicitud de lugar para la cena privada de bogota.forward()"
       aria-busy={pending}
     >
       <fieldset disabled={pending}>
@@ -62,7 +59,7 @@ export function SummitInterestForm() {
         >
           <legend>¿Qué lugar te interesa?</legend>
           <p id="summit-ticket-help" className="lp-ticket-selection-help">
-            Los dos incluyen la tarde completa. Revisamos cada solicitud.
+            Los dos incluyen la tarde completa.
           </p>
           <div className="lp-ticket-radio-options">
             {summitTickets.map((ticket) => (
@@ -85,7 +82,7 @@ export function SummitInterestForm() {
                   <span className="lp-ticket-radio-name">{ticket.name}</span>
                   <span className="lp-ticket-radio-description">
                     {ticket.id === "vip"
-                      ? "Almuerzo, charla privada, feedback 1 a 1 y happy hour"
+                      ? "Cena, charla privada, feedback 1 a 1 y happy hour"
                       : "Todo General + 45 min a solas con Alexander"}
                   </span>
                   <span className="lp-ticket-radio-admission">
@@ -217,7 +214,7 @@ export function SummitInterestForm() {
             }
           />
           <span id="summit-linkedin-help" className="lp-field-help">
-            Lo usamos solo para revisar tu solicitud.
+            Solo para revisar tu solicitud.
           </span>
           {state.errors?.linkedin && (
             <span id="summit-linkedin-error" className="lp-field-error">
@@ -279,8 +276,7 @@ export function SummitInterestForm() {
         </div>
       )}
       <p className="lp-form-note">
-        Por aplicación. Tu solicitud no confirma un lugar ni garantiza el
-        precio de una fase.
+        La solicitud no confirma un lugar ni garantiza el precio de una fase.
       </p>
     </form>
   );

@@ -73,24 +73,12 @@ export function PrivateDinner() {
           <div className="dinner-intro">
             <p className="dinner-lead">
               Tú y otras {totalSeats - 1} personas, elegidas una por una, con
-              Alexander Torrenegra y Tania Zapata. Sin escenario ni público:
-              preguntas directas y feedback de primera mano sobre lo que estás
-              construyendo.
+              Alexander Torrenegra y Tania Zapata.
             </p>
             <ol className="dinner-how" aria-label="Cómo se consigue un lugar">
-              <li>
-                <strong>Aplicas.</strong> Nos cuentas quién eres, tu empresa y
-                tu LinkedIn. Toma dos minutos.
-              </li>
-              <li>
-                <strong>Revisamos tu perfil, uno por uno.</strong> Buscamos
-                founders, managers y C-levels con algo real entre manos. No
-                todas las solicitudes son aceptadas.
-              </li>
-              <li>
-                <strong>Te confirmamos.</strong> Si hay un lugar para ti, te
-                escribimos con los siguientes pasos y la ubicación.
-              </li>
+              <li><strong>Aplicas.</strong> Dos minutos.</li>
+              <li><strong>Revisamos tu perfil.</strong> No todas las solicitudes son aceptadas.</li>
+              <li><strong>Te confirmamos.</strong> Con los siguientes pasos y la ubicación.</li>
             </ol>
           </div>
         </div>
@@ -98,25 +86,21 @@ export function PrivateDinner() {
         <ul className="dinner-gallery" aria-label="Encuentros privados anteriores">
           <li className="dinner-photo" data-shot="session">
             <Image src={photos.session.src} alt={photos.session.alt} fill sizes="(max-width: 640px) 100vw, (max-width: 1000px) 64vw, 592px" quality={86} />
-            <span className="dinner-caption">{photos.session.caption}</span>
           </li>
           <li className="dinner-photo" data-shot="alexander">
             <Image src={photos.alexander.src} alt={photos.alexander.alt} fill sizes="(max-width: 640px) 100vw, (max-width: 1000px) 36vw, 320px" quality={86} />
-            <span className="dinner-caption">{photos.alexander.caption}</span>
           </li>
           <li className="dinner-photo" data-shot="fireside">
             <Image src={photos.fireside.src} alt={photos.fireside.alt} fill sizes="(max-width: 640px) 50vw, (max-width: 1000px) 32vw, 290px" quality={86} />
-            <span className="dinner-caption">{photos.fireside.caption}</span>
           </li>
           <li className="dinner-photo" data-shot="group">
             <Image src={photos.group.src} alt={photos.group.alt} fill sizes="(max-width: 640px) 50vw, (max-width: 1000px) 32vw, 290px" quality={86} />
-            <span className="dinner-caption">{photos.group.caption}</span>
           </li>
         </ul>
 
         <div className="dinner-portfolio">
           <p className="dinner-portfolio-head">
-            Tus anfitriones invierten en empresas y fondos como
+            Invierten en
           </p>
           <ul className="dinner-portfolio-logos" aria-label="Empresas y fondos en los que han invertido">
             {portfolio.map((company) => (
@@ -132,15 +116,12 @@ export function PrivateDinner() {
               </li>
             ))}
           </ul>
-          <p className="dinner-portfolio-note">
-            Logos de empresas y fondos en los que han invertido. No son sponsors
-            del evento.
-          </p>
+          <p className="dinner-portfolio-note">No son sponsors del evento.</p>
         </div>
 
         <div className="dinner-seats">
           <div className="dinner-seats-copy">
-            <h3>{totalSeats} lugares. Ni uno más.</h3>
+            <h3>{totalSeats} lugares.</h3>
             <div
               className="dinner-seat-row"
               role="img"
@@ -153,7 +134,7 @@ export function PrivateDinner() {
             <dl className="dinner-legend">
               <div data-tier="vip">
                 <dt>{general.capacity}</dt>
-                <dd>General · La tarde completa</dd>
+                <dd>General</dd>
               </div>
               <div data-tier="vip-plus">
                 <dt>{vip.capacity}</dt>
@@ -164,9 +145,8 @@ export function PrivateDinner() {
           <div className="dinner-seats-cta">
             <PrivateDinnerCta />
             <p className="dinner-seats-note">
-              Por aplicación. Enviar una solicitud no reserva un lugar.{" "}
               <a href="#entradas">
-                Ver precios por fase <ArrowDown aria-hidden="true" />
+                Ver precios <ArrowDown aria-hidden="true" />
               </a>
             </p>
           </div>

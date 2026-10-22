@@ -306,7 +306,8 @@
 .lp-pillar-copy {
   display: grid;
   gap: 4px;
-  padding: 14px;
+  padding: 16px 14px 18px;
+  text-align: center;
 }
 .lp-pillar-copy h3 {
   font: 500 1rem/1.3 var(--ds-font-text);

@@ -11,28 +11,27 @@ function agendaSpeaker(name: string) {
 }
 const hosts = [agendaSpeaker("Alexander Torrenegra"), agendaSpeaker("Tania Zapata")];
 
-// The afternoon, hour by hour. Each step says what happens and what the
-// person in the room gets from it.
+// The afternoon, hour by hour.
 const schedule = [
   {
     time: "1:30",
     kind: "Llegada",
     title: "Bienvenida",
-    description: "Te recibimos en el lugar del almuerzo. La dirección la compartimos solo con las personas aceptadas.",
+    description: "La dirección la reciben solo las personas aceptadas.",
   },
   {
     time: "2:00",
     until: "a 2:30 p. m.",
-    kind: "Almuerzo",
-    title: "Almuerzo y presentaciones",
-    description: "Comemos juntos y cada participante se presenta ante el grupo: quién es, qué está construyendo y qué lo trae a la mesa.",
+    kind: "Cena",
+    title: "Cena y presentaciones",
+    description: "Cada participante se presenta: quién es y qué está construyendo.",
   },
   {
     time: "2:30",
     until: "a 3:00 p. m.",
     kind: "Charla privada",
     title: "A puerta cerrada con Alexander y Tania",
-    description: "Una conversación sobre IA, empresas y lo que viene, sin escenario ni público. Las preguntas las pone el grupo.",
+    description: "IA, empresas y lo que viene. Las preguntas las pone el grupo.",
     hosts,
   },
   {
@@ -40,7 +39,7 @@ const schedule = [
     until: "a 5:30 p. m.",
     kind: "Feedback 1 a 1",
     title: "Tu turno con Alexander y Tania",
-    description: "Llevas tu empresa, la decisión que tienes atascada o tu plan con IA, y te vas con feedback directo de quienes ya pasaron por ahí.",
+    description: "Tu empresa, tu decisión atascada o tu plan con IA, con feedback directo.",
     hosts,
   },
   {
@@ -48,7 +47,7 @@ const schedule = [
     until: "en adelante",
     kind: "Happy hour",
     title: "La conversación sigue",
-    description: "Sin agenda. Para seguir hablando con el grupo y con los anfitriones.",
+    description: "Sin agenda, con el grupo y los anfitriones.",
   },
 ];
 
@@ -60,7 +59,7 @@ export function SummitAgenda() {
           <header className="agenda-header">
             <div className="agenda-heading">
               <p>La tarde</p>
-              <h2 id="agenda-title">Del almuerzo<br />al happy hour.</h2>
+              <h2 id="agenda-title">De la cena<br />al happy hour.</h2>
             </div>
             <div className="agenda-day">
               <p><time dateTime={colombiaSummit.date}>Jueves 19 de noviembre de 2026</time></p>
@@ -102,7 +101,7 @@ export function SummitAgenda() {
             <span className="agenda-number" aria-hidden="true"><Lock /></span>
             <div>
               <h3>Ubicación privada.</h3>
-              <p>La dirección llega con tu confirmación. Horarios aproximados.</p>
+              <p>Llega con tu confirmación.</p>
             </div>
           </div>
         </div>

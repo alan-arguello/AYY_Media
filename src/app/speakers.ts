@@ -27,7 +27,7 @@ export const speakers: SummitSpeaker[] = [
   {
     name: "Alexander Torrenegra",
     role: "Cofundador y CEO de Torre.ai · Shark en Shark Tank Colombia y México",
-    bio: "Cofundador de Voice123 (adquirida en 2021 por Backstage), Bunny Studio y Torre.ai, donde la IA entrevista y conecta talento con empresas. Innovador menor de 35 del MIT Technology Review y autor de Remoter. Está acostumbrado a decidir en minutos qué le falta a un negocio para escalar.",
+    bio: "Cofundador de Voice123, Bunny Studio y Torre.ai. Innovador menor de 35 del MIT Technology Review.",
     image: "/images/speakers/alexander-torrenegra.webp",
     linkedin: "https://www.linkedin.com/in/alextorrenegra/",
     credentials: [
@@ -49,7 +49,7 @@ export const speakers: SummitSpeaker[] = [
   {
     name: "Tania Zapata",
     role: "Cofundadora de Voice123 · Chairwoman de Bunny Inc.",
-    bio: "Cofundó Voice123 en 2003 y lo hizo autosostenible en seis meses; en 2021 fue adquirido por Backstage. Construyó Bunny Studio, hoy con más de 50.000 clientes, y lo dirigió como CEO hasta 2025. Ha invertido o asesorado a más de 25 startups, y da feedback con la franqueza de quien también ha fallado.",
+    bio: "Cofundó Voice123 y construyó Bunny Studio. Ha invertido o asesorado a más de 25 startups.",
     image: "/images/speakers/tania-zapata.webp",
     linkedin: "https://www.linkedin.com/in/taniazapata/",
     credentials: [

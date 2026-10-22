@@ -4,7 +4,7 @@ export const colombiaSummit = {
   name: "bogota.forward() summit",
   path: "/",
   date: "2026-11-19",
-  // The private lunch: arrival 1:30 p. m., happy hour from 5:30 p. m.
+  // The private dinner: arrival 1:30 p. m., happy hour from 5:30 p. m.
   startDate: "2026-11-19T13:30:00-05:00",
   endDate: "2026-11-19T18:00:00-05:00",
   source: "colombia-summit-2026",

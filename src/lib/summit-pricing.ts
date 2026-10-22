@@ -26,7 +26,7 @@ export const pricingPhases = [
   },
 ] as const;
 
-// The private lunch: one afternoon, 20 seats, two ways in. The ids keep the
+// The private dinner: one afternoon, 20 seats, two ways in. The ids keep the
 // values already stored in Supabase (ticket_type): "vip" was the dinner
 // tier and is now General; "vip-plus" is now VIP. The open summit ticket
 // ("general") is retired, so new requests can't choose it, but historical
@@ -35,27 +35,26 @@ const generalSeats = 10;
 const vipSeats = 10;
 export const totalSeats = generalSeats + vipSeats;
 const afternoon = [
-  "Almuerzo privado y presentaciones entre el grupo",
-  "Charla privada con Alexander Torrenegra y Tania Zapata",
-  "Feedback 1 a 1 con Alexander y Tania",
+  "Cena privada y presentaciones",
+  "Charla privada con Alexander y Tania",
+  "Feedback 1 a 1",
   "Happy hour",
 ] as const;
-export const oneOnOneBenefit =
-  "Sesión 1 a 1 de 45 minutos con Alexander Torrenegra, posterior al evento";
+export const oneOnOneBenefit = "45 minutos a solas con Alexander, después del evento";
 
 export const summitTickets = [
   {
     id: "vip",
     name: "General",
-    description: "Tu lugar en la mesa, la tarde completa.",
+    description: "La tarde completa.",
     capacity: generalSeats,
-    prices: [549, 749, 849],
+    prices: [649, 849, 949],
     benefits: afternoon,
   },
   {
     id: "vip-plus",
     name: "VIP",
-    description: "La mesa, y 45 minutos a solas con Alexander.",
+    description: "La tarde completa, y 45 minutos a solas con Alexander.",
     capacity: vipSeats,
     prices: [1349, 1549, 1749],
     benefits: [...afternoon, oneOnOneBenefit],

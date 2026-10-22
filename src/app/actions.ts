@@ -56,7 +56,7 @@ export async function submitSummitInterest(
     return {
       status: "success",
       message: "Recibimos tu solicitud.",
-      detail: `Revisamos cada perfil a mano. Si hay un lugar para ti, te escribimos por correo o WhatsApp con los siguientes pasos y la ubicación. Si ya habías enviado una solicitud, conservamos tu primera elección; para cambiarla, escríbenos a ${colombiaSummit.contactEmail}.`,
+      detail: `Si hay un lugar para ti, te escribimos por correo o WhatsApp. Para cambiar una solicitud anterior, escríbenos a ${colombiaSummit.contactEmail}.`,
     };
   } catch (error) {
     console.error(

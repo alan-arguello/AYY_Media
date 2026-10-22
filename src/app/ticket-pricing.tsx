@@ -1,13 +1,12 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
-import { ArrowRight, ArrowUp, Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import {
   formatTicketPrice,
   getCurrentPricingPhase,
   pricingPhases,
   summitTickets,
-  totalSeats,
 } from "@/lib/summit-pricing";
 
 // What every seat includes; anything beyond it is shown in bold.
@@ -57,7 +56,7 @@ export function TicketPricing() {
           <h2 id="pricing-title" className="ds-display-l">
             Dos formas de sentarte <span className="ds-accent">a la mesa.</span>
           </h2>
-          <p>Diez lugares en cada una. Todas las solicitudes pasan por revisión antes de confirmar un lugar.</p>
+          <p>Diez lugares en cada una, por aplicación.</p>
         </header>
 
         <div className="lp-phases" role="group" aria-label="Comparar precios por fase">
@@ -109,9 +108,7 @@ export function TicketPricing() {
                     </li>
                   ))}
                 </ul>
-                <a href="#agenda" className="lp-ticket-link">
-                  Ver la agenda de la tarde <ArrowUp aria-hidden="true" />
-                </a>
+
 
                 <div className="lp-ticket-bottom">
                   <dl className="lp-ticket-schedule" aria-label={`Todas las fases de ${ticket.name}, precios en USD`}>
@@ -136,7 +133,7 @@ export function TicketPricing() {
                     </a>
                   )}
                   <p className="lp-ticket-cta-note">
-                    {closed ? "Fases finalizadas" : "Completa el formulario · Por aplicación"}
+                    {closed ? "Fases finalizadas" : "Por aplicación"}
                   </p>
                 </div>
               </article>
@@ -145,8 +142,7 @@ export function TicketPricing() {
         </div>
 
         <div className="lp-pricing-footnote">
-          <p>Precios por persona en USD. Fechas de 2026, hasta las 11:59 p. m., hora de Bogotá.</p>
-          <p>Los {totalSeats} lugares se asignan por aplicación. Enviar una solicitud no confirma un lugar ni garantiza el precio de una fase.</p>
+          <p>Precios por persona en USD. La solicitud no confirma un lugar ni garantiza el precio de una fase.</p>
         </div>
       </div>
     </section>

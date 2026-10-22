@@ -3,7 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { useTicketSelection } from "./ticket-selection";
 
-// The lunch's own "Solicitar" buttons: preselect the tier, then go to the form.
+// The dinner's own "Solicitar" buttons: preselect the tier, then go to the form.
 export function PrivateDinnerCta() {
   const { selectTicket } = useTicketSelection();
   return (
