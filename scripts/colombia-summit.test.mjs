@@ -181,8 +181,8 @@ test("event source and date stay distinct from other campaigns", () => {
 });
 
 test("five speakers have real portraits, credential assets and source links", () => {
-  assert.equal(speakers.length, 5);
-  assert.equal(new Set(speakers.map((speaker) => speaker.linkedin)).size, 5);
+  assert.equal(speakers.length, 3);
+  assert.equal(new Set(speakers.map((speaker) => speaker.linkedin)).size, 3);
   for (const speaker of speakers) {
     assert.ok(
       existsSync(new URL(`../public${speaker.image}`, import.meta.url)),

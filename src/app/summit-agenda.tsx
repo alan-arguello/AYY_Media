@@ -34,13 +34,6 @@ const sessions = [
     description:
       "Los agentes de IA ya no son solo para equipos de ingeniería. En este workshop Alan muestra, con su propio día a día, cómo una sola persona opera con Claude y Codex lo que antes hacía un equipo, y qué debería estar haciendo ya cada área de tu empresa. Sales con un plan para empezar el lunes.",
   },
-  {
-    format: "Charla",
-    speakers: [agendaSpeaker("Juan Pablo Rodríguez"), agendaSpeaker("Catalina Morales")],
-    title: "Lecciones de Growth en Torre.ai para la era de IA",
-    description:
-      "Torre lleva casi siete años creciendo a punta de experimentos: líneas de ingreso que escalaron, otras que apagaron a tiempo, y una “inteligencia artificial” que al principio eran personas detrás de la cortina. Juan Pablo, desde growth, y Catalina, desde operaciones, cuentan qué cambia ahora que los agentes hacen el trabajo, y qué lecciones siguen vigentes.",
-  },
 ];
 
 export function SummitAgenda() {

@@ -89,35 +89,4 @@ export const speakers: SummitSpeaker[] = [
       },
     ],
   },
-  {
-    name: "Catalina Morales",
-    role: "Head of Operations · Torre.ai",
-    image: "/images/colombia-summit/catalina-morales.webp",
-    linkedin: "https://www.linkedin.com/in/soycatamorales/",
-    credentials: [
-      torre("Head of Operations", "https://invest.torre.ai/"),
-      {
-        name: "Stanford",
-        image: `${hosts}stanford.png`,
-        detail: "Stanford–Endeavor Innovation & Growth Program",
-        source:
-          "https://www.linkedin.com/posts/soycatamorales_officially-a-graduate-of-the-stanford-endeavor-activity-7365084213819203584-7BhD",
-      },
-    ],
-  },
-  {
-    name: "Juan Pablo Rodríguez",
-    role: "Head of Marketing · Torre.ai",
-    image: "/images/colombia-summit/juan-pablo-rodriguez.webp",
-    linkedin: "https://www.linkedin.com/in/jprodmo/",
-    credentials: [
-      torre("Head of Marketing", "https://torre.ai/jprodmo"),
-      {
-        name: "DiDi",
-        image: "/images/colombia-summit/didi.svg",
-        detail: "Experiencia previa en Driver Operations",
-        source: "https://torre.ai/jprodmo",
-      },
-    ],
-  },
 ];
