@@ -64,8 +64,8 @@ test("ticket prices use unambiguous USD-style thousands grouping", () => {
 
 test("the private dinner seats exactly the VIP and VIP Plus capacities", () => {
   const capacity = Object.fromEntries(summitTickets.map((ticket) => [ticket.id, ticket.capacity]));
-  assert.deepEqual(capacity, { general: null, vip: 15, "vip-plus": 5 });
-  assert.equal(dinnerSeats, 20);
+  assert.deepEqual(capacity, { general: null, vip: 10, "vip-plus": 5 });
+  assert.equal(dinnerSeats, 15);
   for (const ticket of summitTickets) {
     const atDinner = ticket.benefits.some((benefit) => benefit.startsWith("Cena privada"));
     assert.equal(atDinner, ticket.capacity !== null, ticket.id);

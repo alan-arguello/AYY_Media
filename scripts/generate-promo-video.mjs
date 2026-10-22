@@ -115,7 +115,7 @@ const LINEUP = [
 const TIERS = [
   { name: "General", line: "Un día para abrir la perspectiva.", seats: "Acceso al summit", price: 349,
     perk: "Entrada al summit, bebidas y snacks", tone: "paper" },
-  { name: "VIP", line: "La conversación sigue en la mesa.", seats: "15 personas · Sujeto a aceptación", price: 549,
+  { name: "VIP", line: "La conversación sigue en la mesa.", seats: "10 personas · Sujeto a aceptación", price: 549,
     perk: "Cena privada con Alex Torrenegra y Tania Zapata", tone: "tint" },
   { name: "VIP Plus", line: "Una conversación enfocada en ti.", seats: "5 personas · Sujeto a aceptación", price: 1349,
     perk: "Sesión 1 a 1 de 45 min con Alexander Torrenegra", tone: "navy" },

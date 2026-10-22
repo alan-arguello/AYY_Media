@@ -31,7 +31,7 @@ const generalBenefits = [
   "Bebidas y snacks durante el evento",
 ] as const;
 // Every VIP and VIP Plus seat is a seat at the private dinner.
-const vipSeats = 15;
+const vipSeats = 10;
 const vipPlusSeats = 5;
 export const dinnerSeats = vipSeats + vipPlusSeats;
 const dinnerBenefit = `Cena privada con Alexander Torrenegra y Tania Zapata · ${dinnerSeats} lugares en total`;

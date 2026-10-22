@@ -453,7 +453,7 @@ body::after { content: ""; position: absolute; inset: 0; pointer-events: none;
 <canvas id="kind" class="abs" style="left:922px; top:104px; width:242px; height:62px"></canvas>
 <div class="abs m" style="left:36px; right:36px; top:172px; display:flex; font-size:12px; color:#9aa6c8">
   <span><span class="p">&gt;&gt;&gt;</span> <span class="s">summit</span>.<span class="f">agenda</span><span class="k">()</span> <span class="c"># 4 sesiones · 5 speakers</span></span>
-  <span style="margin-left:auto; color:#c7cfe4"><span class="c">#</span> IA, empresas y lo que viene <span class="c">·</span> cena privada con Alex y Tania: <span class="p">20 lugares</span></span>
+  <span style="margin-left:auto; color:#c7cfe4"><span class="c">#</span> IA, empresas y lo que viene <span class="c">·</span> cena privada con Alex y Tania: <span class="p">15 lugares</span></span>
 </div>
 ${SESSIONS.map((s, i) => {
   const x = CARD.left + i * (CARD.w + CARD.gap);
