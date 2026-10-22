@@ -77,6 +77,51 @@
   border-top: 1px dashed var(--ds-line-strong);
 }
 
+/* The afternoon's schedule: time on the left, what happens, and the hosts'
+   portraits on the steps they lead. */
+.agenda-slot {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: center;
+  padding-block: 30px;
+}
+
+.agenda-slot + .agenda-slot {
+  border-top: 1px dashed var(--ds-line-strong);
+}
+
+.agenda-when {
+  display: grid;
+  gap: 6px;
+  align-self: start;
+}
+
+.agenda-when time {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font: 500 2.25rem/1 var(--ds-font-mono);
+  letter-spacing: -0.06em;
+  color: var(--ds-ink);
+}
+
+.agenda-when time span {
+  font: 400 0.8125rem/1 var(--ds-font-text);
+  letter-spacing: 0;
+  color: var(--ds-muted);
+}
+
+.agenda-until {
+  font-size: 0.8125rem;
+  color: var(--ds-muted);
+}
+
+.agenda-slot .agenda-portraits {
+  padding-left: 0;
+  padding-right: 8px;
+}
+
 .agenda-portraits {
   position: relative;
   display: flex;
@@ -248,6 +293,15 @@
     padding-block: 32px;
   }
 
+  .agenda-slot {
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .agenda-slot .agenda-portraits {
+    grid-column: 2;
+  }
+
   .agenda-format {
     margin-block: 0 4px;
   }
@@ -262,6 +316,26 @@
   .agenda-session {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
+  }
+
+  .agenda-slot {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    padding-block: 26px;
+  }
+
+  .agenda-slot .agenda-portraits {
+    grid-column: auto;
+  }
+
+  .agenda-when {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .agenda-when time {
+    font-size: 1.75rem;
   }
 
   .agenda-portrait,

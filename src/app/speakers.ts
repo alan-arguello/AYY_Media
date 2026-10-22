@@ -7,6 +7,8 @@ export type SpeakerCredential = {
 export type SummitSpeaker = {
   name: string;
   role: string;
+  /** A short record: who they are and why their feedback is worth having. */
+  bio: string;
   image: string;
   linkedin: string;
   credentials: SpeakerCredential[];
@@ -20,10 +22,12 @@ const torre = (detail: string, source: string): SpeakerCredential => ({
   source,
 });
 
+// The lunch's hosts.
 export const speakers: SummitSpeaker[] = [
   {
     name: "Alexander Torrenegra",
-    role: "Cofundador de Torre.ai, Voice123 y Bunny Studio",
+    role: "Cofundador y CEO de Torre.ai · Shark en Shark Tank Colombia y México",
+    bio: "Cofundador de Voice123 (adquirida en 2021 por Backstage), Bunny Studio y Torre.ai, donde la IA entrevista y conecta talento con empresas. Innovador menor de 35 del MIT Technology Review y autor de Remoter. Está acostumbrado a decidir en minutos qué le falta a un negocio para escalar.",
     image: "/images/speakers/alexander-torrenegra.webp",
     linkedin: "https://www.linkedin.com/in/alextorrenegra/",
     credentials: [
@@ -45,6 +49,7 @@ export const speakers: SummitSpeaker[] = [
   {
     name: "Tania Zapata",
     role: "Cofundadora de Voice123 · Chairwoman de Bunny Inc.",
+    bio: "Cofundó Voice123 en 2003 y lo hizo autosostenible en seis meses; en 2021 fue adquirido por Backstage. Construyó Bunny Studio, hoy con más de 50.000 clientes, y lo dirigió como CEO hasta 2025. Ha invertido o asesorado a más de 25 startups, y da feedback con la franqueza de quien también ha fallado.",
     image: "/images/speakers/tania-zapata.webp",
     linkedin: "https://www.linkedin.com/in/taniazapata/",
     credentials: [
@@ -66,26 +71,6 @@ export const speakers: SummitSpeaker[] = [
         detail: "Endeavor Entrepreneur",
         source:
           "https://endeavor.org/entrepreneur-companies/?_search=bunny-studio",
-      },
-    ],
-  },
-  {
-    name: "Alan Argüello",
-    role: "Ingeniero de software y emprendedor · Torrenegra & Co",
-    image: "/images/speakers/alan-arguello-sf.webp",
-    linkedin: "https://www.linkedin.com/in/alan-arguello/",
-    credentials: [
-      {
-        name: "Georgia Tech",
-        image: `${hosts}georgia.png`,
-        detail: "Formación en Computer Science",
-        source: "https://www.linkedin.com/in/alan-arguello/",
-      },
-      {
-        name: "Platanus Ventures",
-        image: `${hosts}platanus.png`,
-        detail: "Emprendimiento respaldado por Platanus Ventures",
-        source: "https://www.linkedin.com/in/alan-arguello/",
       },
     ],
   },

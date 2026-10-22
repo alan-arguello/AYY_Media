@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
 import { speakers } from "./speakers";
 import "./summit-agenda.css";
@@ -9,30 +9,46 @@ function agendaSpeaker(name: string) {
   if (!speaker) throw new Error(`Missing agenda speaker: ${name}`);
   return speaker;
 }
+const hosts = [agendaSpeaker("Alexander Torrenegra"), agendaSpeaker("Tania Zapata")];
 
-// One short paragraph per session: the idea, why it matters to a founder or
-// executive, and what they leave with.
-const sessions = [
+// The afternoon, hour by hour. Each step says what happens and what the
+// person in the room gets from it.
+const schedule = [
   {
-    format: "Charla",
-    speakers: [agendaSpeaker("Alexander Torrenegra")],
-    title: "Cómo predecir el futuro",
-    description:
-      "Predecir el futuro no es adivinar: es hacerse la pregunta correcta. Para Alexander, esa pregunta es: si hoy empezaras tu empresa desde cero, con todo lo que ya sabes, ¿la construirías igual? Una charla para detectar qué partes de tu negocio responden a otra época y cómo replantearlas.",
+    time: "1:30",
+    kind: "Llegada",
+    title: "Bienvenida",
+    description: "Te recibimos en el lugar del almuerzo. La dirección la compartimos solo con las personas aceptadas.",
   },
   {
-    format: "Fireside chat",
-    speakers: [agendaSpeaker("Tania Zapata")],
-    title: "Reinventar tu compañía cuando es disrumpida",
-    description:
-      "Tania pasó más de veinte años construyendo un negocio de voces humanas. Después llegó la voz sintética. En esta conversación cuenta cómo se ve la disrupción desde adentro: cuándo defender el negocio, cuándo canibalizarlo y cómo mover a un equipo sin perderlo en el camino. Para quienes saben que su turno puede llegar.",
+    time: "2:00",
+    until: "a 2:30 p. m.",
+    kind: "Almuerzo",
+    title: "Almuerzo y presentaciones",
+    description: "Comemos juntos y cada participante se presenta ante el grupo: quién es, qué está construyendo y qué lo trae a la mesa.",
   },
   {
-    format: "Workshop",
-    speakers: [agendaSpeaker("Alan Argüello")],
-    title: "Cómo volverte un 10X Operator",
-    description:
-      "Los agentes de IA ya no son solo para equipos de ingeniería. En este workshop Alan muestra, con su propio día a día, cómo una sola persona opera con Claude y Codex lo que antes hacía un equipo, y qué debería estar haciendo ya cada área de tu empresa. Sales con un plan para empezar el lunes.",
+    time: "2:30",
+    until: "a 3:00 p. m.",
+    kind: "Charla privada",
+    title: "A puerta cerrada con Alexander y Tania",
+    description: "Una conversación sobre IA, empresas y lo que viene, sin escenario ni público. Las preguntas las pone el grupo.",
+    hosts,
+  },
+  {
+    time: "3:00",
+    until: "a 5:30 p. m.",
+    kind: "Feedback 1 a 1",
+    title: "Tu turno con Alexander y Tania",
+    description: "Llevas tu empresa, la decisión que tienes atascada o tu plan con IA, y te vas con feedback directo de quienes ya pasaron por ahí.",
+    hosts,
+  },
+  {
+    time: "5:30",
+    until: "en adelante",
+    kind: "Happy hour",
+    title: "La conversación sigue",
+    description: "Sin agenda. Para seguir hablando con el grupo y con los anfitriones.",
   },
 ];
 
@@ -43,61 +59,50 @@ export function SummitAgenda() {
         <div className="agenda-program">
           <header className="agenda-header">
             <div className="agenda-heading">
-              <p>La agenda</p>
-              <h2 id="agenda-title">Del futuro<br />a la acción.</h2>
+              <p>La tarde</p>
+              <h2 id="agenda-title">Del almuerzo<br />al happy hour.</h2>
             </div>
             <div className="agenda-day">
-              <p><time dateTime={colombiaSummit.date}>19 de noviembre de 2026</time></p>
-              <div className="agenda-hours" role="group" aria-label="De 10 de la mañana a 4 de la tarde">
-                <time dateTime={colombiaSummit.startDate}>10:00<span>a. m.</span></time>
+              <p><time dateTime={colombiaSummit.date}>Jueves 19 de noviembre de 2026</time></p>
+              <div className="agenda-hours" role="group" aria-label="De 1:30 a 6 de la tarde">
+                <time dateTime={colombiaSummit.startDate}>1:30<span>p. m.</span></time>
                 <ArrowRight aria-hidden="true" />
-                <time dateTime={colombiaSummit.endDate}>4:00<span>p. m.</span></time>
+                <time dateTime={colombiaSummit.endDate}>6:00<span>p. m.</span></time>
               </div>
               <p>Hora de Bogotá · Presencial</p>
             </div>
           </header>
 
-          <ol className="agenda-sessions" role="list" aria-label="Sesiones del summit">
-            {sessions.map((session, index) => (
-              <li className="agenda-session" key={session.title}>
-                <div className="agenda-portraits" data-pair={session.speakers.length > 1 || undefined}>
-                  {session.speakers.map((speaker) => (
-                    <div className="agenda-portrait" data-speaker={speaker.name} key={speaker.name}>
-                      <Image
-                        src={speaker.image}
-                        alt={speaker.name}
-                        fill
-                        sizes="(max-width: 600px) 80px, 112px"
-                        quality={90}
-                      />
-                    </div>
-                  ))}
-                  <span className="agenda-number" aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+          <ol className="agenda-sessions" role="list" aria-label="Programa de la tarde">
+            {schedule.map((slot) => (
+              <li className="agenda-slot" key={slot.time}>
+                <div className="agenda-when">
+                  <time>{slot.time}<span>p. m.</span></time>
+                  {slot.until && <span className="agenda-until">{slot.until}</span>}
                 </div>
                 <div className="agenda-topic">
-                  <span className="agenda-format">{session.format}</span>
-                  <h3>{session.title}</h3>
-                  <p>{session.description}</p>
-                  <ul className="agenda-speakers" aria-label="Speakers de la sesión">
-                    {session.speakers.map((speaker) => (
-                      <li key={speaker.name}>
-                        <span className="agenda-speaker">{speaker.name}</span>
-                        <span className="agenda-role">{speaker.role}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <span className="agenda-format">{slot.kind}</span>
+                  <h3>{slot.title}</h3>
+                  <p>{slot.description}</p>
                 </div>
+                {slot.hosts && (
+                  <div className="agenda-portraits" data-pair aria-label="Con Alexander Torrenegra y Tania Zapata">
+                    {slot.hosts.map((speaker) => (
+                      <div className="agenda-portrait" data-speaker={speaker.name} key={speaker.name}>
+                        <Image src={speaker.image} alt={speaker.name} fill sizes="88px" quality={90} />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </li>
             ))}
           </ol>
 
           <div className="agenda-coming">
-            <span className="agenda-number" aria-hidden="true"><Plus /></span>
+            <span className="agenda-number" aria-hidden="true"><Lock /></span>
             <div>
-              <h3>Más por anunciar.</h3>
-              <p>Nuevas sesiones y horarios de cada charla, próximamente.</p>
+              <h3>Ubicación privada.</h3>
+              <p>La dirección llega con tu confirmación. Horarios aproximados.</p>
             </div>
           </div>
         </div>

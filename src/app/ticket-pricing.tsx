@@ -7,7 +7,11 @@ import {
   getCurrentPricingPhase,
   pricingPhases,
   summitTickets,
+  totalSeats,
 } from "@/lib/summit-pricing";
+
+// What every seat includes; anything beyond it is shown in bold.
+const base = new Set<string>(summitTickets[0].benefits);
 import { useTicketSelection } from "./ticket-selection";
 import "./ticket-pricing.css";
 
@@ -51,9 +55,9 @@ export function TicketPricing() {
       <div className="ds-container">
         <header className="lp-pricing-heading">
           <h2 id="pricing-title" className="ds-display-l">
-            Tu lugar en <span className="ds-accent">lo que viene.</span>
+            Dos formas de sentarte <span className="ds-accent">a la mesa.</span>
           </h2>
-          <p>Tres formas de vivir el summit. Elige tu experiencia y conoce el precio de cada fase.</p>
+          <p>Diez lugares en cada una. Todas las solicitudes pasan por revisión antes de confirmar un lugar.</p>
         </header>
 
         <div className="lp-phases" role="group" aria-label="Comparar precios por fase">
@@ -85,7 +89,7 @@ export function TicketPricing() {
                   <h3 id={`ticket-${ticket.id}`}>{ticket.name}</h3>
                   <p className="lp-ticket-description">{ticket.description}</p>
                   <p className="lp-ticket-admission">
-                    {ticket.capacity ? <><strong>{ticket.capacity} personas</strong> · Sujeto a aceptación</> : "Acceso al summit"}
+                    <strong>{ticket.capacity} lugares</strong> · Por aplicación
                   </p>
                 </div>
 
@@ -98,18 +102,16 @@ export function TicketPricing() {
                 </div>
 
                 <ul className="lp-ticket-benefits" aria-label={`Incluye ${ticket.name}`}>
-                  {ticket.benefits.map((benefit, index) => (
-                    <li key={benefit} data-extra={index > 1 || undefined}>
+                  {ticket.benefits.map((benefit) => (
+                    <li key={benefit} data-extra={!base.has(benefit) || undefined}>
                       <Check aria-hidden="true" />
                       <span>{benefit}</span>
                     </li>
                   ))}
                 </ul>
-                {ticket.capacity && (
-                  <a href="#cena" className="lp-ticket-link">
-                    Cómo es la cena privada <ArrowUp aria-hidden="true" />
-                  </a>
-                )}
+                <a href="#agenda" className="lp-ticket-link">
+                  Ver la agenda de la tarde <ArrowUp aria-hidden="true" />
+                </a>
 
                 <div className="lp-ticket-bottom">
                   <dl className="lp-ticket-schedule" aria-label={`Todas las fases de ${ticket.name}, precios en USD`}>
@@ -124,17 +126,17 @@ export function TicketPricing() {
                     <a
                       href="#lista"
                       className="ds-button lp-ticket-cta"
-                      data-variant={ticket.id === "general" ? "secondary" : "primary"}
+                      data-variant={ticket.id === "vip" ? "secondary" : "primary"}
                       data-size="md"
                       onClick={() => selectTicket(ticket.id)}
-                      aria-label={`${ticket.capacity ? "Solicitar" : "Elegir"} ${ticket.name} y completar el formulario`}
+                      aria-label={`Solicitar un lugar ${ticket.name} y completar el formulario`}
                     >
-                      {ticket.capacity ? `Solicitar ${ticket.name}` : "Elegir General"}
+                      {`Solicitar lugar ${ticket.name}`}
                       <ArrowRight aria-hidden="true" />
                     </a>
                   )}
                   <p className="lp-ticket-cta-note">
-                    {closed ? "Fases finalizadas" : ticket.capacity ? "Completa el formulario · Sujeto a aceptación" : "Registra tu interés en el formulario"}
+                    {closed ? "Fases finalizadas" : "Completa el formulario · Por aplicación"}
                   </p>
                 </div>
               </article>
@@ -144,7 +146,7 @@ export function TicketPricing() {
 
         <div className="lp-pricing-footnote">
           <p>Precios por persona en USD. Fechas de 2026, hasta las 11:59 p. m., hora de Bogotá.</p>
-          <p>VIP y VIP Plus tienen cupos limitados y requieren aceptación. El registro de interés y las solicitudes no confirman una entrada.</p>
+          <p>Los {totalSeats} lugares se asignan por aplicación. Enviar una solicitud no confirma un lugar ni garantiza el precio de una fase.</p>
         </div>
       </div>
     </section>

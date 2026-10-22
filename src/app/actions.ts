@@ -21,7 +21,7 @@ export async function submitSummitInterest(
 ): Promise<SummitFormState> {
   const success: SummitFormState = {
     status: "success",
-    message: "Recibimos tu interés.",
+    message: "Recibimos tu solicitud.",
   };
   if (formData.get("website")) return success;
 
@@ -55,8 +55,8 @@ export async function submitSummitInterest(
     // disclose whether a person already registered or which ticket they chose.
     return {
       status: "success",
-      message: "Gracias por tu interés.",
-      detail: `Te contactaremos con los próximos pasos para asistir. Si ya habías elegido un ticket en un registro anterior, conservamos esa preferencia; para cambiarla, escríbenos a ${colombiaSummit.contactEmail}.${result.data.ticketType === "general" ? "" : " Las solicitudes VIP y VIP Plus están sujetas a aceptación y disponibilidad."}`,
+      message: "Recibimos tu solicitud.",
+      detail: `Revisamos cada perfil a mano. Si hay un lugar para ti, te escribimos por correo o WhatsApp con los siguientes pasos y la ubicación. Si ya habías enviado una solicitud, conservamos tu primera elección; para cambiarla, escríbenos a ${colombiaSummit.contactEmail}.`,
     };
   } catch (error) {
     console.error(
@@ -66,7 +66,7 @@ export async function submitSummitInterest(
     return {
       status: "error",
       message:
-        "No pudimos guardar tu registro. Inténtalo de nuevo o escríbenos a support@torrenegra.ai.",
+        `No pudimos guardar tu solicitud. Inténtalo de nuevo o escríbenos a ${colombiaSummit.contactEmail}.`,
       values: result.data,
     };
   }

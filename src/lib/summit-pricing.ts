@@ -26,42 +26,39 @@ export const pricingPhases = [
   },
 ] as const;
 
-const generalBenefits = [
-  "Entrada al evento del summit",
-  "Bebidas y snacks durante el evento",
-] as const;
-// Every VIP and VIP Plus seat is a seat at the private dinner.
+// The private lunch: one afternoon, 20 seats, two ways in. The ids keep the
+// values already stored in Supabase (ticket_type): "vip" was the dinner
+// tier and is now General; "vip-plus" is now VIP. The open summit ticket
+// ("general") is retired, so new requests can't choose it, but historical
+// rows keep it.
+const generalSeats = 10;
 const vipSeats = 10;
-const vipPlusSeats = 5;
-export const dinnerSeats = vipSeats + vipPlusSeats;
-const dinnerBenefit = `Cena privada con Alexander Torrenegra y Tania Zapata · ${dinnerSeats} lugares en total`;
+export const totalSeats = generalSeats + vipSeats;
+const afternoon = [
+  "Almuerzo privado y presentaciones entre el grupo",
+  "Charla privada con Alexander Torrenegra y Tania Zapata",
+  "Feedback 1 a 1 con Alexander y Tania",
+  "Happy hour",
+] as const;
 export const oneOnOneBenefit =
   "Sesión 1 a 1 de 45 minutos con Alexander Torrenegra, posterior al evento";
 
 export const summitTickets = [
   {
-    id: "general",
-    name: "General",
-    description: "Un día para abrir la perspectiva.",
-    capacity: null,
-    prices: [349, 479, 579],
-    benefits: generalBenefits,
-  },
-  {
     id: "vip",
-    name: "VIP",
-    description: "La conversación sigue en la mesa.",
-    capacity: vipSeats,
+    name: "General",
+    description: "Tu lugar en la mesa, la tarde completa.",
+    capacity: generalSeats,
     prices: [549, 749, 849],
-    benefits: [...generalBenefits, dinnerBenefit],
+    benefits: afternoon,
   },
   {
     id: "vip-plus",
-    name: "VIP Plus",
-    description: "Una conversación enfocada en ti.",
-    capacity: vipPlusSeats,
+    name: "VIP",
+    description: "La mesa, y 45 minutos a solas con Alexander.",
+    capacity: vipSeats,
     prices: [1349, 1549, 1749],
-    benefits: [...generalBenefits, dinnerBenefit, oneOnOneBenefit],
+    benefits: [...afternoon, oneOnOneBenefit],
   },
 ] as const;
 

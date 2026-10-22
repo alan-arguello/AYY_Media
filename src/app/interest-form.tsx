@@ -16,7 +16,6 @@ export function SummitInterestForm() {
   const { selectedTicket, selectTicket } = useTicketSelection();
   const ticketType = selectedTicket ?? state.values?.ticketType ?? "";
   const selectedExperience = summitTickets.find((ticket) => ticket.id === ticketType);
-  const requiresAcceptance = Boolean(selectedExperience?.capacity);
   const message = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,13 +30,13 @@ export function SummitInterestForm() {
         </span>
         <h3>{state.message}</h3>
         <p>
-          {state.detail ?? "Te compartiremos por correo o WhatsApp las novedades del summit y los próximos pasos para asistir."}
+          {state.detail ?? "Revisamos cada solicitud a mano. Si hay un lugar para ti, te escribimos por correo o WhatsApp con los siguientes pasos."}
         </p>
         <p className="lp-small">
-          Este registro es de interés, no una reserva de entrada.
+          Tu solicitud no reserva un lugar: primero revisamos tu perfil.
         </p>
-        <a className="lp-text-link" href="#speakers">
-          Conoce a los primeros speakers <ArrowRightIcon />
+        <a className="lp-text-link" href="#agenda">
+          Mira la agenda de la tarde <ArrowRightIcon />
         </a>
       </div>
     );
@@ -50,20 +49,20 @@ export function SummitInterestForm() {
       // native reset. Keep the draft intact; success replaces the form above.
       onReset={(event) => event.preventDefault()}
       className="lp-form"
-      aria-label="Registro de interés y solicitudes VIP de bogota.forward() summit"
+      aria-label="Solicitud de lugar para el almuerzo privado de bogota.forward()"
       aria-busy={pending}
     >
       <fieldset disabled={pending}>
-        <legend className="lp-sr-only">Tu experiencia y datos de contacto</legend>
+        <legend className="lp-sr-only">Tu lugar y tus datos</legend>
         <fieldset
           className="lp-ticket-selection"
           role="radiogroup"
           aria-invalid={!!state.errors?.ticketType}
           aria-describedby={state.errors?.ticketType ? "summit-ticket-help summit-ticket-error" : "summit-ticket-help"}
         >
-          <legend>¿Qué entrada te interesa?</legend>
+          <legend>¿Qué lugar te interesa?</legend>
           <p id="summit-ticket-help" className="lp-ticket-selection-help">
-            Elige una experiencia para tu registro.
+            Los dos incluyen la tarde completa. Revisamos cada solicitud.
           </p>
           <div className="lp-ticket-radio-options">
             {summitTickets.map((ticket) => (
@@ -85,17 +84,13 @@ export function SummitInterestForm() {
                 <span className="lp-ticket-radio-copy">
                   <span className="lp-ticket-radio-name">{ticket.name}</span>
                   <span className="lp-ticket-radio-description">
-                    {ticket.id === "general"
-                      ? "Summit, bebidas y snacks"
-                      : ticket.id === "vip"
-                        ? "Todo General + cena privada con Alex y Tania"
-                        : "Todo VIP + sesión 1 a 1 de 45 min con Alexander"}
+                    {ticket.id === "vip"
+                      ? "Almuerzo, charla privada, feedback 1 a 1 y happy hour"
+                      : "Todo General + 45 min a solas con Alexander"}
                   </span>
-                  {ticket.capacity && (
-                    <span className="lp-ticket-radio-admission">
-                      {ticket.capacity} personas · Sujeto a aceptación
-                    </span>
-                  )}
+                  <span className="lp-ticket-radio-admission">
+                    {ticket.capacity} lugares · Por aplicación
+                  </span>
                 </span>
               </label>
             ))}
@@ -179,16 +174,16 @@ export function SummitInterestForm() {
           )}
         </div>
         <div className="lp-field">
-          <label htmlFor="summit-company">
-            Empresa <span>Opcional</span>
-          </label>
+          <label htmlFor="summit-company">Empresa</label>
           <input
             id="summit-company"
             name="company"
             defaultValue={state.values?.company}
             autoComplete="organization"
             placeholder="Dónde trabajas o qué estás construyendo"
+            minLength={2}
             maxLength={160}
+            required
             aria-invalid={!!state.errors?.company}
             aria-describedby={
               state.errors?.company ? "summit-company-error" : undefined
@@ -201,9 +196,7 @@ export function SummitInterestForm() {
           )}
         </div>
         <div className="lp-field">
-          <label htmlFor="summit-linkedin">
-            LinkedIn <span>Opcional</span>
-          </label>
+          <label htmlFor="summit-linkedin">LinkedIn</label>
           <input
             id="summit-linkedin"
             name="linkedin"
@@ -215,11 +208,17 @@ export function SummitInterestForm() {
             defaultValue={state.values?.linkedin}
             placeholder="linkedin.com/in/tu-perfil"
             maxLength={500}
+            required
             aria-invalid={!!state.errors?.linkedin}
             aria-describedby={
-              state.errors?.linkedin ? "summit-linkedin-error" : undefined
+              state.errors?.linkedin
+                ? "summit-linkedin-help summit-linkedin-error"
+                : "summit-linkedin-help"
             }
           />
+          <span id="summit-linkedin-help" className="lp-field-help">
+            Lo usamos solo para revisar tu solicitud.
+          </span>
           {state.errors?.linkedin && (
             <span id="summit-linkedin-error" className="lp-field-error">
               {state.errors.linkedin}
@@ -267,10 +266,10 @@ export function SummitInterestForm() {
           data-size="md"
         >
           {pending
-            ? "Guardando tu registro…"
-            : requiresAcceptance
-              ? `Enviar solicitud ${selectedExperience?.name}`
-              : "Registrar mi interés"}
+            ? "Enviando tu solicitud…"
+            : selectedExperience
+              ? `Solicitar lugar ${selectedExperience.name}`
+              : "Enviar solicitud"}
           <ArrowRightIcon aria-hidden="true" />
         </button>
       </fieldset>
@@ -280,8 +279,8 @@ export function SummitInterestForm() {
         </div>
       )}
       <p className="lp-form-note">
-        {requiresAcceptance ? "Solicitud sujeta a aceptación. " : "Registro de interés. "}
-        No confirma una entrada ni garantiza el precio de una fase.
+        Por aplicación. Tu solicitud no confirma un lugar ni garantiza el
+        precio de una fase.
       </p>
     </form>
   );

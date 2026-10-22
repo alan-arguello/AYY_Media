@@ -14,8 +14,9 @@ function form(overrides = {}) {
     fullName: "Ana Prueba",
     email: "ana@example.com",
     whatsapp: "+57 300 123 4567",
-    company: "",
-    ticketType: "general",
+    company: "Mi empresa",
+    linkedin: "linkedin.com/in/ana-prueba",
+    ticketType: "vip",
     consent: "on",
     ...overrides,
   })) {
@@ -38,17 +39,21 @@ test("validates consent and normalizes email and whitespace", () => {
     email: "ana@example.com",
     whatsapp: "+573001234567",
     company: "Mi empresa",
-    linkedin: "",
-    ticketType: "general",
+    linkedin: "https://www.linkedin.com/in/ana-prueba/",
+    ticketType: "vip",
     consent: true,
   });
 });
 
-test("company and LinkedIn are optional", () => {
-  const data = form();
-  data.delete("company");
-  data.delete("linkedin");
-  assert.equal(parseSummitInterest(data).success, true);
+test("company and LinkedIn are required to review each request", () => {
+  for (const field of ["company", "linkedin"]) {
+    const missing = form();
+    missing.delete(field);
+    const result = parseSummitInterest(missing);
+    assert.equal(result.success, false, field);
+    assert.equal(result.error.issues[0].path[0], field);
+    assert.equal(parseSummitInterest(form({ [field]: "  " })).success, false, field);
+  }
 });
 
 test("normalizes WhatsApp numbers to E.164", () => {
@@ -98,8 +103,8 @@ test("requires a WhatsApp number with a country code outside Colombia", () => {
   assert.equal(parseSummitInterest(fileValue).success, false);
 });
 
-test("accepts each explicitly selected ticket type", () => {
-  for (const ticketType of ["general", "vip", "vip-plus"]) {
+test("accepts each seat on offer: General (vip) and VIP (vip-plus)", () => {
+  for (const ticketType of ["vip", "vip-plus"]) {
     const result = parseSummitInterest(form({ ticketType }));
     assert.equal(result.success, true);
     assert.equal(result.data.ticketType, ticketType);
@@ -112,6 +117,7 @@ test("rejects missing, unknown and malicious ticket types", () => {
   assert.equal(parseSummitInterest(missing).success, false);
   for (const ticketType of [
     "",
+    "general",
     "VIP",
     "vip plus",
     " vip ",
@@ -181,8 +187,8 @@ test("event source and date stay distinct from other campaigns", () => {
 });
 
 test("five speakers have real portraits, credential assets and source links", () => {
-  assert.equal(speakers.length, 3);
-  assert.equal(new Set(speakers.map((speaker) => speaker.linkedin)).size, 3);
+  assert.equal(speakers.length, 2);
+  assert.equal(new Set(speakers.map((speaker) => speaker.linkedin)).size, 2);
   for (const speaker of speakers) {
     assert.ok(
       existsSync(new URL(`../public${speaker.image}`, import.meta.url)),
