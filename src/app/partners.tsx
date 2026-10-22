@@ -14,13 +14,13 @@ const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 const offer = [
   {
     art: mic,
-    title: "Trae a un speaker",
-    body: "Una sesión en la agenda del summit, con alguien de tu equipo o un invitado que traigamos juntos.",
+    title: "Un lugar en la mesa",
+    body: "Alguien de tu equipo come con los 20 founders, managers y C-levels, y con Alexander y Tania.",
   },
   {
     art: flag,
     title: "Tu marca en todo lo que hacemos",
-    body: "En el sitio del summit, las promos, los videos, el newsletter y el día del evento.",
+    body: "En el sitio, las promos, los videos, el newsletter y el día de la comida.",
   },
   {
     art: signal,
@@ -72,9 +72,9 @@ export function Partners({ standalone = false }: { standalone?: boolean }) {
             </>
           }
         >
-          Buscamos pocos aliados y les proponemos algo concreto: un speaker en
-          la agenda, tu marca en el summit y en todo nuestro contenido, y una
-          audiencia que ya nos sigue.
+          Una comida privada de 20 lugares con Alexander Torrenegra y Tania
+          Zapata. Pocos aliados, con algo concreto: un lugar en la mesa, tu
+          marca en todo lo que hacemos y una audiencia que ya nos sigue.
         </SectionHeading>
 
         <ul className="partners-offer">
@@ -173,7 +173,8 @@ export function Partners({ standalone = false }: { standalone?: boolean }) {
               </li>
               <li>
                 <strong>Hablamos.</strong> Te respondemos en pocos días y armamos
-                una propuesta a la medida: speaker, presencia de marca o las dos.
+                una propuesta a la medida: un lugar en la mesa, presencia de
+                marca o las dos.
               </li>
               <li>
                 <strong>Lo cerramos juntos.</strong> Pocos aliados por edición,

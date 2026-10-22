@@ -20,7 +20,7 @@ export function SiteNav({ home = "", current }: { home?: string; current?: "part
   return (
     <header className="lp-nav">
       <div className="lp-nav-inner">
-        <a href={home || "#top"} aria-label="bogota.forward() summit, inicio">
+        <a href={home || "#top"} aria-label="bogota.forward(), inicio">
           <LogoMark />
         </a>
         <nav className="lp-nav-links" aria-label="Secciones">
@@ -78,7 +78,7 @@ export function SiteFooter({ home = "" }: { home?: string }) {
           </nav>
         </div>
         <div className="lp-footer-base">
-          <p>© 2026 bogota.forward() summit · Bogotá, Colombia</p>
+          <p>© 2026 bogota.forward() · Bogotá, Colombia</p>
           <p>
             Fotos:{" "}
             <a

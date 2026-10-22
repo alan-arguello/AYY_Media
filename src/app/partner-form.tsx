@@ -55,7 +55,7 @@ export function PartnerForm() {
       action={action}
       onReset={(event) => event.preventDefault()}
       className="lp-form"
-      aria-label="Propuesta de alianza para bogota.forward() summit"
+      aria-label="Propuesta de alianza para bogota.forward()"
       aria-busy={pending}
     >
       <fieldset disabled={pending}>
@@ -149,7 +149,7 @@ export function PartnerForm() {
 
         <div className="lp-field">
           <label htmlFor="partner-goals">
-            ¿Qué te gustaría lograr con el summit? <span>Opcional</span>
+            ¿Qué te gustaría lograr con la alianza? <span>Opcional</span>
           </label>
           <textarea
             id="partner-goals"

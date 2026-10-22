@@ -10,12 +10,12 @@ export const runtime = "nodejs";
 
 const OG_IMAGE = "/images/colombia-summit/opengraph.png";
 const description =
-  "Propuesta para aliados y sponsors de bogota.forward() summit: un speaker en la agenda, tu marca en todo lo que hacemos y el alcance de nuestros canales. Bogotá, 19 de noviembre de 2026.";
+  "Propuesta para aliados y sponsors de la comida privada con Alexander Torrenegra y Tania Zapata: un lugar en la mesa, tu marca en todo lo que hacemos y +640K seguidores. Bogotá, 19 de noviembre de 2026.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   robots: { index: isPublicSite, follow: isPublicSite },
-  title: "Aliados y sponsors | bogota.forward() summit",
+  title: "Aliados y sponsors | bogota.forward()",
   description,
   alternates: { canonical: "/partners" },
   openGraph: {
@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     locale: "es_CO",
     url: "/partners",
     siteName: colombiaSummit.name,
-    title: "Aliados y sponsors · bogota.forward() summit",
+    title: "Aliados y sponsors · bogota.forward()",
     description,
     images: [
       {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "bogota.forward() summit. Bogotá, 19 de noviembre de 2026. Organiza AIYaiYai.",
+        alt: "Comida privada para founders, managers y C-levels con Alexander Torrenegra y Tania Zapata. Bogotá, 19 de noviembre de 2026.",
       },
     ],
   },

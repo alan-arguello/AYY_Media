@@ -15,12 +15,13 @@ export const partnerTypes = [
     id: "sponsor",
     name: "Sponsor aliado",
     description:
-      "Tu marca en el summit y en todo lo que hacemos, con una sesión para un speaker.",
+      "Tu marca en la comida y en todo lo que hacemos, con un lugar en la mesa.",
   },
   {
+    // Kept as "speaker" in the database; the lunch has no stage, so it is a seat.
     id: "speaker",
-    name: "Speaker o contenido",
-    description: "Una sesión en la agenda con alguien de tu equipo o un invitado.",
+    name: "Un lugar en la mesa",
+    description: "Alguien de tu equipo en la comida, con los anfitriones y el grupo.",
   },
   {
     id: "media",

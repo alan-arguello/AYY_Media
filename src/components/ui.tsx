@@ -179,7 +179,7 @@ export function LogoMark({ word = true }: { word?: boolean }) {
       <PixelArt rows={MARK} size={24} />
       {word && (
         <span className="ds-logo-word">
-          <CodeName /> <span className="ds-logo-kind">summit</span>
+          <CodeName />
         </span>
       )}
     </span>

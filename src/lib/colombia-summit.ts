@@ -1,7 +1,8 @@
 import { z } from "zod";
 
 export const colombiaSummit = {
-  name: "bogota.forward() summit",
+  // Shown as the Open Graph site name and in the Event schema.
+  name: "bogota.forward()",
   path: "/",
   date: "2026-11-19",
   // The private lunch: arrival 1:30 p. m., happy hour from 5:30 p. m.
