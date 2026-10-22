@@ -319,9 +319,16 @@
 /* ── Speakers ────────────────────────────────────────────────────────────── */
 
 .lp-speakers {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Flex, not grid, so a short last row sits in the middle. */
+  --cols: 3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
+}
+.lp-speakers > li {
+  flex: 0 1 calc((100% - (var(--cols) - 1) * 16px) / var(--cols));
+  min-width: 0;
 }
 .lp-speaker {
   display: flex;
@@ -384,8 +391,9 @@
   color: var(--ds-muted);
 }
 .lp-credentials {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Two or three marks per speaker; either way they share the row evenly. */
+  display: flex;
+  justify-content: space-around;
   align-items: center;
   gap: 10px;
   min-height: 56px;
@@ -397,13 +405,19 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 44px;
+}
+.lp-credentials > li {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 33.333%;
 }
 .lp-credential img {
   width: 100%;
   height: 20px;
   object-fit: contain;
-  object-position: left center;
+  object-position: center;
   filter: grayscale(1);
   opacity: 0.75;
   transition:
@@ -969,7 +983,7 @@
 
 @media (max-width: 1000px) {
   .lp-speakers {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    --cols: 2;
   }
   .lp-supporters {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1097,8 +1111,11 @@
     height: 21px;
   }
   .lp-speakers {
-    grid-template-columns: 1fr;
+    --cols: 1;
     gap: 12px;
+  }
+  .lp-speakers > li {
+    flex-basis: 100%;
   }
   .lp-speaker-link {
     grid-template-columns: 112px minmax(0, 1fr);
