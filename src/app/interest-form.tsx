@@ -46,7 +46,7 @@ export function SummitInterestForm() {
       // native reset. Keep the draft intact; success replaces the form above.
       onReset={(event) => event.preventDefault()}
       className="lp-form"
-      aria-label="Solicitud de lugar para la cena privada de bogota.forward()"
+      aria-label="Solicitud de lugar para la comida privada de bogota.forward()"
       aria-busy={pending}
     >
       <fieldset disabled={pending}>
@@ -82,7 +82,7 @@ export function SummitInterestForm() {
                   <span className="lp-ticket-radio-name">{ticket.name}</span>
                   <span className="lp-ticket-radio-description">
                     {ticket.id === "vip"
-                      ? "Cena, charla privada, feedback 1 a 1 y happy hour"
+                      ? "Comida, charla privada, feedback 1 a 1 y happy hour"
                       : "Todo General + 45 min a solas con Alexander"}
                   </span>
                   <span className="lp-ticket-radio-admission">

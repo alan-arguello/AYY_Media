@@ -49,7 +49,7 @@ export function SiteFooter({ home = "" }: { home?: string }) {
           <div className="lp-footer-brand">
             <LogoMark />
             <p>
-              Cena privada con Alexander Torrenegra y Tania Zapata. Bogotá, 19 de noviembre de 2026.
+              Comida privada con Alexander Torrenegra y Tania Zapata. Bogotá, 19 de noviembre de 2026.
             </p>
             <EventOrganizer />
           </div>

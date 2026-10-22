@@ -26,7 +26,7 @@ export const pricingPhases = [
   },
 ] as const;
 
-// The private dinner: one afternoon, 20 seats, two ways in. The ids keep the
+// The private lunch: one afternoon, 20 seats, two ways in. The ids keep the
 // values already stored in Supabase (ticket_type): "vip" was the dinner
 // tier and is now General; "vip-plus" is now VIP. The open summit ticket
 // ("general") is retired, so new requests can't choose it, but historical
@@ -35,7 +35,7 @@ const generalSeats = 10;
 const vipSeats = 10;
 export const totalSeats = generalSeats + vipSeats;
 const afternoon = [
-  "Cena privada y presentaciones",
+  "Comida privada y presentaciones",
   "Charla privada con Alexander y Tania",
   "Feedback 1 a 1",
   "Happy hour",

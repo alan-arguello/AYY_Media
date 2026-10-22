@@ -20,7 +20,7 @@
 }
 
 .agenda-heading h2 {
-  font: 500 clamp(2.25rem, 1.75rem + 1.5vw, 3.25rem)/1.06 var(--ds-font-display);
+  font: 500 clamp(1.875rem, 1.4rem + 1.2vw, 2.5rem)/1.06 var(--ds-font-display);
   letter-spacing: -0.035em;
 }
 
@@ -37,8 +37,8 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  margin-block: 16px 12px;
-  font: 500 2.25rem/1 var(--ds-font-mono);
+  margin-block: 14px 10px;
+  font: 500 1.875rem/1 var(--ds-font-mono);
   letter-spacing: -0.06em;
   color: var(--ds-yellow-tint);
 }
@@ -84,7 +84,7 @@
   grid-template-columns: 150px minmax(0, 1fr) auto;
   gap: 32px;
   align-items: center;
-  padding-block: 30px;
+  padding-block: 24px;
 }
 
 .agenda-slot + .agenda-slot {
@@ -101,7 +101,7 @@
   display: flex;
   align-items: baseline;
   gap: 8px;
-  font: 500 2.25rem/1 var(--ds-font-mono);
+  font: 500 1.75rem/1 var(--ds-font-mono);
   letter-spacing: -0.06em;
   color: var(--ds-ink);
 }
@@ -229,7 +229,7 @@
 }
 
 .agenda-topic h3 {
-  font-size: clamp(1.25rem, 0.9rem + 0.8vw, 1.625rem);
+  font-size: clamp(1.125rem, 0.9rem + 0.6vw, 1.375rem);
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: -0.03em;
@@ -335,7 +335,7 @@
   }
 
   .agenda-when time {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 
   .agenda-portrait,

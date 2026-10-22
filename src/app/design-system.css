@@ -49,19 +49,19 @@
   --ds-frame: 1200px;
   --ds-container: 964px;
   --ds-gutter: 20px;
-  --ds-section: 112px;
+  --ds-section: 96px;
   --ds-nav: 66px;
 }
 
 @media (max-width: 900px) {
   :root {
-    --ds-section: 88px;
+    --ds-section: 76px;
   }
 }
 @media (max-width: 640px) {
   :root {
     --ds-gutter: 16px;
-    --ds-section: 72px;
+    --ds-section: 60px;
     --ds-nav: 56px;
   }
 }
@@ -77,17 +77,17 @@
   text-wrap: balance;
 }
 .ds-display-xl {
-  font-size: clamp(2.5rem, 1.55rem + 3.4vw, 4rem);
+  font-size: clamp(2.25rem, 1.4rem + 2.8vw, 3.5rem);
   line-height: 1.08;
   letter-spacing: -0.03em;
 }
 .ds-display-l {
-  font-size: clamp(2rem, 1.45rem + 2vw, 3rem);
+  font-size: clamp(1.75rem, 1.3rem + 1.5vw, 2.5rem);
   line-height: 1.04;
   letter-spacing: -0.02em;
 }
 .ds-display-m {
-  font-size: clamp(1.5rem, 1.25rem + 0.9vw, 2rem);
+  font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.75rem);
   line-height: 1.12;
   letter-spacing: -0.015em;
 }
@@ -174,7 +174,7 @@
   justify-items: center;
   gap: 18px;
   max-width: 680px;
-  margin: 0 auto 48px;
+  margin: 0 auto 40px;
   text-align: center;
 }
 .ds-heading .ds-lead {

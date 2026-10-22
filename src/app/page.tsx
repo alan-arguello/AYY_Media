@@ -34,7 +34,7 @@ const OG_IMAGE = "/images/colombia-summit/opengraph.png";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   robots: { index: isPublicSite, follow: isPublicSite },
-  title: "Cena privada para founders, managers y C-levels | bogota.forward()",
+  title: "Comida privada para founders, managers y C-levels | bogota.forward()",
   description:
     "Con Alexander Torrenegra y Tania Zapata. Bogotá, 19 de noviembre de 2026, 1:30 a 6:00 p. m. 20 lugares por aplicación: charla privada, feedback 1 a 1 y happy hour.",
   alternates: { canonical: colombiaSummit.path },
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     locale: "es_CO",
     url: colombiaSummit.path,
     siteName: colombiaSummit.name,
-    title: "Cena privada para founders, managers y C-levels · Bogotá, 19 de noviembre",
+    title: "Comida privada para founders, managers y C-levels · Bogotá, 19 de noviembre",
     description:
       "Con Alexander Torrenegra y Tania Zapata. 20 lugares por aplicación: charla privada, feedback 1 a 1 y happy hour.",
     images: [
@@ -179,7 +179,7 @@ function Speaker({ speaker }: { speaker: SummitSpeaker }) {
 const eventSchema = {
   "@context": "https://schema.org",
   "@type": "Event",
-  name: "Cena privada para founders, managers y C-levels",
+  name: "Comida privada para founders, managers y C-levels",
   description: `Con Alexander Torrenegra y Tania Zapata. ${totalSeats} lugares por aplicación en Bogotá.`,
   startDate: colombiaSummit.startDate,
   endDate: colombiaSummit.endDate,
@@ -229,7 +229,7 @@ export default function BogotaForwardSummitPage() {
             </span>
             <h1 id="summit-title" className="ds-display-xl lp-hero-title">
               <span className="ds-reveal" style={step(1)}>
-                Cena privada para
+                Comida privada para
               </span>{" "}
               <span className="ds-reveal ds-accent" style={step(2)}>
                 founders, managers y C-levels
@@ -320,7 +320,7 @@ export default function BogotaForwardSummitPage() {
               {pillars.map((pillar) => (
                 <li key={pillar.title} className="ds-card ds-in-view">
                   <div className="lp-pillar-art">
-                    <PixelArt rows={pillar.art} size={126} />
+                    <PixelArt rows={pillar.art} size={96} />
                   </div>
                   <div className="lp-pillar-copy">
                     <h3>{pillar.title}</h3>

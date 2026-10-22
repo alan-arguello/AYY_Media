@@ -22,8 +22,8 @@ const schedule = [
   {
     time: "2:00",
     until: "a 2:30 p. m.",
-    kind: "Cena",
-    title: "Cena y presentaciones",
+    kind: "Comida",
+    title: "Comida y presentaciones",
     description: "Cada participante se presenta: quién es y qué está construyendo.",
   },
   {
@@ -59,7 +59,7 @@ export function SummitAgenda() {
           <header className="agenda-header">
             <div className="agenda-heading">
               <p>La tarde</p>
-              <h2 id="agenda-title">De la cena<br />al happy hour.</h2>
+              <h2 id="agenda-title">De la comida<br />al happy hour.</h2>
             </div>
             <div className="agenda-day">
               <p><time dateTime={colombiaSummit.date}>Jueves 19 de noviembre de 2026</time></p>
