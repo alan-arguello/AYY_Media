@@ -33,6 +33,15 @@ export const pricingPhases = [
 const vipSeats = 16;
 const vipPlusSeats = 4;
 export const dinnerSeats = vipSeats + vipPlusSeats;
+
+// The dinner's profits, after its costs, are donated here.
+export const vakiFoundation = {
+  name: "Vaki Foundation",
+  url: "https://vaki.org/",
+  // How it is described on the site: Vaki's fund for emergencies and causes.
+  summary:
+    "el fondo de Vaki que apoya emergencias como el terremoto en Colombia y otras causas sociales",
+} as const;
 const eventBenefits = [
   "Evento de 10 a. m. a 3 p. m.",
   "Charlas, fireside chat y workshop",

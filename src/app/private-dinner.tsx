@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
-import { dinnerSeats, summitTickets } from "@/lib/summit-pricing";
+import { dinnerSeats, summitTickets, vakiFoundation } from "@/lib/summit-pricing";
 import { PrivateDinnerCta } from "./private-dinner-cta";
 // Companies and funds both hosts have invested in; marks from their official
 // sites (see public/images/colombia-summit/CREDITS.md).
 import portfolio from "./dinner-portfolio.json";
 import "./private-dinner.css";
+
+const vakiMark = portfolio.find((company) => company.name === "Vaki")!;
 
 const ticket = (id: (typeof summitTickets)[number]["id"]) => {
   const found = summitTickets.find((item) => item.id === id);
@@ -150,6 +152,17 @@ export function PrivateDinner() {
             </p>
           </div>
         </div>
+
+        <aside className="dinner-cause" aria-label="A dónde van las ganancias de la cena">
+          <a href={vakiFoundation.url} target="_blank" rel="noopener noreferrer" className="dinner-cause-mark">
+            <Image src={vakiMark.image} alt="Vaki" width={vakiMark.width} height={vakiMark.height} />
+            <span>Foundation</span>
+          </a>
+          <p>
+            <strong>Las ganancias de la cena, después de cubrir sus gastos, serán donadas a {vakiFoundation.name}</strong>,{" "}
+            {vakiFoundation.summary}.
+          </p>
+        </aside>
       </div>
     </section>
   );

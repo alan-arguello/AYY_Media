@@ -347,6 +347,49 @@
   height: 13px;
 }
 
+/* ── Where the profits go ───────────────────────────────────────────────── */
+
+.dinner-cause {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 16px 24px;
+  align-items: center;
+  margin-top: 36px;
+  padding: 18px 22px;
+  border: 1px dashed var(--ds-line-strong);
+}
+.dinner-cause-mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  text-decoration: none;
+  color: var(--ds-ink);
+}
+.dinner-cause-mark img {
+  height: 26px;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+.dinner-cause-mark span {
+  font: 500 1rem/1 var(--ds-font-text);
+  letter-spacing: -0.01em;
+}
+.dinner-cause-mark:hover span {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+}
+.dinner-cause p {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ds-muted);
+  text-wrap: pretty;
+}
+.dinner-cause strong {
+  color: var(--ds-ink);
+  font-weight: 500;
+}
+
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 
 @media (max-width: 900px) {
@@ -415,6 +458,12 @@
   }
   .dinner-seats {
     margin-top: 40px;
+  }
+  .dinner-cause {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 28px;
+    padding: 16px;
   }
   .dinner-actions {
     width: 100%;

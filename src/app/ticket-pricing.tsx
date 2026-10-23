@@ -8,6 +8,7 @@ import {
   pricingPhases,
   dinnerSeats,
   summitTickets,
+  vakiFoundation,
 } from "@/lib/summit-pricing";
 
 // What every seat includes; anything beyond it is shown in bold.
@@ -144,6 +145,10 @@ export function TicketPricing() {
 
         <div className="lp-pricing-footnote">
           <p>Precios por persona en USD. El registro no confirma una entrada ni garantiza el precio de una fase.</p>
+          <p>
+            Las ganancias de la cena, después de cubrir sus gastos, serán donadas a{" "}
+            <a href={vakiFoundation.url} target="_blank" rel="noopener noreferrer">{vakiFoundation.name}</a>.
+          </p>
         </div>
       </div>
     </section>

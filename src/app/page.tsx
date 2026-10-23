@@ -21,8 +21,8 @@ import { TicketPricing } from "./ticket-pricing";
 import { TicketSelectionProvider } from "./ticket-selection";
 import { PrivateDinner } from "./private-dinner";
 import { SummitAgenda } from "./summit-agenda";
-import { dinnerSeats, summitTickets } from "@/lib/summit-pricing";
-import { chip, flag, signal, skyline } from "./pixel-icons";
+import { dinnerSeats, summitTickets, vakiFoundation } from "@/lib/summit-pricing";
+import { flag } from "./pixel-icons";
 
 export const runtime = "nodejs";
 
@@ -63,12 +63,6 @@ export const metadata: Metadata = {
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 // The day, in three cards.
-const pillars = [
-  { art: chip, title: "De día, el evento", body: "Charlas, fireside chat y workshop." },
-  { art: skyline, title: "De noche, la cena", body: `${dinnerSeats} lugares con Alexander y Tania.` },
-  { art: signal, title: "Para quienes deciden", body: "Founders, managers y C-levels." },
-];
-
 const seatsFor = (id: "vip" | "vip-plus") =>
   summitTickets.find((ticket) => ticket.id === id)?.capacity ?? 0;
 
@@ -88,6 +82,19 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   {
     q: "¿Cuándo es la sesión 1 a 1 de VIP Plus?",
     a: "Después del evento. Es una sesión individual de 60 minutos con Alexander Torrenegra; la fecha y la hora se coordinan por separado.",
+  },
+  {
+    q: "¿A dónde van las ganancias de la cena?",
+    a: (
+      <>
+        Después de cubrir los gastos de la cena, las ganancias serán donadas a{" "}
+        <a href={vakiFoundation.url} target="_blank" rel="noopener noreferrer">
+          Vaki Foundation
+        </a>
+        , el fondo de Vaki que apoya emergencias como el terremoto en Colombia y
+        otras causas sociales.
+      </>
+    ),
   },
   {
     q: "¿Cómo me registro?",
@@ -251,11 +258,7 @@ export default function BogotaForwardSummitPage() {
                 <span className="ds-cursor" aria-hidden="true" />
               </span>
             </h1>
-            <p className="ds-lead lp-hero-lead ds-reveal" style={step(3)}>
-              Charlas y workshop de 10 a. m. a 3 p. m. Cena privada con
-              Alexander Torrenegra y Tania Zapata de 7 a 10 p. m.
-            </p>
-            <div className="lp-actions ds-reveal" style={step(4)}>
+            <div className="lp-actions ds-reveal" style={step(3)}>
               <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>
                 Ver entradas
               </Button>
@@ -301,42 +304,13 @@ export default function BogotaForwardSummitPage() {
               <li className="ds-card">
                 <Utensils aria-hidden="true" />
                 <strong>Cena privada</strong>
-                <span>7 a 10 p. m. · {dinnerSeats} lugares</span>
+                <span>Alexander y Tania · {dinnerSeats} lugares</span>
               </li>
               <li className="ds-card">
                 <Ticket aria-hidden="true" />
                 <strong>3 experiencias</strong>
                 <span>General · VIP · VIP Plus</span>
               </li>
-            </ul>
-          </div>
-        </section>
-
-        <hr className="ds-divider" />
-
-        <section className="ds-section" data-field aria-labelledby="pillars-title">
-          <div className="ds-container">
-            <SectionHeading
-              id="pillars-title"
-              tag="El formato"
-              title={
-                <>
-                  Un día, <span className="ds-accent">dos momentos.</span>
-                </>
-              }
-            />
-            <ul className="lp-pillars">
-              {pillars.map((pillar) => (
-                <li key={pillar.title} className="ds-card ds-in-view">
-                  <div className="lp-pillar-art">
-                    <PixelArt rows={pillar.art} size={96} />
-                  </div>
-                  <div className="lp-pillar-copy">
-                    <h3>{pillar.title}</h3>
-                    <p>{pillar.body}</p>
-                  </div>
-                </li>
-              ))}
             </ul>
           </div>
         </section>
