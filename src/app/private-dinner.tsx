@@ -139,7 +139,7 @@ export function PrivateDinner() {
               </div>
               <div data-tier="vip-plus">
                 <dt>{vipPlus.capacity}</dt>
-                <dd>VIP Plus · incluye 1 a 1 con Alexander</dd>
+                <dd>VIP Plus · incluye 1 a 1 online con Alexander</dd>
               </div>
             </dl>
           </div>

@@ -85,7 +85,7 @@ export function SummitInterestForm() {
                       ? "Evento de 10 a. m. a 3 p. m."
                       : ticket.id === "vip"
                         ? "Evento + cena privada con Alexander y Tania"
-                        : "Todo VIP + 1 a 1 de 60 min con Alexander"}
+                        : "Todo VIP + 1 a 1 online de 60 min con Alexander"}
                   </span>
                   {ticket.capacity && (
                     <span className="lp-ticket-radio-admission">

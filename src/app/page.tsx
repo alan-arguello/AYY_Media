@@ -77,11 +77,11 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "¿Qué diferencia hay entre General, VIP y VIP Plus?",
-    a: `General incluye el evento. VIP suma la cena privada con Alexander y Tania. VIP Plus suma, además, una sesión 1 a 1 de 60 minutos con Alexander. La cena tiene ${dinnerSeats} lugares: ${seatsFor("vip")} VIP y ${seatsFor("vip-plus")} VIP Plus, por aplicación.`,
+    a: `General incluye el evento. VIP suma la cena privada con Alexander y Tania. VIP Plus suma, además, una sesión 1 a 1 online de 60 minutos con Alexander. La cena tiene ${dinnerSeats} lugares: ${seatsFor("vip")} VIP y ${seatsFor("vip-plus")} VIP Plus, por aplicación.`,
   },
   {
     q: "¿Cuándo es la sesión 1 a 1 de VIP Plus?",
-    a: "Después del evento. Es una sesión individual de 60 minutos con Alexander Torrenegra; la fecha y la hora se coordinan por separado.",
+    a: "Después del evento, online. Es una sesión individual de 60 minutos con Alexander Torrenegra; la fecha y la hora se coordinan por separado.",
   },
   {
     q: "¿A dónde van las ganancias de la cena?",

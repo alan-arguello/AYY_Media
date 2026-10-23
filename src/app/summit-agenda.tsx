@@ -32,7 +32,7 @@ const sessions = [
     speakers: [agendaSpeaker("Alan Argüello")],
     title: "Cómo volverte un 10X Operator",
     description:
-      "Cómo una persona opera con agentes de IA lo que antes hacía un equipo. Sales con un plan para el lunes.",
+      "Cómo una persona opera con agentes de IA lo que antes hacía un equipo.",
   },
 ];
 const hosts = [agendaSpeaker("Alexander Torrenegra"), agendaSpeaker("Tania Zapata")];

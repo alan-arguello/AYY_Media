@@ -48,7 +48,7 @@ const eventBenefits = [
   "Bebidas y snacks",
 ] as const;
 const dinnerBenefit = "Cena privada con Alexander y Tania";
-const oneOnOneBenefit = "1 a 1 de 60 minutos con Alexander, después del evento";
+const oneOnOneBenefit = "1 a 1 online de 60 minutos con Alexander, después del evento";
 
 export const summitTickets = [
   {
@@ -70,7 +70,7 @@ export const summitTickets = [
   {
     id: "vip-plus",
     name: "VIP Plus",
-    description: "El evento, la cena y un 1 a 1 con Alexander.",
+    description: "El evento, la cena y un 1 a 1 online con Alexander.",
     capacity: vipPlusSeats,
     prices: [1349, 1549, 1749],
     benefits: [...eventBenefits, dinnerBenefit, oneOnOneBenefit],
