@@ -26,38 +26,34 @@ export const pricingPhases = [
   },
 ] as const;
 
-// The private lunch: one afternoon, 20 seats, two ways in. The ids keep the
-// values already stored in Supabase (ticket_type): "vip" was the dinner
-// tier and is now General; "vip-plus" is now VIP. The open summit ticket
-// ("general") is retired, so new requests can't choose it, but historical
-// rows keep it.
-const generalSeats = 10;
-const vipSeats = 10;
-export const totalSeats = generalSeats + vipSeats;
-const afternoon = [
-  "Comida privada y presentaciones",
-  "Charla privada con Alexander y Tania",
-  "Feedback 1 a 1",
-  "Happy hour",
+// One day, two parts: the event (10 a. m. to 3 p. m.) and a private dinner
+// (7 to 10 p. m.) that only VIP includes. The ids are the values stored in
+// Supabase (ticket_type) and keep their original meaning: "general" is the
+// event and "vip" adds the dinner. "vip-plus" (a retired tier with a 1:1
+// session) stays valid in the database only.
+export const dinnerSeats = 20;
+const eventBenefits = [
+  "Evento de 10 a. m. a 3 p. m.",
+  "Charlas, fireside chat y workshop",
+  "Bebidas y snacks",
 ] as const;
-export const oneOnOneBenefit = "45 minutos a solas con Alexander, después del evento";
 
 export const summitTickets = [
   {
-    id: "vip",
+    id: "general",
     name: "General",
-    description: "La tarde completa.",
-    capacity: generalSeats,
-    prices: [649, 849, 949],
-    benefits: afternoon,
+    description: "El evento completo.",
+    capacity: null,
+    prices: [349, 479, 579],
+    benefits: eventBenefits,
   },
   {
-    id: "vip-plus",
+    id: "vip",
     name: "VIP",
-    description: "La tarde completa, y 45 minutos a solas con Alexander.",
-    capacity: vipSeats,
-    prices: [1349, 1549, 1749],
-    benefits: [...afternoon, oneOnOneBenefit],
+    description: "El evento y la cena privada.",
+    capacity: dinnerSeats,
+    prices: [649, 849, 949],
+    benefits: [...eventBenefits, "Cena privada con Alexander y Tania"],
   },
 ] as const;
 

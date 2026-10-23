@@ -61,6 +61,85 @@
   stroke-width: 1.2;
 }
 
+/* The header lists the day's two parts. */
+.agenda-ranges {
+  display: grid;
+  gap: 10px;
+  margin-block: 14px 12px;
+}
+
+.agenda-ranges > div {
+  display: grid;
+  grid-template-columns: 52px auto;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.agenda-ranges dt {
+  font-size: 0.8125rem;
+  color: #d4dff3;
+}
+
+.agenda-ranges dd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.agenda-ranges time {
+  font: 500 1.625rem/1 var(--ds-font-mono);
+  letter-spacing: -0.05em;
+  color: var(--ds-yellow-tint);
+}
+
+.agenda-ranges small {
+  margin-left: 5px;
+  font: 400 0.75rem/1 var(--ds-font-text);
+  letter-spacing: 0;
+  color: #d4dff3;
+}
+
+.agenda-ranges svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.4;
+  color: #d4dff3;
+}
+
+/* Two parts: the event's sessions, then the dinner. */
+.agenda-part + .agenda-part {
+  border-top: 1px solid var(--ds-line);
+}
+
+.agenda-part[data-part="dinner"] {
+  background: var(--ds-surface);
+}
+
+.agenda-part-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  padding: 26px 32px 0;
+}
+
+.agenda-part-num {
+  font: 400 0.8125rem/1 var(--ds-font-mono);
+  color: var(--ds-blue);
+}
+
+.agenda-part-head h3 {
+  font: 500 1.375rem/1.2 var(--ds-font-display);
+  letter-spacing: -0.02em;
+}
+
+.agenda-part-time {
+  margin-left: auto;
+  font: 400 0.875rem/1.4 var(--ds-font-mono);
+  color: var(--ds-muted);
+}
+
 .agenda-sessions {
   padding-inline: 32px;
 }
@@ -70,57 +149,13 @@
   grid-template-columns: 180px minmax(0, 1fr);
   gap: 32px;
   align-items: center;
-  padding-block: 36px;
+  padding-block: 28px;
 }
 
 .agenda-session + .agenda-session {
   border-top: 1px dashed var(--ds-line-strong);
 }
 
-/* The afternoon's schedule: time on the left, what happens, and the hosts'
-   portraits on the steps they lead. */
-.agenda-slot {
-  display: grid;
-  grid-template-columns: 150px minmax(0, 1fr) auto;
-  gap: 32px;
-  align-items: center;
-  padding-block: 24px;
-}
-
-.agenda-slot + .agenda-slot {
-  border-top: 1px dashed var(--ds-line-strong);
-}
-
-.agenda-when {
-  display: grid;
-  gap: 6px;
-  align-self: start;
-}
-
-.agenda-when time {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  font: 500 1.75rem/1 var(--ds-font-mono);
-  letter-spacing: -0.06em;
-  color: var(--ds-ink);
-}
-
-.agenda-when time span {
-  font: 400 0.8125rem/1 var(--ds-font-text);
-  letter-spacing: 0;
-  color: var(--ds-muted);
-}
-
-.agenda-until {
-  font-size: 0.8125rem;
-  color: var(--ds-muted);
-}
-
-.agenda-slot .agenda-portraits {
-  padding-left: 0;
-  padding-right: 8px;
-}
 
 .agenda-portraits {
   position: relative;
@@ -228,7 +263,9 @@
   font-size: 0.8125rem;
 }
 
-.agenda-topic h3 {
+.agenda-topic h3,
+.agenda-topic h4 {
+  margin: 0;
   font-size: clamp(1.125rem, 0.9rem + 0.6vw, 1.375rem);
   font-weight: 500;
   line-height: 1.25;
@@ -288,19 +325,15 @@
     padding-inline: 24px;
   }
 
+  .agenda-part-head {
+    padding: 22px 24px 0;
+  }
+
   .agenda-session {
     gap: 24px;
     padding-block: 32px;
   }
 
-  .agenda-slot {
-    grid-template-columns: 120px minmax(0, 1fr);
-    gap: 24px;
-  }
-
-  .agenda-slot .agenda-portraits {
-    grid-column: 2;
-  }
 
   .agenda-format {
     margin-block: 0 4px;
@@ -313,30 +346,16 @@
 }
 
 @media (max-width: 600px) {
+  .agenda-part-time {
+    width: 100%;
+    margin-left: 0;
+  }
+
   .agenda-session {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
   }
 
-  .agenda-slot {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
-    padding-block: 26px;
-  }
-
-  .agenda-slot .agenda-portraits {
-    grid-column: auto;
-  }
-
-  .agenda-when {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-  }
-
-  .agenda-when time {
-    font-size: 1.5rem;
-  }
 
   .agenda-portrait,
   .agenda-portraits[data-pair] .agenda-portrait {

@@ -22,7 +22,7 @@ const torre = (detail: string, source: string): SpeakerCredential => ({
   source,
 });
 
-// The lunch's hosts.
+// The day's speakers. Alexander and Tania also host the private dinner.
 export const speakers: SummitSpeaker[] = [
   {
     name: "Alexander Torrenegra",
@@ -71,6 +71,27 @@ export const speakers: SummitSpeaker[] = [
         detail: "Endeavor Entrepreneur",
         source:
           "https://endeavor.org/entrepreneur-companies/?_search=bunny-studio",
+      },
+    ],
+  },
+  {
+    name: "Alan Argüello",
+    role: "Ingeniero de software y emprendedor · Torrenegra & Co",
+    bio: "Cofundador y CTO de Torrenegra & Co, donde lleva agentes de IA a equipos de toda la empresa.",
+    image: "/images/speakers/alan-arguello-sf.webp",
+    linkedin: "https://www.linkedin.com/in/alan-arguello/",
+    credentials: [
+      {
+        name: "Georgia Tech",
+        image: `${hosts}georgia.png`,
+        detail: "Formación en Computer Science",
+        source: "https://www.linkedin.com/in/alan-arguello/",
+      },
+      {
+        name: "Platanus Ventures",
+        image: `${hosts}platanus.png`,
+        detail: "Emprendimiento respaldado por Platanus Ventures",
+        source: "https://www.linkedin.com/in/alan-arguello/",
       },
     ],
   },

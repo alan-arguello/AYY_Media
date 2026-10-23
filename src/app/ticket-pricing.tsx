@@ -6,6 +6,7 @@ import {
   formatTicketPrice,
   getCurrentPricingPhase,
   pricingPhases,
+  dinnerSeats,
   summitTickets,
 } from "@/lib/summit-pricing";
 
@@ -54,9 +55,9 @@ export function TicketPricing() {
       <div className="ds-container">
         <header className="lp-pricing-heading">
           <h2 id="pricing-title" className="ds-display-l">
-            Dos formas de sentarte <span className="ds-accent">a la mesa.</span>
+            Dos formas de <span className="ds-accent">vivir el día.</span>
           </h2>
-          <p>Diez lugares en cada una, por aplicación.</p>
+          <p>VIP incluye la cena privada: {dinnerSeats} lugares, por aplicación.</p>
         </header>
 
         <div className="lp-phases" role="group" aria-label="Comparar precios por fase">
@@ -88,7 +89,7 @@ export function TicketPricing() {
                   <h3 id={`ticket-${ticket.id}`}>{ticket.name}</h3>
                   <p className="lp-ticket-description">{ticket.description}</p>
                   <p className="lp-ticket-admission">
-                    <strong>{ticket.capacity} lugares</strong> · Por aplicación
+                    {ticket.capacity ? <><strong>{ticket.capacity} lugares</strong> · Por aplicación</> : "Acceso al evento"}
                   </p>
                 </div>
 
@@ -123,17 +124,17 @@ export function TicketPricing() {
                     <a
                       href="#lista"
                       className="ds-button lp-ticket-cta"
-                      data-variant={ticket.id === "vip" ? "secondary" : "primary"}
+                      data-variant={ticket.capacity ? "primary" : "secondary"}
                       data-size="md"
                       onClick={() => selectTicket(ticket.id)}
-                      aria-label={`Solicitar un lugar ${ticket.name} y completar el formulario`}
+                      aria-label={`${ticket.capacity ? "Solicitar" : "Elegir"} ${ticket.name} y completar el formulario`}
                     >
-                      {`Solicitar lugar ${ticket.name}`}
+                      {ticket.capacity ? `Solicitar ${ticket.name}` : `Elegir ${ticket.name}`}
                       <ArrowRight aria-hidden="true" />
                     </a>
                   )}
                   <p className="lp-ticket-cta-note">
-                    {closed ? "Fases finalizadas" : "Por aplicación"}
+                    {closed ? "Fases finalizadas" : ticket.capacity ? "Por aplicación" : "Registro abierto"}
                   </p>
                 </div>
               </article>
@@ -142,7 +143,7 @@ export function TicketPricing() {
         </div>
 
         <div className="lp-pricing-footnote">
-          <p>Precios por persona en USD. La solicitud no confirma un lugar ni garantiza el precio de una fase.</p>
+          <p>Precios por persona en USD. El registro no confirma una entrada ni garantiza el precio de una fase.</p>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
-  totalSeats,
+  dinnerSeats,
   formatTicketPrice,
   getCurrentPricingPhase,
   summitTickets,
@@ -62,13 +62,15 @@ test("ticket prices use unambiguous USD-style thousands grouping", () => {
   assert.equal(formatTicketPrice(1349), "$1,349");
 });
 
-test("the private lunch has 20 seats: 10 General and 10 VIP, all by application", () => {
+test("General is the event; VIP adds the 20-seat private dinner", () => {
   const capacity = Object.fromEntries(summitTickets.map((ticket) => [ticket.id, ticket.capacity]));
-  // Ids keep the values stored in Supabase: "vip" is General, "vip-plus" is VIP.
-  assert.deepEqual(capacity, { vip: 10, "vip-plus": 10 });
+  // Ids are the values stored in Supabase; "vip-plus" is retired.
+  assert.deepEqual(capacity, { general: null, vip: 20 });
   assert.deepEqual(summitTickets.map((ticket) => ticket.name), ["General", "VIP"]);
-  assert.equal(totalSeats, 20);
+  assert.equal(dinnerSeats, 20);
   const [general, vip] = summitTickets;
   for (const benefit of general.benefits) assert.ok(vip.benefits.includes(benefit), benefit);
-  assert.ok(vip.benefits.length > general.benefits.length);
+  const atDinner = (ticket) => ticket.benefits.some((benefit) => benefit.startsWith("Cena privada"));
+  assert.equal(atDinner(general), false);
+  assert.equal(atDinner(vip), true);
 });

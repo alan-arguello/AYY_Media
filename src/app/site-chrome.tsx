@@ -9,10 +9,10 @@ import { EventOrganizer } from "./event-branding";
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 const sections = [
-  { href: "#anfitriones", label: "Anfitriones" },
-  { href: "#agenda", label: "La tarde" },
-  { href: "#mesa", label: "La mesa" },
-  { href: "#entradas", label: "Lugares" },
+  { href: "#speakers", label: "Speakers" },
+  { href: "#agenda", label: "El día" },
+  { href: "#mesa", label: "La cena" },
+  { href: "#entradas", label: "Entradas" },
   { href: "#comunidad", label: "Comunidad" },
 ];
 
@@ -34,7 +34,7 @@ export function SiteNav({ home = "", current }: { home?: string; current?: "part
           </a>
         </nav>
         <Button href={`${home}#lista`} size="sm" className="lp-nav-cta">
-          Solicitar lugar
+          Registrarme
         </Button>
       </div>
     </header>
@@ -49,21 +49,21 @@ export function SiteFooter({ home = "" }: { home?: string }) {
           <div className="lp-footer-brand">
             <LogoMark />
             <p>
-              Comida privada con Alexander Torrenegra y Tania Zapata. Bogotá, 19 de noviembre de 2026.
+              Evento y cena privada para founders, managers y C-levels. Bogotá, 19 de noviembre de 2026.
             </p>
             <EventOrganizer />
           </div>
           <nav className="lp-footer-nav" aria-label="Pie de página">
             <div>
               <h2>Evento</h2>
-              <a href={`${home}#anfitriones`}>Anfitriones</a>
-              <a href={`${home}#agenda`}>La tarde</a>
-              <a href={`${home}#mesa`}>La mesa</a>
-              <a href={`${home}#entradas`}>Lugares y precios</a>
+              <a href={`${home}#speakers`}>Speakers</a>
+              <a href={`${home}#agenda`}>El día</a>
+              <a href={`${home}#mesa`}>La cena privada</a>
+              <a href={`${home}#entradas`}>Entradas y precios</a>
               <a href={`${home}#comunidad`}>Comunidad</a>
               <a href="/partners">Aliados y sponsors</a>
               <a href={`${home}#faq`}>Preguntas</a>
-              <a href={`${home}#lista`}>Solicitar lugar</a>
+              <a href={`${home}#lista`}>Registro</a>
             </div>
             <div>
               <h2>Organiza</h2>

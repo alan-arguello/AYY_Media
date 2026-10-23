@@ -15,12 +15,12 @@ const offer = [
   {
     art: mic,
     title: "Un lugar en la mesa",
-    body: "Alguien de tu equipo come con los 20 founders, managers y C-levels, y con Alexander y Tania.",
+    body: "Alguien de tu equipo en la cena privada con Alexander, Tania y los 20 invitados.",
   },
   {
     art: flag,
     title: "Tu marca en todo lo que hacemos",
-    body: "En el sitio, las promos, los videos, el newsletter y el día de la comida.",
+    body: "En el sitio, las promos, los videos, el newsletter, el evento y la cena.",
   },
   {
     art: signal,
@@ -72,9 +72,10 @@ export function Partners({ standalone = false }: { standalone?: boolean }) {
             </>
           }
         >
-          Una comida privada de 20 lugares con Alexander Torrenegra y Tania
-          Zapata. Pocos aliados, con algo concreto: un lugar en la mesa, tu
-          marca en todo lo que hacemos y una audiencia que ya nos sigue.
+          Un evento sobre IA y una cena privada de 20 lugares con Alexander
+          Torrenegra y Tania Zapata. Pocos aliados, con algo concreto: un
+          lugar en la cena, tu marca en todo lo que hacemos y una audiencia
+          que ya nos sigue.
         </SectionHeading>
 
         <ul className="partners-offer">
@@ -173,7 +174,7 @@ export function Partners({ standalone = false }: { standalone?: boolean }) {
               </li>
               <li>
                 <strong>Hablamos.</strong> Te respondemos en pocos días y armamos
-                una propuesta a la medida: un lugar en la mesa, presencia de
+                una propuesta a la medida: un lugar en la cena, presencia de
                 marca o las dos.
               </li>
               <li>

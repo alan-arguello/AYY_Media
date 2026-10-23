@@ -1,19 +1,11 @@
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
-import { summitTickets, totalSeats } from "@/lib/summit-pricing";
+import { dinnerSeats } from "@/lib/summit-pricing";
 import { PrivateDinnerCta } from "./private-dinner-cta";
 // Companies and funds both hosts have invested in; marks from their official
 // sites (see public/images/colombia-summit/CREDITS.md).
 import portfolio from "./dinner-portfolio.json";
 import "./private-dinner.css";
-
-const ticket = (id: (typeof summitTickets)[number]["id"]) => {
-  const found = summitTickets.find((item) => item.id === id);
-  if (!found?.capacity) throw new Error(`Ticket without seats: ${id}`);
-  return found;
-};
-const general = ticket("vip");
-const vip = ticket("vip-plus");
 
 const photos = {
   session: {
@@ -38,14 +30,7 @@ const photos = {
   },
 };
 
-// Seats as a row of pixels: General first, VIP lit in yellow.
-const seats = [
-  ...Array.from({ length: general.capacity }, () => general.id),
-  ...Array.from({ length: vip.capacity }, () => vip.id),
-];
-
-// The heart of the page: why the format is small, how people get a seat,
-// and how many seats there are.
+// The private dinner: who it is with, how to get a seat, how many seats.
 export function PrivateDinner() {
   return (
     <section className="ds-section dinner" id="mesa" aria-labelledby="dinner-title">
@@ -53,7 +38,7 @@ export function PrivateDinner() {
         <div className="dinner-prompt" aria-hidden="true">
           <span className="dinner-prompt-line">
             <span className="dinner-prompt-mark">&gt;&gt;&gt;</span>
-            <span>mesa</span>
+            <span>cena</span>
             <span className="dinner-prompt-dot">.</span>
             <span className="dinner-prompt-fn">privada</span>
             <span className="dinner-prompt-call">(</span>
@@ -61,22 +46,22 @@ export function PrivateDinner() {
             <span className="dinner-prompt-call">)</span>
           </span>
           <span className="dinner-prompt-status">
-            {totalSeats} lugares · por aplicación
+            {dinnerSeats} lugares · solo VIP
           </span>
         </div>
 
         <div className="dinner-head">
           <h2 id="dinner-title" className="dinner-title">
-            <span>No es una conferencia.</span>{" "}
-            <span className="dinner-accent">Es una mesa.</span>
+            <span>El evento termina</span> <span>a las 3&nbsp;p.&nbsp;m.</span>{" "}
+            <span className="dinner-accent">La conversación, no.</span>
           </h2>
           <div className="dinner-intro">
             <p className="dinner-lead">
-              Tú y otras {totalSeats - 1} personas, elegidas una por una, con
+              A las 7 p. m., {dinnerSeats} personas se sientan a cenar con
               Alexander Torrenegra y Tania Zapata.
             </p>
             <ol className="dinner-how" aria-label="Cómo se consigue un lugar">
-              <li><strong>Aplicas.</strong> Dos minutos.</li>
+              <li><strong>Eliges VIP.</strong> Incluye el evento y la cena.</li>
               <li><strong>Revisamos tu perfil.</strong> No todas las solicitudes son aceptadas.</li>
               <li><strong>Te confirmamos.</strong> Con los siguientes pasos y la ubicación.</li>
             </ol>
@@ -121,26 +106,13 @@ export function PrivateDinner() {
 
         <div className="dinner-seats">
           <div className="dinner-seats-copy">
-            <h3>{totalSeats} lugares.</h3>
-            <div
-              className="dinner-seat-row"
-              role="img"
-              aria-label={`${totalSeats} lugares: ${general.capacity} General y ${vip.capacity} VIP`}
-            >
-              {seats.map((tier, index) => (
-                <i key={index} data-tier={tier} />
+            <h3>{dinnerSeats} lugares.</h3>
+            <div className="dinner-seat-row" role="img" aria-label={`${dinnerSeats} lugares en la cena`}>
+              {Array.from({ length: dinnerSeats }, (_, index) => (
+                <i key={index} />
               ))}
             </div>
-            <dl className="dinner-legend">
-              <div data-tier="vip">
-                <dt>{general.capacity}</dt>
-                <dd>General</dd>
-              </div>
-              <div data-tier="vip-plus">
-                <dt>{vip.capacity}</dt>
-                <dd>VIP · + 45 min con Alexander</dd>
-              </div>
-            </dl>
+            <p className="dinner-seats-for">Solo con entrada VIP · 7 a 10 p. m.</p>
           </div>
           <div className="dinner-seats-cta">
             <PrivateDinnerCta />

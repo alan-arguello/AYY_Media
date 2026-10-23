@@ -6,8 +6,8 @@ import {
   CalendarDays,
   ChevronDown,
   MapPin,
-  UserCheck,
-  Users,
+  Ticket,
+  Utensils,
 } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
 import { siteUrl, isPublicSite } from "@/lib/site-url";
@@ -22,8 +22,8 @@ import { TicketPricing } from "./ticket-pricing";
 import { TicketSelectionProvider } from "./ticket-selection";
 import { PrivateDinner } from "./private-dinner";
 import { SummitAgenda } from "./summit-agenda";
-import { summitTickets, totalSeats } from "@/lib/summit-pricing";
-import { flag, mic, signal, skyline } from "./pixel-icons";
+import { dinnerSeats } from "@/lib/summit-pricing";
+import { chip, flag, signal, skyline } from "./pixel-icons";
 
 export const runtime = "nodejs";
 
@@ -34,24 +34,24 @@ const OG_IMAGE = "/images/colombia-summit/opengraph.png";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   robots: { index: isPublicSite, follow: isPublicSite },
-  title: "Comida privada para founders, managers y C-levels | bogota.forward()",
+  title: "Evento y cena privada para founders, managers y C-levels | bogota.forward()",
   description:
-    "Con Alexander Torrenegra y Tania Zapata. Bogotá, 19 de noviembre de 2026, 1:30 a 6:00 p. m. 20 lugares por aplicación: charla privada, feedback 1 a 1 y happy hour.",
+    "IA, empresas y lo que viene. Bogotá, 19 de noviembre de 2026: evento de 10 a. m. a 3 p. m. con Alexander Torrenegra, Tania Zapata y Alan Argüello, y cena privada de 7 a 10 p. m. (20 lugares).",
   alternates: { canonical: colombiaSummit.path },
   openGraph: {
     type: "website",
     locale: "es_CO",
     url: colombiaSummit.path,
     siteName: colombiaSummit.name,
-    title: "Comida privada para founders, managers y C-levels · Bogotá, 19 de noviembre",
+    title: "Evento y cena privada para founders, managers y C-levels · Bogotá, 19 de noviembre",
     description:
-      "Con Alexander Torrenegra y Tania Zapata. 20 lugares por aplicación: charla privada, feedback 1 a 1 y happy hour.",
+      "Evento de 10 a. m. a 3 p. m. y cena privada de 7 a 10 p. m. con Alexander Torrenegra y Tania Zapata. 20 lugares para la cena, por aplicación.",
     images: [
       {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Comida privada para founders, managers y C-levels con Alexander Torrenegra y Tania Zapata. Bogotá, 19 de noviembre de 2026. 20 lugares por aplicación.",
+        alt: "Evento y cena privada para founders, managers y C-levels con Alexander Torrenegra y Tania Zapata. Bogotá, 19 de noviembre de 2026.",
       },
     ],
   },
@@ -63,32 +63,29 @@ export const metadata: Metadata = {
 
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-// The offer, in three cards.
+// The day, in three cards.
 const pillars = [
-  { art: skyline, title: `${totalSeats} lugares`, body: "Founders, managers y C-levels, elegidos a mano." },
-  { art: signal, title: "A puerta cerrada", body: "Sin escenario ni público." },
-  { art: mic, title: "Feedback 1 a 1", body: "Con Alexander y Tania, sobre tu empresa." },
+  { art: chip, title: "De día, el evento", body: "Charlas, fireside chat y workshop." },
+  { art: skyline, title: "De noche, la cena", body: `${dinnerSeats} lugares con Alexander y Tania.` },
+  { art: signal, title: "Para quienes deciden", body: "Founders, managers y C-levels." },
 ];
-
-const seatsFor = (id: "vip" | "vip-plus") =>
-  summitTickets.find((ticket) => ticket.id === id)?.capacity ?? 0;
 
 const faqs: { q: string; a: React.ReactNode }[] = [
   {
     q: "¿Cuándo y dónde es?",
-    a: "Jueves 19 de noviembre de 2026, de 1:30 a 6:00 p. m., en Bogotá. La dirección la reciben solo las personas aceptadas.",
+    a: "Jueves 19 de noviembre de 2026 en Bogotá. El evento es de 10 a. m. a 3 p. m. y la cena privada, de 7 a 10 p. m. El lugar del evento se anuncia pronto; la dirección de la cena la reciben solo las personas aceptadas.",
   },
   {
-    q: "¿Quién puede asistir?",
-    a: `Founders, managers y C-levels. Revisamos cada solicitud; no todas son aceptadas.`,
-  },
-  {
-    q: "¿Cómo funciona la solicitud?",
-    a: "Eliges General o VIP y nos dejas tus datos, tu empresa y tu LinkedIn. Si hay un lugar para ti, te escribimos con los siguientes pasos y el pago. La solicitud no reserva un lugar ni garantiza el precio de una fase.",
+    q: "¿Para quién es?",
+    a: "Founders, managers y C-levels.",
   },
   {
     q: "¿Qué diferencia hay entre General y VIP?",
-    a: `Las dos incluyen la tarde completa. VIP suma 45 minutos a solas con Alexander, después del evento. ${seatsFor("vip")} lugares General y ${seatsFor("vip-plus")} VIP.`,
+    a: `General incluye el evento. VIP suma la cena privada con Alexander y Tania: ${dinnerSeats} lugares, por aplicación.`,
+  },
+  {
+    q: "¿Cómo me registro?",
+    a: "Eliges General o VIP y nos dejas tus datos, tu empresa y tu LinkedIn. Te escribimos con los siguientes pasos y el pago; las solicitudes VIP pasan por revisión. El registro no confirma una entrada ni garantiza el precio de una fase.",
   },
   {
     q: "¿Cómo funcionan las fases de precios?",
@@ -179,10 +176,22 @@ function Speaker({ speaker }: { speaker: SummitSpeaker }) {
 const eventSchema = {
   "@context": "https://schema.org",
   "@type": "Event",
-  name: "Comida privada para founders, managers y C-levels",
-  description: `Con Alexander Torrenegra y Tania Zapata. ${totalSeats} lugares por aplicación en Bogotá.`,
+  name: colombiaSummit.name,
+  description: "Evento de IA para founders, managers y C-levels, con cena privada.",
   startDate: colombiaSummit.startDate,
   endDate: colombiaSummit.endDate,
+  subEvent: {
+    "@type": "Event",
+    name: "Cena privada con Alexander Torrenegra y Tania Zapata",
+    startDate: colombiaSummit.dinnerStartDate,
+    endDate: colombiaSummit.dinnerEndDate,
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    location: {
+      "@type": "Place",
+      name: "Bogotá",
+      address: { "@type": "PostalAddress", addressLocality: "Bogotá", addressCountry: "CO" },
+    },
+  },
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
   inLanguage: "es",
@@ -225,11 +234,11 @@ export default function BogotaForwardSummitPage() {
         <section className="ds-section lp-hero" data-field aria-labelledby="summit-title">
           <div className="ds-container lp-hero-copy">
             <span className="ds-reveal">
-              <Tag live>Bogotá · 19 de noviembre · Por aplicación</Tag>
+              <Tag live>Bogotá · 19 de noviembre</Tag>
             </span>
             <h1 id="summit-title" className="ds-display-xl lp-hero-title">
               <span className="ds-reveal" style={step(1)}>
-                Comida privada para
+                Evento y cena privada para
               </span>{" "}
               <span className="ds-reveal ds-accent" style={step(2)}>
                 founders, managers y C-levels
@@ -237,19 +246,19 @@ export default function BogotaForwardSummitPage() {
               </span>
             </h1>
             <p className="ds-lead lp-hero-lead ds-reveal" style={step(3)}>
-              Con Alexander Torrenegra y Tania Zapata. {totalSeats} lugares,
-              charla privada, feedback 1 a 1 y happy hour.
+              Charlas y workshop de 10 a. m. a 3 p. m. Cena privada con
+              Alexander Torrenegra y Tania Zapata de 7 a 10 p. m.
             </p>
             <div className="lp-actions ds-reveal" style={step(4)}>
               <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>
-                Solicitar mi lugar
+                Ver entradas
               </Button>
               <Button variant="secondary" href="#agenda">
-                Ver la tarde
+                Ver el día
               </Button>
             </div>
             <p className="lp-hero-note ds-reveal" style={step(5)}>
-              {seatsFor("vip")} General · {seatsFor("vip-plus")} VIP
+              General · VIP con cena ({dinnerSeats} lugares)
             </p>
           </div>
 
@@ -268,7 +277,7 @@ export default function BogotaForwardSummitPage() {
                 />
               </div>
               <Tag dot className="lp-float lp-float-place">
-                Bogotá · Privado
+                Bogotá, Colombia
               </Tag>
               <Tag live className="lp-float lp-float-count">
                 <Countdown />
@@ -287,17 +296,17 @@ export default function BogotaForwardSummitPage() {
                 <strong>
                   <time dateTime={colombiaSummit.date}>19.11.2026</time>
                 </strong>
-                <span>Jueves · 1:30 a 6:00 p. m.</span>
+                <span>Evento · 10 a. m. a 3 p. m.</span>
               </li>
               <li className="ds-card">
-                <Users aria-hidden="true" />
-                <strong>{totalSeats} lugares</strong>
-                <span>{seatsFor("vip")} General · {seatsFor("vip-plus")} VIP</span>
+                <Utensils aria-hidden="true" />
+                <strong>Cena privada</strong>
+                <span>7 a 10 p. m. · {dinnerSeats} lugares</span>
               </li>
               <li className="ds-card">
-                <UserCheck aria-hidden="true" />
-                <strong>Por aplicación</strong>
-                <span>Founders, managers y C-levels</span>
+                <Ticket aria-hidden="true" />
+                <strong>General · VIP</strong>
+                <span>VIP incluye la cena</span>
               </li>
             </ul>
           </div>
@@ -312,7 +321,7 @@ export default function BogotaForwardSummitPage() {
               tag="El formato"
               title={
                 <>
-                  Menos gente, <span className="ds-accent">más conversación.</span>
+                  Un día, <span className="ds-accent">dos momentos.</span>
                 </>
               }
             />
@@ -334,14 +343,14 @@ export default function BogotaForwardSummitPage() {
 
         <hr className="ds-divider" />
 
-        <section className="ds-section" id="anfitriones" aria-labelledby="speakers-title">
+        <section className="ds-section" id="speakers" aria-labelledby="speakers-title">
           <div className="ds-container">
             <SectionHeading
               id="speakers-title"
-              tag="Anfitriones"
+              tag="Speakers"
               title={
                 <>
-                  Con quién te vas <span className="ds-accent">a sentar.</span>
+                  De quién vas <span className="ds-accent">a aprender.</span>
                 </>
               }
             />
@@ -351,7 +360,7 @@ export default function BogotaForwardSummitPage() {
               ))}
             </ul>
             <p className="lp-note">
-              Logos de trayectoria y formación de los anfitriones, no de
+              Logos de trayectoria y formación de los speakers, no de
               patrocinios.
             </p>
           </div>
@@ -437,14 +446,15 @@ export default function BogotaForwardSummitPage() {
           <div className="ds-container">
             <SectionHeading
               id="registration-title"
-              tag="Solicitud"
+              tag="Registro"
               title={
                 <>
-                  Solicita tu <span className="ds-accent">lugar.</span>
+                  Nos vemos en <span className="ds-accent">Bogotá.</span>
                 </>
               }
             >
-              Revisamos cada solicitud. Si hay un lugar para ti, te escribimos.
+              Elige tu entrada y déjanos tus datos. Te escribimos con los
+              siguientes pasos.
             </SectionHeading>
             <div className="lp-register">
               <div className="ds-card lp-register-media">
@@ -465,11 +475,11 @@ export default function BogotaForwardSummitPage() {
                   </div>
                   <div>
                     <dt>Horario</dt>
-                    <dd>1:30 a 6:00 p. m. · Hora de Bogotá</dd>
+                    <dd>Evento 10 a. m. a 3 p. m. · Cena 7 a 10 p. m.</dd>
                   </div>
                   <div>
                     <dt>Dónde</dt>
-                    <dd>Bogotá · Ubicación privada</dd>
+                    <dd>Bogotá, Colombia</dd>
                   </div>
                 </dl>
               </div>
@@ -489,7 +499,7 @@ export default function BogotaForwardSummitPage() {
         className="lp-mobile-cta"
         icon={<ArrowRight aria-hidden="true" />}
       >
-        Solicitar lugar · {totalSeats} lugares
+        Ver entradas · 19 de noviembre
       </Button>
     </div>
   );

@@ -103,8 +103,8 @@ test("requires a WhatsApp number with a country code outside Colombia", () => {
   assert.equal(parseSummitInterest(fileValue).success, false);
 });
 
-test("accepts each seat on offer: General (vip) and VIP (vip-plus)", () => {
-  for (const ticketType of ["vip", "vip-plus"]) {
+test("accepts each ticket on offer: General and VIP", () => {
+  for (const ticketType of ["general", "vip"]) {
     const result = parseSummitInterest(form({ ticketType }));
     assert.equal(result.success, true);
     assert.equal(result.data.ticketType, ticketType);
@@ -117,7 +117,7 @@ test("rejects missing, unknown and malicious ticket types", () => {
   assert.equal(parseSummitInterest(missing).success, false);
   for (const ticketType of [
     "",
-    "general",
+    "vip-plus",
     "VIP",
     "vip plus",
     " vip ",
@@ -187,8 +187,8 @@ test("event source and date stay distinct from other campaigns", () => {
 });
 
 test("five speakers have real portraits, credential assets and source links", () => {
-  assert.equal(speakers.length, 2);
-  assert.equal(new Set(speakers.map((speaker) => speaker.linkedin)).size, 2);
+  assert.equal(speakers.length, 3);
+  assert.equal(new Set(speakers.map((speaker) => speaker.linkedin)).size, 3);
   for (const speaker of speakers) {
     assert.ok(
       existsSync(new URL(`../public${speaker.image}`, import.meta.url)),

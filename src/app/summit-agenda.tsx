@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { ArrowRight, Lock } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
-import { speakers } from "./speakers";
+import { dinnerSeats } from "@/lib/summit-pricing";
+import { speakers, type SummitSpeaker } from "./speakers";
 import "./summit-agenda.css";
 
 function agendaSpeaker(name: string) {
@@ -9,48 +10,57 @@ function agendaSpeaker(name: string) {
   if (!speaker) throw new Error(`Missing agenda speaker: ${name}`);
   return speaker;
 }
-const hosts = [agendaSpeaker("Alexander Torrenegra"), agendaSpeaker("Tania Zapata")];
 
-// The afternoon, hour by hour.
-const schedule = [
+// The event, one line per session: the idea and what you leave with.
+const sessions = [
   {
-    time: "1:30",
-    kind: "Llegada",
-    title: "Bienvenida",
-    description: "La dirección la reciben solo las personas aceptadas.",
+    format: "Charla",
+    speakers: [agendaSpeaker("Alexander Torrenegra")],
+    title: "Cómo predecir el futuro",
+    description:
+      "Si hoy empezaras tu empresa desde cero, con todo lo que ya sabes, ¿la construirías igual?",
   },
   {
-    time: "2:00",
-    until: "a 2:30 p. m.",
-    kind: "Comida",
-    title: "Comida y presentaciones",
-    description: "Cada participante se presenta: quién es y qué está construyendo.",
+    format: "Fireside chat",
+    speakers: [agendaSpeaker("Tania Zapata")],
+    title: "Reinventar tu compañía cuando es disrumpida",
+    description:
+      "Cuándo defender tu negocio y cuándo canibalizarlo, contado desde adentro.",
   },
   {
-    time: "2:30",
-    until: "a 3:00 p. m.",
-    kind: "Charla privada",
-    title: "A puerta cerrada con Alexander y Tania",
-    description: "IA, empresas y lo que viene. Las preguntas las pone el grupo.",
-    hosts,
-  },
-  {
-    time: "3:00",
-    until: "a 5:30 p. m.",
-    kind: "Feedback 1 a 1",
-    title: "Tu turno con Alexander y Tania",
-    description: "Tu empresa, tu decisión atascada o tu plan con IA, con feedback directo.",
-    hosts,
-  },
-  {
-    time: "5:30",
-    until: "en adelante",
-    kind: "Happy hour",
-    title: "La conversación sigue",
-    description: "Sin agenda, con el grupo y los anfitriones.",
+    format: "Workshop",
+    speakers: [agendaSpeaker("Alan Argüello")],
+    title: "Cómo volverte un 10X Operator",
+    description:
+      "Cómo una persona opera con agentes de IA lo que antes hacía un equipo. Sales con un plan para el lunes.",
   },
 ];
+const hosts = [agendaSpeaker("Alexander Torrenegra"), agendaSpeaker("Tania Zapata")];
 
+function Portraits({ people, number }: { people: SummitSpeaker[]; number?: number }) {
+  return (
+    <div className="agenda-portraits" data-pair={people.length > 1 || undefined}>
+      {people.map((speaker) => (
+        <div className="agenda-portrait" data-speaker={speaker.name} key={speaker.name}>
+          <Image
+            src={speaker.image}
+            alt={speaker.name}
+            fill
+            sizes="(max-width: 600px) 80px, 112px"
+            quality={90}
+          />
+        </div>
+      ))}
+      {number && (
+        <span className="agenda-number" aria-hidden="true">
+          {String(number).padStart(2, "0")}
+        </span>
+      )}
+    </div>
+  );
+}
+
+// The day in two parts: the event in the morning, the private dinner at night.
 export function SummitAgenda() {
   return (
     <section className="ds-section agenda" id="agenda" aria-labelledby="agenda-title">
@@ -58,50 +68,80 @@ export function SummitAgenda() {
         <div className="agenda-program">
           <header className="agenda-header">
             <div className="agenda-heading">
-              <p>La tarde</p>
-              <h2 id="agenda-title">De la comida<br />al happy hour.</h2>
+              <p>El día</p>
+              <h2 id="agenda-title">Del evento<br />a la cena.</h2>
             </div>
             <div className="agenda-day">
               <p><time dateTime={colombiaSummit.date}>Jueves 19 de noviembre de 2026</time></p>
-              <div className="agenda-hours" role="group" aria-label="De 1:30 a 6 de la tarde">
-                <time dateTime={colombiaSummit.startDate}>1:30<span>p. m.</span></time>
-                <ArrowRight aria-hidden="true" />
-                <time dateTime={colombiaSummit.endDate}>6:00<span>p. m.</span></time>
-              </div>
+              <dl className="agenda-ranges">
+                <div>
+                  <dt>Evento</dt>
+                  <dd aria-label="De 10 de la mañana a 3 de la tarde">
+                    <time dateTime={colombiaSummit.startDate}>10:00<small>a. m.</small></time>
+                    <ArrowRight aria-hidden="true" />
+                    <time dateTime={colombiaSummit.endDate}>3:00<small>p. m.</small></time>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Cena</dt>
+                  <dd aria-label="De 7 a 10 de la noche">
+                    <time dateTime={colombiaSummit.dinnerStartDate}>7:00<small>p. m.</small></time>
+                    <ArrowRight aria-hidden="true" />
+                    <time dateTime={colombiaSummit.dinnerEndDate}>10:00<small>p. m.</small></time>
+                  </dd>
+                </div>
+              </dl>
               <p>Hora de Bogotá · Presencial</p>
             </div>
           </header>
 
-          <ol className="agenda-sessions" role="list" aria-label="Programa de la tarde">
-            {schedule.map((slot) => (
-              <li className="agenda-slot" key={slot.time}>
-                <div className="agenda-when">
-                  <time>{slot.time}<span>p. m.</span></time>
-                  {slot.until && <span className="agenda-until">{slot.until}</span>}
-                </div>
-                <div className="agenda-topic">
-                  <span className="agenda-format">{slot.kind}</span>
-                  <h3>{slot.title}</h3>
-                  <p>{slot.description}</p>
-                </div>
-                {slot.hosts && (
-                  <div className="agenda-portraits" data-pair aria-label="Con Alexander Torrenegra y Tania Zapata">
-                    {slot.hosts.map((speaker) => (
-                      <div className="agenda-portrait" data-speaker={speaker.name} key={speaker.name}>
-                        <Image src={speaker.image} alt={speaker.name} fill sizes="88px" quality={90} />
-                      </div>
-                    ))}
+          <div className="agenda-part">
+            <div className="agenda-part-head">
+              <span className="agenda-part-num">01</span>
+              <h3>El evento</h3>
+              <span className="agenda-part-time">10:00 a. m. – 3:00 p. m.</span>
+            </div>
+            <ol className="agenda-sessions" role="list" aria-label="Sesiones del evento">
+              {sessions.map((session, index) => (
+                <li className="agenda-session" key={session.title}>
+                  <Portraits people={session.speakers} number={index + 1} />
+                  <div className="agenda-topic">
+                    <span className="agenda-format">
+                      {session.format} · {session.speakers.map((speaker) => speaker.name).join(" y ")}
+                    </span>
+                    <h4>{session.title}</h4>
+                    <p>{session.description}</p>
                   </div>
-                )}
-              </li>
-            ))}
-          </ol>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="agenda-part" data-part="dinner">
+            <div className="agenda-part-head">
+              <span className="agenda-part-num">02</span>
+              <h3>La cena privada</h3>
+              <span className="agenda-part-time">7:00 – 10:00 p. m.</span>
+            </div>
+            <div className="agenda-sessions">
+              <div className="agenda-session">
+                <Portraits people={hosts} />
+                <div className="agenda-topic">
+                  <span className="agenda-format">
+                    Solo VIP · {dinnerSeats} lugares · Por aplicación
+                  </span>
+                  <h4>Cena con Alexander y Tania</h4>
+                  <p>Una mesa pequeña para seguir la conversación del día.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="agenda-coming">
             <span className="agenda-number" aria-hidden="true"><Lock /></span>
             <div>
-              <h3>Ubicación privada.</h3>
-              <p>Llega con tu confirmación.</p>
+              <h3>Lugar y horarios, próximamente.</h3>
+              <p>La dirección de la cena llega con tu confirmación.</p>
             </div>
           </div>
         </div>

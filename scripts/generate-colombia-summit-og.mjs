@@ -1,12 +1,12 @@
 // Generates public/images/colombia-summit/opengraph.png (1200×630) and
-// src/app/icon.png for the private lunch. Run with `npm run og` after
+// src/app/icon.png for the event and the private dinner. Run with `npm run og` after
 // changing the photo or copy. Rendered with headless Chrome like the promos,
 // so the site's own WOFF2 fonts (Geist Pixel Square, Geist, Geist Mono) are
 // used as-is. Same language as the site: paper, ink, the flag by role.
 import { readFile, writeFile } from "node:fs/promises";
 import puppeteer from "puppeteer-core";
 import sharp from "sharp";
-import { summitTickets, totalSeats } from "../src/lib/summit-pricing.ts";
+import { dinnerSeats } from "../src/lib/summit-pricing.ts";
 
 const root = new URL("../", import.meta.url);
 const asset = (path) => new URL(path, root);
@@ -18,7 +18,6 @@ const W = 1200, H = 630;
 
 const PAPER = "#fcfbf6", INK = "#0d0b01", MUTED = "#6d685a", LINE = "#b5ae99";
 const BLUE = "#003893", YELLOW = "#fcd116", RED = "#ce1126";
-const seats = Object.fromEntries(summitTickets.map((t) => [t.id, t.capacity]));
 
 const fonts = "node_modules/geist/dist/fonts/";
 const [pixel, sans, mono, photo] = await Promise.all([
@@ -60,7 +59,7 @@ body { position: relative; overflow: hidden; background: ${PAPER}; color: ${INK}
 .tag b { font-weight: 500; color: ${INK}; }
 .tag .mono { font-family: GeistMono, monospace; }
 .flag { width: 14px; height: 9px; background: linear-gradient(${YELLOW} 0 50%, ${BLUE} 50% 75%, ${RED} 75%); box-shadow: 0 0 0 1px rgb(13 11 1 / 0.08); }
-h1 { font: 500 58px/1.04 GeistPixel, monospace; letter-spacing: -0.03em; }
+h1 { font: 500 54px/1.04 GeistPixel, monospace; letter-spacing: -0.03em; }
 h1 .accent { color: ${BLUE}; }
 .cursor { display: inline-block; width: 0.5em; height: 0.82em; margin-left: 0.08em; vertical-align: -0.06em; background: ${YELLOW};
   box-shadow: inset 0 0 0 1px rgb(13 11 1 / 0.12); }
@@ -78,13 +77,12 @@ h1 .accent { color: ${BLUE}; }
     <span class="tag"><span class="flag"></span>Jueves 19 de noviembre · Bogotá</span>
   </div>
   <div>
-    <h1>Comida privada para<br><span class="accent">founders, managers<br>y C-levels</span><span class="cursor"></span></h1>
+    <h1>Evento y cena privada<br>para <span class="accent">founders, managers<br>y C-levels</span><span class="cursor"></span></h1>
     <p class="lead">Con Alexander Torrenegra y Tania Zapata.</p>
   </div>
   <div class="facts">
-    <span class="tag"><b>${totalSeats} lugares</b> · ${seats.vip} General · ${seats["vip-plus"]} VIP</span>
-    <span class="tag"><b>Por aplicación</b></span>
-    <span class="tag mono">1:30 – 6:00 p. m.</span>
+    <span class="tag"><b>Evento</b> <span class="mono">10 a. m. – 3 p. m.</span></span>
+    <span class="tag"><b>Cena privada</b> <span class="mono">7 – 10 p. m.</span> · ${dinnerSeats} lugares</span>
   </div>
 </div>
 </body></html>`;

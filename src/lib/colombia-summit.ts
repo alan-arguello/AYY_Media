@@ -5,9 +5,11 @@ export const colombiaSummit = {
   name: "bogota.forward()",
   path: "/",
   date: "2026-11-19",
-  // The private lunch: arrival 1:30 p. m., happy hour from 5:30 p. m.
-  startDate: "2026-11-19T13:30:00-05:00",
-  endDate: "2026-11-19T18:00:00-05:00",
+  // The event runs 10 a. m. to 3 p. m.; the private dinner, 7 to 10 p. m.
+  startDate: "2026-11-19T10:00:00-05:00",
+  endDate: "2026-11-19T15:00:00-05:00",
+  dinnerStartDate: "2026-11-19T19:00:00-05:00",
+  dinnerEndDate: "2026-11-19T22:00:00-05:00",
   source: "colombia-summit-2026",
   consentVersion: "aiyaiyai-summit-2026-v1",
   organizer: "AIYaiYai",
@@ -101,8 +103,8 @@ export const summitInterestSchema = z.object({
   linkedin: linkedinProfile.refine((url) => url !== "", {
     message: "Comparte tu perfil de LinkedIn: lo usamos para revisar tu solicitud.",
   }),
-  // "general" (the retired summit ticket) stays valid in the database only.
-  ticketType: z.enum(["vip", "vip-plus"], {
+  // "vip-plus" (a retired tier) stays valid in the database only.
+  ticketType: z.enum(["general", "vip"], {
     error: "Elige General o VIP.",
   }),
   consent: z.literal(true, {

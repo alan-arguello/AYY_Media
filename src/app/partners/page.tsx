@@ -10,7 +10,7 @@ export const runtime = "nodejs";
 
 const OG_IMAGE = "/images/colombia-summit/opengraph.png";
 const description =
-  "Propuesta para aliados y sponsors de la comida privada con Alexander Torrenegra y Tania Zapata: un lugar en la mesa, tu marca en todo lo que hacemos y +640K seguidores. Bogotá, 19 de noviembre de 2026.";
+  "Propuesta para aliados y sponsors del evento y la cena privada con Alexander Torrenegra y Tania Zapata: un lugar en la cena, tu marca en todo lo que hacemos y +640K seguidores. Bogotá, 19 de noviembre de 2026.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Comida privada para founders, managers y C-levels con Alexander Torrenegra y Tania Zapata. Bogotá, 19 de noviembre de 2026.",
+        alt: "Evento y cena privada para founders, managers y C-levels con Alexander Torrenegra y Tania Zapata. Bogotá, 19 de noviembre de 2026.",
       },
     ],
   },

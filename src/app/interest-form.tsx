@@ -3,7 +3,7 @@
 import { useActionState, useEffect, useRef } from "react";
 import { ArrowRight as ArrowRightIcon } from "lucide-react";
 import { initialSummitFormState, colombiaSummit } from "@/lib/colombia-summit";
-import { summitTickets } from "@/lib/summit-pricing";
+import { dinnerSeats, summitTickets } from "@/lib/summit-pricing";
 import { submitSummitInterest } from "./actions";
 import { useTicketSelection } from "./ticket-selection";
 import "./ticket-selection.css";
@@ -33,7 +33,7 @@ export function SummitInterestForm() {
           {state.detail ?? "Si hay un lugar para ti, te escribimos por correo o WhatsApp."}
         </p>
         <a className="lp-text-link" href="#agenda">
-          Mira la agenda de la tarde <ArrowRightIcon />
+          Mira el día <ArrowRightIcon />
         </a>
       </div>
     );
@@ -46,7 +46,7 @@ export function SummitInterestForm() {
       // native reset. Keep the draft intact; success replaces the form above.
       onReset={(event) => event.preventDefault()}
       className="lp-form"
-      aria-label="Solicitud de lugar para la comida privada de bogota.forward()"
+      aria-label="Registro para el evento y la cena privada de bogota.forward()"
       aria-busy={pending}
     >
       <fieldset disabled={pending}>
@@ -57,9 +57,9 @@ export function SummitInterestForm() {
           aria-invalid={!!state.errors?.ticketType}
           aria-describedby={state.errors?.ticketType ? "summit-ticket-help summit-ticket-error" : "summit-ticket-help"}
         >
-          <legend>¿Qué lugar te interesa?</legend>
+          <legend>¿Qué entrada te interesa?</legend>
           <p id="summit-ticket-help" className="lp-ticket-selection-help">
-            Los dos incluyen la tarde completa.
+            VIP incluye la cena privada ({dinnerSeats} lugares, por aplicación).
           </p>
           <div className="lp-ticket-radio-options">
             {summitTickets.map((ticket) => (
@@ -81,13 +81,15 @@ export function SummitInterestForm() {
                 <span className="lp-ticket-radio-copy">
                   <span className="lp-ticket-radio-name">{ticket.name}</span>
                   <span className="lp-ticket-radio-description">
-                    {ticket.id === "vip"
-                      ? "Comida, charla privada, feedback 1 a 1 y happy hour"
-                      : "Todo General + 45 min a solas con Alexander"}
+                    {ticket.id === "general"
+                      ? "Evento de 10 a. m. a 3 p. m."
+                      : "Evento + cena privada con Alexander y Tania"}
                   </span>
-                  <span className="lp-ticket-radio-admission">
-                    {ticket.capacity} lugares · Por aplicación
-                  </span>
+                  {ticket.capacity && (
+                    <span className="lp-ticket-radio-admission">
+                      {ticket.capacity} lugares · Por aplicación
+                    </span>
+                  )}
                 </span>
               </label>
             ))}
@@ -263,10 +265,10 @@ export function SummitInterestForm() {
           data-size="md"
         >
           {pending
-            ? "Enviando tu solicitud…"
-            : selectedExperience
-              ? `Solicitar lugar ${selectedExperience.name}`
-              : "Enviar solicitud"}
+            ? "Enviando…"
+            : selectedExperience?.capacity
+              ? `Solicitar ${selectedExperience.name}`
+              : "Registrarme"}
           <ArrowRightIcon aria-hidden="true" />
         </button>
       </fieldset>
@@ -276,7 +278,8 @@ export function SummitInterestForm() {
         </div>
       )}
       <p className="lp-form-note">
-        La solicitud no confirma un lugar ni garantiza el precio de una fase.
+        {selectedExperience?.capacity ? "Por aplicación. " : ""}El registro no
+        confirma una entrada ni garantiza el precio de una fase.
       </p>
     </form>
   );
