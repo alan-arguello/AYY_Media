@@ -5,7 +5,6 @@ import {
   ArrowUpRight,
   CalendarDays,
   ChevronDown,
-  MapPin,
   Ticket,
   Utensils,
 } from "lucide-react";
@@ -264,39 +263,33 @@ export default function BogotaForwardSummitPage() {
                 Ver el día
               </Button>
             </div>
-            <p className="lp-hero-note ds-reveal" style={step(5)}>
-              General, VIP y VIP Plus · {dinnerSeats} lugares en la cena
-            </p>
+          </div>
+
+          {/* The city fills the width and climbs under the copy, where it
+              dissolves into pixels on the paper. */}
+          <div className="lp-hero-stage">
+            <PixelPhoto
+              src={HERO_PHOTO}
+              alt="Bogotá al atardecer frente a los cerros de Monserrate y Guadalupe."
+              sizes="100vw"
+              preload
+              silhouette={0.12}
+              transparent
+              className="lp-hero-photo"
+            />
+            <div className="ds-container lp-hero-tags">
+              <Tag dot>
+                <span>
+                  Bogotá<span className="lp-hero-tag-long">, Colombia</span> · 2.640 m
+                </span>
+              </Tag>
+              <Tag live>
+                <Countdown />
+              </Tag>
+            </div>
           </div>
 
           <div className="ds-container">
-            <figure className="lp-stage">
-              <div className="ds-card lp-stage-frame">
-                <PixelPhoto
-                  src={HERO_PHOTO}
-                  alt="Bogotá al atardecer frente a los cerros de Monserrate y Guadalupe."
-                  sizes="(max-width: 1000px) 100vw, 924px"
-                  preload
-                  cell={16}
-                  solidFrom={0.44}
-                  silhouette={0.35}
-                  className="lp-stage-photo"
-                />
-              </div>
-              <Tag dot className="lp-float lp-float-place">
-                Bogotá, Colombia
-              </Tag>
-              <Tag live className="lp-float lp-float-count">
-                <Countdown />
-              </Tag>
-              <span className="ds-icon-tile lp-float lp-float-pin" aria-hidden="true">
-                <MapPin />
-              </span>
-              <span className="ds-icon-tile lp-float lp-float-cal" aria-hidden="true">
-                <CalendarDays />
-              </span>
-            </figure>
-
             <ul className="lp-facts" aria-label="Datos del evento">
               <li className="ds-card">
                 <CalendarDays aria-hidden="true" />

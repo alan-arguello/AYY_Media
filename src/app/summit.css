@@ -123,14 +123,27 @@
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 
+/* One scene: the copy sits in the "sky" (paper), the city rises underneath
+   and dissolves into pixels just below the buttons, and the facts row
+   straddles the photo's bottom edge. */
 .lp-hero {
-  padding-top: calc(var(--ds-nav) + 80px);
-  padding-bottom: 56px;
+  --hero-band: 400px; /* the solid-city row; grows with the viewport */
+  --hero-reach: 60px; /* how far the photo climbs under the buttons */
+  --px-clear: 30px; /* from the photo's top: left blank… */
+  --px-solid: 240px; /* …and where it becomes solid */
+  --px-cell: 12px;
+  display: grid;
+  grid-template-rows: auto minmax(var(--hero-band), 1fr) auto;
+  min-height: clamp(720px, 100svh, 920px);
+  padding-top: calc(var(--ds-nav) + 56px);
+  padding-bottom: 40px;
 }
 .lp-hero-copy {
+  z-index: 2;
   display: grid;
   justify-items: center;
-  gap: 24px;
+  gap: 20px;
+  padding-bottom: 32px;
   text-align: center;
 }
 .lp-hero h1 {
@@ -146,33 +159,33 @@
 .lp-hero-lead {
   max-width: 470px;
 }
-.lp-hero-note {
-  margin-top: -8px;
-  font-size: 0.875rem;
-  color: var(--ds-muted);
-}
-.lp-stage {
+.lp-hero-stage {
   position: relative;
-  margin: 56px 0 0;
 }
-.lp-stage-photo {
-  aspect-ratio: 2.1 / 1;
-  --px-pos: 50% 45%;
+.lp-hero-photo {
+  position: absolute;
+  inset: calc(-1 * var(--hero-reach)) 0 0;
+  background: transparent;
+  /* Anchored to the top so the sky is what dissolves, not the hills. */
+  --px-pos: 50% 0%;
+}
+/* Without the canvas, the plain photo gets the same blank-to-solid mask. */
+.lp-hero-photo[data-mode="image"] > img {
+  -webkit-mask-image: linear-gradient(to bottom, transparent var(--px-clear), #000 var(--px-solid));
+  mask-image: linear-gradient(to bottom, transparent var(--px-clear), #000 var(--px-solid));
 }
 .px-photo > img {
   object-position: var(--px-pos, 50% 50%);
 }
-.lp-float {
+.lp-hero-stage > .lp-hero-tags {
   position: absolute;
-  z-index: 4;
-}
-.lp-float-place {
-  left: -16px;
-  top: 30%;
-}
-.lp-float-count {
-  right: -16px;
-  top: 14%;
+  left: 0;
+  right: 0;
+  bottom: 64px;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
 }
 .lp-countdown {
   font-family: var(--ds-font-mono);
@@ -180,19 +193,13 @@
   font-feature-settings: "tnum";
   color: var(--ds-ink);
 }
-.lp-float-pin {
-  left: 7%;
-  bottom: -24px;
-}
-.lp-float-cal {
-  right: -24px;
-  top: 56%;
-}
 .lp-facts {
+  position: relative;
+  z-index: 3;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
-  margin-top: 16px;
+  margin-top: -44px;
 }
 .lp-facts li {
   display: grid;
@@ -1002,23 +1009,6 @@
   .lp-footer-inner {
     grid-template-columns: 1fr;
   }
-  .lp-float-place,
-  .lp-float-count {
-    left: auto;
-    right: auto;
-  }
-  .lp-float-place {
-    left: 12px;
-    top: 12px;
-  }
-  .lp-float-count {
-    right: 12px;
-    top: 12px;
-  }
-  .lp-float-pin,
-  .lp-float-cal {
-    display: none;
-  }
 }
 /* Six links plus the button need the full 960 nav; below that, button only. */
 @media (max-width: 1000px) {
@@ -1058,11 +1048,18 @@
     display: none !important;
   }
   .lp-hero {
-    padding-top: calc(var(--ds-nav) + 64px);
-    padding-bottom: 56px;
+    --hero-band: 360px;
+    --hero-reach: 60px;
+    --px-clear: 20px;
+    --px-solid: 220px;
+    --px-cell: 10px;
+    min-height: 0;
+    padding-top: calc(var(--ds-nav) + 48px);
+    padding-bottom: 32px;
   }
   .lp-hero-copy {
-    gap: 20px;
+    gap: 18px;
+    padding-bottom: 24px;
   }
   .lp-actions {
     width: 100%;
@@ -1070,18 +1067,20 @@
   .lp-actions .ds-button {
     flex: 1 1 auto;
   }
-  .lp-stage {
-    margin-top: 48px;
-  }
-  .lp-stage-photo {
-    aspect-ratio: 4 / 5;
+  .lp-hero-photo {
     /* Centro Internacional skyline under the hills. */
-    --px-pos: 74% 50%;
+    --px-pos: 74% 0%;
+  }
+  .lp-hero-stage > .lp-hero-tags {
+    bottom: 14px;
+  }
+  .lp-hero-tag-long {
+    display: none;
   }
   .lp-facts {
     grid-template-columns: 1fr;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 12px;
   }
   .lp-facts li {
     grid-template-columns: auto 1fr;

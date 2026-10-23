@@ -17,6 +17,8 @@ type PixelPhotoProps = {
   silhouette?: number;
   /** CSS filter applied to the photo and its pixels, e.g. a sepia tone. */
   filter?: string;
+  /** Dissolve into transparency instead of paper, so what is behind shows. */
+  transparent?: boolean;
   className?: string;
   children?: React.ReactNode;
 };
@@ -35,6 +37,7 @@ export function PixelPhoto({
   solidFrom = 0.6,
   silhouette = 0,
   filter = "none",
+  transparent = false,
   className,
   children,
 }: PixelPhotoProps) {
@@ -70,6 +73,12 @@ export function PixelPhoto({
     let colors = new Uint8ClampedArray(0);
     let noise = new Float32Array(0);
     let flick = new Float32Array(0);
+    // Fractions of the height: nothing is drawn above clearAt, the photo is
+    // solid from solidAt. CSS can set both in pixels (--px-clear, --px-solid)
+    // and the cell size (--px-cell), so they can change per breakpoint.
+    let clearAt = 0;
+    let solidAt = solidFrom;
+    let size = cell;
     let progress = reduce ? 1 : 0;
     let started = reduce;
     let visible = false;
@@ -89,6 +98,11 @@ export function PixelPhoto({
       h = wrap.clientHeight;
       if (!w || !h) return false;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const style = getComputedStyle(wrap);
+      clearAt = (parseFloat(style.getPropertyValue("--px-clear")) || 0) / h;
+      const solidPx = parseFloat(style.getPropertyValue("--px-solid"));
+      solidAt = solidPx > 0 ? solidPx / h : solidFrom;
+      size = parseFloat(style.getPropertyValue("--px-cell")) || cell;
       canvas!.width = Math.round(w * dpr);
       canvas!.height = Math.round(h * dpr);
 
@@ -112,14 +126,14 @@ export function PixelPhoto({
       b.filter = filter;
       b.drawImage(source, sx, sy, sw, sh, 0, 0, base.width, base.height);
 
-      cols = Math.ceil(w / cell);
-      rows = Math.ceil(h / cell);
+      cols = Math.ceil(w / size);
+      rows = Math.ceil(h / size);
       sample.width = cols;
       sample.height = rows;
       const s = sample.getContext("2d", { willReadFrequently: true })!;
       s.imageSmoothingQuality = "high";
       s.filter = filter;
-      s.drawImage(source, sx, sy, sw, sh, 0, 0, w / cell, h / cell);
+      s.drawImage(source, sx, sy, sw, sh, 0, 0, w / size, h / size);
       colors = s.getImageData(0, 0, cols, rows).data;
 
       seed = 1911;
@@ -135,8 +149,13 @@ export function PixelPhoto({
       const lift = (1 - progress) * 1.25;
       ctx!.lineWidth = 1;
       for (let r = 0; r < rows; r++) {
-        const t = (r + 0.5) / rows / solidFrom;
-        const y = r * cell;
+        const y = r * size;
+        const f = (r + 0.5) / rows;
+        if (f < clearAt) {
+          ctx!.clearRect(0, y, w, size);
+          continue;
+        }
+        const t = (f - clearAt) / (solidAt - clearAt);
         for (let c = 0; c < cols; c++) {
           const i = r * cols + c;
           const o = i * 4;
@@ -146,24 +165,28 @@ export function PixelPhoto({
           const v =
             t + (0.45 - lum) * silhouette + (noise[i] - 0.5) * 0.45 - lift + flick[i];
           if (v >= 1) continue;
-          const x = c * cell;
+          const x = c * size;
           const rgb = `${colors[o]},${colors[o + 1]},${colors[o + 2]}`;
-          if (v >= 0.45) {
+          if (v >= 0.5) {
             // A solid pixel of the photo's own colour, on a faint ink grid.
             ctx!.fillStyle = `rgb(${rgb})`;
-            ctx!.fillRect(x, y, cell, cell);
+            ctx!.fillRect(x, y, size, size);
             ctx!.strokeStyle = "rgba(13,11,1,0.16)";
-            ctx!.strokeRect(x + 0.5, y + 0.5, cell - 1, cell - 1);
+            ctx!.strokeRect(x + 0.5, y + 0.5, size - 1, size - 1);
             continue;
           }
-          ctx!.fillStyle = paper;
-          ctx!.fillRect(x, y, cell, cell);
-          if (v >= 0.3) {
-            ctx!.fillStyle = `rgba(${rgb},0.3)`;
-            ctx!.fillRect(x + 1, y + 1, cell - 1, cell - 1);
-          } else if (v >= 0.18) {
+          if (transparent) ctx!.clearRect(x, y, size, size);
+          else {
+            ctx!.fillStyle = paper;
+            ctx!.fillRect(x, y, size, size);
+          }
+          // Then a halftone: the cell's colour at two strengths, then an outline.
+          if (v >= 0.26) {
+            ctx!.fillStyle = `rgba(${rgb},${v >= 0.38 ? 0.6 : 0.3})`;
+            ctx!.fillRect(x + 1, y + 1, size - 1, size - 1);
+          } else if (v >= 0.14) {
             ctx!.strokeStyle = line;
-            ctx!.strokeRect(x + 0.5, y + 0.5, cell - 1, cell - 1);
+            ctx!.strokeRect(x + 0.5, y + 0.5, size - 1, size - 1);
           }
         }
       }
@@ -247,7 +270,7 @@ export function PixelPhoto({
       photo.removeEventListener("load", ready);
       photo.removeEventListener("error", onError);
     };
-  }, [cell, solidFrom, silhouette, filter]);
+  }, [cell, solidFrom, silhouette, filter, transparent]);
 
   return (
     <div
