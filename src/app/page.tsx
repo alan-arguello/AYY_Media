@@ -15,6 +15,7 @@ import { PixelPhoto } from "@/components/pixel-photo";
 import { SummitInterestForm } from "./interest-form";
 import { speakers, type SummitSpeaker } from "./speakers";
 import { EventCarousel } from "./event-carousel";
+import { pastEventSupporters } from "./past-events";
 import { SiteFooter, SiteNav } from "./site-chrome";
 import { Countdown } from "./countdown";
 import { TicketPricing } from "./ticket-pricing";
@@ -366,6 +367,26 @@ export default function BogotaForwardSummitPage() {
             />
           </div>
           <EventCarousel />
+          <div className="ds-container lp-community-collabs">
+            <div className="lp-supporters-head">
+              <h3>Empresas con las que hemos colaborado antes en Silicon Valley</h3>
+              <Tag>No son sponsors de este evento</Tag>
+            </div>
+            <ul className="lp-supporters">
+              {pastEventSupporters.map((partner) => (
+                <li key={partner.name} className="ds-card">
+                  <Image
+                    src={partner.image}
+                    alt={partner.name}
+                    width={160}
+                    height={40}
+                    className="lp-mono-logo"
+                    data-compact={partner.name === "v0" || undefined}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         <section className="lp-partners-band" aria-labelledby="partners-band-title">
