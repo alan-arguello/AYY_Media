@@ -103,9 +103,8 @@ export const summitInterestSchema = z.object({
   linkedin: linkedinProfile.refine((url) => url !== "", {
     message: "Comparte tu perfil de LinkedIn: lo usamos para revisar tu solicitud.",
   }),
-  // "vip-plus" (a retired tier) stays valid in the database only.
-  ticketType: z.enum(["general", "vip"], {
-    error: "Elige General o VIP.",
+  ticketType: z.enum(["general", "vip", "vip-plus"], {
+    error: "Elige General, VIP o VIP Plus.",
   }),
   consent: z.literal(true, {
     error: "Autoriza el contacto para recibir novedades.",

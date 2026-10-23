@@ -59,7 +59,7 @@ export function SummitInterestForm() {
         >
           <legend>¿Qué entrada te interesa?</legend>
           <p id="summit-ticket-help" className="lp-ticket-selection-help">
-            VIP incluye la cena privada ({dinnerSeats} lugares, por aplicación).
+            VIP y VIP Plus incluyen la cena privada ({dinnerSeats} lugares, por aplicación).
           </p>
           <div className="lp-ticket-radio-options">
             {summitTickets.map((ticket) => (
@@ -83,7 +83,9 @@ export function SummitInterestForm() {
                   <span className="lp-ticket-radio-description">
                     {ticket.id === "general"
                       ? "Evento de 10 a. m. a 3 p. m."
-                      : "Evento + cena privada con Alexander y Tania"}
+                      : ticket.id === "vip"
+                        ? "Evento + cena privada con Alexander y Tania"
+                        : "Todo VIP + 1 a 1 de 60 min con Alexander"}
                   </span>
                   {ticket.capacity && (
                     <span className="lp-ticket-radio-admission">

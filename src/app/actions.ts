@@ -55,9 +55,9 @@ export async function submitSummitInterest(
     // disclose whether a person already registered or which ticket they chose.
     return {
       status: "success",
-      message: result.data.ticketType === "vip" ? "Recibimos tu solicitud." : "Recibimos tu registro.",
+      message: result.data.ticketType !== "general" ? "Recibimos tu solicitud." : "Recibimos tu registro.",
       detail: `${
-        result.data.ticketType === "vip"
+        result.data.ticketType !== "general"
           ? "Revisamos cada solicitud para la cena. Si hay un lugar para ti, te escribimos por correo o WhatsApp."
           : "Te escribimos por correo o WhatsApp con los siguientes pasos para asistir."
       } Para cambiar un registro anterior, escríbenos a ${colombiaSummit.contactEmail}.`,

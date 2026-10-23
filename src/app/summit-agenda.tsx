@@ -128,7 +128,7 @@ export function SummitAgenda() {
                 <Portraits people={hosts} />
                 <div className="agenda-topic">
                   <span className="agenda-format">
-                    Solo VIP · {dinnerSeats} lugares · Por aplicación
+                    VIP y VIP Plus · {dinnerSeats} lugares · Por aplicación
                   </span>
                   <h4>Cena con Alexander y Tania</h4>
                   <p>Una mesa pequeña para seguir la conversación del día.</p>

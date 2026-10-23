@@ -62,15 +62,21 @@ test("ticket prices use unambiguous USD-style thousands grouping", () => {
   assert.equal(formatTicketPrice(1349), "$1,349");
 });
 
-test("General is the event; VIP adds the 20-seat private dinner", () => {
-  const capacity = Object.fromEntries(summitTickets.map((ticket) => [ticket.id, ticket.capacity]));
-  // Ids are the values stored in Supabase; "vip-plus" is retired.
-  assert.deepEqual(capacity, { general: null, vip: 20 });
-  assert.deepEqual(summitTickets.map((ticket) => ticket.name), ["General", "VIP"]);
+test("General is the event; VIP and VIP Plus share the 20-seat dinner", () => {
+  const byId = Object.fromEntries(summitTickets.map((ticket) => [ticket.id, ticket]));
+  assert.deepEqual(summitTickets.map((ticket) => ticket.name), ["General", "VIP", "VIP Plus"]);
+  assert.deepEqual(
+    Object.fromEntries(summitTickets.map((ticket) => [ticket.id, ticket.capacity])),
+    { general: null, vip: 16, "vip-plus": 4 },
+  );
   assert.equal(dinnerSeats, 20);
-  const [general, vip] = summitTickets;
-  for (const benefit of general.benefits) assert.ok(vip.benefits.includes(benefit), benefit);
+  assert.deepEqual(byId.general.prices, [349, 479, 579]);
+  assert.deepEqual(byId.vip.prices, [749, 949, 1049]);
+  assert.deepEqual(byId["vip-plus"].prices, [1349, 1549, 1749]);
+  // Each tier includes everything in the one before it.
+  for (const benefit of byId.general.benefits) assert.ok(byId.vip.benefits.includes(benefit), benefit);
+  for (const benefit of byId.vip.benefits) assert.ok(byId["vip-plus"].benefits.includes(benefit), benefit);
   const atDinner = (ticket) => ticket.benefits.some((benefit) => benefit.startsWith("Cena privada"));
-  assert.equal(atDinner(general), false);
-  assert.equal(atDinner(vip), true);
+  assert.deepEqual(summitTickets.map(atDinner), [false, true, true]);
+  assert.ok(byId["vip-plus"].benefits.some((benefit) => benefit.includes("60 minutos")));
 });

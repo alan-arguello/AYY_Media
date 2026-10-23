@@ -55,9 +55,9 @@ export function TicketPricing() {
       <div className="ds-container">
         <header className="lp-pricing-heading">
           <h2 id="pricing-title" className="ds-display-l">
-            Dos formas de <span className="ds-accent">vivir el día.</span>
+            Tres formas de <span className="ds-accent">vivir el día.</span>
           </h2>
-          <p>VIP incluye la cena privada: {dinnerSeats} lugares, por aplicación.</p>
+          <p>VIP y VIP Plus incluyen la cena privada: {dinnerSeats} lugares, por aplicación.</p>
         </header>
 
         <div className="lp-phases" role="group" aria-label="Comparar precios por fase">

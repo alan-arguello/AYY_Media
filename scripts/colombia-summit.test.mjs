@@ -103,8 +103,8 @@ test("requires a WhatsApp number with a country code outside Colombia", () => {
   assert.equal(parseSummitInterest(fileValue).success, false);
 });
 
-test("accepts each ticket on offer: General and VIP", () => {
-  for (const ticketType of ["general", "vip"]) {
+test("accepts each ticket on offer: General, VIP and VIP Plus", () => {
+  for (const ticketType of ["general", "vip", "vip-plus"]) {
     const result = parseSummitInterest(form({ ticketType }));
     assert.equal(result.success, true);
     assert.equal(result.data.ticketType, ticketType);
@@ -117,7 +117,6 @@ test("rejects missing, unknown and malicious ticket types", () => {
   assert.equal(parseSummitInterest(missing).success, false);
   for (const ticketType of [
     "",
-    "vip-plus",
     "VIP",
     "vip plus",
     " vip ",

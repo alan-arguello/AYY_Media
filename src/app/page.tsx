@@ -22,7 +22,7 @@ import { TicketPricing } from "./ticket-pricing";
 import { TicketSelectionProvider } from "./ticket-selection";
 import { PrivateDinner } from "./private-dinner";
 import { SummitAgenda } from "./summit-agenda";
-import { dinnerSeats } from "@/lib/summit-pricing";
+import { dinnerSeats, summitTickets } from "@/lib/summit-pricing";
 import { chip, flag, signal, skyline } from "./pixel-icons";
 
 export const runtime = "nodejs";
@@ -70,6 +70,9 @@ const pillars = [
   { art: signal, title: "Para quienes deciden", body: "Founders, managers y C-levels." },
 ];
 
+const seatsFor = (id: "vip" | "vip-plus") =>
+  summitTickets.find((ticket) => ticket.id === id)?.capacity ?? 0;
+
 const faqs: { q: string; a: React.ReactNode }[] = [
   {
     q: "¿Cuándo y dónde es?",
@@ -80,12 +83,16 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     a: "Founders, managers y C-levels.",
   },
   {
-    q: "¿Qué diferencia hay entre General y VIP?",
-    a: `General incluye el evento. VIP suma la cena privada con Alexander y Tania: ${dinnerSeats} lugares, por aplicación.`,
+    q: "¿Qué diferencia hay entre General, VIP y VIP Plus?",
+    a: `General incluye el evento. VIP suma la cena privada con Alexander y Tania. VIP Plus suma, además, una sesión 1 a 1 de 60 minutos con Alexander. La cena tiene ${dinnerSeats} lugares: ${seatsFor("vip")} VIP y ${seatsFor("vip-plus")} VIP Plus, por aplicación.`,
+  },
+  {
+    q: "¿Cuándo es la sesión 1 a 1 de VIP Plus?",
+    a: "Después del evento. Es una sesión individual de 60 minutos con Alexander Torrenegra; la fecha y la hora se coordinan por separado.",
   },
   {
     q: "¿Cómo me registro?",
-    a: "Eliges General o VIP y nos dejas tus datos, tu empresa y tu LinkedIn. Te escribimos con los siguientes pasos y el pago; las solicitudes VIP pasan por revisión. El registro no confirma una entrada ni garantiza el precio de una fase.",
+    a: "Eliges General, VIP o VIP Plus y nos dejas tus datos, tu empresa y tu LinkedIn. Te escribimos con los siguientes pasos y el pago; las solicitudes VIP y VIP Plus pasan por revisión. El registro no confirma una entrada ni garantiza el precio de una fase.",
   },
   {
     q: "¿Cómo funcionan las fases de precios?",
@@ -258,7 +265,7 @@ export default function BogotaForwardSummitPage() {
               </Button>
             </div>
             <p className="lp-hero-note ds-reveal" style={step(5)}>
-              General · VIP con cena ({dinnerSeats} lugares)
+              General, VIP y VIP Plus · {dinnerSeats} lugares en la cena
             </p>
           </div>
 
@@ -305,8 +312,8 @@ export default function BogotaForwardSummitPage() {
               </li>
               <li className="ds-card">
                 <Ticket aria-hidden="true" />
-                <strong>General · VIP</strong>
-                <span>VIP incluye la cena</span>
+                <strong>3 experiencias</strong>
+                <span>General · VIP · VIP Plus</span>
               </li>
             </ul>
           </div>
