@@ -29,6 +29,10 @@
 .lp :is(section, [id]) {
   scroll-margin-top: calc(var(--ds-nav) + 32px);
 }
+.lp-nowrap {
+  display: inline-block;
+  white-space: nowrap;
+}
 .lp-actions {
   display: flex;
   flex-wrap: wrap;

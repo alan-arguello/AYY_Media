@@ -27,8 +27,11 @@ export const metadata: Metadata = {
   creator: colombiaSummit.organizer,
   publisher: colombiaSummit.organizer,
   category: "technology",
-  // Phone numbers in the copy are examples; iOS should not turn them into links.
-  formatDetection: { telephone: false, address: false, email: false },
+  // iOS Safari turns dates, times and numbers into links by rewriting the
+  // DOM before React hydrates, which breaks hydration and misplaces nodes
+  // (the agenda's "10:00 a. m. → 3:00 p. m." ended up mid-list). Next's
+  // formatDetection has no `date` key, so the meta tag is written in full.
+  other: { "format-detection": "telephone=no, date=no, address=no, email=no" },
 };
 
 export const viewport: Viewport = {

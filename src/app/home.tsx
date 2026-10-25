@@ -407,7 +407,11 @@ export function HomePage() {
                   </div>
                   <div>
                     <dt>Horario</dt>
-                    <dd>Evento 10 a. m. a 3 p. m. · Cena 7 a 10 p. m.</dd>
+                    <dd>
+                      {/* One range per line; "a. m." never splits. */}
+                      <span className="lp-nowrap">Evento 10{"\u00a0"}a.{"\u00a0"}m. a 3{"\u00a0"}p.{"\u00a0"}m.</span>{" "}
+                      <span className="lp-nowrap">Cena 7 a 10{"\u00a0"}p.{"\u00a0"}m.</span>
+                    </dd>
                   </div>
                   <div>
                     <dt>Dónde</dt>

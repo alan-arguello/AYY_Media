@@ -174,20 +174,20 @@ html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav-links {
 html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav-links a:hover {
   color: #f4f5f2;
 }
-html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-logo {
+html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav .ds-logo {
   color: #f4f5f2;
 }
-html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-logo svg rect {
+html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav .ds-logo svg rect {
   fill: #f4f5f2;
 }
-html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-logo svg rect[fill="#0e6b43"] {
+html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav .ds-logo svg rect[fill="#0e6b43"] {
   fill: #5bc896;
 }
-html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-code-fn {
+html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav .ds-code-fn {
   color: #5bc896;
 }
-html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-code-dot,
-html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-code-call {
+html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav .ds-code-dot,
+html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav .ds-code-call {
   color: rgb(244 245 242 / 0.55);
 }
 html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav-cta {
