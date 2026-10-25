@@ -32,7 +32,7 @@
   display: grid;
   gap: 6px;
   align-self: flex-start;
-  font: 380 1.5rem/1.15 var(--ds-font-display);
+  font: 400 1.5rem/1.15 var(--ds-font-display);
   letter-spacing: -0.02em;
 }
 .agenda-date span {
@@ -65,7 +65,7 @@
   white-space: nowrap;
 }
 .agenda-ranges time {
-  font: 380 2.75rem/1 var(--ds-font-display);
+  font: 400 2.75rem/1 var(--ds-font-display);
   letter-spacing: -0.03em;
   color: var(--ds-bg);
 }
@@ -105,7 +105,7 @@
 }
 
 .agenda-part-head h3 {
-  font: 380 1.375rem/1.2 var(--ds-font-display);
+  font: 400 1.375rem/1.2 var(--ds-font-display);
   letter-spacing: -0.02em;
 }
 
@@ -245,7 +245,7 @@
 .agenda-topic h3,
 .agenda-topic h4 {
   margin: 0;
-  font: 380 clamp(1.375rem, 1.05rem + 0.9vw, 1.875rem)/1.12 var(--ds-font-display);
+  font: 400 clamp(1.375rem, 1.05rem + 0.9vw, 1.875rem)/1.12 var(--ds-font-display);
   letter-spacing: -0.025em;
   text-wrap: balance;
 }
@@ -279,7 +279,7 @@
 }
 
 .agenda-coming h3 {
-  font: 380 1.5rem/1.2 var(--ds-font-display);
+  font: 400 1.5rem/1.2 var(--ds-font-display);
 }
 
 .agenda-coming p {
