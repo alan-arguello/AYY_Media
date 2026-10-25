@@ -42,7 +42,7 @@
 .lp-ticket-radio[data-selected] {
   border-style: solid;
   border-color: var(--ds-blue);
-  background: #f6ece7;
+  background: var(--ds-blue-tint);
   box-shadow: inset 3px 0 0 var(--ds-blue);
 }
 

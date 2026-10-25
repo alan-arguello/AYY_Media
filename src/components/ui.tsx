@@ -96,16 +96,16 @@ export function SectionHeading({
 }
 
 const PIXEL_PALETTE: Record<string, string> = {
-  k: "#131316", // ink
-  d: "#34343a", // dark
-  m: "#8a8a92", // mid grey
-  g: "#dcdad3", // light grey
+  k: "#121411", // ink
+  d: "#2a2d28", // dark
+  m: "#80847d", // mid grey
+  g: "#d9dbd4", // light grey
   w: "#ffffff",
-  b: "#b4482a", // brick
-  a: "#c9765c", // light brick
-  l: "#e3a58f", // pale brick
-  y: "#f3e5df", // highlight
-  r: "#b4482a", // accent (brick)
+  b: "#0e6b43", // accent
+  a: "#5bc896", // light accent
+  l: "#5bc896", // light accent
+  y: "#dcefe4", // highlight
+  r: "#0e6b43", // accent
 };
 
 // Renders a bitmap (one string per row, one character per pixel, "." for

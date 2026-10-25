@@ -108,7 +108,7 @@ export function SummitAgenda() {
             <div className="agenda-part-head">
               <span className="agenda-part-num">01</span>
               <h3>El evento</h3>
-              <span className="agenda-part-time">10:00 a. m. – 3:00 p. m.</span>
+              <span className="agenda-part-time">10:00 a. m. a 3:00 p. m.</span>
             </div>
             <ol className="agenda-sessions" role="list" aria-label="Sesiones del evento">
               {sessions.map((session, index) => (
@@ -130,7 +130,7 @@ export function SummitAgenda() {
             <div className="agenda-part-head">
               <span className="agenda-part-num">02</span>
               <h3>La cena privada</h3>
-              <span className="agenda-part-time">7:00 – 10:00 p. m.</span>
+              <span className="agenda-part-time">7:00 a 10:00 p. m.</span>
             </div>
             <div className="agenda-sessions">
               <div className="agenda-session">

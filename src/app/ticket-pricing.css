@@ -2,80 +2,60 @@
 .lp-phases {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  max-width: 690px;
+  max-width: 600px;
+  margin-inline: auto;
   border: 1px solid var(--ds-line);
 }
 .lp-phase {
   position: relative;
   display: grid;
   gap: 5px;
-  padding: 18px 12px 15px;
+  padding: 14px 12px 12px;
   border: 0;
-  background: var(--ds-bg);
+  background: var(--ds-field);
   text-align: center;
   cursor: pointer;
   transition: background var(--ds-fast), color var(--ds-fast);
 }
 .lp-phase + .lp-phase { border-left: 1px solid var(--ds-line); }
 .lp-phase[aria-pressed="true"] {
-  background: var(--ds-blue);
-  color: white;
+  background: var(--ds-ink);
+  color: var(--ds-bg);
 }
-.lp-phase[aria-pressed="true"]::after {
-  content: "";
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  left: calc(50% - 4px);
-  bottom: -5px;
-  background: var(--ds-blue);
-  transform: rotate(45deg);
-}
-.lp-phase:hover:not([aria-pressed="true"]) { background: var(--ds-blue-tint); }
-.lp-phase-name { font: 400 1.125rem/1.2 var(--ds-font-display); }
+.lp-phase:hover:not([aria-pressed="true"]) { background: var(--ds-surface); }
+.lp-phase-name { font: 500 0.9375rem/1.3 var(--ds-font-text); }
 .lp-phase-date { font-size: 0.875rem; }
 .lp-phase-status { font-size: 0.6875rem; opacity: 0.78; }
 .lp-phase-caption {
-  margin: 18px 0 30px;
+  margin: 14px 0 32px;
+  text-align: center;
   color: var(--ds-muted);
   font-size: 0.8125rem;
 }
 .lp-ticket-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 16px;
 }
 .lp-ticket {
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 26px 22px 18px;
-  border: 1px solid var(--ds-line-strong);
-  background: var(--ds-bg);
-}
-.lp-ticket::before {
-  position: absolute;
-  content: "";
-  left: -1px;
-  top: -1px;
-  width: 48px;
-  height: 3px;
-  background: var(--ds-line-strong);
+  padding: 28px 24px 20px;
+  border: 1px solid var(--ds-line);
+  background: var(--ds-field);
 }
 .lp-ticket[data-tier="vip"] {
-  border-color: var(--ds-blue);
-  background: #f6ece7;
+  border-color: var(--ds-ink);
 }
-.lp-ticket[data-tier="vip"]::before { background: var(--ds-blue); }
 .lp-ticket[data-tier="vip-plus"] {
-  background: #18181b;
-  border-color: #18181b;
+  background: #121411;
+  border-color: #121411;
   color: var(--ds-bg);
-  --ds-muted: #c4c1bb;
-  --ds-line: #3a3a40;
-  --ds-blue: #e3a58f;
+  --ds-muted: #a3a79f;
+  --ds-line: #2a2d28;
+  --ds-blue: var(--ds-yellow);
 }
-.lp-ticket[data-tier="vip-plus"]::before { background: var(--ds-yellow); }
 .lp-ticket h3 {
   font: 400 1.5rem/1.1 var(--ds-font-display);
   letter-spacing: -0.03em;
@@ -99,10 +79,10 @@
 .lp-ticket-price-block { padding: 22px 0 24px; }
 .lp-ticket-price { display: flex; align-items: baseline; gap: 7px; }
 .lp-ticket-price > span:first-child {
-  font: 400 clamp(2rem, 3vw, 2.5rem)/1 var(--ds-font-display);
-  letter-spacing: -0.055em;
+  font: 400 2.25rem/1 var(--ds-font-display);
+  letter-spacing: -0.02em;
 }
-.lp-ticket-currency { font: 400 0.75rem/1 var(--ds-font-mono); color: var(--ds-muted); }
+.lp-ticket-currency { font-size: 0.8125rem; color: var(--ds-muted); }
 .lp-ticket-deadline { margin-top: 10px; font-size: 0.75rem; color: var(--ds-muted); }
 .lp-ticket-benefits {
   display: grid;
@@ -138,10 +118,10 @@
   color: var(--ds-muted);
   font-size: 0.75rem;
 }
-.lp-ticket-schedule dd { font-family: var(--ds-font-mono); }
+.lp-ticket-schedule dd { font-feature-settings: "tnum"; }
 .lp-ticket-schedule [data-selected] { font-weight: 600; color: inherit; }
 .lp-ticket-cta { width: 100%; justify-content: space-between; font-size: 0.875rem; }
-.lp-ticket[data-tier="vip-plus"] .lp-ticket-cta { background: var(--ds-bg); color: #18181b; }
+.lp-ticket[data-tier="vip-plus"] .lp-ticket-cta { background: var(--ds-bg); color: #121411; }
 .lp-ticket[data-tier="vip-plus"] .lp-ticket-cta:hover { background: var(--ds-yellow); }
 .lp-ticket-cta-note { margin-top: 10px; color: var(--ds-muted); text-align: center; font-size: 0.6875rem; }
 .lp-pricing-footnote { max-width: 690px; margin: 24px auto 0; text-align: center; font-size: 0.75rem; color: var(--ds-muted); }
@@ -151,7 +131,7 @@
   .lp-ticket-grid { grid-template-columns: 1fr; gap: 20px; max-width: 460px; margin-inline: auto; }
   .lp-ticket { padding: 28px; }
   .lp-ticket-description, .lp-ticket-admission { min-height: 0; }
-  .lp-ticket-price > span:first-child { font-size: 2.5rem; }
+  .lp-ticket-price > span:first-child { font-size: 2.25rem; }
   .lp-ticket-price-block { padding-top: 24px; }
   .lp-phase { padding: 16px 6px 13px; }
   .lp-phase-date { font-size: 0.75rem; }

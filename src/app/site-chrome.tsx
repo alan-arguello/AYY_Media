@@ -80,21 +80,14 @@ export function SiteFooter({ home = "" }: { home?: string }) {
         <div className="lp-footer-base">
           <p>© 2026 bogota.forward() · Bogotá, Colombia</p>
           <p>
-            Grabado y semitono creados a partir de fotos de{" "}
+            Foto de Bogotá:{" "}
             <a
               href="https://commons.wikimedia.org/wiki/File:Bogot%C3%A1_y_Cerros_Orientales.jpg"
               {...external}
             >
               Felipeortegag
             </a>{" "}
-            (CC BY-SA 4.0; el grabado se comparte con la misma licencia) y{" "}
-            <a
-              href="https://commons.wikimedia.org/wiki/File:El_cielo_del_atardecer_sobre_Bogot%C3%A1,_Colombia,_2015,_por_Cristian_Baron_(Unsplash).jpg"
-              {...external}
-            >
-              Cristian Baron
-            </a>{" "}
-            (CC0).
+            (CC BY-SA 4.0).
           </p>
         </div>
       </div>

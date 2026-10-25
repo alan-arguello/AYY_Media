@@ -18,6 +18,7 @@
   padding: 24px 22px 26px;
 }
 .partners-offer-index {
+  display: none;
   position: absolute;
   top: 12px;
   right: 14px;
@@ -146,6 +147,7 @@
 .partners-apply {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: start;
   gap: 16px;
   margin-top: 48px;
   scroll-margin-top: calc(var(--ds-nav) + 32px);
@@ -157,27 +159,6 @@
   gap: 20px;
   padding: 24px;
   background: var(--ds-surface);
-}
-/* Beside the long form the pitch card is tall: a flight over the clouds,
-   in halftone, rises from its foot. */
-@media (min-width: 901px) {
-  .partners-pitch {
-    isolation: isolate;
-    overflow: hidden;
-    background: var(--ds-bg);
-  }
-  .partners-apply .partners-pitch::after {
-    display: block;
-    content: "";
-    position: absolute;
-    inset: auto 0 0;
-    z-index: -1;
-    width: auto;
-    height: 62%;
-    background: url("/images/editorial/vuelo-tinta-sm.webp") 46% 100% / cover no-repeat;
-    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%);
-    mask-image: linear-gradient(to bottom, transparent, #000 40%);
-  }
 }
 .partners-pitch h3 {
   font: 400 clamp(1.5rem, 1.25rem + 0.9vw, 2rem)/1.12 var(--ds-font-display);
@@ -199,11 +180,11 @@
 }
 .partners-steps li::before {
   counter-increment: step;
-  content: "0" counter(step);
+  content: counter(step);
   position: absolute;
-  top: 0.25em;
+  top: 0.2em;
   left: 0;
-  font: 500 0.75rem/1 var(--ds-font-mono);
+  font: 500 0.875rem/1 var(--ds-font-text);
   color: var(--ds-blue);
 }
 .partners-steps strong {
@@ -255,7 +236,7 @@
 .pt-choice:has(input:checked) {
   border-style: solid;
   border-color: var(--ds-blue);
-  background: #f6ece7;
+  background: var(--ds-blue-tint);
   box-shadow: inset 3px 0 0 var(--ds-blue);
 }
 .pt-choice[data-invalid] {

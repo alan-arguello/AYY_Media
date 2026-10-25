@@ -10,8 +10,8 @@ html {
 }
 body {
   margin: 0;
-  background: #f4f3ef;
-  color: #131316;
+  background: #f4f5f2;
+  color: #121411;
   font-family: var(--font-text), system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -55,7 +55,7 @@ em {
   font-style: normal;
 }
 ::selection {
-  background: #e6e1da;
+  background: #dcefe4;
   color: #000;
 }
 @media (prefers-reduced-motion: reduce) {

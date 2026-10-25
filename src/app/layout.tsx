@@ -23,7 +23,7 @@ const newsreader = localFont({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f4f3ef",
+  themeColor: "#f4f5f2",
   colorScheme: "light",
 };
 

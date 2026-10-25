@@ -73,34 +73,33 @@
   opacity: 1;
 }
 
-/* ── Nav ─────────────────────────────────────────────────────────────────── */
+/* ── Nav: a full-width bar whose content sits on the page grid ──────────── */
 
 .lp-nav {
   position: fixed;
-  top: 20px;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 40;
-  pointer-events: none;
+  border-bottom: 1px solid transparent;
+  background: rgb(244 245 242 / 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 .lp-nav-inner {
   display: flex;
   align-items: center;
-  gap: 24px;
-  width: min(960px, 100% - 32px);
+  gap: 28px;
+  width: min(var(--ds-container), 100%);
   height: var(--ds-nav);
   margin-inline: auto;
-  padding: 0 12px 0 16px;
-  border: 1px solid var(--ds-line);
-  background: rgb(244 243 239 / 0.86);
-  backdrop-filter: blur(14px) saturate(1.4);
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  pointer-events: auto;
+  padding-inline: var(--ds-gutter);
 }
 .lp-nav-links {
   display: flex;
-  gap: 18px;
+  gap: 24px;
   margin-left: auto;
+  font-size: 0.9375rem;
   color: var(--ds-muted);
 }
 .lp-nav-links a {
@@ -111,130 +110,67 @@
 .lp-nav-links a[aria-current="page"] {
   color: var(--ds-ink);
 }
+/* The bar gets its hairline once the page scrolls under it. */
+@supports (animation-timeline: scroll()) {
+  .lp-nav {
+    animation: lp-nav-line linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 24px;
+  }
+  @keyframes lp-nav-line {
+    to {
+      border-bottom-color: var(--ds-line);
+    }
+  }
+}
 
-/* ── Hero ────────────────────────────────────────────────────────────────── */
+/* ── Hero: centred, type only ───────────────────────────────────────────── */
 
-/* Editorial opening: a dated label, a large two-tone headline and the lede
-   with the calls to action; then Bogotá as a line engraving rising out of
-   the same paper, and the facts of the day as a hairline row. */
 .lp-hero {
-  --hero-band: clamp(300px, 34vw, 500px);
-  --hero-reach: 150px; /* how far the art climbs behind the lede */
-  --art-solid: 300px; /* where its fade from paper ends */
-  padding-top: calc(var(--ds-nav) + 88px);
+  padding: calc(var(--ds-nav) + 96px) 0 0;
 }
 .lp-hero-copy {
-  z-index: 2;
   display: grid;
-  gap: 32px;
+  justify-items: center;
+  gap: 24px;
+  text-align: center;
 }
-.lp-hero-meta {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.lp-hero-meta-rule {
-  width: 56px;
-  height: 1px;
-  background: var(--ds-line-strong);
-}
-.lp-hero-meta-side {
-  font: 500 0.75rem/1.3 var(--ds-font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ds-muted);
+.lp-hero-eyebrow {
+  font-size: 0.9375rem;
+  color: var(--ds-blue);
 }
 .lp-hero-title {
-  max-width: 12.5em;
-}
-.lp-hero-foot {
-  display: grid;
-  grid-template-columns: minmax(0, 31em) auto;
-  justify-content: space-between;
-  align-items: end;
-  gap: 24px 48px;
-}
-.lp-hero-lede {
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  letter-spacing: -0.012em;
-  color: var(--ds-muted);
-  text-wrap: pretty;
+  max-width: 15em;
 }
 .lp-hero .lp-actions {
-  justify-content: flex-end;
-}
-.lp-hero-stage {
-  position: relative;
-  height: var(--hero-band);
-  margin-top: 48px;
-}
-.lp-hero-art {
-  position: absolute;
-  inset: calc(-1 * var(--hero-reach)) 0 0;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, rgb(0 0 0 / 0.3) calc(var(--art-solid) * 0.5), #000 var(--art-solid));
-  mask-image: linear-gradient(to bottom, transparent 0, rgb(0 0 0 / 0.3) calc(var(--art-solid) * 0.5), #000 var(--art-solid));
-}
-.lp-hero-img {
-  /* 64px of spare art above the frame, so the scroll drift never shows an
-     edge. Overrides next/image's inline fill box. */
-  top: -64px !important;
-  height: calc(100% + 64px) !important;
-  object-fit: cover;
-  object-position: 50% 12%;
-  transform-origin: 50% 80%;
-  animation: lp-art-in 2.4s var(--ds-ease-out) both;
-}
-@keyframes lp-art-in {
-  from {
-    opacity: 0;
-    transform: scale(1.04) translateY(14px);
-  }
-}
-/* As the page scrolls, the engraving sinks a little slower than the copy. */
-@keyframes lp-art-drift {
-  to {
-    translate: 0 64px;
-  }
-}
-@supports (animation-timeline: scroll()) {
-  .lp-hero-img {
-    animation:
-      lp-art-in 2.4s var(--ds-ease-out) both,
-      lp-art-drift linear both;
-    animation-timeline: auto, scroll(root);
-    animation-range: normal, 0 100vh;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .lp-hero-img {
-    animation: none;
-  }
-}
-.lp-hero-stage > .lp-hero-tags {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 20px;
-  z-index: 3;
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
+  margin-top: 8px;
 }
 .lp-countdown {
   font-feature-settings: "tnum";
 }
+/* A real photograph of the city, in the same black and white as the
+   speakers, framed to the content width. */
+.lp-hero-photo {
+  position: relative;
+  aspect-ratio: 1120 / 440;
+  margin-top: 64px;
+  overflow: hidden;
+  background: var(--ds-surface);
+}
+.lp-hero-photo > img {
+  object-fit: cover;
+  object-position: 50% 62%;
+  filter: grayscale(1) contrast(1.12) brightness(1.1);
+}
+/* The facts of the day, one hairline row under the photo. */
 .lp-facts {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   border-bottom: 1px solid var(--ds-line);
 }
 .lp-facts > div {
-  padding: 22px 24px 26px;
-}
-.lp-facts > div:first-child {
-  padding-left: 0;
+  padding: 20px 0 22px;
+  text-align: center;
 }
 .lp-facts > div + div {
   border-left: 1px solid var(--ds-line);
@@ -244,9 +180,10 @@
   color: var(--ds-muted);
 }
 .lp-facts dd {
-  margin-top: 8px;
-  font: 400 1.125rem/1.3 var(--ds-font-display);
-  letter-spacing: -0.02em;
+  margin-top: 6px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ds-ink);
 }
 
 /* ── Sponsors ────────────────────────────────────────────────────────────── */
@@ -336,7 +273,7 @@
 }
 .lp-speaker-media {
   position: relative;
-  aspect-ratio: 1 / 1.08;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border-bottom: 1px solid var(--ds-line);
   background: var(--ds-surface);
@@ -464,7 +401,7 @@
 
 .lp-carousel {
   position: relative;
-  width: min(var(--ds-frame), 100%);
+  width: 100%;
   margin: 0 auto 72px;
 }
 .lp-carousel-window {
@@ -495,13 +432,7 @@
   overflow: hidden;
   background: var(--ds-surface);
 }
-.lp-carousel-group li::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgb(19 19 22 / 0.25);
-  pointer-events: none;
-}
+
 .lp-carousel-group img {
   object-fit: cover;
   filter: saturate(0.9);
@@ -545,14 +476,14 @@
   margin-top: 48px;
 }
 .lp-supporters-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px 24px;
-  margin-bottom: 16px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  margin-bottom: 24px;
+  text-align: center;
 }
 .lp-supporters-head h3 {
-  font: 400 1rem/1.4 var(--ds-font-text);
+  font: 500 1rem/1.4 var(--ds-font-text);
 }
 .lp-supporters {
   display: grid;
@@ -562,8 +493,12 @@
 .lp-supporters > li {
   display: grid;
   place-items: center;
-  min-height: 96px;
-  padding: 24px 16px;
+  min-height: 72px;
+  padding: 16px;
+}
+.lp-supporters > li.ds-card {
+  border: 0;
+  background: transparent;
 }
 .lp-supporters img {
   width: 100%;
@@ -579,7 +514,7 @@
   max-width: 40px;
 }
 
-/* A pointer to /partners between Comunidad and the FAQ: one card, all link. */
+/* A pointer to /partners between Comunidad and the FAQ: one row, all link. */
 .lp-partners-band {
   padding-bottom: var(--ds-section);
 }
@@ -587,51 +522,40 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 20px 32px;
+  gap: 20px 40px;
   padding: 28px 32px;
+  border: 0;
   background: var(--ds-surface);
 }
 .lp-partners-art {
-  position: relative;
   display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 6px;
-  width: 168px;
-  aspect-ratio: 1;
-  overflow: hidden;
-  background: #18181b;
-  color: #f4f3ef;
+  justify-items: start;
+  gap: 2px;
+  padding-right: 40px;
+  border-right: 1px solid var(--ds-line-strong);
 }
-.lp-partners-art > img {
-  object-fit: cover;
-  transition: transform 900ms var(--ds-ease-out);
-}
-.lp-partners-cta:hover .lp-partners-art > img {
-  transform: scale(1.08);
-}
-.lp-partners-art strong,
-.lp-partners-art small {
-  position: relative;
+.lp-partners-art img {
+  display: none;
 }
 .lp-partners-art strong {
   font: 400 2.25rem/1 var(--ds-font-display);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 .lp-partners-art small {
-  font: 500 0.6875rem/1 var(--ds-font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #e3a58f;
+  font-size: 0.875rem;
+  color: var(--ds-muted);
 }
 .lp-partners-copy {
   display: grid;
   justify-items: start;
-  gap: 10px;
+  gap: 6px;
+}
+.lp-partners-copy .ds-tag {
+  display: none;
 }
 .lp-partners-copy h2 {
-  font: 400 clamp(1.375rem, 1.15rem + 0.7vw, 1.75rem)/1.12 var(--ds-font-display);
-  letter-spacing: -0.02em;
+  font: 400 1.5rem/1.2 var(--ds-font-display);
+  letter-spacing: -0.01em;
   text-wrap: balance;
 }
 .lp-partners-copy p {
@@ -641,7 +565,7 @@
   text-wrap: pretty;
 }
 .lp-partners-cta:hover .lp-partners-button {
-  background: var(--ds-blue-hover);
+  background: var(--ds-ink);
 }
 .lp-partners-cta:hover .lp-partners-button svg {
   transform: translateX(2px);
@@ -650,11 +574,13 @@
   .lp-partners-cta {
     grid-template-columns: 1fr;
     justify-items: start;
-    padding: 22px 18px;
+    padding: 24px 20px;
   }
   .lp-partners-art {
+    padding: 0 0 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--ds-line-strong);
     width: 100%;
-    aspect-ratio: 16 / 7;
   }
   .lp-partners-button {
     width: 100%;
@@ -665,7 +591,7 @@
 /* ── FAQ ─────────────────────────────────────────────────────────────────── */
 
 .lp-faq {
-  border-top: 1px solid var(--ds-line-strong);
+  border-top: 1px solid var(--ds-line);
 }
 .lp-faq-item {
   border-bottom: 1px solid var(--ds-line);
@@ -675,10 +601,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  min-height: 64px;
-  padding: 18px 0;
-  font: 400 1.0625rem/1.4 var(--ds-font-text);
-  letter-spacing: -0.015em;
+  min-height: 56px;
+  padding: 16px 0;
+  font: 400 1rem/1.4 var(--ds-font-text);
   list-style: none;
   cursor: pointer;
   transition: color var(--ds-fast);
@@ -687,11 +612,11 @@
   display: none;
 }
 .lp-faq-item summary:hover {
-  color: var(--ds-blue);
+  color: var(--ds-muted);
 }
 .lp-faq-item summary svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
   stroke-width: 1.5;
   color: var(--ds-muted);
@@ -699,11 +624,12 @@
 }
 .lp-faq-item[open] summary svg {
   transform: rotate(45deg);
-  color: var(--ds-blue);
+  color: var(--ds-ink);
 }
 .lp-faq-item p {
   max-width: 40em;
-  padding: 0 44px 24px 0;
+  padding: 0 44px 20px 0;
+  font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--ds-muted);
 }
@@ -736,34 +662,8 @@
 }
 .lp-register-photo > img {
   object-fit: cover;
-  object-position: 52% 40%;
-}
-/* A boarding-pass line over the sky of the flight art. */
-.lp-register-pass {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: end;
-  column-gap: 14px;
-  padding: 12px 14px;
-  border: 1px solid var(--ds-line);
-  background: var(--ds-bg);
-}
-.lp-register-pass span {
-  font: 500 0.6875rem/1.3 var(--ds-font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ds-muted);
-}
-.lp-register-pass span:first-child {
-  grid-column: 1 / -1;
-  margin-bottom: 4px;
-}
-.lp-register-pass strong {
-  font: 400 2rem/0.9 var(--ds-font-display);
-  letter-spacing: -0.03em;
+  object-position: 45% 40%;
+  filter: grayscale(1) contrast(1.05);
 }
 .lp-register-facts {
   display: grid;
@@ -786,11 +686,10 @@
 }
 .lp-register-facts dd {
   margin-top: 4px;
-  font: 500 1.0625rem/1.3 var(--ds-font-text);
-  letter-spacing: -0.01em;
+  font: 500 0.9375rem/1.4 var(--ds-font-text);
 }
 .lp-form-card {
-  padding: 24px;
+  padding: 28px;
 }
 
 /* Form */
@@ -1042,7 +941,7 @@
   /* The first card lines up with the container; the rail bleeds right. */
   --rail-pad: max(var(--ds-gutter), calc((100% - var(--ds-container)) / 2 + var(--ds-gutter)));
   display: flex;
-  gap: 28px;
+  gap: 24px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
@@ -1054,7 +953,7 @@
   display: none;
 }
 .lp-tema {
-  flex: 0 0 min(420px, 84vw);
+  flex: 0 0 min(340px, 80vw);
   scroll-snap-align: start;
 }
 .lp-tema > a {
@@ -1076,26 +975,24 @@
   transform: scale(1.04);
 }
 .lp-tema-meta {
-  display: flex;
-  gap: 12px;
-  margin-top: 20px;
-  font: 500 0.75rem/1.3 var(--ds-font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  margin-top: 16px;
+  font-size: 0.8125rem;
   color: var(--ds-muted);
 }
 .lp-tema-meta span {
-  color: var(--ds-blue);
+  display: none;
 }
 .lp-tema h3 {
-  margin-top: 12px;
-  font: 400 1.25rem/1.2 var(--ds-font-display);
+  margin-top: 8px;
+  font: 400 1.25rem/1.25 var(--ds-font-display);
   letter-spacing: -0.02em;
   text-wrap: balance;
   transition: color var(--ds-fast);
 }
 .lp-tema > a:hover h3 {
-  color: var(--ds-blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }
 .lp-tema-dek {
   margin-top: 10px;
@@ -1197,12 +1094,6 @@
   }
 }
 @media (max-width: 900px) {
-  .lp-hero-foot {
-    grid-template-columns: 1fr;
-  }
-  .lp-hero .lp-actions {
-    justify-content: flex-start;
-  }
   .lp-sponsors {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1222,23 +1113,10 @@
     display: none !important;
   }
   .lp-hero {
-    --hero-band: 300px;
-    --hero-reach: 64px;
-    --art-solid: 150px;
     padding-top: calc(var(--ds-nav) + 56px);
   }
   .lp-hero-copy {
-    gap: 22px;
-  }
-  .lp-hero-meta-rule,
-  .lp-hero-meta-side {
-    display: none;
-  }
-  .lp-hero-foot {
-    grid-template-columns: 1fr;
-  }
-  .lp-hero-lede {
-    font-size: 1.0625rem;
+    gap: 18px;
   }
   .lp-actions {
     width: 100%;
@@ -1246,34 +1124,24 @@
   .lp-actions .ds-button {
     flex: 1 1 auto;
   }
-  .lp-hero-stage {
-    margin-top: 28px;
+  .lp-hero-photo {
+    aspect-ratio: 4 / 3;
+    margin-top: 40px;
   }
-  .lp-hero-img {
-    /* Monserrate's peak and the centre's towers. */
-    object-position: 28% 0%;
-  }
-  .lp-hero-stage > .lp-hero-tags {
-    bottom: 12px;
-  }
-  .lp-hero-tag-long {
-    display: none;
+  .lp-hero-photo > img {
+    object-position: 30% 60%;
   }
   .lp-facts {
     grid-template-columns: 1fr 1fr;
   }
   .lp-facts > div {
-    padding: 16px 0 18px 16px;
+    padding: 16px 8px 18px;
   }
   .lp-facts > div:nth-child(odd) {
-    padding-left: 0;
     border-left: 0;
   }
   .lp-facts > div:nth-child(n + 3) {
     border-top: 1px solid var(--ds-line);
-  }
-  .lp-facts dd {
-    font-size: 1.125rem;
   }
   .lp-sponsors {
     gap: 10px;
@@ -1340,10 +1208,7 @@
   .lp-supporters > li {
     min-height: 84px;
   }
-  .lp-register-pass {
-    top: 12px;
-    left: 12px;
-  }
+
   .lp-rail-track {
     gap: 16px;
   }

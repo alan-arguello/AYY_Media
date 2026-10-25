@@ -20,8 +20,8 @@ import { dinnerSeats, summitTickets, vakiFoundation } from "@/lib/summit-pricing
 export const runtime = "nodejs";
 
 // Editorial art: brick duotones on the page's own paper colour.
-const HERO_ART = "/images/editorial/bogota-grabado-tinta.webp";
-const FLIGHT_ART = "/images/editorial/vuelo-tinta.webp";
+const CITY_PHOTO = "/images/photos/bogota-golden-hour.webp";
+const SKY_PHOTO = "/images/photos/bogota-sky.webp";
 const OG_IMAGE = "/images/colombia-summit/opengraph.png";
 
 export const metadata: Metadata = {
@@ -239,26 +239,15 @@ export default function BogotaForwardSummitPage() {
       <TicketSelectionProvider>
       <main id="contenido">
         <section className="lp-hero" aria-labelledby="summit-title">
-          <div className="ds-container lp-hero-copy">
-            <p className="lp-hero-meta ds-reveal">
-              <Tag live>Bogotá · 19 de noviembre de 2026</Tag>
-              <span className="lp-hero-meta-rule" aria-hidden="true" />
-              <span className="lp-hero-meta-side">Evento + cena privada</span>
-            </p>
-            <h1 id="summit-title" className="ds-display-xl lp-hero-title">
-              <span className="ds-reveal" style={step(1)}>
-                Evento y cena privada para
-              </span>{" "}
-              <span className="ds-reveal ds-accent" style={step(2)}>
-                founders, managers y C-levels.
-              </span>
-            </h1>
-            <div className="lp-hero-foot ds-reveal" style={step(3)}>
-              <p className="lp-hero-lede">
-                Lo que la IA ya está cambiando en las empresas, contado por
-                quienes lo están haciendo.
+          <div className="ds-container">
+            <div className="lp-hero-copy">
+              <p className="lp-hero-eyebrow ds-reveal">
+                Jueves 19 de noviembre de 2026 · Bogotá
               </p>
-              <div className="lp-actions">
+              <h1 id="summit-title" className="ds-display-xl lp-hero-title ds-reveal" style={step(1)}>
+                Evento y cena privada para founders, managers y C-levels
+              </h1>
+              <div className="lp-actions ds-reveal" style={step(2)}>
                 <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>
                   Ver entradas
                 </Button>
@@ -267,59 +256,38 @@ export default function BogotaForwardSummitPage() {
                 </Button>
               </div>
             </div>
-          </div>
-
-          {/* Bogotá as a line engraving, drawn from a photograph of the city
-              under Monserrate: it rises out of the same paper as the page. */}
-          <div className="lp-hero-stage">
-            <div className="lp-hero-art">
+            <figure className="lp-hero-photo ds-reveal" style={step(3)}>
               <Image
-                src={HERO_ART}
-                alt="Grabado en tinta de Bogotá: los cerros de Monserrate y Guadalupe sobre el centro de la ciudad."
+                src={CITY_PHOTO}
+                alt="Bogotá frente a los cerros de Monserrate y Guadalupe."
                 fill
-                sizes="100vw"
-                quality={92}
+                sizes="(max-width: 1200px) 100vw, 1120px"
+                quality={90}
                 preload
-                className="lp-hero-img"
               />
-            </div>
-            <div className="ds-container lp-hero-tags">
-              <Tag dot chip>
-                <span>
-                  Bogotá<span className="lp-hero-tag-long">, Colombia</span> · 2.640 m
-                </span>
-              </Tag>
-              <Tag live chip>
-                <Countdown />
-              </Tag>
-            </div>
-          </div>
-
-          <div className="ds-container">
+            </figure>
             <dl className="lp-facts" aria-label="Datos del evento">
               <div>
-                <dt>Fecha</dt>
-                <dd>
-                  <time dateTime={colombiaSummit.date}>Jueves 19.11.2026</time>
-                </dd>
-              </div>
-              <div>
                 <dt>Evento</dt>
-                <dd>10 a. m. – 3 p. m.</dd>
+                <dd>10 a. m. a 3 p. m.</dd>
               </div>
               <div>
                 <dt>Cena privada</dt>
-                <dd>7 – 10 p. m. · {dinnerSeats} lugares</dd>
+                <dd>7 a 10 p. m. · {dinnerSeats} lugares</dd>
               </div>
               <div>
                 <dt>Entradas</dt>
-                <dd>General · VIP · VIP Plus</dd>
+                <dd>General, VIP y VIP Plus</dd>
+              </div>
+              <div>
+                <dt>Cuenta regresiva</dt>
+                <dd>
+                  <Countdown />
+                </dd>
               </div>
             </dl>
           </div>
         </section>
-
-        <hr className="ds-divider" />
 
         <section className="ds-section" id="speakers" aria-labelledby="speakers-title">
           <div className="ds-container">
@@ -398,13 +366,6 @@ export default function BogotaForwardSummitPage() {
           <div className="ds-container">
             <a href="/partners" className="ds-card lp-partners-cta" data-accent>
               <div className="lp-partners-art" aria-hidden="true">
-                <Image
-                  src="/images/editorial/noche-ladrillo.webp"
-                  alt=""
-                  fill
-                  sizes="(max-width: 760px) 100vw, 240px"
-                  quality={86}
-                />
                 <strong>+642K</strong>
                 <small>seguidores</small>
               </div>
@@ -470,17 +431,12 @@ export default function BogotaForwardSummitPage() {
               <div className="ds-card lp-register-media">
                 <div className="lp-register-photo">
                   <Image
-                    src={FLIGHT_ART}
-                    alt="Un avión cruza sobre una nube iluminada, en semitono."
+                    src={SKY_PHOTO}
+                    alt="Un avión cruza el cielo de Bogotá al atardecer."
                     fill
-                    sizes="(max-width: 1000px) 100vw, 500px"
+                    sizes="(max-width: 1000px) 100vw, 560px"
                     quality={90}
                   />
-                  <p className="lp-register-pass" aria-hidden="true">
-                    <span>Destino</span>
-                    <strong>BOG</strong>
-                    <span>Bogotá · 2.640 m</span>
-                  </p>
                 </div>
                 <dl className="lp-register-facts">
                   <div>

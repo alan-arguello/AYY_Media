@@ -1,46 +1,42 @@
 /* ──────────────────────────────────────────────────────────────────────────
-   bogota.forward() summit — design system (editorial)
-   Neutral paper, near-black ink and a single brick taken from the Bogotá
-   engraving. Newsreader for display, Geist for text, Geist Mono for figures
-   and code. 1px solid hairlines, 2px corners, generous space, no shadows.
-   Illustrations are duotones in brick on paper so the page never mixes hues.
+   bogota.forward() summit — design system
+   Built on the Super Intelligence Society system: neutral paper, near-black
+   ink, quiet greys and one accent used sparingly. Newsreader for display,
+   Geist for everything else. Hairlines, 2px corners, no shadows, no glows.
    ────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* Surfaces: neutral paper, never cream */
-  --ds-bg: #f4f3ef;
-  --ds-surface: #ecebe5;
-  --ds-surface-2: #e2e0d8;
+  /* Surfaces */
+  --ds-bg: #f4f5f2;
+  --ds-surface: #ebece7;
+  --ds-surface-2: #e3e5df;
   --ds-white: #fff;
-  --ds-field: #fbfaf8;
+  --ds-field: #fff;
 
   /* Ink */
-  --ds-ink: #131316;
-  --ds-ink-2: #34343a;
-  --ds-muted: #5d5d65;
-  --ds-subtle: #8a8a92;
-  --ds-accent-ink: #77777f; /* the quiet half of a two-tone headline */
+  --ds-ink: #121411;
+  --ds-ink-2: #2a2d28;
+  --ds-muted: #5e625b;
+  --ds-subtle: #80847d;
 
   /* Hairlines */
-  --ds-line: #dcdad3;
-  --ds-line-strong: #a8a69f;
+  --ds-line: #d9dbd4;
+  --ds-line-strong: #a3a79f;
 
-  /* One accent: the brick of the Bogotá engraving. The legacy names stay
-     so every component keeps working: blue leads, "yellow" is now the light
-     brick used for glows and highlights, "red" the lighter accent for the
-     call parentheses. Functional error reds live in their own components. */
-  --ds-blue: #b4482a;
-  --ds-blue-hover: #7a2f1a;
-  --ds-blue-tint: #f3e5df;
-  --ds-yellow: #e3a58f;
-  --ds-yellow-tint: #f3e5df;
-  --ds-red: #c9765c;
+  /* One accent. Legacy names stay so every component keeps working:
+     "blue" is the accent, "yellow" the accent on dark surfaces. */
+  --ds-blue: #0e6b43;
+  --ds-blue-hover: #121411;
+  --ds-blue-tint: #dcefe4;
+  --ds-yellow: #5bc896;
+  --ds-yellow-tint: #dcefe4;
+  --ds-red: var(--ds-subtle);
   --ds-flag: var(--ds-blue);
   --ds-flag-h: var(--ds-blue);
 
-  /* Type: editorial serif for display, Geist for text, Geist Mono for figures */
+  /* Type */
   --ds-font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
-  --ds-font-text: var(--font-geist-sans), system-ui, sans-serif;
+  --ds-font-text: var(--font-geist-sans), "Helvetica Neue", Arial, sans-serif;
   --ds-font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   /* Shape */
@@ -52,29 +48,27 @@
   --ds-fast: 160ms;
   --ds-base: 280ms;
 
-  /* Layout */
-  --ds-frame: 1200px;
-  --ds-container: 1040px;
-  --ds-gutter: 24px;
+  /* Layout: 1120 of content plus 40px margins, as in SIS */
+  --ds-container: 1200px;
+  --ds-gutter: 40px;
   --ds-section: 96px;
-  --ds-nav: 64px;
-  --ds-label-col: 176px;
+  --ds-nav: 72px;
 }
 
 @media (max-width: 900px) {
   :root {
-    --ds-section: 76px;
+    --ds-section: 72px;
   }
 }
 @media (max-width: 640px) {
   :root {
-    --ds-gutter: 16px;
-    --ds-section: 60px;
-    --ds-nav: 56px;
+    --ds-gutter: 20px;
+    --ds-section: 56px;
+    --ds-nav: 60px;
   }
 }
 
-/* ── Typography ─────────────────────────────────────────────────────────── */
+/* ── Typography (SIS scale) ─────────────────────────────────────────────── */
 
 .ds-display-xl,
 .ds-display-l,
@@ -85,27 +79,27 @@
   text-wrap: balance;
 }
 .ds-display-xl {
-  font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.75rem);
-  line-height: 1.04;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.25rem, 1.6rem + 2.2vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
 }
 .ds-display-l {
-  font-size: clamp(1.75rem, 1.35rem + 1.3vw, 2.5rem);
-  line-height: 1.08;
-  letter-spacing: -0.025em;
-}
-.ds-display-m {
-  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
-  line-height: 1.12;
+  font-size: clamp(1.75rem, 1.45rem + 1vw, 2.25rem);
+  line-height: 1.15;
   letter-spacing: -0.015em;
 }
-/* Second voice of a headline: same upright serif, quieter ink. */
+.ds-display-m {
+  font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+/* Headlines are one colour; the span stays for markup compatibility. */
 .ds-accent {
-  color: var(--ds-accent-ink);
+  color: inherit;
 }
 .ds-lead {
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--ds-muted);
   text-wrap: pretty;
 }
@@ -114,39 +108,11 @@
   font-feature-settings: "tnum";
 }
 
-/* ── Frame: solid rails, section rhythm and dividers ───────────────────── */
+/* ── Frame ──────────────────────────────────────────────────────────────── */
 
-/* Four vertical rails: the 1200 frame and the 960 content column. */
 .ds-rails {
   display: none !important;
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  --rail: repeating-linear-gradient(
-    to bottom,
-    var(--ds-line) 0 4px,
-    transparent 4px 8px
-  );
-  background:
-    var(--rail) calc(50% - var(--ds-frame) / 2) 0 / 1px 100% no-repeat,
-    var(--rail) calc(50% + var(--ds-frame) / 2) 0 / 1px 100% no-repeat,
-    var(--rail) calc(50% - var(--ds-container) / 2 + 1px) 0 / 1px 100% no-repeat,
-    var(--rail) calc(50% + var(--ds-container) / 2 - 1px) 0 / 1px 100% no-repeat;
 }
-@media (max-width: 1240px) {
-  .ds-rails {
-    background:
-      var(--rail) calc(50% - var(--ds-container) / 2 + 1px) 0 / 1px 100% no-repeat,
-      var(--rail) calc(50% + var(--ds-container) / 2 - 1px) 0 / 1px 100% no-repeat;
-  }
-}
-@media (max-width: 1000px) {
-  .ds-rails {
-    display: none;
-  }
-}
-
 .ds-container {
   position: relative;
   width: min(var(--ds-container), 100%);
@@ -158,99 +124,58 @@
   isolation: isolate;
   padding-block: var(--ds-section);
 }
-/* Faint pixel mosaic that fades out from the centre. A mask, not an opaque
-   gradient, so the rails stay visible through it. */
 .ds-section[data-field]::before {
   display: none;
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: url("/images/pixel-field.svg") center top / 1440px auto repeat-y;
-  -webkit-mask-image: radial-gradient(ellipse 58% 50% at 50% 26%, #000, transparent 80%);
-  mask-image: radial-gradient(ellipse 58% 50% at 50% 26%, #000, transparent 80%);
-  pointer-events: none;
 }
 .ds-divider {
-  width: min(var(--ds-container), 100%);
+  width: calc(min(var(--ds-container), 100%) - 2 * var(--ds-gutter));
   margin-inline: auto;
   border: 0;
   border-top: 1px solid var(--ds-line);
 }
 
-/* ── Section heading ────────────────────────────────────────────────────── */
+/* ── Section heading: centred title and lead ───────────────────────────── */
 
-/* Label column on the left (numbered automatically), the headline and its
-   lead in the content column. Collapses to one column on small screens. */
-.lp main,
-.partners-page {
-  counter-reset: ds-section;
-}
 .ds-heading {
   display: grid;
-  grid-template-columns: var(--ds-label-col) minmax(0, 1fr);
-  column-gap: 32px;
-  row-gap: 18px;
-  align-items: start;
-  margin: 0 0 48px;
-  counter-increment: ds-section;
+  justify-items: center;
+  gap: 14px;
+  max-width: 720px;
+  margin: 0 auto 48px;
+  text-align: center;
 }
 .ds-heading > .ds-tag {
-  grid-row: span 2;
-  padding-top: 0.9em;
-}
-.ds-heading > .ds-tag::before {
-  content: counter(ds-section, decimal-leading-zero);
-  margin-right: 6px;
-  color: var(--ds-blue);
-}
-.ds-heading > .ds-tag .ds-tag-dot {
   display: none;
 }
-.ds-heading > :is(h1, h2) {
-  max-width: 15em;
-}
 .ds-heading .ds-lead {
-  max-width: 34em;
+  max-width: 36em;
 }
-@media (max-width: 760px) {
+@media (max-width: 640px) {
   .ds-heading {
-    grid-template-columns: 1fr;
-    row-gap: 14px;
-    margin-bottom: 36px;
-  }
-  .ds-heading > .ds-tag {
-    grid-row: auto;
-    padding-top: 0;
+    margin-bottom: 32px;
   }
 }
-/* Content that lines up with the headline column. */
+/* A centred reading column. */
 .ds-offset {
-  margin-left: calc(var(--ds-label-col) + 32px);
-}
-@media (max-width: 760px) {
-  .ds-offset {
-    margin-left: 0;
-  }
+  max-width: 760px;
+  margin-inline: auto;
 }
 
-/* ── Tag ─────────────────────────────────────────────────────────────────── */
+/* ── Tag: a quiet line of small text ───────────────────────────────────── */
 
 .ds-tag {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font: 500 0.75rem/1.3 var(--ds-font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ds-ink-2);
+  font: 400 0.875rem/1.4 var(--ds-font-text);
+  color: var(--ds-muted);
   white-space: nowrap;
 }
-/* On top of art the label sits on a paper chip so it stays legible. */
 .ds-tag[data-chip] {
-  padding: 7px 10px 6px;
+  padding: 6px 10px;
   border: 1px solid var(--ds-line);
   background: var(--ds-bg);
+  color: var(--ds-ink-2);
 }
 .ds-tag-dot {
   width: 6px;
@@ -258,18 +183,6 @@
   flex-shrink: 0;
   border-radius: 999px;
   background: var(--ds-blue);
-}
-.ds-tag-dot[data-live] {
-  box-shadow: 0 0 0 0 rgb(180 72 42 / 0.45);
-  animation: ds-pulse 2.2s var(--ds-ease) infinite;
-}
-@keyframes ds-pulse {
-  70% {
-    box-shadow: 0 0 0 7px rgb(180 72 42 / 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgb(180 72 42 / 0);
-  }
 }
 
 /* ── Buttons ─────────────────────────────────────────────────────────────── */
@@ -308,12 +221,16 @@
 .ds-button:hover svg {
   transform: translateX(2px);
 }
+.ds-button[data-size="sm"] svg {
+  display: none;
+}
 .ds-button[data-variant="primary"] {
   background: var(--ds-blue);
   color: var(--ds-white);
 }
 .ds-button[data-variant="primary"]:hover {
-  background: var(--ds-blue-hover);
+  background: var(--ds-ink);
+  color: var(--ds-bg);
 }
 .ds-button[data-variant="secondary"] {
   border: 1px solid var(--ds-ink);
@@ -368,7 +285,7 @@ a.ds-card:hover::after,
   background: var(--ds-blue);
 }
 .ds-card[data-accent] {
-  border-color: var(--ds-blue);
+  border-color: var(--ds-line);
 }
 
 .ds-icon-tile {
@@ -409,7 +326,7 @@ a.ds-card:hover::after,
   flex-shrink: 0;
 }
 .ds-logo-word {
-  font: 500 0.9375rem/1 var(--ds-font-mono);
+  font: 500 1rem/1 var(--ds-font-mono);
   letter-spacing: -0.02em;
   white-space: nowrap;
 }
