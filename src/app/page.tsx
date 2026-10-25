@@ -255,9 +255,9 @@ export default function BogotaForwardSummitPage() {
             </h1>
             <div className="lp-hero-foot ds-reveal" style={step(3)}>
               <p className="lp-hero-lede">
-                IA, empresas y lo que viene. Un día en Bogotá con Alexander
-                Torrenegra, Tania Zapata y Alan Argüello, y una cena privada de{" "}
-                {dinnerSeats} lugares.
+                Charlas, un fireside chat y un workshop sobre cómo la IA está
+                cambiando las empresas, con Alexander Torrenegra, Tania Zapata y
+                Alan Argüello. En la noche, cena privada para {dinnerSeats}.
               </p>
               <div className="lp-actions">
                 <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>

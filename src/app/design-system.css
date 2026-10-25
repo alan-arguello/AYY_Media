@@ -1,7 +1,7 @@
 /* ──────────────────────────────────────────────────────────────────────────
    bogota.forward() summit — design system (editorial)
    Neutral paper, near-black ink and a single indigo taken from the Bogotá
-   engraving. Newsreader for display, Geist for text, Geist Mono for figures
+   engraving. Source Serif 4 Light for display, Geist for text, Geist Mono for figures
    and code. 1px solid hairlines, 2px corners, generous space, no shadows.
    Illustrations are duotones in indigo on paper so the page never mixes hues.
    ────────────────────────────────────────────────────────────────────────── */
@@ -39,7 +39,8 @@
   --ds-flag-h: var(--ds-blue);
 
   /* Type: editorial serif for display, Geist for text, Geist Mono for figures */
-  --ds-font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --ds-font-display: var(--font-display), Georgia, "Times New Roman", serif;
+  --ds-display-weight: 380;
   --ds-font-text: var(--font-geist-sans), system-ui, sans-serif;
   --ds-font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
@@ -80,19 +81,19 @@
 .ds-display-l,
 .ds-display-m {
   font-family: var(--ds-font-display);
-  font-weight: 400;
+  font-weight: var(--ds-display-weight);
   color: var(--ds-ink);
   text-wrap: balance;
 }
 .ds-display-xl {
   font-size: clamp(2.75rem, 1.4rem + 4.6vw, 5.5rem);
   line-height: 0.98;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.042em;
 }
 .ds-display-l {
   font-size: clamp(2.125rem, 1.4rem + 2.3vw, 3.5rem);
   line-height: 1.02;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.038em;
 }
 .ds-display-m {
   font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.75rem);

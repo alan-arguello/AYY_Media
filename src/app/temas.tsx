@@ -3,8 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui";
 import { TemasRail } from "./temas-rail";
 
-// Essays from the Super Intelligence Society blog, shown here as the themes
-// the day will get into. Each card opens the full article on SIS.
+// Essays from the Super Intelligence Society blog: some of the subjects we
+// write about (not the event's agenda). Each card opens the article on SIS.
 const SIS_BLOG = "https://society.aiyaiyai.io/blog";
 
 export const temas = [
@@ -47,14 +47,13 @@ export function Temas() {
           tag="Temas"
           title={
             <>
-              Los temas que <span className="ds-accent">vamos a tocar.</span>
+              Algunas de <span className="ds-accent">nuestras temáticas.</span>
             </>
           }
         >
-          Agentes que trabajan solos, modelos que aprenden más allá de
-          nosotros, sistemas que son más que un LLM y la IA que llega al mundo
-          físico. Lo escribimos en Super Intelligence Society; en Bogotá lo
-          conversamos en persona.
+          Lo que escribimos en Super Intelligence Society, la comunidad de
+          AiYaiYai: agentes, modelos, arquitectura y la IA que llega al mundo
+          físico.
         </SectionHeading>
       </div>
       <TemasRail count={temas.length}>

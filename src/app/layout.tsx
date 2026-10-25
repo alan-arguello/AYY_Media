@@ -9,13 +9,13 @@ import "./globals.css";
 import "./design-system.css";
 import "./summit.css";
 
-// Display: Newsreader (OFL, self-hosted). Text: Geist. Figures: Geist Mono.
-const newsreader = localFont({
-  src: [
-    { path: "./fonts/newsreader-latin-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/newsreader-latin-500-normal.woff2", weight: "500", style: "normal" },
-  ],
-  variable: "--font-newsreader",
+// Display: Source Serif 4 (OFL, self-hosted, variable weight and optical
+// size) set light, the free counterpart of Tiempos Headline. Text: Geist.
+const display = localFont({
+  src: "./fonts/source-serif-4-latin-opsz-normal.woff2",
+  weight: "200 900",
+  style: "normal",
+  variable: "--font-display",
   display: "swap",
   fallback: ["Georgia", "Times New Roman", "serif"],
 });
@@ -36,7 +36,7 @@ export default function SummitLayout({
   return (
     <html
       lang="es"
-      className={`${GeistSans.variable} ${GeistPixelSquare.variable} ${GeistMono.variable} ${newsreader.variable}`}
+      className={`${GeistSans.variable} ${GeistPixelSquare.variable} ${GeistMono.variable} ${display.variable}`}
     >
       <body>
         {children}

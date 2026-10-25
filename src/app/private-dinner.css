@@ -95,7 +95,7 @@
   padding-block: 36px 40px;
 }
 .dinner-title {
-  font: 400 clamp(1.875rem, 1.3rem + 1.5vw, 2.5rem)/1.06 var(--ds-font-display);
+  font: 380 clamp(1.875rem, 1.3rem + 1.5vw, 2.5rem)/1.06 var(--ds-font-display);
   letter-spacing: -0.03em;
 }
 /* One thought per line: the hours, then the turn. */
@@ -264,7 +264,7 @@
   border-top: 1px solid var(--ds-line-strong);
 }
 .dinner-seats-copy h3 {
-  font: 400 clamp(1.5rem, 1.25rem + 0.8vw, 1.875rem)/1.05 var(--ds-font-display);
+  font: 380 clamp(1.5rem, 1.25rem + 0.8vw, 1.875rem)/1.05 var(--ds-font-display);
   letter-spacing: -0.03em;
 }
 .dinner-seat-row {
@@ -299,7 +299,7 @@
 .dinner-legend dt {
   position: relative;
   padding-left: 18px;
-  font: 400 1.125rem/1 var(--ds-font-display);
+  font: 380 1.125rem/1 var(--ds-font-display);
   color: var(--ds-ink);
 }
 .dinner-legend dt::before {
