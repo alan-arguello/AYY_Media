@@ -91,7 +91,7 @@
   height: var(--ds-nav);
   margin-inline: auto;
   padding: 0 12px 0 16px;
-  border: 1px solid var(--ds-line-strong);
+  border: 1px solid var(--ds-line);
   background: rgb(244 243 239 / 0.86);
   backdrop-filter: blur(14px) saturate(1.4);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
@@ -114,48 +114,67 @@
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 
-/* One scene: the copy sits on the paper, an indigo engraving of the old
-   city rises out of that same paper underneath, and the facts row straddles
-   the art's bottom edge. */
+/* Editorial opening: a dated label, a large two-tone headline and the lede
+   with the calls to action; then Bogotá as a line engraving rising out of
+   the same paper, and the facts of the day as a hairline row. */
 .lp-hero {
-  --hero-band: 440px; /* the engraving's row; grows with the viewport */
-  --hero-reach: 96px; /* how far the art climbs under the buttons */
-  --art-solid: 300px; /* where the fade from paper ends */
-  display: grid;
-  grid-template-rows: auto minmax(var(--hero-band), 1fr) auto;
-  min-height: clamp(760px, 100svh, 980px);
-  padding-top: calc(var(--ds-nav) + 64px);
-  padding-bottom: 40px;
+  --hero-band: clamp(340px, 44vw, 660px);
+  --hero-reach: 150px; /* how far the art climbs behind the lede */
+  --art-solid: 300px; /* where its fade from paper ends */
+  padding-top: calc(var(--ds-nav) + 104px);
 }
 .lp-hero-copy {
   z-index: 2;
   display: grid;
-  justify-items: center;
-  gap: 22px;
-  padding-bottom: 32px;
-  text-align: center;
+  gap: 32px;
 }
-.lp-hero h1 {
-  margin-top: 4px;
+.lp-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
-.lp-hero h1 > span {
-  display: block;
+.lp-hero-meta-rule {
+  width: 56px;
+  height: 1px;
+  background: var(--ds-line-strong);
+}
+.lp-hero-meta-side {
+  font: 500 0.75rem/1.3 var(--ds-font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ds-muted);
 }
 .lp-hero-title {
-  font-size: clamp(2.5rem, 1.2rem + 4.4vw, 5.25rem);
-  line-height: 1;
-  letter-spacing: -0.035em;
+  max-width: 12.5em;
+}
+.lp-hero-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 31em) auto;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px 48px;
+}
+.lp-hero-lede {
+  font-size: 1.1875rem;
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+  color: var(--ds-muted);
+  text-wrap: pretty;
+}
+.lp-hero .lp-actions {
+  justify-content: flex-end;
 }
 .lp-hero-stage {
   position: relative;
+  height: var(--hero-band);
+  margin-top: 48px;
 }
 .lp-hero-art {
   position: absolute;
   inset: calc(-1 * var(--hero-reach)) 0 0;
   overflow: hidden;
-  border-bottom: 1px solid var(--ds-line-strong);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, rgb(0 0 0 / 0.35) calc(var(--art-solid) * 0.45), #000 var(--art-solid));
-  mask-image: linear-gradient(to bottom, transparent 0, rgb(0 0 0 / 0.35) calc(var(--art-solid) * 0.45), #000 var(--art-solid));
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, rgb(0 0 0 / 0.3) calc(var(--art-solid) * 0.5), #000 var(--art-solid));
+  mask-image: linear-gradient(to bottom, transparent 0, rgb(0 0 0 / 0.3) calc(var(--art-solid) * 0.5), #000 var(--art-solid));
 }
 .lp-hero-img {
   /* 64px of spare art above the frame, so the scroll drift never shows an
@@ -163,14 +182,14 @@
   top: -64px !important;
   height: calc(100% + 64px) !important;
   object-fit: cover;
-  object-position: 50% 42%;
-  transform-origin: 50% 70%;
+  object-position: 50% 12%;
+  transform-origin: 50% 80%;
   animation: lp-art-in 2.4s var(--ds-ease-out) both;
 }
 @keyframes lp-art-in {
   from {
     opacity: 0;
-    transform: scale(1.05) translateY(12px);
+    transform: scale(1.04) translateY(14px);
   }
 }
 /* As the page scrolls, the engraving sinks a little slower than the copy. */
@@ -197,45 +216,37 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 64px;
+  bottom: 20px;
   z-index: 3;
   display: flex;
   justify-content: space-between;
   pointer-events: none;
 }
 .lp-countdown {
-  font-family: var(--ds-font-mono);
-  font-size: 0.8125rem;
   font-feature-settings: "tnum";
-  color: var(--ds-ink);
 }
 .lp-facts {
-  position: relative;
-  z-index: 3;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: -44px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid var(--ds-line);
 }
-.lp-facts li {
-  display: grid;
-  align-content: start;
-  gap: 6px;
-  padding: 16px 14px;
+.lp-facts > div {
+  padding: 22px 24px 26px;
 }
-.lp-facts svg {
-  width: 22px;
-  height: 22px;
-  margin-bottom: 8px;
-  color: var(--ds-ink);
+.lp-facts > div:first-child {
+  padding-left: 0;
 }
-.lp-facts strong {
-  font: 400 1.25rem/1.1 var(--ds-font-display);
-  letter-spacing: -0.02em;
+.lp-facts > div + div {
+  border-left: 1px solid var(--ds-line);
 }
-.lp-facts span {
-  font-size: 0.9375rem;
+.lp-facts dt {
+  font-size: 0.8125rem;
   color: var(--ds-muted);
+}
+.lp-facts dd {
+  margin-top: 8px;
+  font: 400 1.25rem/1.25 var(--ds-font-display);
+  letter-spacing: -0.02em;
 }
 
 /* ── Sponsors ────────────────────────────────────────────────────────────── */
@@ -341,11 +352,11 @@
 }
 .lp-speaker-link:hover .lp-speaker-media > img,
 .lp-speaker-link:focus-visible .lp-speaker-media > img {
-  filter: none;
+  filter: grayscale(1) contrast(1.12);
   transform: scale(1.03);
 }
 .lp-speaker-head {
-  padding: 14px 14px 0;
+  padding: 18px 18px 0;
 }
 .lp-speaker-bio {
   margin-top: 10px;
@@ -359,7 +370,8 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
-  font: 500 1rem/1.3 var(--ds-font-text);
+  font: 400 1.375rem/1.15 var(--ds-font-display);
+  letter-spacing: -0.02em;
 }
 .lp-speaker-head h3 svg {
   width: 16px;
@@ -376,7 +388,7 @@
   transform: translate(2px, -2px);
 }
 .lp-speaker-head p {
-  margin-top: 4px;
+  margin-top: 6px;
   font-size: 0.875rem;
   line-height: 1.45;
   color: var(--ds-muted);
@@ -417,7 +429,6 @@
 }
 .lp-credential:hover img,
 .lp-credential:focus-visible img {
-  filter: none;
   opacity: 1;
 }
 .lp-tooltip {
@@ -654,46 +665,46 @@
 /* ── FAQ ─────────────────────────────────────────────────────────────────── */
 
 .lp-faq {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: start;
-  gap: 16px 20px;
+  border-top: 1px solid var(--ds-line-strong);
 }
 .lp-faq-item {
-  border: 1px solid var(--ds-line-strong);
-  background: var(--ds-bg);
-  transition: border-color var(--ds-fast);
-}
-.lp-faq-item[open] {
-  border-color: var(--ds-blue);
+  border-bottom: 1px solid var(--ds-line);
 }
 .lp-faq-item summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  min-height: 52px;
-  padding: 12px 14px;
+  gap: 24px;
+  min-height: 64px;
+  padding: 18px 0;
+  font: 400 1.25rem/1.3 var(--ds-font-display);
+  letter-spacing: -0.015em;
   list-style: none;
   cursor: pointer;
+  transition: color var(--ds-fast);
 }
 .lp-faq-item summary::-webkit-details-marker {
   display: none;
 }
+.lp-faq-item summary:hover {
+  color: var(--ds-blue);
+}
 .lp-faq-item summary svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
-  stroke-width: 2.4;
-  transition: transform var(--ds-base) var(--ds-ease-out);
+  stroke-width: 1.5;
+  color: var(--ds-muted);
+  transition: transform var(--ds-base) var(--ds-ease-out), color var(--ds-fast);
 }
 .lp-faq-item[open] summary svg {
-  transform: rotate(180deg);
+  transform: rotate(45deg);
   color: var(--ds-blue);
 }
 .lp-faq-item p {
-  padding: 0 14px 16px;
-  line-height: 1.55;
+  max-width: 40em;
+  padding: 0 44px 24px 0;
+  line-height: 1.6;
   color: var(--ds-muted);
 }
 .lp-faq-item a {
@@ -725,16 +736,34 @@
 }
 .lp-register-photo > img {
   object-fit: cover;
-  object-position: 60% 100%;
+  object-position: 52% 40%;
 }
-.lp-register-quote {
+/* A boarding-pass line over the sky of the flight art. */
+.lp-register-pass {
   position: absolute;
-  top: 22px;
-  left: 24px;
-  right: 24px;
-  font: 400 clamp(1.5rem, 1.1rem + 1.2vw, 2rem)/1.08 var(--ds-font-display);
-  letter-spacing: -0.025em;
-  text-wrap: balance;
+  top: 18px;
+  left: 18px;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: end;
+  column-gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--ds-line);
+  background: var(--ds-bg);
+}
+.lp-register-pass span {
+  font: 500 0.6875rem/1.3 var(--ds-font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-muted);
+}
+.lp-register-pass span:first-child {
+  grid-column: 1 / -1;
+  margin-bottom: 4px;
+}
+.lp-register-pass strong {
+  font: 400 2.5rem/0.9 var(--ds-font-display);
+  letter-spacing: -0.03em;
 }
 .lp-register-facts {
   display: grid;
@@ -1007,6 +1036,138 @@
   display: none;
 }
 
+/* ── Temas: essays from SIS as a swipeable rail ─────────────────────────── */
+
+.lp-rail-track {
+  /* The first card lines up with the container; the rail bleeds right. */
+  --rail-pad: max(var(--ds-gutter), calc((100% - var(--ds-container)) / 2 + var(--ds-gutter)));
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--rail-pad);
+  padding: 4px var(--rail-pad) 8px;
+  scrollbar-width: none;
+}
+.lp-rail-track::-webkit-scrollbar {
+  display: none;
+}
+.lp-tema {
+  flex: 0 0 min(420px, 84vw);
+  scroll-snap-align: start;
+}
+.lp-tema > a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.lp-tema-cover {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0e0f2e;
+}
+.lp-tema-cover > img {
+  object-fit: cover;
+  transition: transform 900ms var(--ds-ease-out);
+}
+.lp-tema > a:hover .lp-tema-cover > img {
+  transform: scale(1.04);
+}
+.lp-tema-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  font: 500 0.75rem/1.3 var(--ds-font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ds-muted);
+}
+.lp-tema-meta span {
+  color: var(--ds-blue);
+}
+.lp-tema h3 {
+  margin-top: 12px;
+  font: 400 1.5rem/1.14 var(--ds-font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  transition: color var(--ds-fast);
+}
+.lp-tema > a:hover h3 {
+  color: var(--ds-blue);
+}
+.lp-tema-dek {
+  margin-top: 10px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ds-muted);
+  text-wrap: pretty;
+}
+.lp-tema-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 18px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.lp-tema-link svg {
+  width: 15px;
+  height: 15px;
+  transition: transform var(--ds-base) var(--ds-ease-out);
+}
+.lp-tema > a:hover .lp-tema-link svg {
+  transform: translate(2px, -2px);
+}
+.lp-rail-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+.lp-rail-progress {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  margin-right: 16px;
+  overflow: hidden;
+  background: var(--ds-line);
+}
+.lp-rail-progress > span {
+  position: absolute;
+  inset: 0;
+  background: var(--ds-ink);
+  transform-origin: left;
+  transition: transform 240ms var(--ds-ease);
+}
+.lp-rail-controls button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--ds-line-strong);
+  border-radius: var(--ds-radius);
+  background: transparent;
+  color: var(--ds-ink);
+  cursor: pointer;
+  transition: background-color var(--ds-fast), color var(--ds-fast), opacity var(--ds-fast);
+}
+.lp-rail-controls button:hover:not(:disabled) {
+  background: var(--ds-ink);
+  color: var(--ds-bg);
+}
+.lp-rail-controls button:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+.lp-rail-controls svg {
+  width: 18px;
+  height: 18px;
+}
+
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 
 @media (max-width: 1000px) {
@@ -1036,8 +1197,11 @@
   }
 }
 @media (max-width: 900px) {
-  .lp-faq {
+  .lp-hero-foot {
     grid-template-columns: 1fr;
+  }
+  .lp-hero .lp-actions {
+    justify-content: flex-start;
   }
   .lp-sponsors {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1058,16 +1222,23 @@
     display: none !important;
   }
   .lp-hero {
-    --hero-band: 340px;
-    --hero-reach: 56px;
-    --art-solid: 180px;
-    min-height: 0;
-    padding-top: calc(var(--ds-nav) + 48px);
-    padding-bottom: 32px;
+    --hero-band: 300px;
+    --hero-reach: 64px;
+    --art-solid: 150px;
+    padding-top: calc(var(--ds-nav) + 56px);
   }
   .lp-hero-copy {
-    gap: 18px;
-    padding-bottom: 24px;
+    gap: 22px;
+  }
+  .lp-hero-meta-rule,
+  .lp-hero-meta-side {
+    display: none;
+  }
+  .lp-hero-foot {
+    grid-template-columns: 1fr;
+  }
+  .lp-hero-lede {
+    font-size: 1.0625rem;
   }
   .lp-actions {
     width: 100%;
@@ -1075,32 +1246,33 @@
   .lp-actions .ds-button {
     flex: 1 1 auto;
   }
+  .lp-hero-stage {
+    margin-top: 28px;
+  }
   .lp-hero-img {
-    /* The dome and the lamp post, the heart of the engraving. */
-    object-position: 44% 50%;
+    /* Monserrate's peak and the centre's towers. */
+    object-position: 28% 0%;
   }
   .lp-hero-stage > .lp-hero-tags {
-    bottom: 14px;
+    bottom: 12px;
   }
   .lp-hero-tag-long {
     display: none;
   }
   .lp-facts {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-top: 12px;
+    grid-template-columns: 1fr 1fr;
   }
-  .lp-facts li {
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    column-gap: 14px;
-    padding: 12px 14px;
+  .lp-facts > div {
+    padding: 16px 0 18px 16px;
   }
-  .lp-facts svg {
-    grid-row: span 2;
-    margin: 0;
+  .lp-facts > div:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
   }
-  .lp-facts strong {
+  .lp-facts > div:nth-child(n + 3) {
+    border-top: 1px solid var(--ds-line);
+  }
+  .lp-facts dd {
     font-size: 1.125rem;
   }
   .lp-sponsors {
@@ -1168,9 +1340,15 @@
   .lp-supporters > li {
     min-height: 84px;
   }
-  .lp-register-quote {
-    top: 16px;
-    left: 18px;
+  .lp-register-pass {
+    top: 12px;
+    left: 12px;
+  }
+  .lp-rail-track {
+    gap: 16px;
+  }
+  .lp-tema h3 {
+    font-size: 1.3125rem;
   }
   .lp-form-card {
     padding: 18px;

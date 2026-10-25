@@ -13,6 +13,7 @@ import {
 
 // What every seat includes; anything beyond it is shown in bold.
 const base = new Set<string>(summitTickets[0].benefits);
+import { Tag } from "@/components/ui";
 import { useTicketSelection } from "./ticket-selection";
 import "./ticket-pricing.css";
 
@@ -54,11 +55,12 @@ export function TicketPricing() {
   return (
     <section className="ds-section lp-pricing" id="entradas" aria-labelledby="pricing-title">
       <div className="ds-container">
-        <header className="lp-pricing-heading">
+        <header className="ds-heading lp-pricing-heading">
+          <Tag>Entradas</Tag>
           <h2 id="pricing-title" className="ds-display-l">
-            Tres formas de <span className="ds-accent">vivir el día.</span>
+            Tres formas de vivir el día.
           </h2>
-          <p>VIP y VIP Plus incluyen la cena privada: {dinnerSeats} lugares, por aplicación.</p>
+          <p className="ds-lead">VIP y VIP Plus incluyen la cena privada: {dinnerSeats} lugares, por aplicación.</p>
         </header>
 
         <div className="lp-phases" role="group" aria-label="Comparar precios por fase">

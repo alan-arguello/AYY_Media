@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  CalendarDays,
-  ChevronDown,
-  Ticket,
-  Utensils,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, Plus } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
 import { siteUrl, isPublicSite } from "@/lib/site-url";
 import { Button, SectionHeading, Tag } from "@/components/ui";
@@ -21,13 +14,14 @@ import { TicketPricing } from "./ticket-pricing";
 import { TicketSelectionProvider } from "./ticket-selection";
 import { PrivateDinner } from "./private-dinner";
 import { SummitAgenda } from "./summit-agenda";
+import { Temas } from "./temas";
 import { dinnerSeats, summitTickets, vakiFoundation } from "@/lib/summit-pricing";
 
 export const runtime = "nodejs";
 
 // Editorial art: indigo duotones on the page's own paper colour.
-const HERO_ART = "/images/editorial/bogota-grabado.webp";
-const HORIZON_ART = "/images/editorial/horizonte.webp";
+const HERO_ART = "/images/editorial/bogota-monserrate-grabado.webp";
+const FLIGHT_ART = "/images/editorial/vuelo.webp";
 const OG_IMAGE = "/images/colombia-summit/opengraph.png";
 
 export const metadata: Metadata = {
@@ -244,76 +238,85 @@ export default function BogotaForwardSummitPage() {
 
       <TicketSelectionProvider>
       <main id="contenido">
-        <section className="ds-section lp-hero" aria-labelledby="summit-title">
+        <section className="lp-hero" aria-labelledby="summit-title">
           <div className="ds-container lp-hero-copy">
-            <span className="ds-reveal">
-              <Tag live>Bogotá · 19 de noviembre</Tag>
-            </span>
+            <p className="lp-hero-meta ds-reveal">
+              <Tag live>Bogotá · 19 de noviembre de 2026</Tag>
+              <span className="lp-hero-meta-rule" aria-hidden="true" />
+              <span className="lp-hero-meta-side">Evento + cena privada</span>
+            </p>
             <h1 id="summit-title" className="ds-display-xl lp-hero-title">
               <span className="ds-reveal" style={step(1)}>
                 Evento y cena privada para
               </span>{" "}
               <span className="ds-reveal ds-accent" style={step(2)}>
-                founders, managers y C-levels
-                <span className="ds-cursor" aria-hidden="true" />
+                founders, managers y C-levels.
               </span>
             </h1>
-            <div className="lp-actions ds-reveal" style={step(3)}>
-              <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>
-                Ver entradas
-              </Button>
-              <Button variant="secondary" href="#agenda">
-                Ver el día
-              </Button>
+            <div className="lp-hero-foot ds-reveal" style={step(3)}>
+              <p className="lp-hero-lede">
+                IA, empresas y lo que viene. Un día en Bogotá con Alexander
+                Torrenegra, Tania Zapata y Alan Argüello, y una cena privada de{" "}
+                {dinnerSeats} lugares.
+              </p>
+              <div className="lp-actions">
+                <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>
+                  Ver entradas
+                </Button>
+                <Button variant="secondary" href="#agenda">
+                  Ver el día
+                </Button>
+              </div>
             </div>
           </div>
 
-          {/* An engraving of the old city rises out of the paper under the
-              copy: same ink, same paper, so the page and the art are one. */}
+          {/* Bogotá as a line engraving, drawn from a photograph of the city
+              under Monserrate: it rises out of the same paper as the page. */}
           <div className="lp-hero-stage">
             <div className="lp-hero-art">
               <Image
                 src={HERO_ART}
-                alt="Grabado en tinta índigo de una plaza colonial con catedral, cúpula, torre y farol."
+                alt="Grabado en tinta índigo de Bogotá: los cerros de Monserrate y Guadalupe sobre el centro de la ciudad."
                 fill
                 sizes="100vw"
-                quality={90}
+                quality={92}
                 preload
                 className="lp-hero-img"
               />
             </div>
             <div className="ds-container lp-hero-tags">
-              <Tag dot>
+              <Tag dot chip>
                 <span>
                   Bogotá<span className="lp-hero-tag-long">, Colombia</span> · 2.640 m
                 </span>
               </Tag>
-              <Tag live>
+              <Tag live chip>
                 <Countdown />
               </Tag>
             </div>
           </div>
 
           <div className="ds-container">
-            <ul className="lp-facts" aria-label="Datos del evento">
-              <li className="ds-card">
-                <CalendarDays aria-hidden="true" />
-                <strong>
-                  <time dateTime={colombiaSummit.date}>19.11.2026</time>
-                </strong>
-                <span>Evento · 10 a. m. a 3 p. m.</span>
-              </li>
-              <li className="ds-card">
-                <Utensils aria-hidden="true" />
-                <strong>Cena privada</strong>
-                <span>Alexander y Tania · {dinnerSeats} lugares</span>
-              </li>
-              <li className="ds-card">
-                <Ticket aria-hidden="true" />
-                <strong>3 experiencias</strong>
-                <span>General · VIP · VIP Plus</span>
-              </li>
-            </ul>
+            <dl className="lp-facts" aria-label="Datos del evento">
+              <div>
+                <dt>Fecha</dt>
+                <dd>
+                  <time dateTime={colombiaSummit.date}>Jueves 19.11.2026</time>
+                </dd>
+              </div>
+              <div>
+                <dt>Evento</dt>
+                <dd>10 a. m. – 3 p. m.</dd>
+              </div>
+              <div>
+                <dt>Cena privada</dt>
+                <dd>7 – 10 p. m. · {dinnerSeats} lugares</dd>
+              </div>
+              <div>
+                <dt>Entradas</dt>
+                <dd>General · VIP · VIP Plus</dd>
+              </div>
+            </dl>
           </div>
         </section>
 
@@ -326,7 +329,7 @@ export default function BogotaForwardSummitPage() {
               tag="Speakers"
               title={
                 <>
-                  De quién vas <span className="ds-accent">a aprender.</span>
+                  De quién vas a aprender.
                 </>
               }
             />
@@ -347,6 +350,8 @@ export default function BogotaForwardSummitPage() {
         <SummitAgenda />
 
         <hr className="ds-divider" />
+
+        <Temas />
 
         <PrivateDinner />
 
@@ -395,7 +400,7 @@ export default function BogotaForwardSummitPage() {
             <a href="/partners" className="ds-card lp-partners-cta" data-accent>
               <div className="lp-partners-art" aria-hidden="true">
                 <Image
-                  src="/images/editorial/noche-indigo.webp"
+                  src="/images/editorial/noche.webp"
                   alt=""
                   fill
                   sizes="(max-width: 760px) 100vw, 240px"
@@ -407,7 +412,7 @@ export default function BogotaForwardSummitPage() {
               <div className="lp-partners-copy">
                 <Tag dot>Aliados y sponsors</Tag>
                 <h2 id="partners-band-title">
-                  ¿Te interesa ser sponsor <span className="ds-accent">o aliado?</span>
+                  ¿Te interesa ser sponsor o aliado?
                 </h2>
                 <p>Un lugar en la cena y tu marca en todo lo que hacemos.</p>
               </div>
@@ -428,16 +433,16 @@ export default function BogotaForwardSummitPage() {
               tag="FAQ"
               title={
                 <>
-                  Preguntas <span className="ds-accent">frecuentes.</span>
+                  Preguntas frecuentes.
                 </>
               }
             />
-            <div className="lp-faq">
+            <div className="lp-faq ds-offset">
               {faqs.map((faq) => (
                 <details key={faq.q} className="lp-faq-item" name="faq">
                   <summary>
                     {faq.q}
-                    <ChevronDown aria-hidden="true" />
+                    <Plus aria-hidden="true" />
                   </summary>
                   <p>{faq.a}</p>
                 </details>
@@ -455,7 +460,7 @@ export default function BogotaForwardSummitPage() {
               tag="Registro"
               title={
                 <>
-                  Nos vemos en <span className="ds-accent">Bogotá.</span>
+                  Nos vemos en Bogotá.
                 </>
               }
             >
@@ -466,14 +471,16 @@ export default function BogotaForwardSummitPage() {
               <div className="ds-card lp-register-media">
                 <div className="lp-register-photo">
                   <Image
-                    src={HORIZON_ART}
-                    alt=""
+                    src={FLIGHT_ART}
+                    alt="Un avión cruza sobre una nube iluminada, en semitono índigo."
                     fill
-                    sizes="(max-width: 1000px) 100vw, 460px"
+                    sizes="(max-width: 1000px) 100vw, 500px"
                     quality={90}
                   />
-                  <p className="lp-register-quote" aria-hidden="true">
-                    IA, empresas y <span className="ds-accent">lo que viene.</span>
+                  <p className="lp-register-pass" aria-hidden="true">
+                    <span>Destino</span>
+                    <strong>BOG</strong>
+                    <span>Bogotá · 2.640 m</span>
                   </p>
                 </div>
                 <dl className="lp-register-facts">

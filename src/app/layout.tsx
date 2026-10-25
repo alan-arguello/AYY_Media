@@ -14,7 +14,6 @@ const newsreader = localFont({
   src: [
     { path: "./fonts/newsreader-latin-400-normal.woff2", weight: "400", style: "normal" },
     { path: "./fonts/newsreader-latin-500-normal.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/newsreader-latin-400-italic.woff2", weight: "400", style: "italic" },
   ],
   variable: "--font-newsreader",
   display: "swap",

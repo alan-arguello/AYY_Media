@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { colombiaSummit } from "@/lib/colombia-summit";
 import { summitPartners } from "@/lib/summit-partners";
-import { PixelArt, SectionHeading, Tag } from "@/components/ui";
+import { Megaphone, RadioTower, Utensils } from "lucide-react";
+import { SectionHeading, Tag } from "@/components/ui";
 import { EventSponsors } from "./event-branding";
 import { pastEventSupporters } from "./past-events";
 import { PartnerForm } from "./partner-form";
-import { flag, mic, signal } from "./pixel-icons";
 import "./partners.css";
 
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
@@ -13,17 +13,17 @@ const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 // What an ally gets. Three things, said plainly.
 const offer = [
   {
-    art: mic,
+    Icon: Utensils,
     title: "Un lugar en la mesa",
     body: "Alguien de tu equipo en la cena privada con Alexander, Tania y los 20 invitados.",
   },
   {
-    art: flag,
+    Icon: Megaphone,
     title: "Tu marca en todo lo que hacemos",
     body: "En el sitio, las promos, los videos, el newsletter, el evento y la cena.",
   },
   {
-    art: signal,
+    Icon: RadioTower,
     title: "Una audiencia que ya existe",
     body: "Founders, C-levels y ejecutivos que siguen a Alexander, a Alan y a Torrenegra & Co, y la comunidad de AIYaiYai.",
   },
@@ -84,7 +84,9 @@ export function Partners({ standalone = false }: { standalone?: boolean }) {
               <span className="partners-offer-index" aria-hidden="true">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <PixelArt rows={item.art} size={54} />
+              <span className="partners-offer-icon" aria-hidden="true">
+                <item.Icon />
+              </span>
               <h3>{item.title}</h3>
               <p>{item.body}</p>
             </li>

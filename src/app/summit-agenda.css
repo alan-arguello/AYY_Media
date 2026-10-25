@@ -3,108 +3,83 @@
   background: var(--ds-bg);
 }
 
+/* The day's two time ranges over Bogotá's hills, engraved in reverse:
+   light lines on indigo, like a cyanotype. */
 .agenda-header {
+  position: relative;
+  isolation: isolate;
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 32px;
-  padding: 36px;
-  background: var(--ds-blue);
+  gap: 28px 40px;
+  min-height: 240px;
+  padding: 32px 36px;
+  overflow: hidden;
+  background: #2c2e94;
   color: var(--ds-bg);
 }
-
-.agenda-heading > p {
-  margin-bottom: 20px;
-  font-size: 0.875rem;
-  color: #dcdcf3;
+.agenda-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/images/editorial/bogota-cianotipo.webp") 70% 30% / cover no-repeat;
+  -webkit-mask-image: linear-gradient(100deg, rgb(0 0 0 / 0.18) 20%, rgb(0 0 0 / 0.9) 75%);
+  mask-image: linear-gradient(100deg, rgb(0 0 0 / 0.18) 20%, rgb(0 0 0 / 0.9) 75%);
 }
-
-.agenda-heading h2 {
-  font: 400 clamp(1.875rem, 1.4rem + 1.2vw, 2.5rem)/1.06 var(--ds-font-display);
-  letter-spacing: -0.035em;
-}
-
-.agenda-day {
-  flex-shrink: 0;
-}
-
-.agenda-day > p {
-  font-size: 0.8125rem;
-  color: #dcdcf3;
-}
-
-.agenda-hours {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-block: 14px 10px;
-  font: 500 1.875rem/1 var(--ds-font-mono);
-  letter-spacing: -0.06em;
-  color: var(--ds-yellow-tint);
-}
-
-.agenda-hours time {
+.agenda-date {
   display: grid;
-  gap: 8px;
+  gap: 6px;
+  align-self: flex-start;
+  font: 400 1.5rem/1.15 var(--ds-font-display);
+  letter-spacing: -0.02em;
 }
-
-.agenda-hours span {
-  font: 400 0.8125rem/1.2 var(--ds-font-text);
-  letter-spacing: 0;
+.agenda-date span {
+  font: 500 0.75rem/1.3 var(--ds-font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: #dcdcf3;
-}
-
-.agenda-hours > svg {
-  width: 28px;
-  height: 28px;
-  margin-top: -20px;
-  stroke-width: 1.2;
 }
 
 /* The header lists the day's two parts. */
 .agenda-ranges {
-  display: grid;
-  gap: 10px;
-  margin-block: 14px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 40px;
 }
-
 .agenda-ranges > div {
   display: grid;
-  grid-template-columns: 52px auto;
-  align-items: baseline;
-  gap: 12px;
+  gap: 10px;
 }
-
 .agenda-ranges dt {
-  font-size: 0.8125rem;
+  font: 500 0.75rem/1.3 var(--ds-font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: #dcdcf3;
 }
-
 .agenda-ranges dd {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   white-space: nowrap;
 }
-
 .agenda-ranges time {
-  font: 500 1.625rem/1 var(--ds-font-mono);
-  letter-spacing: -0.05em;
-  color: var(--ds-yellow-tint);
+  font: 400 2.75rem/1 var(--ds-font-display);
+  letter-spacing: -0.03em;
+  color: var(--ds-bg);
 }
-
 .agenda-ranges small {
-  margin-left: 5px;
-  font: 400 0.75rem/1 var(--ds-font-text);
-  letter-spacing: 0;
+  margin-left: 6px;
+  font: 500 0.75rem/1 var(--ds-font-mono);
+  letter-spacing: 0.04em;
   color: #dcdcf3;
 }
-
 .agenda-ranges svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   stroke-width: 1.4;
-  color: #dcdcf3;
+  color: #b9baf0;
 }
 
 /* Two parts: the event's sessions, then the dinner. */
@@ -234,9 +209,11 @@
 
 .agenda-format {
   display: block;
-  margin-block: 1px 8px;
+  margin-block: 1px 10px;
+  font: 500 0.75rem/1.3 var(--ds-font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--ds-blue);
-  font-size: 0.75rem;
 }
 
 .agenda-speakers {
@@ -268,11 +245,9 @@
 .agenda-topic h3,
 .agenda-topic h4 {
   margin: 0;
-  font-size: clamp(1.125rem, 0.9rem + 0.6vw, 1.375rem);
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.03em;
-  text-wrap: pretty;
+  font: 400 clamp(1.375rem, 1.05rem + 0.9vw, 1.875rem)/1.12 var(--ds-font-display);
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .agenda-topic > p {
@@ -316,11 +291,6 @@
 @media (max-width: 760px) {
   .agenda-header {
     padding: 28px;
-  }
-
-  .agenda-hours {
-    gap: 16px;
-    font-size: 2rem;
   }
 
   .agenda-sessions {
@@ -383,21 +353,24 @@
   .agenda-header {
     align-items: stretch;
     flex-direction: column;
-    gap: 28px;
-    padding: 28px 20px;
-  }
-
-  .agenda-heading > p {
-    margin-bottom: 14px;
-  }
-
-  .agenda-day {
-    padding-top: 22px;
-    border-top: 1px solid #5557c4;
-  }
-
-  .agenda-hours {
     gap: 24px;
+    min-height: 0;
+    padding: 24px 20px 26px;
+  }
+
+  .agenda-header::before {
+    background-position: 30% 20%;
+    -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.3), rgb(0 0 0 / 0.55));
+    mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.3), rgb(0 0 0 / 0.55));
+  }
+
+  .agenda-ranges {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .agenda-ranges time {
+    font-size: 2.25rem;
   }
 
   .agenda-sessions {

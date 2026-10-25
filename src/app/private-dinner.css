@@ -4,8 +4,8 @@
    Tags and cards re-theme through the design-system variables. */
 
 .dinner {
-  --ds-bg: #15163d;
-  --ds-field: #15163d;
+  --ds-bg: #0d0e2b; /* the night art's own base, so its fade has no seam */
+  --ds-field: #121339;
   --ds-ink: #f4f3ef;
   --ds-ink-2: #e6e6f2;
   --ds-muted: #b8b9d3;
@@ -24,13 +24,20 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background:
-    repeating-linear-gradient(to bottom, rgb(255 255 255 / 0.022) 0 1px, transparent 1px 3px),
-    url("/images/editorial/noche-indigo.webp") center top / 100% auto no-repeat;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 55%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0, #000 55%, transparent 100%);
-  opacity: 0.9;
+  /* Generated indigo night (scripts in the redesign notes): rendered at
+     2400px so it is never upscaled. */
+  /* The arc of light sits above the prompt line, clear of the copy. */
+  background: url("/images/editorial/noche.webp") center -250px / max(100%, 1600px) auto no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 50%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 0, #000 50%, transparent 92%);
   pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .dinner::before {
+    background-size: 1000px auto;
+    background-position: center -240px;
+  }
 }
 
 /* ── Prompt ──────────────────────────────────────────────────────────────── */

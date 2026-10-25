@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowRight, Lock } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
 import { dinnerSeats } from "@/lib/summit-pricing";
+import { SectionHeading } from "@/components/ui";
 import { speakers, type SummitSpeaker } from "./speakers";
 import "./summit-agenda.css";
 
@@ -65,34 +66,42 @@ export function SummitAgenda() {
   return (
     <section className="ds-section agenda" id="agenda" aria-labelledby="agenda-title">
       <div className="ds-container">
+        <SectionHeading
+          id="agenda-title"
+          tag="Agenda"
+          title={
+            <>
+              Del evento <span className="ds-accent">a la cena.</span>
+            </>
+          }
+        >
+          Tres sesiones de 10 a. m. a 3 p. m. y, en la noche, una mesa de{" "}
+          {dinnerSeats} personas con Alexander y Tania.
+        </SectionHeading>
         <div className="agenda-program">
           <header className="agenda-header">
-            <div className="agenda-heading">
-              <p>El día</p>
-              <h2 id="agenda-title">Del evento<br />a la cena.</h2>
-            </div>
-            <div className="agenda-day">
-              <p><time dateTime={colombiaSummit.date}>Jueves 19 de noviembre de 2026</time></p>
-              <dl className="agenda-ranges">
-                <div>
-                  <dt>Evento</dt>
-                  <dd aria-label="De 10 de la mañana a 3 de la tarde">
-                    <time dateTime={colombiaSummit.startDate}>10:00<small>a. m.</small></time>
-                    <ArrowRight aria-hidden="true" />
-                    <time dateTime={colombiaSummit.endDate}>3:00<small>p. m.</small></time>
-                  </dd>
-                </div>
-                <div>
-                  <dt>Cena</dt>
-                  <dd aria-label="De 7 a 10 de la noche">
-                    <time dateTime={colombiaSummit.dinnerStartDate}>7:00<small>p. m.</small></time>
-                    <ArrowRight aria-hidden="true" />
-                    <time dateTime={colombiaSummit.dinnerEndDate}>10:00<small>p. m.</small></time>
-                  </dd>
-                </div>
-              </dl>
-              <p>Hora de Bogotá · Presencial</p>
-            </div>
+            <p className="agenda-date">
+              <time dateTime={colombiaSummit.date}>Jueves 19 de noviembre de 2026</time>
+              <span>Hora de Bogotá · Presencial</span>
+            </p>
+            <dl className="agenda-ranges">
+              <div>
+                <dt>Evento</dt>
+                <dd aria-label="De 10 de la mañana a 3 de la tarde">
+                  <time dateTime={colombiaSummit.startDate}>10:00<small>a. m.</small></time>
+                  <ArrowRight aria-hidden="true" />
+                  <time dateTime={colombiaSummit.endDate}>3:00<small>p. m.</small></time>
+                </dd>
+              </div>
+              <div>
+                <dt>Cena privada</dt>
+                <dd aria-label="De 7 a 10 de la noche">
+                  <time dateTime={colombiaSummit.dinnerStartDate}>7:00<small>p. m.</small></time>
+                  <ArrowRight aria-hidden="true" />
+                  <time dateTime={colombiaSummit.dinnerEndDate}>10:00<small>p. m.</small></time>
+                </dd>
+              </div>
+            </dl>
           </header>
 
           <div className="agenda-part">

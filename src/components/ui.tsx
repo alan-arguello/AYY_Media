@@ -42,15 +42,21 @@ export function Tag({
   children,
   dot = false,
   live = false,
+  chip = false,
   className,
 }: {
   children: React.ReactNode;
   dot?: boolean;
   live?: boolean;
+  /** Paper chip behind the label, for labels laid over art. */
+  chip?: boolean;
   className?: string;
 }) {
   return (
-    <span className={["ds-tag", className].filter(Boolean).join(" ")}>
+    <span
+      className={["ds-tag", className].filter(Boolean).join(" ")}
+      data-chip={chip || undefined}
+    >
       {(dot || live) && (
         <span
           className="ds-tag-dot"
