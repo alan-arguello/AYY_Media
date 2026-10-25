@@ -87,7 +87,7 @@ export function Partners({ standalone = false }: { standalone?: boolean }) {
               <span className="partners-offer-icon" aria-hidden="true">
                 <item.Icon />
               </span>
-              <h3>{item.title}</h3>
+              <h2>{item.title}</h2>
               <p>{item.body}</p>
             </li>
           ))}
@@ -123,13 +123,9 @@ export function Partners({ standalone = false }: { standalone?: boolean }) {
               return (
                 <li key={`${item.who}-${item.channel}`} className="partners-channel">
                   {"href" in item ? (
-                    <a
-                      href={item.href}
-                      {...external}
-                      className="partners-channel-inner"
-                      aria-label={`${item.who} en ${item.channel}, ${compact(item.count)} (nueva pestaña)`}
-                    >
+                    <a href={item.href} {...external} className="partners-channel-inner">
                       {inner}
+                      <span className="lp-sr-only"> (se abre en una pestaña nueva)</span>
                     </a>
                   ) : (
                     <span className="partners-channel-inner">{inner}</span>
@@ -143,7 +139,7 @@ export function Partners({ standalone = false }: { standalone?: boolean }) {
         <div className="partners-proof">
           <div>
             <div className="lp-supporters-head">
-              <h3>Empresas con las que hemos colaborado</h3>
+              <h2>Empresas con las que hemos colaborado</h2>
               <Tag>No son sponsors de este evento</Tag>
             </div>
             <ul className="lp-supporters">
@@ -167,9 +163,9 @@ export function Partners({ standalone = false }: { standalone?: boolean }) {
         <div className="partners-apply" id="aliados-form">
           <div className="ds-card partners-pitch">
             <Tag dot>Quiero ser aliado</Tag>
-            <h3>
-              Cuéntanos quién eres <span className="ds-accent">y qué buscas.</span>
-            </h3>
+            <h2>
+              Cuéntanos quién eres y qué buscas.
+            </h2>
             <ol className="partners-steps" aria-label="Qué pasa después">
               <li>
                 <strong>Nos escribes.</strong> Unas pocas preguntas cortas; dos minutos.

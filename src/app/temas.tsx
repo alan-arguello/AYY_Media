@@ -58,8 +58,7 @@ export function Temas() {
             <a
               href={`${SIS_BLOG}/${tema.slug}/`}
               target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${tema.title}. Leer el artículo (nueva pestaña)`}
+              rel="noopener"
             >
               <div className="lp-tema-cover">
                 <Image
@@ -78,6 +77,7 @@ export function Temas() {
               <p className="lp-tema-dek">{tema.dek}</p>
               <span className="lp-tema-link">
                 Leer el artículo
+                <span className="lp-sr-only"> (se abre en una pestaña nueva)</span>
                 <ArrowUpRight aria-hidden="true" />
               </span>
             </a>

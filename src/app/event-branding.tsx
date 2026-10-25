@@ -11,7 +11,7 @@ export function EventOrganizer() {
       href={colombiaSummit.channel}
       {...external}
       className="lp-organizer"
-      aria-label="AIYaiYai, organizador. Ver canal de YouTube (nueva pestaña)"
+      aria-label="Organiza AIYaiYai. Ver el canal de YouTube (nueva pestaña)"
     >
       <span>Organiza</span>
       <Image

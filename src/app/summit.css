@@ -162,6 +162,12 @@
   object-fit: cover;
   object-position: 50% 58%;
 }
+.lp-not-found {
+  padding-bottom: var(--ds-section);
+}
+.lp-not-found .ds-lead {
+  max-width: 32em;
+}
 /* The facts of the day, one hairline row under the photo. */
 .lp-facts {
   display: grid;
@@ -484,7 +490,7 @@
   margin-bottom: 24px;
   text-align: center;
 }
-.lp-supporters-head h3 {
+.lp-supporters-head :is(h2, h3) {
   font: 500 1rem/1.4 var(--ds-font-text);
 }
 .lp-supporters {
@@ -715,7 +721,7 @@
 }
 .lp-field label > span {
   font-weight: 400;
-  color: var(--ds-subtle);
+  color: var(--ds-muted);
 }
 .lp-field input {
   width: 100%;
@@ -792,8 +798,8 @@
 }
 .lp-form-note {
   margin-top: 12px;
-  font-size: 0.75rem;
-  color: var(--ds-subtle);
+  font-size: 0.8125rem;
+  color: var(--ds-muted);
   text-align: center;
 }
 .lp-honeypot,

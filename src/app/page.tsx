@@ -19,38 +19,41 @@ import { dinnerSeats, summitTickets, vakiFoundation } from "@/lib/summit-pricing
 
 export const runtime = "nodejs";
 
-// Editorial art: brick duotones on the page's own paper colour.
 const CITY_PHOTO = "/images/photos/bogota-golden-hour.webp";
 const SKY_PHOTO = "/images/photos/bogota-sky.webp";
 const OG_IMAGE = "/images/colombia-summit/opengraph.png";
+const OG_ALT =
+  "bogota.forward(): evento de IA y cena privada para founders, managers y C-levels con Alexander Torrenegra, Tania Zapata y Alan Argüello. Bogotá, 19 de noviembre de 2026.";
+
+// What search results and link previews show. The title leads with what
+// people search for (IA, Bogotá, the date) and ends with the brand.
+const seoTitle = "Evento de IA y cena privada en Bogotá, 19 de noviembre de 2026 | bogota.forward()";
+const seoDescription =
+  "Evento de IA en Bogotá para founders, managers y C-levels, con Alexander Torrenegra, Tania Zapata y Alan Argüello. Jueves 19 de noviembre de 2026. Cena privada de 20 lugares, por aplicación.";
+const shareTitle = "bogota.forward() · Evento de IA y cena privada en Bogotá, 19 de noviembre de 2026";
+const shareDescription =
+  "Charlas, fireside chat y workshop con Alexander Torrenegra, Tania Zapata y Alan Argüello, y una cena privada de 20 lugares. Para founders, managers y C-levels.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   robots: { index: isPublicSite, follow: isPublicSite },
-  title: "Evento y cena privada para founders, managers y C-levels | bogota.forward()",
-  description:
-    "IA, empresas y lo que viene. Bogotá, 19 de noviembre de 2026: evento de 10 a. m. a 3 p. m. con Alexander Torrenegra, Tania Zapata y Alan Argüello, y cena privada de 7 a 10 p. m. (20 lugares).",
+  title: seoTitle,
+  description: seoDescription,
   alternates: { canonical: colombiaSummit.path },
   openGraph: {
     type: "website",
     locale: "es_CO",
     url: colombiaSummit.path,
     siteName: colombiaSummit.name,
-    title: "Evento y cena privada para founders, managers y C-levels · Bogotá, 19 de noviembre",
-    description:
-      "Evento de 10 a. m. a 3 p. m. y cena privada de 7 a 10 p. m. con Alexander Torrenegra y Tania Zapata. 20 lugares para la cena, por aplicación.",
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: "Evento y cena privada para founders, managers y C-levels con Alexander Torrenegra y Tania Zapata. Bogotá, 19 de noviembre de 2026.",
-      },
-    ],
+    title: shareTitle,
+    description: shareDescription,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: OG_ALT }],
   },
   twitter: {
     card: "summary_large_image",
-    images: [OG_IMAGE],
+    title: shareTitle,
+    description: shareDescription,
+    images: [{ url: OG_IMAGE, alt: OG_ALT }],
   },
 };
 
@@ -138,8 +141,8 @@ function Speaker({ speaker }: { speaker: SummitSpeaker }) {
             src={speaker.image}
             alt={speaker.name}
             fill
-            sizes="(max-width: 640px) 90vw, (max-width: 1000px) 45vw, 300px"
-            quality={90}
+            sizes="(max-width: 640px) 112px, (max-width: 1000px) 45vw, 360px"
+            quality={86}
           />
         </div>
         <div className="lp-speaker-head">
@@ -180,47 +183,74 @@ function Speaker({ speaker }: { speaker: SummitSpeaker }) {
   );
 }
 
+// Prices across the three phases, so the offer stays true all season.
+const allPrices = summitTickets.flatMap((ticket) => ticket.prices);
 const eventSchema = {
   "@context": "https://schema.org",
   "@type": "Event",
-  name: colombiaSummit.name,
-  description: "Evento de IA para founders, managers y C-levels, con cena privada.",
+  "@id": `${siteUrl}/#event`,
+  name: "bogota.forward() · Evento de IA y cena privada para founders, managers y C-levels",
+  description: seoDescription,
+  url: `${siteUrl}/`,
   startDate: colombiaSummit.startDate,
   endDate: colombiaSummit.endDate,
-  subEvent: {
-    "@type": "Event",
-    name: "Cena privada con Alexander Torrenegra y Tania Zapata",
-    startDate: colombiaSummit.dinnerStartDate,
-    endDate: colombiaSummit.dinnerEndDate,
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    location: {
-      "@type": "Place",
-      name: "Bogotá",
-      address: { "@type": "PostalAddress", addressLocality: "Bogotá", addressCountry: "CO" },
-    },
-  },
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
   inLanguage: "es",
-  image: [`${siteUrl}${OG_IMAGE}`],
+  isAccessibleForFree: false,
+  image: [
+    `${siteUrl}${OG_IMAGE}`,
+    `${siteUrl}/images/colombia-summit/opengraph-4x3.png`,
+    `${siteUrl}/images/colombia-summit/opengraph-1x1.png`,
+  ],
   location: {
     "@type": "Place",
     name: "Bogotá",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Bogotá",
+      addressRegion: "Bogotá D.C.",
       addressCountry: "CO",
     },
   },
   organizer: {
     "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
     name: colombiaSummit.organizer,
-    url: colombiaSummit.channel,
+    url: siteUrl,
   },
-  performer: speakers.map((speaker) => ({ "@type": "Person", name: speaker.name })),
+  performer: speakers.map((speaker) => ({
+    "@type": "Person",
+    name: speaker.name,
+    jobTitle: speaker.role,
+    sameAs: speaker.linkedin,
+  })),
+  offers: {
+    "@type": "AggregateOffer",
+    url: `${siteUrl}/#entradas`,
+    priceCurrency: "USD",
+    lowPrice: Math.min(...allPrices),
+    highPrice: Math.max(...allPrices),
+    offerCount: summitTickets.length,
+    availability: "https://schema.org/InStock",
+    validFrom: "2026-10-01T00:00:00-05:00",
+  },
+  subEvent: {
+    "@type": "Event",
+    name: "Cena privada con Alexander Torrenegra y Tania Zapata",
+    description: `Cena de ${dinnerSeats} lugares para VIP y VIP Plus, por aplicación.`,
+    startDate: colombiaSummit.dinnerStartDate,
+    endDate: colombiaSummit.dinnerEndDate,
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    maximumAttendeeCapacity: dinnerSeats,
+    location: {
+      "@type": "Place",
+      name: "Bogotá",
+      address: { "@type": "PostalAddress", addressLocality: "Bogotá", addressRegion: "Bogotá D.C.", addressCountry: "CO" },
+    },
+  },
 };
-
-const step = (i: number) => ({ "--i": i }) as React.CSSProperties;
 
 export default function BogotaForwardSummitPage() {
   return (
@@ -229,7 +259,6 @@ export default function BogotaForwardSummitPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
       />
-      <div className="ds-rails" aria-hidden="true" />
       <a className="lp-skip" href="#contenido">
         Ir al contenido
       </a>
@@ -241,13 +270,13 @@ export default function BogotaForwardSummitPage() {
         <section className="lp-hero" aria-labelledby="summit-title">
           <div className="ds-container">
             <div className="lp-hero-copy">
-              <p className="lp-hero-eyebrow ds-reveal">
-                Jueves 19 de noviembre de 2026 · Bogotá
+              <p className="lp-hero-eyebrow">
+                <time dateTime={colombiaSummit.date}>Jueves 19 de noviembre de 2026</time> · Bogotá
               </p>
-              <h1 id="summit-title" className="ds-display-xl lp-hero-title ds-reveal" style={step(1)}>
+              <h1 id="summit-title" className="ds-display-xl lp-hero-title">
                 Evento y cena privada para founders, managers y C-levels
               </h1>
-              <div className="lp-actions ds-reveal" style={step(2)}>
+              <div className="lp-actions">
                 <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>
                   Ver entradas
                 </Button>
@@ -256,13 +285,13 @@ export default function BogotaForwardSummitPage() {
                 </Button>
               </div>
             </div>
-            <figure className="lp-hero-photo ds-reveal" style={step(3)}>
+            <figure className="lp-hero-photo">
               <Image
                 src={CITY_PHOTO}
                 alt="Bogotá frente a los cerros de Monserrate y Guadalupe."
                 fill
                 sizes="(max-width: 900px) 100vw, 820px"
-                quality={90}
+                quality={86}
                 preload
               />
             </figure>
@@ -435,7 +464,7 @@ export default function BogotaForwardSummitPage() {
                     alt="Un avión cruza el cielo de Bogotá al atardecer."
                     fill
                     sizes="(max-width: 1000px) 100vw, 560px"
-                    quality={90}
+                    quality={86}
                   />
                 </div>
                 <dl className="lp-register-facts">
