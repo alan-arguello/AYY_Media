@@ -4,6 +4,7 @@ import { colombiaSummit } from "@/lib/colombia-summit";
 import { dinnerSeats } from "@/lib/summit-pricing";
 import { Button } from "@/components/ui";
 import { Countdown } from "./countdown";
+import { HeroField } from "./hero-field";
 import { NavScrollState } from "./nav-scroll-state";
 import "./hero.css";
 
@@ -57,6 +58,7 @@ export function Hero() {
       <div className="hero-media">
         <Image src={PHOTO.src} alt={PHOTO.alt} fill sizes="100vw" quality={82} preload />
       </div>
+      <HeroField />
       <div className="hero-body">
         {/* Once the copy reaches the nav, the nav turns solid so nothing scrolls under it. */}
         <NavScrollState />
