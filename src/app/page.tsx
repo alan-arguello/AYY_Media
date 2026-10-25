@@ -185,6 +185,26 @@ function Speaker({ speaker }: { speaker: SummitSpeaker }) {
 
 // Prices across the three phases, so the offer stays true all season.
 const allPrices = summitTickets.flatMap((ticket) => ticket.prices);
+const dinnerPrices = summitTickets
+  .filter((ticket) => ticket.id !== "general")
+  .flatMap((ticket) => ticket.prices);
+const eventImages = [
+  `${siteUrl}${OG_IMAGE}`,
+  `${siteUrl}/images/colombia-summit/opengraph-4x3.png`,
+  `${siteUrl}/images/colombia-summit/opengraph-1x1.png`,
+];
+const eventOrganizer = {
+  "@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
+  name: colombiaSummit.organizer,
+  url: siteUrl,
+};
+const eventPerformers = speakers.map((speaker) => ({
+  "@type": "Person",
+  name: speaker.name,
+  jobTitle: speaker.role,
+  sameAs: speaker.linkedin,
+}));
 const eventSchema = {
   "@context": "https://schema.org",
   "@type": "Event",
@@ -198,11 +218,7 @@ const eventSchema = {
   eventStatus: "https://schema.org/EventScheduled",
   inLanguage: "es",
   isAccessibleForFree: false,
-  image: [
-    `${siteUrl}${OG_IMAGE}`,
-    `${siteUrl}/images/colombia-summit/opengraph-4x3.png`,
-    `${siteUrl}/images/colombia-summit/opengraph-1x1.png`,
-  ],
+  image: eventImages,
   location: {
     "@type": "Place",
     name: "Bogotá",
@@ -213,18 +229,8 @@ const eventSchema = {
       addressCountry: "CO",
     },
   },
-  organizer: {
-    "@type": "Organization",
-    "@id": `${siteUrl}/#organization`,
-    name: colombiaSummit.organizer,
-    url: siteUrl,
-  },
-  performer: speakers.map((speaker) => ({
-    "@type": "Person",
-    name: speaker.name,
-    jobTitle: speaker.role,
-    sameAs: speaker.linkedin,
-  })),
+  organizer: eventOrganizer,
+  performer: eventPerformers,
   offers: {
     "@type": "AggregateOffer",
     url: `${siteUrl}/#entradas`,
@@ -244,6 +250,19 @@ const eventSchema = {
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     eventStatus: "https://schema.org/EventScheduled",
     maximumAttendeeCapacity: dinnerSeats,
+    image: eventImages,
+    organizer: eventOrganizer,
+    performer: eventPerformers.filter((person) => person.name !== "Alan Argüello"),
+    offers: {
+      "@type": "AggregateOffer",
+      url: `${siteUrl}/#entradas`,
+      priceCurrency: "USD",
+      lowPrice: Math.min(...dinnerPrices),
+      highPrice: Math.max(...dinnerPrices),
+      offerCount: 2,
+      availability: "https://schema.org/InStock",
+      validFrom: "2026-10-01T00:00:00-05:00",
+    },
     location: {
       "@type": "Place",
       name: "Bogotá",
