@@ -261,7 +261,7 @@ export default function BogotaForwardSummitPage() {
                 src={CITY_PHOTO}
                 alt="Bogotá frente a los cerros de Monserrate y Guadalupe."
                 fill
-                sizes="(max-width: 1200px) 100vw, 1120px"
+                sizes="(max-width: 900px) 100vw, 820px"
                 quality={90}
                 preload
               />

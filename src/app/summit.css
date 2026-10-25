@@ -152,20 +152,22 @@
    speakers, framed to the content width. */
 .lp-hero-photo {
   position: relative;
-  aspect-ratio: 1120 / 440;
-  margin-top: 64px;
+  width: min(820px, 100%);
+  aspect-ratio: 820 / 340;
+  margin: 64px auto 0;
   overflow: hidden;
   background: var(--ds-surface);
 }
 .lp-hero-photo > img {
   object-fit: cover;
-  object-position: 50% 62%;
-  filter: grayscale(1) contrast(1.12) brightness(1.1);
+  object-position: 50% 58%;
 }
 /* The facts of the day, one hairline row under the photo. */
 .lp-facts {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: min(820px, 100%);
+  margin-inline: auto;
   border-bottom: 1px solid var(--ds-line);
 }
 .lp-facts > div {
@@ -1125,7 +1127,7 @@
     flex: 1 1 auto;
   }
   .lp-hero-photo {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2;
     margin-top: 40px;
   }
   .lp-hero-photo > img {
