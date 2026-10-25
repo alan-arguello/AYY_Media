@@ -50,11 +50,7 @@ export function Temas() {
               Algunas de <span className="ds-accent">nuestras temáticas.</span>
             </>
           }
-        >
-          Lo que escribimos en Super Intelligence Society, la comunidad de
-          AiYaiYai: agentes, modelos, arquitectura y la IA que llega al mundo
-          físico.
-        </SectionHeading>
+        />
       </div>
       <TemasRail count={temas.length}>
         {temas.map((tema, index) => (
@@ -63,7 +59,7 @@ export function Temas() {
               href={`${SIS_BLOG}/${tema.slug}/`}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${tema.title}. Leer en Super Intelligence Society (nueva pestaña)`}
+              aria-label={`${tema.title}. Leer el artículo (nueva pestaña)`}
             >
               <div className="lp-tema-cover">
                 <Image

@@ -1,19 +1,19 @@
 /* ── Cena privada: the one full-bleed dark band on the page ───────────────
-   Deep indigo night with the duotone glow behind the heading, paper for
-   ink, hairlines in a lighter indigo and light indigo as the highlight.
+   Deep brick night with the duotone glow behind the heading, paper for
+   ink, hairlines in a lighter brick and light brick as the highlight.
    Tags and cards re-theme through the design-system variables. */
 
 .dinner {
-  --ds-bg: #0d0e2b; /* the night art's own base, so its fade has no seam */
-  --ds-field: #121339;
+  --ds-bg: #0f0f11; /* the night art's own base, so its fade has no seam */
+  --ds-field: #1c1c1f;
   --ds-ink: #f4f3ef;
-  --ds-ink-2: #e6e6f2;
-  --ds-muted: #b8b9d3;
-  --ds-subtle: #8a8bb0;
-  --ds-line: #2c2d5c;
-  --ds-line-strong: #4a4b80;
-  --dinner-accent: #b9baf0;
-  --dinner-tint: #1c1d4c;
+  --ds-ink-2: #ece9e4;
+  --ds-muted: #b9b6b0;
+  --ds-subtle: #8c8a86;
+  --ds-line: #2e2e33;
+  --ds-line-strong: #4a4a52;
+  --dinner-accent: #e3a58f;
+  --dinner-tint: #222226;
   padding-block: calc(var(--ds-section) - 8px);
   background: var(--ds-bg);
   color: var(--ds-ink);
@@ -24,12 +24,13 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  /* Generated indigo night (scripts in the redesign notes): rendered at
+  /* Generated brick night (scripts in the redesign notes): rendered at
      2400px so it is never upscaled. */
   /* The arc of light sits above the prompt line, clear of the copy. */
-  background: url("/images/editorial/noche.webp") center -250px / max(100%, 1600px) auto no-repeat;
+  background: url("/images/editorial/noche-ladrillo.webp") center -250px / max(100%, 1600px) auto no-repeat;
   -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 50%, transparent 92%);
   mask-image: linear-gradient(to bottom, #000 0, #000 50%, transparent 92%);
+  opacity: 0.55;
   pointer-events: none;
 }
 
@@ -70,7 +71,7 @@
   color: var(--dinner-accent);
 }
 .dinner-prompt-line .dinner-prompt-call {
-  color: #b9baf0;
+  color: #e3a58f;
 }
 .dinner-prompt-status::before {
   content: "";
@@ -189,7 +190,7 @@
   bottom: 0;
   z-index: 1;
   padding: 26px 12px 10px;
-  background: linear-gradient(to top, rgb(12 13 36 / 0.9), rgb(12 13 36 / 0));
+  background: linear-gradient(to top, rgb(17 17 19 / 0.9), rgb(17 17 19 / 0));
   font: 400 0.75rem/1.4 var(--ds-font-mono);
   color: var(--ds-ink-2);
 }
@@ -326,7 +327,7 @@
 }
 .dinner-button[data-variant="primary"] {
   background: var(--ds-ink);
-  color: #15163d;
+  color: #18181b;
 }
 .dinner-button[data-variant="primary"]:hover {
   background: var(--ds-yellow);

@@ -174,7 +174,7 @@
     z-index: -1;
     width: auto;
     height: 62%;
-    background: url("/images/editorial/vuelo-sm.webp") 46% 100% / cover no-repeat;
+    background: url("/images/editorial/vuelo-tinta-sm.webp") 46% 100% / cover no-repeat;
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%);
     mask-image: linear-gradient(to bottom, transparent, #000 40%);
   }
@@ -255,7 +255,7 @@
 .pt-choice:has(input:checked) {
   border-style: solid;
   border-color: var(--ds-blue);
-  background: #efeff8;
+  background: #f6ece7;
   box-shadow: inset 3px 0 0 var(--ds-blue);
 }
 .pt-choice[data-invalid] {

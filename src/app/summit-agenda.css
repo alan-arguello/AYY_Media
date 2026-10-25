@@ -4,7 +4,7 @@
 }
 
 /* The day's two time ranges over Bogotá's hills, engraved in reverse:
-   light lines on indigo, like a cyanotype. */
+   light lines on brick, like a cyanotype. */
 .agenda-header {
   position: relative;
   isolation: isolate;
@@ -16,7 +16,7 @@
   min-height: 240px;
   padding: 32px 36px;
   overflow: hidden;
-  background: #2c2e94;
+  background: #18181b;
   color: var(--ds-bg);
 }
 .agenda-header::before {
@@ -24,7 +24,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: url("/images/editorial/bogota-cianotipo.webp") 70% 30% / cover no-repeat;
+  background: url("/images/editorial/bogota-nocturno.webp") 70% 30% / cover no-repeat;
   -webkit-mask-image: linear-gradient(100deg, rgb(0 0 0 / 0.18) 20%, rgb(0 0 0 / 0.9) 75%);
   mask-image: linear-gradient(100deg, rgb(0 0 0 / 0.18) 20%, rgb(0 0 0 / 0.9) 75%);
 }
@@ -32,14 +32,14 @@
   display: grid;
   gap: 6px;
   align-self: flex-start;
-  font: 400 1.5rem/1.15 var(--ds-font-display);
+  font: 400 1.25rem/1.2 var(--ds-font-display);
   letter-spacing: -0.02em;
 }
 .agenda-date span {
   font: 500 0.75rem/1.3 var(--ds-font-mono);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #dcdcf3;
+  color: #e6e1da;
 }
 
 /* The header lists the day's two parts. */
@@ -56,7 +56,7 @@
   font: 500 0.75rem/1.3 var(--ds-font-mono);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #dcdcf3;
+  color: #e6e1da;
 }
 .agenda-ranges dd {
   display: flex;
@@ -65,7 +65,7 @@
   white-space: nowrap;
 }
 .agenda-ranges time {
-  font: 400 2.75rem/1 var(--ds-font-display);
+  font: 400 2.125rem/1 var(--ds-font-display);
   letter-spacing: -0.03em;
   color: var(--ds-bg);
 }
@@ -73,13 +73,13 @@
   margin-left: 6px;
   font: 500 0.75rem/1 var(--ds-font-mono);
   letter-spacing: 0.04em;
-  color: #dcdcf3;
+  color: #e6e1da;
 }
 .agenda-ranges svg {
   width: 20px;
   height: 20px;
   stroke-width: 1.4;
-  color: #b9baf0;
+  color: #e3a58f;
 }
 
 /* Two parts: the event's sessions, then the dinner. */
@@ -245,7 +245,7 @@
 .agenda-topic h3,
 .agenda-topic h4 {
   margin: 0;
-  font: 400 clamp(1.375rem, 1.05rem + 0.9vw, 1.875rem)/1.12 var(--ds-font-display);
+  font: 400 clamp(1.1875rem, 1rem + 0.5vw, 1.4375rem)/1.2 var(--ds-font-display);
   letter-spacing: -0.025em;
   text-wrap: balance;
 }
@@ -370,7 +370,7 @@
   }
 
   .agenda-ranges time {
-    font-size: 2.25rem;
+    font-size: 1.875rem;
   }
 
   .agenda-sessions {

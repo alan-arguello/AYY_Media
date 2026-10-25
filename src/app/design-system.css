@@ -1,9 +1,9 @@
 /* ──────────────────────────────────────────────────────────────────────────
    bogota.forward() summit — design system (editorial)
-   Neutral paper, near-black ink and a single indigo taken from the Bogotá
+   Neutral paper, near-black ink and a single brick taken from the Bogotá
    engraving. Newsreader for display, Geist for text, Geist Mono for figures
    and code. 1px solid hairlines, 2px corners, generous space, no shadows.
-   Illustrations are duotones in indigo on paper so the page never mixes hues.
+   Illustrations are duotones in brick on paper so the page never mixes hues.
    ────────────────────────────────────────────────────────────────────────── */
 
 :root {
@@ -25,16 +25,16 @@
   --ds-line: #dcdad3;
   --ds-line-strong: #a8a69f;
 
-  /* One accent: the indigo of the Bogotá engraving. The legacy names stay
+  /* One accent: the brick of the Bogotá engraving. The legacy names stay
      so every component keeps working: blue leads, "yellow" is now the light
-     indigo used for glows and highlights, "red" the lighter accent for the
+     brick used for glows and highlights, "red" the lighter accent for the
      call parentheses. Functional error reds live in their own components. */
-  --ds-blue: #3b3db4;
-  --ds-blue-hover: #13134a;
-  --ds-blue-tint: #e7e7f6;
-  --ds-yellow: #b9baf0;
-  --ds-yellow-tint: #e7e7f6;
-  --ds-red: #6d6fd6;
+  --ds-blue: #b4482a;
+  --ds-blue-hover: #7a2f1a;
+  --ds-blue-tint: #f3e5df;
+  --ds-yellow: #e3a58f;
+  --ds-yellow-tint: #f3e5df;
+  --ds-red: #c9765c;
   --ds-flag: var(--ds-blue);
   --ds-flag-h: var(--ds-blue);
 
@@ -56,7 +56,7 @@
   --ds-frame: 1200px;
   --ds-container: 1040px;
   --ds-gutter: 24px;
-  --ds-section: 104px;
+  --ds-section: 96px;
   --ds-nav: 64px;
   --ds-label-col: 176px;
 }
@@ -85,17 +85,17 @@
   text-wrap: balance;
 }
 .ds-display-xl {
-  font-size: clamp(2.75rem, 1.4rem + 4.6vw, 5.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-}
-.ds-display-l {
-  font-size: clamp(2.125rem, 1.4rem + 2.3vw, 3.5rem);
-  line-height: 1.02;
+  font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.75rem);
+  line-height: 1.04;
   letter-spacing: -0.03em;
 }
+.ds-display-l {
+  font-size: clamp(1.75rem, 1.35rem + 1.3vw, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
 .ds-display-m {
-  font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.75rem);
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
   line-height: 1.12;
   letter-spacing: -0.015em;
 }
@@ -192,7 +192,7 @@
   column-gap: 32px;
   row-gap: 18px;
   align-items: start;
-  margin: 0 0 56px;
+  margin: 0 0 48px;
   counter-increment: ds-section;
 }
 .ds-heading > .ds-tag {
@@ -260,15 +260,15 @@
   background: var(--ds-blue);
 }
 .ds-tag-dot[data-live] {
-  box-shadow: 0 0 0 0 rgb(59 61 180 / 0.45);
+  box-shadow: 0 0 0 0 rgb(180 72 42 / 0.45);
   animation: ds-pulse 2.2s var(--ds-ease) infinite;
 }
 @keyframes ds-pulse {
   70% {
-    box-shadow: 0 0 0 7px rgb(59 61 180 / 0);
+    box-shadow: 0 0 0 7px rgb(180 72 42 / 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgb(59 61 180 / 0);
+    box-shadow: 0 0 0 0 rgb(180 72 42 / 0);
   }
 }
 

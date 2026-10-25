@@ -101,11 +101,11 @@ const PIXEL_PALETTE: Record<string, string> = {
   m: "#8a8a92", // mid grey
   g: "#dcdad3", // light grey
   w: "#ffffff",
-  b: "#3b3db4", // indigo
-  a: "#6d6fd6", // light indigo
-  l: "#b9baf0", // pale indigo
-  y: "#e7e7f6", // highlight
-  r: "#3b3db4", // accent (indigo)
+  b: "#b4482a", // brick
+  a: "#c9765c", // light brick
+  l: "#e3a58f", // pale brick
+  y: "#f3e5df", // highlight
+  r: "#b4482a", // accent (brick)
 };
 
 // Renders a bitmap (one string per row, one character per pixel, "." for

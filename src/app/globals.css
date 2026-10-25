@@ -55,7 +55,7 @@ em {
   font-style: normal;
 }
 ::selection {
-  background: #dcdcf3;
+  background: #e6e1da;
   color: #000;
 }
 @media (prefers-reduced-motion: reduce) {

@@ -19,9 +19,9 @@ import { dinnerSeats, summitTickets, vakiFoundation } from "@/lib/summit-pricing
 
 export const runtime = "nodejs";
 
-// Editorial art: indigo duotones on the page's own paper colour.
-const HERO_ART = "/images/editorial/bogota-monserrate-grabado.webp";
-const FLIGHT_ART = "/images/editorial/vuelo.webp";
+// Editorial art: brick duotones on the page's own paper colour.
+const HERO_ART = "/images/editorial/bogota-grabado-tinta.webp";
+const FLIGHT_ART = "/images/editorial/vuelo-tinta.webp";
 const OG_IMAGE = "/images/colombia-summit/opengraph.png";
 
 export const metadata: Metadata = {
@@ -255,9 +255,8 @@ export default function BogotaForwardSummitPage() {
             </h1>
             <div className="lp-hero-foot ds-reveal" style={step(3)}>
               <p className="lp-hero-lede">
-                Charlas, un fireside chat y un workshop sobre cómo la IA está
-                cambiando las empresas, con Alexander Torrenegra, Tania Zapata y
-                Alan Argüello. En la noche, cena privada para {dinnerSeats}.
+                Lo que la IA ya está cambiando en las empresas, contado por
+                quienes lo están haciendo.
               </p>
               <div className="lp-actions">
                 <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>
@@ -276,7 +275,7 @@ export default function BogotaForwardSummitPage() {
             <div className="lp-hero-art">
               <Image
                 src={HERO_ART}
-                alt="Grabado en tinta índigo de Bogotá: los cerros de Monserrate y Guadalupe sobre el centro de la ciudad."
+                alt="Grabado en tinta de Bogotá: los cerros de Monserrate y Guadalupe sobre el centro de la ciudad."
                 fill
                 sizes="100vw"
                 quality={92}
@@ -400,7 +399,7 @@ export default function BogotaForwardSummitPage() {
             <a href="/partners" className="ds-card lp-partners-cta" data-accent>
               <div className="lp-partners-art" aria-hidden="true">
                 <Image
-                  src="/images/editorial/noche.webp"
+                  src="/images/editorial/noche-ladrillo.webp"
                   alt=""
                   fill
                   sizes="(max-width: 760px) 100vw, 240px"
@@ -472,7 +471,7 @@ export default function BogotaForwardSummitPage() {
                 <div className="lp-register-photo">
                   <Image
                     src={FLIGHT_ART}
-                    alt="Un avión cruza sobre una nube iluminada, en semitono índigo."
+                    alt="Un avión cruza sobre una nube iluminada, en semitono."
                     fill
                     sizes="(max-width: 1000px) 100vw, 500px"
                     quality={90}

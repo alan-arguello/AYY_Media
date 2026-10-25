@@ -64,16 +64,16 @@
 }
 .lp-ticket[data-tier="vip"] {
   border-color: var(--ds-blue);
-  background: #efeff8;
+  background: #f6ece7;
 }
 .lp-ticket[data-tier="vip"]::before { background: var(--ds-blue); }
 .lp-ticket[data-tier="vip-plus"] {
-  background: #15163d;
-  border-color: #15163d;
+  background: #18181b;
+  border-color: #18181b;
   color: var(--ds-bg);
-  --ds-muted: #c4c5dc;
-  --ds-line: #3a3b6b;
-  --ds-blue: #b9baf0;
+  --ds-muted: #c4c1bb;
+  --ds-line: #3a3a40;
+  --ds-blue: #e3a58f;
 }
 .lp-ticket[data-tier="vip-plus"]::before { background: var(--ds-yellow); }
 .lp-ticket h3 {
@@ -141,7 +141,7 @@
 .lp-ticket-schedule dd { font-family: var(--ds-font-mono); }
 .lp-ticket-schedule [data-selected] { font-weight: 600; color: inherit; }
 .lp-ticket-cta { width: 100%; justify-content: space-between; font-size: 0.875rem; }
-.lp-ticket[data-tier="vip-plus"] .lp-ticket-cta { background: var(--ds-bg); color: #15163d; }
+.lp-ticket[data-tier="vip-plus"] .lp-ticket-cta { background: var(--ds-bg); color: #18181b; }
 .lp-ticket[data-tier="vip-plus"] .lp-ticket-cta:hover { background: var(--ds-yellow); }
 .lp-ticket-cta-note { margin-top: 10px; color: var(--ds-muted); text-align: center; font-size: 0.6875rem; }
 .lp-pricing-footnote { max-width: 690px; margin: 24px auto 0; text-align: center; font-size: 0.75rem; color: var(--ds-muted); }
