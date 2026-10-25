@@ -8,15 +8,6 @@
   letter-spacing: -0.008em;
   overflow-x: clip;
 }
-/* The flag as a thin signature at the top of the page. */
-.lp::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  z-index: 2;
-  height: 4px;
-  background: var(--ds-flag-h);
-}
 .lp > main,
 .lp > footer {
   position: relative;
@@ -100,8 +91,8 @@
   height: var(--ds-nav);
   margin-inline: auto;
   padding: 0 12px 0 16px;
-  border: 1px dashed var(--ds-line-strong);
-  background: rgb(252 251 246 / 0.86);
+  border: 1px solid var(--ds-line-strong);
+  background: rgb(244 243 239 / 0.86);
   backdrop-filter: blur(14px) saturate(1.4);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
   pointer-events: auto;
@@ -123,26 +114,24 @@
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 
-/* One scene: the copy sits in the "sky" (paper), the city rises underneath
-   and dissolves into pixels just below the buttons, and the facts row
-   straddles the photo's bottom edge. */
+/* One scene: the copy sits on the paper, an indigo engraving of the old
+   city rises out of that same paper underneath, and the facts row straddles
+   the art's bottom edge. */
 .lp-hero {
-  --hero-band: 400px; /* the solid-city row; grows with the viewport */
-  --hero-reach: 60px; /* how far the photo climbs under the buttons */
-  --px-clear: 30px; /* from the photo's top: left blank… */
-  --px-solid: 240px; /* …and where it becomes solid */
-  --px-cell: 12px;
+  --hero-band: 440px; /* the engraving's row; grows with the viewport */
+  --hero-reach: 96px; /* how far the art climbs under the buttons */
+  --art-solid: 300px; /* where the fade from paper ends */
   display: grid;
   grid-template-rows: auto minmax(var(--hero-band), 1fr) auto;
-  min-height: clamp(720px, 100svh, 920px);
-  padding-top: calc(var(--ds-nav) + 56px);
+  min-height: clamp(760px, 100svh, 980px);
+  padding-top: calc(var(--ds-nav) + 64px);
   padding-bottom: 40px;
 }
 .lp-hero-copy {
   z-index: 2;
   display: grid;
   justify-items: center;
-  gap: 20px;
+  gap: 22px;
   padding-bottom: 32px;
   text-align: center;
 }
@@ -153,26 +142,56 @@
   display: block;
 }
 .lp-hero-title {
-  font-size: clamp(2.25rem, 1.3rem + 3.2vw, 4rem);
-  line-height: 1.04;
+  font-size: clamp(2.5rem, 1.2rem + 4.4vw, 5.25rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 .lp-hero-stage {
   position: relative;
 }
-.lp-hero-photo {
+.lp-hero-art {
   position: absolute;
   inset: calc(-1 * var(--hero-reach)) 0 0;
-  background: transparent;
-  /* Anchored to the top so the sky is what dissolves, not the hills. */
-  --px-pos: 50% 0%;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ds-line-strong);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, rgb(0 0 0 / 0.35) calc(var(--art-solid) * 0.45), #000 var(--art-solid));
+  mask-image: linear-gradient(to bottom, transparent 0, rgb(0 0 0 / 0.35) calc(var(--art-solid) * 0.45), #000 var(--art-solid));
 }
-/* Without the canvas, the plain photo gets the same blank-to-solid mask. */
-.lp-hero-photo[data-mode="image"] > img {
-  -webkit-mask-image: linear-gradient(to bottom, transparent var(--px-clear), #000 var(--px-solid));
-  mask-image: linear-gradient(to bottom, transparent var(--px-clear), #000 var(--px-solid));
+.lp-hero-img {
+  /* 64px of spare art above the frame, so the scroll drift never shows an
+     edge. Overrides next/image's inline fill box. */
+  top: -64px !important;
+  height: calc(100% + 64px) !important;
+  object-fit: cover;
+  object-position: 50% 42%;
+  transform-origin: 50% 70%;
+  animation: lp-art-in 2.4s var(--ds-ease-out) both;
 }
-.px-photo > img {
-  object-position: var(--px-pos, 50% 50%);
+@keyframes lp-art-in {
+  from {
+    opacity: 0;
+    transform: scale(1.05) translateY(12px);
+  }
+}
+/* As the page scrolls, the engraving sinks a little slower than the copy. */
+@keyframes lp-art-drift {
+  to {
+    translate: 0 64px;
+  }
+}
+@supports (animation-timeline: scroll()) {
+  .lp-hero-img {
+    animation:
+      lp-art-in 2.4s var(--ds-ease-out) both,
+      lp-art-drift linear both;
+    animation-timeline: auto, scroll(root);
+    animation-range: normal, 0 100vh;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-hero-img {
+    animation: none;
+  }
 }
 .lp-hero-stage > .lp-hero-tags {
   position: absolute;
@@ -211,7 +230,7 @@
   color: var(--ds-ink);
 }
 .lp-facts strong {
-  font: 500 1.25rem/1.1 var(--ds-font-display);
+  font: 400 1.25rem/1.1 var(--ds-font-display);
   letter-spacing: -0.02em;
 }
 .lp-facts span {
@@ -308,7 +327,7 @@
   position: relative;
   aspect-ratio: 1 / 1.08;
   overflow: hidden;
-  border-bottom: 1px dashed var(--ds-line);
+  border-bottom: 1px solid var(--ds-line);
   background: var(--ds-surface);
 }
 .lp-speaker-media > img {
@@ -371,7 +390,7 @@
   min-height: 56px;
   margin-top: 14px;
   padding: 4px 14px;
-  border-top: 1px dashed var(--ds-line);
+  border-top: 1px solid var(--ds-line);
 }
 .lp-credential {
   position: relative;
@@ -469,7 +488,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  border: 1px dashed rgb(13 11 1 / 0.25);
+  border: 1px solid rgb(19 19 22 / 0.25);
   pointer-events: none;
 }
 .lp-carousel-group img {
@@ -484,7 +503,7 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  border: 1px dashed var(--ds-line-strong);
+  border: 1px solid var(--ds-line-strong);
   background: var(--ds-bg);
   color: var(--ds-ink);
   cursor: pointer;
@@ -562,12 +581,37 @@
   background: var(--ds-surface);
 }
 .lp-partners-art {
-  width: 64px;
-  height: 64px;
-  transition: transform var(--ds-base) var(--ds-ease-out);
+  position: relative;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 6px;
+  width: 168px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #15163d;
+  color: #f4f3ef;
 }
-.lp-partners-cta:hover .lp-partners-art {
-  transform: translateY(-3px) rotate(-4deg);
+.lp-partners-art > img {
+  object-fit: cover;
+  transition: transform 900ms var(--ds-ease-out);
+}
+.lp-partners-cta:hover .lp-partners-art > img {
+  transform: scale(1.08);
+}
+.lp-partners-art strong,
+.lp-partners-art small {
+  position: relative;
+}
+.lp-partners-art strong {
+  font: 400 2.25rem/1 var(--ds-font-display);
+  letter-spacing: -0.03em;
+}
+.lp-partners-art small {
+  font: 500 0.6875rem/1 var(--ds-font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b9baf0;
 }
 .lp-partners-copy {
   display: grid;
@@ -575,7 +619,7 @@
   gap: 10px;
 }
 .lp-partners-copy h2 {
-  font: 500 clamp(1.5rem, 1.2rem + 1vw, 2rem)/1.1 var(--ds-font-display);
+  font: 400 clamp(1.5rem, 1.2rem + 1vw, 2rem)/1.1 var(--ds-font-display);
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
@@ -598,8 +642,8 @@
     padding: 22px 18px;
   }
   .lp-partners-art {
-    width: 48px;
-    height: 48px;
+    width: 100%;
+    aspect-ratio: 16 / 7;
   }
   .lp-partners-button {
     width: 100%;
@@ -616,7 +660,7 @@
   gap: 16px 20px;
 }
 .lp-faq-item {
-  border: 1px dashed var(--ds-line-strong);
+  border: 1px solid var(--ds-line-strong);
   background: var(--ds-bg);
   transition: border-color var(--ds-fast);
 }
@@ -663,31 +707,49 @@
 .lp-register {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
   gap: 16px;
 }
+/* The art keeps its own proportions and stays in view beside the form. */
 .lp-register-media {
+  position: sticky;
+  top: calc(var(--ds-nav) + 40px);
   display: flex;
   flex-direction: column;
 }
 .lp-register-photo {
-  flex: 1;
-  min-height: 380px;
-  --px-pos: 42% 30%;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--ds-bg);
+}
+.lp-register-photo > img {
+  object-fit: cover;
+  object-position: 60% 100%;
+}
+.lp-register-quote {
+  position: absolute;
+  top: 22px;
+  left: 24px;
+  right: 24px;
+  font: 400 clamp(1.5rem, 1.1rem + 1.2vw, 2rem)/1.08 var(--ds-font-display);
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 .lp-register-facts {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-top: 1px dashed var(--ds-line);
+  border-top: 1px solid var(--ds-line);
 }
 .lp-register-facts > div {
   padding: 14px;
 }
 .lp-register-facts > div:first-child {
   grid-column: 1 / -1;
-  border-bottom: 1px dashed var(--ds-line);
+  border-bottom: 1px solid var(--ds-line);
 }
 .lp-register-facts > div:nth-child(3) {
-  border-left: 1px dashed var(--ds-line);
+  border-left: 1px solid var(--ds-line);
 }
 .lp-register-facts dt {
   font-size: 0.8125rem;
@@ -695,7 +757,7 @@
 }
 .lp-register-facts dd {
   margin-top: 4px;
-  font: 500 1.0625rem/1.25 var(--ds-font-display);
+  font: 500 1.0625rem/1.3 var(--ds-font-text);
   letter-spacing: -0.01em;
 }
 .lp-form-card {
@@ -729,7 +791,7 @@
   width: 100%;
   height: 44px;
   padding: 0 12px;
-  border: 1px dashed var(--ds-line-strong);
+  border: 1px solid var(--ds-line-strong);
   border-radius: 0;
   background: var(--ds-white);
   font: 400 0.9375rem/1 var(--ds-font-text);
@@ -793,7 +855,7 @@
 .lp-form-error {
   margin-top: 14px;
   padding: 12px 14px;
-  border: 1px dashed #d4442e;
+  border: 1px solid #d4442e;
   background: #fff3ee;
   color: #9c2a0f;
   font-size: 0.8125rem;
@@ -830,7 +892,7 @@
 }
 .lp-success h3 {
   margin-top: 8px;
-  font: 500 1.75rem/1.12 var(--ds-font-display);
+  font: 400 1.75rem/1.12 var(--ds-font-display);
   letter-spacing: -0.02em;
 }
 .lp-success p {
@@ -848,7 +910,7 @@
   gap: 8px;
   margin-top: 8px;
   padding-bottom: 2px;
-  border-bottom: 1px dashed currentColor;
+  border-bottom: 1px solid currentColor;
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -867,7 +929,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
   gap: 48px;
   padding: 48px 0 44px;
-  border-top: 1px dashed var(--ds-line-strong);
+  border-top: 1px solid var(--ds-line-strong);
 }
 .lp-footer-brand {
   display: grid;
@@ -932,18 +994,9 @@
   justify-content: space-between;
   gap: 8px 24px;
   padding: 20px 0 32px;
-  border-top: 1px dashed var(--ds-line);
+  border-top: 1px solid var(--ds-line);
   font-size: 0.8125rem;
   color: var(--ds-muted);
-}
-.lp-footer-base::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: 0;
-  width: 96px;
-  height: 3px;
-  background: var(--ds-flag-h);
 }
 .lp-footer-base a {
   color: var(--ds-ink);
@@ -965,6 +1018,9 @@
   }
   .lp-register {
     grid-template-columns: 1fr;
+  }
+  .lp-register-media {
+    position: static;
   }
   .lp-footer-inner {
     grid-template-columns: 1fr;
@@ -1002,11 +1058,9 @@
     display: none !important;
   }
   .lp-hero {
-    --hero-band: 360px;
-    --hero-reach: 60px;
-    --px-clear: 20px;
-    --px-solid: 220px;
-    --px-cell: 10px;
+    --hero-band: 340px;
+    --hero-reach: 56px;
+    --art-solid: 180px;
     min-height: 0;
     padding-top: calc(var(--ds-nav) + 48px);
     padding-bottom: 32px;
@@ -1021,9 +1075,9 @@
   .lp-actions .ds-button {
     flex: 1 1 auto;
   }
-  .lp-hero-photo {
-    /* Centro Internacional skyline under the hills. */
-    --px-pos: 74% 0%;
+  .lp-hero-img {
+    /* The dome and the lamp post, the heart of the engraving. */
+    object-position: 44% 50%;
   }
   .lp-hero-stage > .lp-hero-tags {
     bottom: 14px;
@@ -1085,7 +1139,7 @@
     aspect-ratio: auto;
     min-height: 136px;
     border-bottom: 0;
-    border-right: 1px dashed var(--ds-line);
+    border-right: 1px solid var(--ds-line);
   }
   .lp-speaker-head {
     padding: 14px;
@@ -1114,8 +1168,9 @@
   .lp-supporters > li {
     min-height: 84px;
   }
-  .lp-register-photo {
-    min-height: 300px;
+  .lp-register-quote {
+    top: 16px;
+    left: 18px;
   }
   .lp-form-card {
     padding: 18px;
@@ -1136,6 +1191,6 @@
     left: 16px;
     right: 16px;
     bottom: max(16px, env(safe-area-inset-bottom));
-    box-shadow: 0 12px 32px -12px rgb(13 11 1 / 0.45);
+    box-shadow: 0 12px 32px -12px rgb(19 19 22 / 0.45);
   }
 }

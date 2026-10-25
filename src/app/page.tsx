@@ -10,8 +10,7 @@ import {
 } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
 import { siteUrl, isPublicSite } from "@/lib/site-url";
-import { Button, PixelArt, SectionHeading, Tag } from "@/components/ui";
-import { PixelPhoto } from "@/components/pixel-photo";
+import { Button, SectionHeading, Tag } from "@/components/ui";
 import { SummitInterestForm } from "./interest-form";
 import { speakers, type SummitSpeaker } from "./speakers";
 import { EventCarousel } from "./event-carousel";
@@ -23,12 +22,12 @@ import { TicketSelectionProvider } from "./ticket-selection";
 import { PrivateDinner } from "./private-dinner";
 import { SummitAgenda } from "./summit-agenda";
 import { dinnerSeats, summitTickets, vakiFoundation } from "@/lib/summit-pricing";
-import { flag } from "./pixel-icons";
 
 export const runtime = "nodejs";
 
-const HERO_PHOTO = "/images/photos/bogota-golden-hour.webp";
-const SKY_PHOTO = "/images/photos/bogota-sky.webp";
+// Editorial art: indigo duotones on the page's own paper colour.
+const HERO_ART = "/images/editorial/bogota-grabado.webp";
+const HORIZON_ART = "/images/editorial/horizonte.webp";
 const OG_IMAGE = "/images/colombia-summit/opengraph.png";
 
 export const metadata: Metadata = {
@@ -245,7 +244,7 @@ export default function BogotaForwardSummitPage() {
 
       <TicketSelectionProvider>
       <main id="contenido">
-        <section className="ds-section lp-hero" data-field aria-labelledby="summit-title">
+        <section className="ds-section lp-hero" aria-labelledby="summit-title">
           <div className="ds-container lp-hero-copy">
             <span className="ds-reveal">
               <Tag live>Bogotá · 19 de noviembre</Tag>
@@ -269,18 +268,20 @@ export default function BogotaForwardSummitPage() {
             </div>
           </div>
 
-          {/* The city fills the width and climbs under the copy, where it
-              dissolves into pixels on the paper. */}
+          {/* An engraving of the old city rises out of the paper under the
+              copy: same ink, same paper, so the page and the art are one. */}
           <div className="lp-hero-stage">
-            <PixelPhoto
-              src={HERO_PHOTO}
-              alt="Bogotá al atardecer frente a los cerros de Monserrate y Guadalupe."
-              sizes="100vw"
-              preload
-              silhouette={0.12}
-              transparent
-              className="lp-hero-photo"
-            />
+            <div className="lp-hero-art">
+              <Image
+                src={HERO_ART}
+                alt="Grabado en tinta índigo de una plaza colonial con catedral, cúpula, torre y farol."
+                fill
+                sizes="100vw"
+                quality={90}
+                preload
+                className="lp-hero-img"
+              />
+            </div>
             <div className="ds-container lp-hero-tags">
               <Tag dot>
                 <span>
@@ -392,13 +393,23 @@ export default function BogotaForwardSummitPage() {
         <section className="lp-partners-band" aria-labelledby="partners-band-title">
           <div className="ds-container">
             <a href="/partners" className="ds-card lp-partners-cta" data-accent>
-              <PixelArt rows={flag} size={64} className="lp-partners-art" />
+              <div className="lp-partners-art" aria-hidden="true">
+                <Image
+                  src="/images/editorial/noche-indigo.webp"
+                  alt=""
+                  fill
+                  sizes="(max-width: 760px) 100vw, 240px"
+                  quality={86}
+                />
+                <strong>+642K</strong>
+                <small>seguidores</small>
+              </div>
               <div className="lp-partners-copy">
                 <Tag dot>Aliados y sponsors</Tag>
                 <h2 id="partners-band-title">
                   ¿Te interesa ser sponsor <span className="ds-accent">o aliado?</span>
                 </h2>
-                <p>Tu marca frente a +642K seguidores.</p>
+                <p>Un lugar en la cena y tu marca en todo lo que hacemos.</p>
               </div>
               <span className="ds-button lp-partners-button" data-variant="primary" data-size="md">
                 Revisa la propuesta
@@ -453,16 +464,18 @@ export default function BogotaForwardSummitPage() {
             </SectionHeading>
             <div className="lp-register">
               <div className="ds-card lp-register-media">
-                <PixelPhoto
-                  src={SKY_PHOTO}
-                  alt=""
-                  sizes="(max-width: 1000px) 100vw, 460px"
-                  quality={86}
-                  cell={12}
-                  solidFrom={0.27}
-                  filter="saturate(0.85) brightness(1.04)"
-                  className="lp-register-photo"
-                />
+                <div className="lp-register-photo">
+                  <Image
+                    src={HORIZON_ART}
+                    alt=""
+                    fill
+                    sizes="(max-width: 1000px) 100vw, 460px"
+                    quality={90}
+                  />
+                  <p className="lp-register-quote" aria-hidden="true">
+                    IA, empresas y <span className="ds-accent">lo que viene.</span>
+                  </p>
+                </div>
                 <dl className="lp-register-facts">
                   <div>
                     <dt>Cuándo</dt>

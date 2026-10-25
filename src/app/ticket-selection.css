@@ -26,7 +26,7 @@
   align-items: flex-start;
   gap: 11px;
   padding: 13px;
-  border: 1px dashed var(--ds-line-strong);
+  border: 1px solid var(--ds-line-strong);
   background: var(--ds-white);
   cursor: pointer;
   transition:
@@ -42,7 +42,7 @@
 .lp-ticket-radio[data-selected] {
   border-style: solid;
   border-color: var(--ds-blue);
-  background: #f0f4fb;
+  background: #efeff8;
   box-shadow: inset 3px 0 0 var(--ds-blue);
 }
 

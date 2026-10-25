@@ -16,11 +16,11 @@
 .agenda-heading > p {
   margin-bottom: 20px;
   font-size: 0.875rem;
-  color: #d4dff3;
+  color: #dcdcf3;
 }
 
 .agenda-heading h2 {
-  font: 500 clamp(1.875rem, 1.4rem + 1.2vw, 2.5rem)/1.06 var(--ds-font-display);
+  font: 400 clamp(1.875rem, 1.4rem + 1.2vw, 2.5rem)/1.06 var(--ds-font-display);
   letter-spacing: -0.035em;
 }
 
@@ -30,7 +30,7 @@
 
 .agenda-day > p {
   font-size: 0.8125rem;
-  color: #d4dff3;
+  color: #dcdcf3;
 }
 
 .agenda-hours {
@@ -51,7 +51,7 @@
 .agenda-hours span {
   font: 400 0.8125rem/1.2 var(--ds-font-text);
   letter-spacing: 0;
-  color: #d4dff3;
+  color: #dcdcf3;
 }
 
 .agenda-hours > svg {
@@ -77,7 +77,7 @@
 
 .agenda-ranges dt {
   font-size: 0.8125rem;
-  color: #d4dff3;
+  color: #dcdcf3;
 }
 
 .agenda-ranges dd {
@@ -97,14 +97,14 @@
   margin-left: 5px;
   font: 400 0.75rem/1 var(--ds-font-text);
   letter-spacing: 0;
-  color: #d4dff3;
+  color: #dcdcf3;
 }
 
 .agenda-ranges svg {
   width: 18px;
   height: 18px;
   stroke-width: 1.4;
-  color: #d4dff3;
+  color: #dcdcf3;
 }
 
 /* Two parts: the event's sessions, then the dinner. */
@@ -130,7 +130,7 @@
 }
 
 .agenda-part-head h3 {
-  font: 500 1.375rem/1.2 var(--ds-font-display);
+  font: 400 1.375rem/1.2 var(--ds-font-display);
   letter-spacing: -0.02em;
 }
 
@@ -153,7 +153,7 @@
 }
 
 .agenda-session + .agenda-session {
-  border-top: 1px dashed var(--ds-line-strong);
+  border-top: 1px solid var(--ds-line-strong);
 }
 
 
@@ -179,6 +179,8 @@
   object-fit: cover;
   object-position: 50% 0;
   transform-origin: 50% 0;
+  /* Same treatment as the speaker cards: one ink, no stray colour. */
+  filter: grayscale(1) contrast(1.05);
 }
 
 .agenda-portrait[data-speaker="Alexander Torrenegra"] img {
@@ -242,7 +244,7 @@
   gap: 6px;
   margin-top: 16px;
   padding-top: 14px;
-  border-top: 1px dashed var(--ds-line);
+  border-top: 1px solid var(--ds-line);
 }
 
 .agenda-speakers li {
@@ -293,7 +295,7 @@
 
 .agenda-coming .agenda-number {
   flex-shrink: 0;
-  border-style: dashed;
+  border-style: solid;
 }
 
 .agenda-coming svg {
@@ -302,7 +304,7 @@
 }
 
 .agenda-coming h3 {
-  font: 500 1.5rem/1.2 var(--ds-font-display);
+  font: 400 1.5rem/1.2 var(--ds-font-display);
 }
 
 .agenda-coming p {
@@ -391,7 +393,7 @@
 
   .agenda-day {
     padding-top: 22px;
-    border-top: 1px solid #496faa;
+    border-top: 1px solid #5557c4;
   }
 
   .agenda-hours {

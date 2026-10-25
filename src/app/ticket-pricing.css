@@ -43,7 +43,7 @@
   transform: rotate(45deg);
 }
 .lp-phase:hover:not([aria-pressed="true"]) { background: var(--ds-blue-tint); }
-.lp-phase-name { font: 500 1.125rem/1.2 var(--ds-font-display); }
+.lp-phase-name { font: 400 1.125rem/1.2 var(--ds-font-display); }
 .lp-phase-date { font-size: 0.875rem; }
 .lp-phase-status { font-size: 0.6875rem; opacity: 0.78; }
 .lp-phase-caption {
@@ -76,20 +76,20 @@
 }
 .lp-ticket[data-tier="vip"] {
   border-color: var(--ds-blue);
-  background: #f0f3f9;
+  background: #efeff8;
 }
 .lp-ticket[data-tier="vip"]::before { background: var(--ds-blue); }
 .lp-ticket[data-tier="vip-plus"] {
-  background: #10274b;
-  border-color: #10274b;
+  background: #15163d;
+  border-color: #15163d;
   color: var(--ds-bg);
-  --ds-muted: #c5cddd;
-  --ds-line: #40516c;
-  --ds-blue: #fcd116;
+  --ds-muted: #c4c5dc;
+  --ds-line: #3a3b6b;
+  --ds-blue: #b9baf0;
 }
 .lp-ticket[data-tier="vip-plus"]::before { background: var(--ds-yellow); }
 .lp-ticket h3 {
-  font: 500 1.5rem/1.1 var(--ds-font-display);
+  font: 400 1.5rem/1.1 var(--ds-font-display);
   letter-spacing: -0.03em;
 }
 .lp-ticket-description {
@@ -111,7 +111,7 @@
 .lp-ticket-price-block { padding: 22px 0 24px; }
 .lp-ticket-price { display: flex; align-items: baseline; gap: 7px; }
 .lp-ticket-price > span:first-child {
-  font: 500 clamp(2rem, 3vw, 2.5rem)/1 var(--ds-font-display);
+  font: 400 clamp(2rem, 3vw, 2.5rem)/1 var(--ds-font-display);
   letter-spacing: -0.055em;
 }
 .lp-ticket-currency { font: 400 0.75rem/1 var(--ds-font-mono); color: var(--ds-muted); }
@@ -121,7 +121,7 @@
   align-content: start;
   gap: 14px;
   padding-top: 24px;
-  border-top: 1px dashed var(--ds-line);
+  border-top: 1px solid var(--ds-line);
 }
 .lp-ticket-benefits li { display: flex; align-items: flex-start; gap: 9px; font-size: 0.875rem; line-height: 1.5; }
 .lp-ticket-benefits svg { flex-shrink: 0; width: 15px; height: 15px; margin-top: 3px; color: var(--ds-blue); }
@@ -134,14 +134,14 @@
   font-size: 0.8125rem;
   color: var(--ds-muted);
   text-decoration: underline;
-  text-decoration-style: dashed;
+  text-decoration-style: solid;
   text-underline-offset: 3px;
   transition: color var(--ds-fast);
 }
 .lp-ticket-link:hover { color: inherit; }
 .lp-ticket-link svg { width: 13px; height: 13px; }
 .lp-ticket-bottom { margin-top: auto; padding-top: 32px; }
-.lp-ticket-schedule { margin-bottom: 22px; padding-top: 12px; border-top: 1px dashed var(--ds-line); }
+.lp-ticket-schedule { margin-bottom: 22px; padding-top: 12px; border-top: 1px solid var(--ds-line); }
 .lp-ticket-schedule > div {
   display: flex;
   justify-content: space-between;
@@ -153,12 +153,12 @@
 .lp-ticket-schedule dd { font-family: var(--ds-font-mono); }
 .lp-ticket-schedule [data-selected] { font-weight: 600; color: inherit; }
 .lp-ticket-cta { width: 100%; justify-content: space-between; font-size: 0.875rem; }
-.lp-ticket[data-tier="vip-plus"] .lp-ticket-cta { background: var(--ds-bg); color: #10274b; }
+.lp-ticket[data-tier="vip-plus"] .lp-ticket-cta { background: var(--ds-bg); color: #15163d; }
 .lp-ticket[data-tier="vip-plus"] .lp-ticket-cta:hover { background: var(--ds-yellow); }
 .lp-ticket-cta-note { margin-top: 10px; color: var(--ds-muted); text-align: center; font-size: 0.6875rem; }
 .lp-pricing-footnote { max-width: 690px; margin: 24px auto 0; text-align: center; font-size: 0.75rem; color: var(--ds-muted); }
 .lp-pricing-footnote p + p { margin-top: 5px; }
-.lp-pricing-footnote a { color: var(--ds-ink); text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 3px; }
+.lp-pricing-footnote a { color: var(--ds-ink); text-decoration: underline; text-decoration-style: solid; text-underline-offset: 3px; }
 @media (max-width: 760px) {
   .lp-ticket-grid { grid-template-columns: 1fr; gap: 20px; max-width: 460px; margin-inline: auto; }
   .lp-ticket { padding: 28px; }

@@ -1,43 +1,49 @@
 /* ──────────────────────────────────────────────────────────────────────────
-   bogota.forward() summit — design system
-   A light take on a dot-matrix system: warm paper, near-black ink and the
-   Colombian flag used by role (blue leads, yellow lights, red signals), 1px dashed rules, square corners, 4px corner markers and pixel
-   type (Geist Pixel Square) over Geist text.
+   bogota.forward() summit — design system (editorial)
+   Neutral paper, near-black ink and a single indigo taken from the Bogotá
+   engraving. Newsreader for display, Geist for text, Geist Mono for figures
+   and code. 1px solid hairlines, 2px corners, generous space, no shadows.
+   Illustrations are duotones in indigo on paper so the page never mixes hues.
    ────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* Surfaces */
-  --ds-bg: #fcfbf6;
-  --ds-surface: #f5f2e8;
-  --ds-surface-2: #ece7d9;
+  /* Surfaces: neutral paper, never cream */
+  --ds-bg: #f4f3ef;
+  --ds-surface: #ecebe5;
+  --ds-surface-2: #e2e0d8;
   --ds-white: #fff;
+  --ds-field: #fbfaf8;
 
   /* Ink */
-  --ds-ink: #0d0b01;
-  --ds-ink-2: #3a362b;
-  --ds-muted: #6d685a;
-  --ds-subtle: #9b9584;
+  --ds-ink: #131316;
+  --ds-ink-2: #34343a;
+  --ds-muted: #5d5d65;
+  --ds-subtle: #8a8a92;
 
-  /* Rules */
-  --ds-line: #d8d2c1;
-  --ds-line-strong: #b5ae99;
+  /* Hairlines */
+  --ds-line: #dcdad3;
+  --ds-line-strong: #a8a69f;
 
-  /* Colombia, by role: blue for accents and fills, yellow only as light
-     (pixels, tints; never text), red as a rare signal. */
-  --ds-blue: #003893;
-  --ds-blue-hover: #002a70;
-  --ds-blue-tint: #e2e8f5;
-  --ds-yellow: #fcd116;
-  --ds-yellow-tint: #fff3bf;
-  --ds-red: #ce1126;
-  /* The flag in its 2:1:1 proportion. */
-  --ds-flag: linear-gradient(var(--ds-yellow) 0 50%, var(--ds-blue) 50% 75%, var(--ds-red) 75%);
-  --ds-flag-h: linear-gradient(90deg, var(--ds-yellow) 0 50%, var(--ds-blue) 50% 75%, var(--ds-red) 75%);
+  /* One accent: the indigo of the Bogotá engraving. The legacy names stay
+     so every component keeps working: blue leads, "yellow" is now the light
+     indigo used for glows and highlights, "red" the lighter accent for the
+     call parentheses. Functional error reds live in their own components. */
+  --ds-blue: #3b3db4;
+  --ds-blue-hover: #13134a;
+  --ds-blue-tint: #e7e7f6;
+  --ds-yellow: #b9baf0;
+  --ds-yellow-tint: #e7e7f6;
+  --ds-red: #6d6fd6;
+  --ds-flag: var(--ds-blue);
+  --ds-flag-h: var(--ds-blue);
 
-  /* Type */
-  --ds-font-display: var(--font-geist-pixel-square), var(--font-geist-mono), ui-monospace, monospace;
+  /* Type: editorial serif for display, Geist for text, Geist Mono for figures */
+  --ds-font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
   --ds-font-text: var(--font-geist-sans), system-ui, sans-serif;
   --ds-font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Shape */
+  --ds-radius: 2px;
 
   /* Motion */
   --ds-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -45,12 +51,12 @@
   --ds-fast: 160ms;
   --ds-base: 280ms;
 
-  /* Layout: a 960 content column inside a 1200 frame, both drawn as rails */
+  /* Layout */
   --ds-frame: 1200px;
-  --ds-container: 964px;
-  --ds-gutter: 20px;
-  --ds-section: 96px;
-  --ds-nav: 66px;
+  --ds-container: 1040px;
+  --ds-gutter: 24px;
+  --ds-section: 104px;
+  --ds-nav: 64px;
 }
 
 @media (max-width: 900px) {
@@ -72,18 +78,18 @@
 .ds-display-l,
 .ds-display-m {
   font-family: var(--ds-font-display);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--ds-ink);
   text-wrap: balance;
 }
 .ds-display-xl {
-  font-size: clamp(2.25rem, 1.4rem + 2.8vw, 3.5rem);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.5rem, 1.5rem + 3.2vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
 }
 .ds-display-l {
-  font-size: clamp(1.75rem, 1.3rem + 1.5vw, 2.5rem);
-  line-height: 1.04;
+  font-size: clamp(2rem, 1.4rem + 1.9vw, 3rem);
+  line-height: 1.06;
   letter-spacing: -0.02em;
 }
 .ds-display-m {
@@ -93,9 +99,10 @@
 }
 .ds-accent {
   color: var(--ds-blue);
+  font-style: italic;
 }
 .ds-lead {
-  font-size: 1rem;
+  font-size: 1.0625rem;
   line-height: 1.5;
   color: var(--ds-muted);
   text-wrap: pretty;
@@ -105,10 +112,11 @@
   font-feature-settings: "tnum";
 }
 
-/* ── Frame: dashed rails, section rhythm and dividers ───────────────────── */
+/* ── Frame: solid rails, section rhythm and dividers ───────────────────── */
 
 /* Four vertical rails: the 1200 frame and the 960 content column. */
 .ds-rails {
+  display: none !important;
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -151,6 +159,7 @@
 /* Faint pixel mosaic that fades out from the centre. A mask, not an opaque
    gradient, so the rails stay visible through it. */
 .ds-section[data-field]::before {
+  display: none;
   content: "";
   position: absolute;
   inset: 0;
@@ -161,10 +170,10 @@
   pointer-events: none;
 }
 .ds-divider {
-  width: min(720px, 100% - 2 * var(--ds-gutter));
+  width: min(var(--ds-container), 100%);
   margin-inline: auto;
   border: 0;
-  border-top: 1px dashed var(--ds-line);
+  border-top: 1px solid var(--ds-line);
 }
 
 /* ── Section heading ────────────────────────────────────────────────────── */
@@ -193,20 +202,23 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 8px;
-  border: 1px dashed var(--ds-line-strong);
-  background: var(--ds-bg);
-  font-size: 0.875rem;
-  line-height: 1.4;
-  color: var(--ds-muted);
+  padding: 6px 12px;
+  border: 1px solid var(--ds-line);
+  border-radius: 999px;
+  background: var(--ds-field);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  color: var(--ds-ink-2);
   white-space: nowrap;
 }
 .ds-tag-dot {
-  width: 12px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   flex-shrink: 0;
-  background: var(--ds-flag);
-  box-shadow: 0 0 0 1px rgb(13 11 1 / 0.08);
+  border-radius: 999px;
+  background: var(--ds-blue);
 }
 .ds-tag-dot[data-live] {
   animation: ds-blink 1.6s steps(1) infinite;
@@ -223,8 +235,9 @@
   height: var(--button-h);
   padding: 0 14px;
   border: 1px solid transparent;
-  border-radius: 0;
-  font: 400 1rem/1 var(--ds-font-text);
+  border-radius: var(--ds-radius);
+  padding: 0 20px;
+  font: 500 0.9375rem/1 var(--ds-font-text);
   letter-spacing: -0.008em;
   white-space: nowrap;
   cursor: pointer;
@@ -255,24 +268,32 @@
   background: var(--ds-blue-hover);
 }
 .ds-button[data-variant="secondary"] {
-  border: 1px dashed var(--ds-line-strong);
-  background: var(--ds-bg);
+  border: 1px solid var(--ds-ink);
+  background: transparent;
   color: var(--ds-ink);
 }
 .ds-button[data-variant="secondary"]:hover {
-  border-color: var(--ds-ink);
+  background: var(--ds-ink);
+  color: var(--ds-bg);
 }
 
-/* ── Cards: dashed box with a marker on two opposite corners ────────────── */
+/* ── Cards: solid box with a marker on two opposite corners ────────────── */
 
 .ds-card {
   position: relative;
-  border: 1px dashed var(--ds-line-strong);
-  background: var(--ds-bg);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius);
+  background: var(--ds-field);
   transition: border-color var(--ds-base) var(--ds-ease);
 }
+a.ds-card:hover,
+.ds-card:has(a:hover) {
+  border-color: var(--ds-line-strong);
+}
+/* The old corner markers are retired; hairlines carry the structure. */
 .ds-card::before,
 .ds-card::after {
+  display: none;
   content: "";
   position: absolute;
   z-index: 3;
@@ -307,8 +328,9 @@ a.ds-card:hover::after,
   place-items: center;
   width: 48px;
   height: 48px;
-  border: 1px dashed var(--ds-line-strong);
-  background: var(--ds-bg);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius);
+  background: var(--ds-field);
   color: var(--ds-ink);
 }
 .ds-icon-tile svg {
@@ -339,7 +361,7 @@ a.ds-card:hover::after,
   flex-shrink: 0;
 }
 .ds-logo-word {
-  font: 500 1rem/1 var(--ds-font-display);
+  font: 500 0.9375rem/1 var(--ds-font-mono);
   letter-spacing: -0.02em;
   white-space: nowrap;
 }
@@ -361,15 +383,14 @@ a.ds-card:hover::after,
 .ds-code-call {
   color: var(--ds-red);
 }
-/* A terminal block cursor in flag yellow. */
+/* A thin indigo caret after the headline. */
 .ds-cursor {
   display: inline-block;
-  width: 0.5em;
-  height: 0.82em;
-  margin-left: 0.08em;
-  vertical-align: -0.06em;
-  background: var(--ds-yellow);
-  box-shadow: inset 0 0 0 1px rgb(13 11 1 / 0.12);
+  width: 0.06em;
+  height: 0.8em;
+  margin-left: 0.1em;
+  vertical-align: -0.04em;
+  background: var(--ds-blue);
   animation: ds-cursor 1.1s steps(1) infinite;
 }
 @keyframes ds-cursor {
@@ -416,5 +437,6 @@ a.ds-card:hover::after,
 
 :focus-visible {
   outline: 2px solid var(--ds-blue);
+  border-radius: 2px;
   outline-offset: 3px;
 }

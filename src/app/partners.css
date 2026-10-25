@@ -21,7 +21,7 @@
   position: absolute;
   top: 12px;
   right: 14px;
-  font: 500 0.8125rem/1 var(--ds-font-display);
+  font: 500 0.8125rem/1 var(--ds-font-mono);
   color: var(--ds-subtle);
 }
 .partners-offer .ds-pixel-art {
@@ -61,7 +61,7 @@
   gap: 6px;
 }
 .partners-reach-number strong {
-  font: 500 clamp(3rem, 2.3rem + 2.6vw, 4.5rem)/0.95 var(--ds-font-display);
+  font: 400 clamp(3rem, 2.3rem + 2.6vw, 4.5rem)/0.95 var(--ds-font-display);
   letter-spacing: -0.04em;
   color: var(--ds-blue);
 }
@@ -82,7 +82,7 @@
   gap: 10px;
 }
 .partners-channel {
-  border: 1px dashed var(--ds-line-strong);
+  border: 1px solid var(--ds-line-strong);
   background: var(--ds-bg);
   transition: border-color var(--ds-fast);
 }
@@ -111,7 +111,7 @@
   min-width: 0;
 }
 .partners-channel-copy strong {
-  font: 500 1.5rem/1 var(--ds-font-display);
+  font: 400 1.5rem/1 var(--ds-font-display);
   letter-spacing: -0.03em;
 }
 .partners-channel-copy span {
@@ -148,8 +148,16 @@
   padding: 24px;
   background: var(--ds-surface);
 }
+/* Beside the long form, the pitch card is tall: the horizon fills its foot. */
+@media (min-width: 901px) {
+  .partners-pitch {
+    background:
+      url("/images/editorial/horizonte.webp") 62% 100% / 150% auto no-repeat,
+      var(--ds-bg);
+  }
+}
 .partners-pitch h3 {
-  font: 500 clamp(1.5rem, 1.25rem + 0.9vw, 2rem)/1.12 var(--ds-font-display);
+  font: 400 clamp(1.5rem, 1.25rem + 0.9vw, 2rem)/1.12 var(--ds-font-display);
   letter-spacing: -0.015em;
   text-wrap: balance;
 }
@@ -172,7 +180,7 @@
   position: absolute;
   top: 0.25em;
   left: 0;
-  font: 500 0.75rem/1 var(--ds-font-display);
+  font: 500 0.75rem/1 var(--ds-font-mono);
   color: var(--ds-blue);
 }
 .partners-steps strong {
@@ -191,7 +199,7 @@
 }
 
 /* Form pieces the attendee form does not have: choice cards, two-up rows,
-   a select and a textarea in the same dashed language as the inputs. */
+   a select and a textarea in the same solid language as the inputs. */
 .lp-form .pt-choice-group {
   display: block;
 }
@@ -210,7 +218,7 @@
   align-items: flex-start;
   gap: 10px;
   padding: 12px;
-  border: 1px dashed var(--ds-line-strong);
+  border: 1px solid var(--ds-line-strong);
   background: var(--ds-white);
   cursor: pointer;
   transition:
@@ -224,7 +232,7 @@
 .pt-choice:has(input:checked) {
   border-style: solid;
   border-color: var(--ds-blue);
-  background: #f0f4fb;
+  background: #efeff8;
   box-shadow: inset 3px 0 0 var(--ds-blue);
 }
 .pt-choice[data-invalid] {
@@ -266,7 +274,7 @@
 .lp-field textarea {
   width: 100%;
   padding: 0 12px;
-  border: 1px dashed var(--ds-line-strong);
+  border: 1px solid var(--ds-line-strong);
   border-radius: 0;
   background: var(--ds-white);
   font: 400 0.9375rem/1.45 var(--ds-font-text);
