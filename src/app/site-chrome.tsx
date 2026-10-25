@@ -81,13 +81,10 @@ export function SiteFooter({ home = "" }: { home?: string }) {
           <p>© 2026 bogota.forward() · Bogotá, Colombia</p>
           <p>
             Foto de Bogotá:{" "}
-            <a
-              href="https://commons.wikimedia.org/wiki/File:Bogot%C3%A1_y_Cerros_Orientales.jpg"
-              {...external}
-            >
-              Felipeortegag
+            <a href="https://unsplash.com/photos/BIaxvcmyUK4" {...external}>
+              Reza Madani
             </a>{" "}
-            (CC BY-SA 4.0).
+            en Unsplash.
           </p>
         </div>
       </div>

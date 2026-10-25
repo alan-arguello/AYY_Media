@@ -69,7 +69,7 @@ Tambien se verificaron inserciones de las 3 versiones de consentimiento y dedupl
 - Organizador y sponsors: `src/app/event-branding.tsx`.
 - Speakers y trayectoria: `src/app/speakers.ts`.
 - Estilo: tokens y primitivos en `src/app/design-system.css`; composición de la página en `src/app/summit.css`.
-- Thumbnail y favicon: `public/images/colombia-summit/opengraph.png` y `src/app/icon.png`; regenerar ambos con `npm run og`.
+- Imágenes para compartir: `public/images/colombia-summit/opengraph.jpg` (y `-4x3`, `-1x1` para el schema del evento); se regeneran con `npm run og` (necesita `CHROME_PATH` si Chrome no está en la ruta por defecto). Favicons: `src/app/icon.png` y `src/app/apple-icon.png`, archivos estáticos.
 - Fotos principales: `public/images/photos/`.
 - Creditos y licencias: `public/images/colombia-summit/CREDITS.md`.
 

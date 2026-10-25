@@ -1,12 +1,16 @@
-// Generates public/images/colombia-summit/opengraph.png (1200×630) and
-// src/app/icon.png for the event and the private dinner. Run with `npm run og` after
-// changing the photo or copy. Rendered with headless Chrome like the promos,
-// so the site's own WOFF2 fonts (Geist Pixel Square, Geist, Geist Mono) are
-// used as-is. Same language as the site: paper, ink, the flag by role.
-import { readFile, writeFile } from "node:fs/promises";
+// Generates the share images in public/images/colombia-summit/:
+//   opengraph.jpg      1200×630   (Open Graph, Twitter, LinkedIn, WhatsApp)
+//   opengraph-4x3.jpg  1200×900   (Event schema)
+//   opengraph-1x1.jpg  1200×1200  (Event schema)
+// Run with `npm run og` after changing the hero photo or the headline.
+// Rendered with headless Chrome (CHROME_PATH) so the site's own fonts are
+// used as-is; the composition mirrors the hero: the city under the sunbeams,
+// the date and the headline in white serif over it. JPEG, kept under ~300 KB
+// so WhatsApp and iMessage still show the preview. The favicons in src/app/
+// are static files and are not touched here.
+import { readFile } from "node:fs/promises";
 import puppeteer from "puppeteer-core";
 import sharp from "sharp";
-import { dinnerSeats } from "../src/lib/summit-pricing.ts";
 
 const root = new URL("../", import.meta.url);
 const asset = (path) => new URL(path, root);
@@ -14,102 +18,69 @@ const CHROME =
   process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const dataUrl = async (path, type) =>
   `data:${type};base64,${(await readFile(asset(path))).toString("base64")}`;
-const W = 1200, H = 630;
 
-const PAPER = "#fcfbf6", INK = "#0d0b01", MUTED = "#6d685a", LINE = "#b5ae99";
-const BLUE = "#003893", YELLOW = "#fcd116", RED = "#ce1126";
+const PAPER = "#f4f5f2";
+const INK = "#121411";
+const GREEN_LIGHT = "#5bc896";
 
 const fonts = "node_modules/geist/dist/fonts/";
-const [pixel, sans, mono, photo] = await Promise.all([
-  dataUrl(`${fonts}geist-pixel/GeistPixel-Square.woff2`, "font/woff2"),
-  dataUrl(`${fonts}geist-sans/Geist-Variable.woff2`, "font/woff2"),
-  dataUrl(`${fonts}geist-mono/GeistMono-Variable.woff2`, "font/woff2"),
-  dataUrl("public/images/photos/bogota-golden-hour.webp", "image/webp"),
+const [serif, sans, mono, photo] = await Promise.all([
+  dataUrl("src/app/fonts/newsreader-latin-400-normal.woff2", "font/woff2"),
+  dataUrl(`${fonts}geist-sans/Geist-Regular.woff2`, "font/woff2"),
+  dataUrl(`${fonts}geist-mono/GeistMono-Medium.woff2`, "font/woff2"),
+  dataUrl("public/images/photos/bogota-rayos.webp", "image/webp"),
 ]);
 
-// Same geometry as <LogoMark />: an exponential curve in pixels, red lead.
-const MARK = [".......r", "......k.", "......k.", ".....k..", "....k...", "..kk....", "kk......"];
-const markSvg = (ink) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 7" shape-rendering="crispEdges">${MARK.flatMap((row, y) =>
-    [...row].map((c, x) => (c === "." ? "" : `<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="${c === "r" ? RED : ink}"/>`))).join("")}</svg>`;
+// One layout, three frames. `pos` is the photo's focal point: on the square
+// the frame is narrow, so it moves toward the downtown towers.
+const frames = [
+  { file: "opengraph.jpg", w: 1200, h: 630, h1: 68, pad: 64, brand: 22, eye: 21, gap: 20, bottom: 64, pos: "58% 50%" },
+  { file: "opengraph-4x3.jpg", w: 1200, h: 900, h1: 76, pad: 72, brand: 24, eye: 23, gap: 24, bottom: 80, pos: "56% 50%" },
+  { file: "opengraph-1x1.jpg", w: 1200, h: 1200, h1: 84, pad: 80, brand: 26, eye: 25, gap: 26, bottom: 96, pos: "54% 50%" },
+];
 
-const PHOTO_W = 430;
-const html = /* html */ `<!doctype html><html lang="es"><head><meta charset="utf-8"><style>
-@font-face { font-family: GeistPixel; src: url(${pixel}) format("woff2"); font-weight: 500; }
-@font-face { font-family: Geist; src: url(${sans}) format("woff2"); font-weight: 100 900; }
-@font-face { font-family: GeistMono; src: url(${mono}) format("woff2"); font-weight: 100 900; }
+const html = (f) => /* html */ `<!doctype html><html lang="es"><head><meta charset="utf-8"><style>
+@font-face { font-family: Newsreader; src: url(${serif}) format("woff2"); font-weight: 400; }
+@font-face { font-family: Geist; src: url(${sans}) format("woff2"); font-weight: 400; }
+@font-face { font-family: GeistMono; src: url(${mono}) format("woff2"); font-weight: 500; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: ${W}px; height: ${H}px; }
-body { position: relative; overflow: hidden; background: ${PAPER}; color: ${INK}; font: 400 20px/1.3 Geist, sans-serif;
-  letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; }
-.stripe { position: absolute; top: 0; left: 0; width: ${W}px; height: 8px;
-  background: linear-gradient(90deg, ${YELLOW} 0 50%, ${BLUE} 50% 75%, ${RED} 75%); }
-.photo { position: absolute; top: 8px; right: 0; width: ${PHOTO_W}px; height: ${H - 8}px; object-fit: cover; object-position: 50% 45%; }
-.edge { position: absolute; top: 8px; right: ${PHOTO_W}px; width: 0; height: ${H - 8}px; border-left: 1px dashed ${LINE}; }
-.corner { position: absolute; width: 5px; height: 5px; background: ${INK}; }
-.copy { position: absolute; top: 8px; left: 0; width: ${W - PHOTO_W}px; height: ${H - 8}px; display: flex; flex-direction: column;
-  justify-content: space-between; padding: 40px 44px 42px 48px; }
-.top { display: flex; align-items: center; justify-content: space-between; }
-.lockup { display: flex; align-items: center; gap: 10px; }
-.lockup svg { width: 26px; height: 23px; }
-.lockup .word { font: 500 22px/1 GeistPixel, monospace; letter-spacing: -0.02em; white-space: nowrap; }
-.dot { color: #9b9584; } .fn { color: ${BLUE}; } .call { color: ${RED}; }
-.tag { display: inline-flex; align-items: center; gap: 10px; padding: 7px 11px; border: 1px dashed ${LINE}; background: ${PAPER};
-  font-size: 17px; color: ${MUTED}; white-space: nowrap; }
-.tag b { font-weight: 500; color: ${INK}; }
-.tag .mono { font-family: GeistMono, monospace; }
-.flag { width: 14px; height: 9px; background: linear-gradient(${YELLOW} 0 50%, ${BLUE} 50% 75%, ${RED} 75%); box-shadow: 0 0 0 1px rgb(13 11 1 / 0.08); }
-h1 { font: 500 54px/1.04 GeistPixel, monospace; letter-spacing: -0.03em; }
-h1 .accent { color: ${BLUE}; }
-.cursor { display: inline-block; width: 0.5em; height: 0.82em; margin-left: 0.08em; vertical-align: -0.06em; background: ${YELLOW};
-  box-shadow: inset 0 0 0 1px rgb(13 11 1 / 0.12); }
-.lead { margin-top: 20px; font-size: 24px; line-height: 1.35; color: #3a362b; }
-.facts { display: flex; gap: 10px; }
+html, body { width: ${f.w}px; height: ${f.h}px; }
+body { position: relative; overflow: hidden; background: ${INK}; color: ${PAPER}; -webkit-font-smoothing: antialiased; }
+.photo { position: absolute; inset: 0; background: url(${photo}) ${f.pos} / cover no-repeat; }
+.scrim { position: absolute; inset: 0; background:
+  linear-gradient(to top, rgb(10 12 10 / 0.86) 0%, rgb(10 12 10 / 0.58) 34%, rgb(10 12 10 / 0) 66%),
+  linear-gradient(to bottom, rgb(10 12 10 / 0.5) 0%, rgb(10 12 10 / 0) 24%); }
+.brand { position: absolute; left: ${f.pad}px; top: ${f.pad - 8}px; font: 500 ${f.brand}px/1 GeistMono, monospace; letter-spacing: -0.02em; }
+.brand .dim { color: #b9bdb5; } .brand .fn { color: ${GREEN_LIGHT}; }
+.copy { position: absolute; left: ${f.pad}px; right: ${f.pad}px; bottom: ${f.bottom}px; }
+.eye { font: 400 ${f.eye}px/1 Geist, sans-serif; color: rgb(244 245 242 / 0.8); margin-bottom: ${f.gap}px; }
+h1 { font: 400 ${f.h1}px/1.04 Newsreader, Georgia, serif; letter-spacing: -0.025em; max-width: ${Math.round(f.w * 0.86)}px; }
 </style></head><body>
-<div class="stripe"></div>
-<img class="photo" src="${photo}" alt="">
-<div class="edge"></div>
-<div class="corner" style="top:${8 - 2}px; right:${PHOTO_W - 2}px"></div>
-<div class="corner" style="bottom:-2px; right:-2px"></div>
+<div class="photo"></div><div class="scrim"></div>
+<div class="brand">bogota<span class="dim">.</span><span class="fn">forward</span><span class="dim">()</span></div>
 <div class="copy">
-  <div class="top">
-    <div class="lockup">${markSvg(INK)}<span class="word">bogota<span class="dot">.</span><span class="fn">forward</span><span class="call">()</span></span></div>
-    <span class="tag"><span class="flag"></span>Jueves 19 de noviembre · Bogotá</span>
-  </div>
-  <div>
-    <h1>Evento y cena privada<br>para <span class="accent">founders, managers<br>y C-levels</span><span class="cursor"></span></h1>
-    <p class="lead">Con Alexander Torrenegra y Tania Zapata.</p>
-  </div>
-  <div class="facts">
-    <span class="tag"><b>Evento</b> <span class="mono">10 a. m. – 3 p. m.</span></span>
-    <span class="tag"><b>Cena privada</b> <span class="mono">7 – 10 p. m.</span> · ${dinnerSeats} lugares</span>
-  </div>
+  <p class="eye">Jueves 19 de noviembre de 2026 · Bogotá</p>
+  <h1>Evento y cena privada para founders, managers y C-levels</h1>
 </div>
 </body></html>`;
 
-const browser = await puppeteer.launch({ executablePath: CHROME, headless: true });
+// Chrome refuses to run its sandbox as root (CI containers); a desktop run keeps it.
+const args = process.getuid?.() === 0 ? ["--no-sandbox"] : [];
+const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, args });
 try {
-  const page = await browser.newPage();
-  await page.setViewport({ width: W, height: H, deviceScaleFactor: 1 });
-  await page.setContent(html, { waitUntil: "load" });
-  await page.evaluate(() => document.fonts.ready);
-  const og = asset("public/images/colombia-summit/opengraph.png");
-  await writeFile(og, await page.screenshot({ type: "png" }));
-  console.log(`Generated ${og.pathname}`);
+  for (const f of frames) {
+    const page = await browser.newPage();
+    await page.setViewport({ width: f.w, height: f.h, deviceScaleFactor: 1 });
+    await page.setContent(html(f), { waitUntil: "load" });
+    await page.evaluate(() => document.fonts.ready);
+    const png = await page.screenshot({ type: "png" });
+    await page.close();
+    const out = asset(`public/images/colombia-summit/${f.file}`);
+    const info = await sharp(png)
+      .jpeg({ quality: 80, progressive: true, mozjpeg: true, chromaSubsampling: "4:2:0" })
+      .toFile(out.pathname);
+    console.log(`Generated ${out.pathname} (${f.w}×${f.h}, ${Math.round(info.size / 1024)} KB)`);
+  }
 } finally {
   await browser.close();
 }
-
-// Favicon: the pixel curve in paper on an ink tile.
-const icon = asset("src/app/icon.png");
-await sharp(
-  Buffer.from(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="${INK}"/><g transform="translate(12 16.5) scale(5)">${MARK.flatMap((row, y) =>
-      [...row].map((c, x) => (c === "." ? "" : `<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="${c === "r" ? RED : PAPER}"/>`))).join("")}</g></svg>`,
-  ),
-  { density: 600 },
-)
-  .resize(256, 256)
-  .png()
-  .toFile(icon.pathname);
-console.log(`Generated ${icon.pathname}`);

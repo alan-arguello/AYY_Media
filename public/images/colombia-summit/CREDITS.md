@@ -1,11 +1,11 @@
 # Photography
 
-- `/images/photos/bogota-golden-hour.webp`: "Bogotá y Cerros Orientales", Felipeortegag. CC BY-SA 4.0. https://commons.wikimedia.org/wiki/File:Bogot%C3%A1_y_Cerros_Orientales.jpg
-  Cropped to remove the foreground rooftop, resized to 2800 px, slightly brightened and compressed to WebP. The adaptation remains CC BY-SA 4.0.
+- `/images/photos/bogota-rayos.webp` (hero and the `opengraph*.jpg` share images): "Cityscape with dramatic clouds and sunbeams", Bogotá, Reza Madani. Unsplash License. https://unsplash.com/photos/BIaxvcmyUK4
+  The top 41% of the frame (white cloud) is cropped away so the hero opens on blue sky; resized to 3840 px, lightly sharpened and compressed to WebP. Credited in the page footer; the share images are regenerated with `npm run og`.
 - `/images/photos/bogota-sky.webp`: "El cielo del atardecer sobre Bogotá, Colombia, 2015", Cristian Baron (Unsplash, via Wikimedia Commons). CC0. https://commons.wikimedia.org/wiki/File:El_cielo_del_atardecer_sobre_Bogot%C3%A1,_Colombia,_2015,_por_Cristian_Baron_(Unsplash).jpg
-  Resized to 2600 px and compressed to WebP. Also used, cropped, in `opengraph.png`.
-
-Attribution is displayed in the page footer.
+  Resized to 2600 px and compressed to WebP.
+- `/images/photos/bogota-golden-hour.webp`: "Bogotá y Cerros Orientales", Felipeortegag. CC BY-SA 4.0. https://commons.wikimedia.org/wiki/File:Bogot%C3%A1_y_Cerros_Orientales.jpg
+  Cropped to remove the foreground rooftop, resized to 2800 px, slightly brightened and compressed to WebP. The adaptation remains CC BY-SA 4.0. No longer shown on the site; still used by the promo scripts in `scripts/`, so material rendered from it needs the CC BY-SA credit where it is posted.
 
 # Company marks
 

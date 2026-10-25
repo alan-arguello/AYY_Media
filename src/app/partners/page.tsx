@@ -8,7 +8,7 @@ import { SiteFooter, SiteNav } from "../site-chrome";
 
 export const runtime = "nodejs";
 
-const OG_IMAGE = "/images/colombia-summit/opengraph.png";
+const OG_IMAGE = "/images/colombia-summit/opengraph.jpg";
 const OG_ALT =
   "bogota.forward(): evento de IA y cena privada para founders, managers y C-levels. Bogotá, 19 de noviembre de 2026.";
 const title = "Aliados y sponsors del evento de IA en Bogotá | bogota.forward()";

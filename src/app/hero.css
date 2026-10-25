@@ -1,0 +1,245 @@
+/* ── Hero ──────────────────────────────────────────────────────────────────
+   One element at full scale (the city), everything else small and exact. */
+
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 100svh;
+  padding-top: var(--ds-nav);
+  background: #121411;
+  color: #f4f5f2;
+  isolation: isolate;
+  overflow: hidden;
+}
+.hero-sentinel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  pointer-events: none;
+}
+
+/* The photograph */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.hero-media > img {
+  object-fit: cover;
+  object-position: var(--hero-pos, 50% 50%);
+  transform-origin: 50% 60%;
+  /* A slow push-in, like a locked-off camera drifting. */
+  animation: hero-drift 32s linear both;
+}
+@keyframes hero-drift {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+/* Scrims: one for the copy at the bottom, a lighter one under the nav. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to top, rgb(10 12 10 / 0.86) 0%, rgb(10 12 10 / 0.58) 32%, rgb(10 12 10 / 0) 64%),
+    linear-gradient(to bottom, rgb(10 12 10 / 0.5) 0%, rgb(10 12 10 / 0) 22%);
+}
+
+/* The copy */
+.hero-body {
+  position: relative;
+  grid-row: 2;
+  display: grid;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+.hero-copy {
+  display: grid;
+  justify-items: start;
+  gap: 24px;
+}
+.hero-eyebrow {
+  font-size: 0.9375rem;
+  color: rgb(244 245 242 / 0.78);
+}
+.hero-title {
+  max-width: 13.5em;
+  font-family: var(--ds-font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 1.6rem + 3.4vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: #f4f5f2;
+  text-wrap: balance;
+}
+.hero-actions {
+  justify-content: flex-start;
+}
+.hero .ds-button[data-variant="primary"] {
+  background: #f4f5f2;
+  color: #121411;
+}
+.hero .ds-button[data-variant="primary"]:hover {
+  background: #fff;
+  color: #121411;
+}
+.hero .ds-button[data-variant="secondary"] {
+  border-color: rgb(244 245 242 / 0.7);
+  color: #f4f5f2;
+}
+.hero .ds-button[data-variant="secondary"]:hover {
+  background: #f4f5f2;
+  border-color: #f4f5f2;
+  color: #121411;
+}
+
+/* The facts row: four cells on hairlines */
+.hero-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgb(244 245 242 / 0.28);
+}
+.hero-facts > div {
+  padding: 18px 24px 20px 0;
+}
+.hero-facts > div + div {
+  padding-left: 24px;
+  border-left: 1px solid rgb(244 245 242 / 0.28);
+}
+.hero-facts dt {
+  font-size: 0.8125rem;
+  color: rgb(244 245 242 / 0.66);
+}
+.hero-facts dd {
+  margin-top: 6px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #f4f5f2;
+}
+
+/* Entrance: each block rises once, in order. */
+.hero-eyebrow,
+.hero-title,
+.hero-actions,
+.hero-facts {
+  animation: hero-rise 1100ms var(--ds-ease-out) both;
+}
+.hero-title { animation-delay: 80ms; }
+.hero-actions { animation-delay: 160ms; }
+.hero-facts { animation-delay: 320ms; }
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+/* The nav over the photograph: transparent, white, until the hero scrolls out. */
+.lp[data-hero="dark"] .lp-nav {
+  transition:
+    background-color 280ms var(--ds-ease),
+    border-color 280ms var(--ds-ease);
+}
+html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav {
+  background: transparent;
+  border-bottom-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  animation: none;
+}
+html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav-links {
+  color: rgb(244 245 242 / 0.78);
+}
+html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav-links a:hover {
+  color: #f4f5f2;
+}
+html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-logo {
+  color: #f4f5f2;
+}
+html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-logo svg rect {
+  fill: #f4f5f2;
+}
+html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-logo svg rect[fill="#0e6b43"] {
+  fill: #5bc896;
+}
+html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-code-fn {
+  color: #5bc896;
+}
+html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-code-dot,
+html:not([data-nav-solid]) .lp[data-hero="dark"] .ds-code-call {
+  color: rgb(244 245 242 / 0.55);
+}
+html:not([data-nav-solid]) .lp[data-hero="dark"] .lp-nav-cta {
+  background: #f4f5f2;
+  color: #121411;
+}
+html[data-nav-solid] .lp[data-hero="dark"] .lp-nav {
+  border-bottom-color: var(--ds-line);
+}
+/* Solid but still over the photograph: opaque, so the headline does not
+   ghost through the frosted bar. The frosting returns past the hero. */
+html[data-nav-solid]:not([data-nav-past-hero]) .lp[data-hero="dark"] .lp-nav {
+  background: #f4f5f2;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-media > img,
+  .hero-eyebrow,
+  .hero-title,
+  .hero-actions,
+  .hero-facts {
+    animation: none;
+  }
+}
+
+/* ── Phone ───────────────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .hero-media > img {
+    object-position: var(--hero-pos-phone, 50% 50%);
+  }
+  .hero-body {
+    gap: 28px;
+    /* Room for the fixed mobile call to action. */
+    padding-bottom: 92px;
+  }
+  .hero-copy {
+    gap: 18px;
+  }
+  .hero-title {
+    letter-spacing: -0.02em;
+  }
+  .hero-actions {
+    width: 100%;
+  }
+  .hero-actions .ds-button {
+    flex: 1 1 auto;
+  }
+  .hero-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero-facts > div {
+    padding: 14px 12px 16px 0;
+  }
+  .hero-facts > div + div {
+    padding-left: 12px;
+  }
+  .hero-facts > div:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .hero-facts > div:nth-child(n + 3) {
+    border-top: 1px solid rgb(244 245 242 / 0.28);
+  }
+  .hero-facts dd {
+    font-size: 0.875rem;
+  }
+}

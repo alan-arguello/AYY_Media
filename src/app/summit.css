@@ -124,7 +124,7 @@
   }
 }
 
-/* ── Hero: centred, type only ───────────────────────────────────────────── */
+/* ── Page intro used by the 404 page (the home hero lives in hero.css) ──── */
 
 .lp-hero {
   padding: calc(var(--ds-nav) + 96px) 0 0;
@@ -148,50 +148,11 @@
 .lp-countdown {
   font-feature-settings: "tnum";
 }
-/* A real photograph of the city, in the same black and white as the
-   speakers, framed to the content width. */
-.lp-hero-photo {
-  position: relative;
-  width: min(820px, 100%);
-  aspect-ratio: 820 / 340;
-  margin: 64px auto 0;
-  overflow: hidden;
-  background: var(--ds-surface);
-}
-.lp-hero-photo > img {
-  object-fit: cover;
-  object-position: 50% 58%;
-}
 .lp-not-found {
   padding-bottom: var(--ds-section);
 }
 .lp-not-found .ds-lead {
   max-width: 32em;
-}
-/* The facts of the day, one hairline row under the photo. */
-.lp-facts {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  width: min(820px, 100%);
-  margin-inline: auto;
-  border-bottom: 1px solid var(--ds-line);
-}
-.lp-facts > div {
-  padding: 20px 0 22px;
-  text-align: center;
-}
-.lp-facts > div + div {
-  border-left: 1px solid var(--ds-line);
-}
-.lp-facts dt {
-  font-size: 0.8125rem;
-  color: var(--ds-muted);
-}
-.lp-facts dd {
-  margin-top: 6px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--ds-ink);
 }
 
 /* ── Sponsors ────────────────────────────────────────────────────────────── */
@@ -1107,12 +1068,8 @@
   }
 }
 @media (max-width: 640px) {
-  .lp-nav {
-    top: 10px;
-  }
   .lp-nav-inner {
-    width: calc(100% - 20px);
-    padding-inline: 14px;
+    padding-inline: var(--ds-gutter);
   }
   .lp-nav .ds-logo-word {
     font-size: 0.875rem;
@@ -1131,25 +1088,6 @@
   }
   .lp-actions .ds-button {
     flex: 1 1 auto;
-  }
-  .lp-hero-photo {
-    aspect-ratio: 3 / 2;
-    margin-top: 40px;
-  }
-  .lp-hero-photo > img {
-    object-position: 30% 60%;
-  }
-  .lp-facts {
-    grid-template-columns: 1fr 1fr;
-  }
-  .lp-facts > div {
-    padding: 16px 8px 18px;
-  }
-  .lp-facts > div:nth-child(odd) {
-    border-left: 0;
-  }
-  .lp-facts > div:nth-child(n + 3) {
-    border-top: 1px solid var(--ds-line);
   }
   .lp-sponsors {
     gap: 10px;

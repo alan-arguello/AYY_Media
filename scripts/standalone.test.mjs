@@ -33,7 +33,7 @@ test("organizer and sponsor assets are included locally", () => {
     "aiyaiyai.png",
     "worder.png",
     "credential-torre-ai.png",
-    "opengraph.png",
+    "opengraph.jpg",
   ]) {
     assert.ok(
       existsSync(
@@ -41,12 +41,10 @@ test("organizer and sponsor assets are included locally", () => {
       ),
     );
   }
-  const page = readFileSync(
-    new URL("../src/app/page.tsx", import.meta.url),
-    "utf8",
-  );
-  // Nav and footer are shared chrome; the sponsor strip lives on /partners.
+  // The home page's markup lives in home.tsx; page.tsx holds its metadata.
   const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
+  const page = read("../src/app/page.tsx") + read("../src/app/home.tsx");
+  // Nav and footer are shared chrome; the sponsor strip lives on /partners.
   const chrome = read("../src/app/site-chrome.tsx");
   const partners = read("../src/app/partners.tsx");
   const partnersPage = read("../src/app/partners/page.tsx");

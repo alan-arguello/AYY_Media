@@ -336,16 +336,17 @@ try {
   await writeFile(new URL(OUT, root), png);
   console.log(`${OUT}: 3840×2160`);
 
-  // The site's Open Graph card (1200×630): same design, no speakers row.
+  // A 1200×630 card in the same design, for posts. The site's own share
+  // image is opengraph.jpg, rendered by `npm run og`.
   await page.setViewport({ width: 1920, height: 1008, deviceScaleFactor: 1 });
   await page.addStyleTag({ content: `
     .speakers-head, .speaker { display: none !important; }
     .hero { top: 196px; } h1 { font-size: 126px; }
     .facts { top: 668px; } .stage { top: 196px; height: 568px; } .foot { top: 896px; }` });
   await page.evaluate((src) => window.renderPhoto(src), hero);
-  const og = await sharp(await page.screenshot({ type: "png" })).resize(1200, 630).png().toBuffer();
-  await writeFile(new URL("public/images/colombia-summit/opengraph.png", root), og);
-  console.log("public/images/colombia-summit/opengraph.png: 1200×630");
+  const card = await sharp(await page.screenshot({ type: "png" })).resize(1200, 630).png().toBuffer();
+  await writeFile(new URL("marketing/bogota-forward-summit-card.png", root), card);
+  console.log("marketing/bogota-forward-summit-card.png: 1200×630");
 } finally {
   await browser.close();
 }
