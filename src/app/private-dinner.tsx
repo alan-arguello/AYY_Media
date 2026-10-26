@@ -24,6 +24,10 @@ const seats = [
 ];
 
 const photos = {
+  table: {
+    src: "/images/dinner/napa-table.webp",
+    alt: "Una mesa larga al aire libre: participantes de Becoming AI Native comen y conversan; uno sonríe a la cámara con el pulgar arriba.",
+  },
   session: {
     src: "/images/dinner/private-session.webp",
     alt: "Un grupo pequeño sigue una presentación en una sala privada, sentado en sofás.",
@@ -68,8 +72,8 @@ export function PrivateDinner() {
 
         <div className="dinner-head">
           <h2 id="dinner-title" className="dinner-title">
-            <span>El evento termina</span> <span>a las 3&nbsp;p.&nbsp;m.</span>{" "}
-            <span className="dinner-accent">La conversación, no.</span>
+            <span>Cena privada</span>{" "}
+            <span className="dinner-accent">por la noche.</span>
           </h2>
           <div className="dinner-intro">
             <p className="dinner-lead">
@@ -83,6 +87,27 @@ export function PrivateDinner() {
             </ol>
           </div>
         </div>
+
+        <aside className="dinner-cause" aria-label="A dónde van las ganancias de la cena">
+          <a href={vakiFoundation.url} target="_blank" rel="noopener noreferrer" className="dinner-cause-mark">
+            <Image src={vakiMark.image} alt="Vaki" width={vakiMark.width} height={vakiMark.height} />
+            <span>Foundation</span>
+          </a>
+          <p>
+            <strong>Las ganancias de la cena se donan a {vakiFoundation.name}</strong>,{" "}
+            {vakiFoundation.summary}.
+          </p>
+        </aside>
+
+        <figure className="dinner-hero-photo">
+          <Image
+            src={photos.table.src}
+            alt={photos.table.alt}
+            fill
+            sizes="(max-width: 1000px) 100vw, 924px"
+            quality={86}
+          />
+        </figure>
 
         <ul className="dinner-gallery" aria-label="Encuentros privados anteriores">
           <li className="dinner-photo" data-shot="session">
@@ -153,16 +178,6 @@ export function PrivateDinner() {
           </div>
         </div>
 
-        <aside className="dinner-cause" aria-label="A dónde van las ganancias de la cena">
-          <a href={vakiFoundation.url} target="_blank" rel="noopener noreferrer" className="dinner-cause-mark">
-            <Image src={vakiMark.image} alt="Vaki" width={vakiMark.width} height={vakiMark.height} />
-            <span>Foundation</span>
-          </a>
-          <p>
-            <strong>Las ganancias de la cena, después de cubrir sus gastos, serán donadas a {vakiFoundation.name}</strong>,{" "}
-            {vakiFoundation.summary}.
-          </p>
-        </aside>
       </div>
     </section>
   );

@@ -92,6 +92,18 @@
 
 /* ── Gallery: a wide shot, a portrait and two tiles ─────────────────────── */
 
+/* The table, wide: the one photo that is a dinner. */
+.dinner-hero-photo {
+  position: relative;
+  aspect-ratio: 2000 / 873;
+  margin: 0 0 12px;
+  overflow: hidden;
+  background: var(--dinner-tint);
+}
+.dinner-hero-photo > img {
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.02);
+}
 .dinner-gallery {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.1fr);
@@ -311,7 +323,8 @@
   grid-template-columns: auto minmax(0, 1fr);
   gap: 20px 48px;
   align-items: center;
-  margin-top: 48px;
+  margin-bottom: 32px;
+  text-align: left;
   padding: 32px 36px;
   background: var(--ds-field);
 }
@@ -410,7 +423,7 @@
   .dinner-cause {
     grid-template-columns: 1fr;
     gap: 16px;
-    margin-top: 32px;
+    margin-bottom: 24px;
     padding: 24px 20px;
   }
   .dinner-cause-mark img {
