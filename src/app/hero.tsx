@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
 import { dinnerSeats, vakiFoundation } from "@/lib/summit-pricing";
 import { Button } from "@/components/ui";
-import { Countdown } from "./countdown";
 import { HeroField } from "./hero-field";
 import { NavScrollState } from "./nav-scroll-state";
 import "./hero.css";
@@ -20,7 +19,8 @@ const PHOTO = {
 
 const TITLE = "Evento y cena privada para founders, managers y C-levels";
 
-// The day in four facts, under the headline.
+// The day in three facts under the headline; the last, wider one says
+// where the dinner's profits go.
 function Facts() {
   return (
     <dl className="hero-facts" aria-label="Datos del evento">
@@ -32,14 +32,14 @@ function Facts() {
         <dt>Cena privada</dt>
         <dd>7 a 10 p. m. · {dinnerSeats} lugares</dd>
       </div>
-      <div>
-        <dt>Entradas</dt>
-        <dd>General, VIP y VIP Plus</dd>
-      </div>
-      <div>
-        <dt>Cuenta regresiva</dt>
+      <div className="hero-fact-cause">
+        <dt>Ganancias de la cena</dt>
         <dd>
-          <Countdown />
+          <a href={vakiFoundation.url} target="_blank" rel="noopener noreferrer">
+            Se donan a
+            <Image src="/images/dinner/portfolio/vaki.png" alt="Vaki" width={195} height={120} />
+            Foundation
+          </a>
         </dd>
       </div>
     </dl>
@@ -70,21 +70,6 @@ export function Hero() {
           <h1 id="summit-title" className="hero-title">
             {TITLE}
           </h1>
-          <a
-            className="hero-cause"
-            href={vakiFoundation.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="hero-cause-mark">
-              <Image src="/images/dinner/portfolio/vaki.png" alt="Vaki" width={195} height={120} />
-              <span>Foundation</span>
-            </span>
-            <span className="hero-cause-copy">
-              <strong>Las ganancias de la cena se donan a Vaki Foundation.</strong>
-              <span>Para emergencias como el terremoto en Colombia y otras causas sociales.</span>
-            </span>
-          </a>
           <div className="lp-actions hero-actions">
             <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>
               Ver entradas
