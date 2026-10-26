@@ -114,6 +114,56 @@
   color: #121411;
 }
 
+/* Where the dinner's profits go: front and center, under the headline. */
+.hero-cause {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  max-width: 800px;
+  padding: 16px 22px 16px 20px;
+  border: 1px solid rgb(140 198 63 / 0.55);
+  border-left: 6px solid #8cc63f;
+  background: rgb(10 12 10 / 0.58);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #f4f5f2;
+  transition: background-color var(--ds-fast);
+}
+.hero-cause:hover {
+  background: rgb(10 12 10 / 0.72);
+}
+.hero-cause-mark {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  padding-right: 22px;
+  border-right: 1px solid rgb(244 245 242 / 0.22);
+}
+.hero-cause-mark img {
+  width: auto;
+  height: 40px;
+}
+.hero-cause-mark > span {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.hero-cause-copy {
+  display: grid;
+  gap: 4px;
+}
+.hero-cause-copy strong {
+  font-size: 1.1875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+.hero-cause-copy > span {
+  font-size: 0.875rem;
+  color: rgb(244 245 242 / 0.72);
+}
+
 /* The facts row: four cells on hairlines */
 .hero-facts {
   display: grid;
@@ -141,11 +191,13 @@
 /* Entrance: each block rises once, in order. */
 .hero-eyebrow,
 .hero-title,
+.hero-cause,
 .hero-actions,
 .hero-facts {
   animation: hero-rise 1100ms var(--ds-ease-out) both;
 }
 .hero-title { animation-delay: 80ms; }
+.hero-cause { animation-delay: 120ms; }
 .hero-actions { animation-delay: 160ms; }
 .hero-facts { animation-delay: 320ms; }
 @keyframes hero-rise {
@@ -212,6 +264,7 @@ html[data-nav-solid]:not([data-nav-past-hero]) .lp[data-hero="dark"] .lp-nav {
   .hero-media > img,
   .hero-eyebrow,
   .hero-title,
+  .hero-cause,
   .hero-actions,
   .hero-facts {
     animation: none;
@@ -234,6 +287,22 @@ html[data-nav-solid]:not([data-nav-past-hero]) .lp[data-hero="dark"] .lp-nav {
   }
   .hero-title {
     letter-spacing: -0.02em;
+  }
+  .hero-cause {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+  .hero-cause-mark {
+    padding-right: 0;
+    border-right: 0;
+  }
+  .hero-cause-mark img {
+    height: 32px;
+  }
+  .hero-cause-copy strong {
+    font-size: 1.0625rem;
   }
   .hero-actions {
     width: 100%;

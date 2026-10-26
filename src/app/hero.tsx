@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { colombiaSummit } from "@/lib/colombia-summit";
-import { dinnerSeats } from "@/lib/summit-pricing";
+import { dinnerSeats, vakiFoundation } from "@/lib/summit-pricing";
 import { Button } from "@/components/ui";
 import { Countdown } from "./countdown";
 import { HeroField } from "./hero-field";
@@ -70,6 +70,21 @@ export function Hero() {
           <h1 id="summit-title" className="hero-title">
             {TITLE}
           </h1>
+          <a
+            className="hero-cause"
+            href={vakiFoundation.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="hero-cause-mark">
+              <Image src="/images/dinner/portfolio/vaki.png" alt="Vaki" width={195} height={120} />
+              <span>Foundation</span>
+            </span>
+            <span className="hero-cause-copy">
+              <strong>Las ganancias de la cena se donan a Vaki Foundation.</strong>
+              <span>Para emergencias como el terremoto en Colombia y otras causas sociales.</span>
+            </span>
+          </a>
           <div className="lp-actions hero-actions">
             <Button href="#entradas" icon={<ArrowRight aria-hidden="true" />}>
               Ver entradas
