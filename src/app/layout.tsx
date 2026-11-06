@@ -1,87 +1,88 @@
 import type { Metadata, Viewport } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import localFont from "next/font/local";
+import { Inter, Spectral } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { colombiaSummit } from "@/lib/colombia-summit";
-import { siteUrl } from "@/lib/site-url";
-
+import { isPublicSite, siteUrl } from "@/lib/site-url";
+import { channels, people, site } from "@/lib/site";
+import { JsonLd } from "./json-ld";
 import "./globals.css";
-import "./design-system.css";
-import "./summit.css";
 
-// Display: Newsreader (OFL, self-hosted). Text: Geist. Figures: Geist Mono.
-const newsreader = localFont({
-  src: "./fonts/newsreader-latin-400-normal.woff2",
-  weight: "400",
-  style: "normal",
-  variable: "--font-newsreader",
+const spectral = Spectral({
+  subsets: ["latin"],
+  weight: "300",
+  variable: "--font-spectral",
   display: "swap",
-  fallback: ["Georgia", "Times New Roman", "serif"],
+});
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  applicationName: colombiaSummit.name,
-  authors: [{ name: colombiaSummit.organizer, url: siteUrl }],
-  creator: colombiaSummit.organizer,
-  publisher: colombiaSummit.organizer,
-  category: "technology",
-  // iOS Safari turns dates, times and numbers into links by rewriting the
-  // DOM before React hydrates, which breaks hydration and misplaces nodes
-  // (the agenda's "10:00 a. m. → 3:00 p. m." ended up mid-list). Next's
-  // formatDetection has no `date` key, so the meta tag is written in full.
+  title: { default: site.title, template: `%s | ${site.name}` },
+  description: site.description,
+  robots: {
+    index: isPublicSite,
+    follow: isPublicSite,
+    googleBot: {
+      index: isPublicSite,
+      follow: isPublicSite,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  // iOS Safari rewrites dates and numbers into links before React hydrates,
+  // which breaks hydration. Next's formatDetection has no `date` key.
   other: { "format-detection": "telephone=no, date=no, address=no, email=no" },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f4f5f2",
+  themeColor: "#ffffff",
   colorScheme: "light",
 };
 
-// Who publishes the site, for search engines. The Event itself is described
-// on the home page.
-const organizationSchema = {
+const schema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
-      name: colombiaSummit.organizer,
-      url: siteUrl,
-      logo: `${siteUrl}/icon.png`,
-      email: colombiaSummit.contactEmail,
-      sameAs: [colombiaSummit.channel],
+      name: site.fullName,
+      alternateName: site.name,
+      url: `${siteUrl}/`,
+      logo: `${siteUrl}/images/logo.png`,
+      description: site.description,
+      email: site.contactEmail,
+      sameAs: channels.map((channel) => channel.href),
+      member: people.map((person) => ({
+        "@type": "Person",
+        name: person.name,
+        jobTitle: person.role,
+        image: `${siteUrl}${person.image}`,
+        sameAs: person.linkedin,
+      })),
     },
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
-      name: colombiaSummit.name,
-      url: siteUrl,
+      name: site.fullName,
+      alternateName: site.name,
+      url: `${siteUrl}/`,
       inLanguage: "es",
       publisher: { "@id": `${siteUrl}/#organization` },
     },
   ],
 };
 
-export default function SummitLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  // Font variables live on <html> so :root tokens can resolve them.
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="es"
-      className={`${GeistSans.variable} ${GeistMono.variable} ${newsreader.variable}`}
-    >
+    <html lang="es" className={`${spectral.variable} ${inter.variable}`}>
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
+        <JsonLd data={schema} />
         {children}
         <Analytics />
       </body>

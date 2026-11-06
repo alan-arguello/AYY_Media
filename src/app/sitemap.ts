@@ -1,13 +1,16 @@
 import type { MetadataRoute } from "next";
+import { allPosts } from "@/lib/feeds";
 import { siteUrl, isPublicSite } from "@/lib/site-url";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  // The build date: the site is static, so this is when the content changed.
-  const lastModified = new Date();
-  return isPublicSite
-    ? [
-        { url: `${siteUrl}/`, lastModified, changeFrequency: "weekly", priority: 1 },
-        { url: `${siteUrl}/partners`, lastModified, changeFrequency: "monthly", priority: 0.6 },
-      ]
-    : [];
+export const revalidate = 3600;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  if (!isPublicSite) return [];
+  const posts = await allPosts();
+  const newest = posts[0]?.published;
+  return [
+    { url: `${siteUrl}/`, lastModified: newest },
+    { url: `${siteUrl}/blog`, lastModified: newest },
+    ...posts.map((post) => ({ url: `${siteUrl}/blog/${post.slug}`, lastModified: post.published })),
+  ];
 }

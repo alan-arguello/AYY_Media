@@ -3,10 +3,16 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    qualities: [75, 86, 90, 92],
+    remotePatterns: [
+      { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
+      { protocol: "https", hostname: "substack-post-media.s3.amazonaws.com", pathname: "/public/images/**" },
+    ],
   },
   async redirects() {
-    return [{ source: "/colombia-summit", destination: "/", permanent: true }];
+    return [
+      { source: "/colombia-summit", destination: "/", permanent: true },
+      { source: "/partners", destination: "/", permanent: true },
+    ];
   },
   async headers() {
     return [
