@@ -7,10 +7,13 @@ import {
   channels,
   formatCount,
   formatDate,
+  formatReach,
   formatViews,
+  millionsOfViews,
   people,
   site,
   thousandsOfFollowers,
+  viewsMeasured,
 } from "@/lib/site";
 import { ChannelIcon } from "./channel-icon";
 import { external, SiteFooter, SiteNav } from "./chrome";
@@ -83,26 +86,33 @@ export default async function Home() {
         <section className="band" id="canales" aria-labelledby="canales-title">
           <div className="wrap">
             <h2 id="canales-title">
-              Más de {thousandsOfFollowers()} mil seguidores
+              Más de {millionsOfViews()} millones de vistas en 90 días
               <br />
-              <span>en cuatro canales</span>
+              <span>y {thousandsOfFollowers()} mil seguidores en cuatro canales</span>
             </h2>
             <ul className="channels">
               {channels.map((channel) => (
                 <li key={channel.id}>
                   <a href={channel.href} className="channel" {...external}>
                     <span className="channel-top">
-                      <ChannelIcon id={channel.id} />
+                      <span className="channel-name">
+                        <ChannelIcon id={channel.id} />
+                        {channel.name}
+                      </span>
                       <i aria-hidden="true">↗</i>
                     </span>
-                    <span className="channel-count">{formatCount(channel.count)}</span>
-                    <span className="channel-label">
-                      {channel.unit} en {channel.name}
+                    <span className="channel-count">{formatReach(channel.views)}</span>
+                    <span className="channel-label">{channel.viewsUnit}</span>
+                    <span className="channel-audience">
+                      {formatCount(channel.count)} {channel.unit}
                     </span>
                   </a>
                 </li>
               ))}
             </ul>
+            <p className="channels-note">
+              Alcance orgánico de los últimos 90 días, medido el {viewsMeasured}.
+            </p>
           </div>
         </section>
 

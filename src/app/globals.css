@@ -300,8 +300,8 @@ h2 span {
 .channel {
   display: flex;
   flex-direction: column;
-  height: 188px;
-  padding: 18px 20px 20px;
+  height: 232px;
+  padding: 18px 20px 16px;
   border-radius: 14px;
   background: var(--tile);
   transition: background-color 200ms var(--ease);
@@ -315,6 +315,13 @@ h2 span {
   justify-content: space-between;
   margin-bottom: auto;
   color: var(--ink-70);
+}
+.channel-name {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 15px;
+  line-height: 1;
 }
 .channel-icon {
   width: 20px;
@@ -341,6 +348,22 @@ h2 span {
   color: var(--ink-70);
   font-size: 15px;
   line-height: 1.4;
+}
+
+.channel-audience {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.channels-note {
+  margin-top: 14px;
+  color: var(--ink-62);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 /* ── Newsletter ───────────────────────────────────────────────────────── */
@@ -817,13 +840,14 @@ h2 span {
     margin-top: 28px;
   }
   .channel {
-    height: 164px;
+    height: 208px;
     padding: 16px;
   }
   .channel-count {
     font-size: 2.25rem;
   }
-  .channel-label {
+  .channel-label,
+  .channel-audience {
     font-size: 14px;
   }
   .section {

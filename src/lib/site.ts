@@ -6,6 +6,8 @@ export type Channel = {
   href: string;
   count: number;
   unit: "seguidores" | "suscriptores";
+  views: number;
+  viewsUnit: "vistas" | "impresiones";
 };
 
 export type Person = {
@@ -27,14 +29,19 @@ export const site = {
   substack: "https://aiyaiyaimedia.substack.com",
 };
 
-// Largest first.
+// Largest first. `views` are the organic views of the last 90 days, copied from
+// each platform's analytics on `viewsMeasured`.
+export const viewsMeasured = "5 de noviembre de 2026";
+
 export const channels: Channel[] = [
   {
     id: "instagram",
     name: "Instagram",
     href: "https://www.instagram.com/torrenegraconsulting/",
-    count: 32_800,
+    count: 32_865,
     unit: "seguidores",
+    views: 1_070_847,
+    viewsUnit: "vistas",
   },
   {
     id: "linkedin",
@@ -42,20 +49,26 @@ export const channels: Channel[] = [
     href: "https://www.linkedin.com/school/torrenegraorg/posts/",
     count: 22_597,
     unit: "seguidores",
-  },
-  {
-    id: "substack",
-    name: "Substack",
-    href: "https://substack.com/@aiyaiyaimedia",
-    count: 5_100,
-    unit: "suscriptores",
+    views: 379_850,
+    viewsUnit: "impresiones",
   },
   {
     id: "youtube",
     name: "YouTube",
     href: site.youtube,
-    count: 1_520,
+    count: 1_523,
     unit: "suscriptores",
+    views: 105_905,
+    viewsUnit: "vistas",
+  },
+  {
+    id: "substack",
+    name: "Substack",
+    href: "https://substack.com/@aiyaiyaimedia",
+    count: 5_125,
+    unit: "suscriptores",
+    views: 34_600,
+    viewsUnit: "vistas",
   },
 ];
 
@@ -96,6 +109,17 @@ export const formatViews = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 1,
   roundingMode: "trunc",
 }).format;
+
+/** Four digits at most, never rounded up: 1070847 → "1.07M", 379850 → "379.8K". */
+export const formatReach = new Intl.NumberFormat("en-US", {
+  notation: "compact",
+  maximumSignificantDigits: 4,
+  roundingMode: "trunc",
+}).format;
+
+/** Total reach in millions, one decimal, rounded down: 1605352 → 1.6. */
+export const millionsOfViews = (list: Channel[] = channels) =>
+  Math.floor(list.reduce((sum, channel) => sum + channel.views, 0) / 100_000) / 10;
 
 /** The audience in round thousands, rounded down: 62017 → 62. */
 export const thousandsOfFollowers = (list: Channel[] = channels) =>

@@ -1,17 +1,21 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { channels, formatCount, formatViews, people, thousandsOfFollowers } from "../src/lib/site.ts";
+import { channels, formatCount, formatReach, formatViews, millionsOfViews, people, thousandsOfFollowers } from "../src/lib/site.ts";
 
-test("shows each channel's audience in compact form", () => {
+test("shows each channel's reach and audience in compact form", () => {
   assert.deepEqual(
-    channels.map((channel) => [channel.name, formatCount(channel.count)]),
+    channels.map(({ name, views, count }) => [name, formatReach(views), formatCount(count)]),
     [
-      ["Instagram", "32.8K"],
-      ["LinkedIn", "22.6K"],
-      ["Substack", "5.1K"],
-      ["YouTube", "1.5K"],
+      ["Instagram", "1.07M", "32.9K"],
+      ["LinkedIn", "379.8K", "22.6K"],
+      ["YouTube", "105.9K", "1.5K"],
+      ["Substack", "34.6K", "5.1K"],
     ],
   );
+});
+
+test("the headline reach never rounds up", () => {
+  assert.equal(millionsOfViews([{ ...channels[0], views: 1_299_999 }]), 1.2);
 });
 
 test("view counts are cut, not rounded, so they never exceed YouTube's", () => {
