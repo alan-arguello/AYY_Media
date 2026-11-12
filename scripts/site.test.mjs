@@ -8,7 +8,7 @@ test("shows each channel's reach and audience in compact form", () => {
     [
       ["Instagram", "1.07M", "32.9K"],
       ["LinkedIn", "379.8K", "22.6K"],
-      ["YouTube", "105.9K", "1.5K"],
+      ["YouTube", "167.1K", "1.5K"],
       ["Substack", "34.6K", "5.1K"],
     ],
   );

@@ -58,7 +58,7 @@ export const channels: Channel[] = [
     href: site.youtube,
     count: 1_523,
     unit: "suscriptores",
-    views: 105_905,
+    views: 167_100,
     viewsUnit: "vistas",
   },
   {
